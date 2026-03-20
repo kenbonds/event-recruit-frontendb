@@ -1,0 +1,15 @@
+# PWA files - LFS not needed for small icons
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.ico binary
+
+# Text files
+*.html text
+*.js text
+*.json text
+*.css text
+*.md text
+
+# Line endings
+* text=auto eol=lf

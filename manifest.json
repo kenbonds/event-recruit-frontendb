@@ -1,0 +1,27 @@
+{
+  "name": "活动招聘 - 双向导流平台",
+  "short_name": "活动招聘",
+  "description": "连接活动与招聘的双向导流平台，让每一场活动都成为人才发现的机会",
+  "start_url": "/demo.html",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#f5f6fa",
+  "theme_color": "#667eea",
+  "lang": "zh-CN",
+  "icons": [
+    {
+      "src": "/icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": ["business", "lifestyle"],
+  "screenshots": []
+}

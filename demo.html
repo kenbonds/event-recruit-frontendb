@@ -1,0 +1,1419 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="theme-color" content="#667eea">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="活动招聘">
+<link rel="manifest" href="/manifest.json">
+<link rel="apple-touch-icon" href="/icons/icon-192.png">
+<title>活动招聘 - 活动招聘双向导流平台</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+:root {
+  --primary: #667eea;
+  --primary2: #764ba2;
+  --orange: #ff6b35;
+  --green: #19c37d;
+  --bg: #f5f6fa;
+  --card: #ffffff;
+  --text: #2c3e50;
+  --sub: #8492a6;
+  --border: #edf2f7;
+}
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif; background: var(--bg); color: var(--text); max-width: 480px; margin: 0 auto; min-height: 100vh; }
+
+/* ===== TYPOGRAPHY ===== */
+h1,h2,h3 { line-height: 1.3; }
+
+/* ===== HEADER ===== */
+.header { background: linear-gradient(135deg, var(--primary) 0%, var(--primary2) 100%); padding: 44px 20px 20px; color: white; }
+.header h1 { font-size: 22px; margin-bottom: 4px; }
+.header p { font-size: 13px; opacity: 0.85; }
+.search-bar { display: flex; margin-top: 14px; }
+.search-bar input { flex: 1; padding: 10px 16px; border-radius: 20px 0 0 20px; border: none; font-size: 14px; outline: none; background: rgba(255,255,255,0.95); }
+.search-bar button { padding: 10px 18px; border-radius: 0 20px 20px 0; border: none; background: rgba(255,255,255,0.25); color: white; font-size: 14px; cursor: pointer; backdrop-filter: blur(4px); }
+
+/* ===== STATS BANNER ===== */
+.stats { display: flex; background: white; margin: 14px 12px; border-radius: 14px; padding: 14px; box-shadow: 0 4px 16px rgba(102,126,234,0.1); }
+.stat-item { flex: 1; text-align: center; }
+.stat-item .num { font-size: 22px; font-weight: 700; color: var(--primary); }
+.stat-item .label { font-size: 11px; color: var(--sub); margin-top: 3px; }
+
+/* ===== SECTIONS ===== */
+.section { margin: 14px 12px; }
+.section-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
+.section-header h2 { font-size: 17px; font-weight: 700; }
+.section-header a { font-size: 13px; color: var(--primary); text-decoration: none; }
+
+/* ===== TAGS ===== */
+.tags { display: flex; gap: 8px; overflow-x: auto; padding-bottom: 6px; scrollbar-width: none; }
+.tags::-webkit-scrollbar { display: none; }
+.tag { padding: 5px 14px; border-radius: 20px; font-size: 13px; white-space: nowrap; cursor: pointer; border: 1.5px solid #e2e8f0; background: white; color: #64748b; transition: all 0.2s; }
+.tag.active { background: linear-gradient(135deg, var(--primary), var(--primary2)); color: white; border-color: transparent; box-shadow: 0 2px 8px rgba(102,126,234,0.3); }
+
+/* ===== EVENT CARDS ===== */
+.events-scroll { display: flex; gap: 12px; overflow-x: auto; padding-bottom: 8px; scroll-snap-type: x mandatory; scrollbar-width: none; }
+.events-scroll::-webkit-scrollbar { display: none; }
+.event-card-h { min-width: 250px; background: white; border-radius: 14px; overflow: hidden; box-shadow: 0 4px 12px rgba(0,0,0,0.06); scroll-snap-align: start; cursor: pointer; transition: transform 0.2s, box-shadow 0.2s; }
+.event-card-h:hover { transform: translateY(-3px); box-shadow: 0 8px 20px rgba(0,0,0,0.1); }
+.event-card-h .cover { width: 100%; height: 130px; object-fit: cover; }
+.event-card-h .cover-placeholder { width: 100%; height: 130px; display: flex; align-items: center; justify-content: center; font-size: 36px; }
+.event-card-h .info { padding: 12px; }
+.event-card-h .info h3 { font-size: 14px; font-weight: 600; margin-bottom: 5px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.event-card-h .info .meta { font-size: 11px; color: var(--sub); }
+.event-card-h .info .tags-row { display: flex; gap: 5px; margin-top: 8px; flex-wrap: wrap; }
+.mini-tag { padding: 2px 8px; border-radius: 4px; font-size: 11px; background: #ede9ff; color: var(--primary); }
+.mini-tag.orange { background: #fff4ef; color: var(--orange); }
+.mini-tag.green { background: #edfbf5; color: var(--green); }
+
+/* ===== JOB CARDS ===== */
+.job-card { background: white; border-radius: 14px; padding: 16px; margin-bottom: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); cursor: pointer; transition: transform 0.2s, box-shadow 0.2s; }
+.job-card:hover { transform: translateY(-2px); box-shadow: 0 6px 18px rgba(0,0,0,0.09); }
+.job-card .top { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 6px; }
+.job-card .top h3 { font-size: 16px; font-weight: 700; flex: 1; }
+.job-card .salary { font-size: 16px; font-weight: 700; color: var(--orange); white-space: nowrap; margin-left: 12px; }
+.job-card .company { font-size: 13px; color: #64748b; margin-bottom: 8px; display: flex; align-items: center; gap: 6px; }
+.job-card .company .badge { font-size: 11px; color: var(--green); background: #edfbf5; padding: 1px 7px; border-radius: 4px; }
+.job-card .tags-row { display: flex; gap: 6px; flex-wrap: wrap; }
+.job-card .bottom { display: flex; justify-content: space-between; align-items: center; margin-top: 10px; padding-top: 10px; border-top: 1px solid var(--border); }
+.job-card .bottom .city { font-size: 12px; color: var(--sub); }
+.job-card .bottom .score { font-size: 12px; color: var(--primary); font-weight: 600; background: #ede9ff; padding: 3px 10px; border-radius: 10px; }
+
+/* ===== EVENT LIST ===== */
+.event-list-card { background: white; border-radius: 14px; padding: 14px; margin-bottom: 10px; display: flex; gap: 12px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); cursor: pointer; transition: transform 0.2s; }
+.event-list-card:hover { transform: translateX(3px); }
+.event-list-card .cover-sm { width: 90px; height: 72px; border-radius: 10px; object-fit: cover; flex-shrink: 0; }
+.event-list-card .cover-sm-ph { width: 90px; height: 72px; border-radius: 10px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; font-size: 28px; }
+.event-list-card .info { flex: 1; display: flex; flex-direction: column; justify-content: space-between; min-width: 0; }
+.event-list-card .info h3 { font-size: 14px; font-weight: 600; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.event-list-card .info .meta { font-size: 12px; color: var(--sub); }
+.event-list-card .info .participants { font-size: 12px; color: var(--primary); font-weight: 500; }
+
+/* ===== TAB BAR ===== */
+.tab-bar { position: fixed; bottom: 0; left: 50%; transform: translateX(-50%); width: 100%; max-width: 480px; background: white; display: flex; border-top: 1px solid var(--border); padding: 6px 0 max(env(safe-area-inset-bottom), 6px); z-index: 100; box-shadow: 0 -4px 16px rgba(0,0,0,0.06); }
+.tab-item { flex: 1; display: flex; flex-direction: column; align-items: center; padding: 4px 0; cursor: pointer; color: var(--sub); font-size: 11px; text-decoration: none; transition: color 0.2s; }
+.tab-item.active { color: var(--primary); }
+.tab-icon { font-size: 22px; margin-bottom: 1px; }
+.tab-dot { width: 5px; height: 5px; background: #ff4444; border-radius: 50%; position: absolute; margin-top: -20px; margin-left: 12px; }
+
+/* ===== PAGES ===== */
+.page { display: none; padding-bottom: 72px; min-height: 100vh; }
+.page.active { display: block; }
+
+/* ===== LOGIN ===== */
+.login-page { padding: 20px; display: none; min-height: 100vh; background: white; }
+.login-page.active { display: flex; flex-direction: column; }
+.login-logo { text-align: center; padding: 60px 0 40px; }
+.login-logo .brand-icon { font-size: 64px; margin-bottom: 16px; display: block; }
+.login-logo h1 { font-size: 28px; background: linear-gradient(135deg, var(--primary), var(--primary2)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-weight: 800; }
+.login-logo p { color: var(--sub); margin-top: 8px; font-size: 14px; }
+.mode-tabs { display: flex; background: var(--bg); border-radius: 10px; padding: 4px; margin-bottom: 24px; }
+.mode-tab { flex: 1; padding: 8px; text-align: center; border-radius: 8px; font-size: 14px; cursor: pointer; color: var(--sub); transition: all 0.2s; }
+.mode-tab.active { background: white; color: var(--primary); font-weight: 600; box-shadow: 0 2px 8px rgba(0,0,0,0.08); }
+.form-group { margin-bottom: 16px; }
+.form-group label { display: block; font-size: 13px; color: var(--sub); margin-bottom: 6px; font-weight: 500; }
+.form-group input, .form-group select, .form-group textarea { width: 100%; padding: 13px 16px; border: 1.5px solid var(--border); border-radius: 10px; font-size: 15px; outline: none; transition: border-color 0.2s; background: white; color: var(--text); resize: none; }
+.form-group input:focus, .form-group select:focus, .form-group textarea:focus { border-color: var(--primary); box-shadow: 0 0 0 3px rgba(102,126,234,0.12); }
+.send-code { position: relative; }
+.send-code input { padding-right: 100px; }
+.send-code-btn { position: absolute; right: 10px; top: 50%; transform: translateY(-50%); padding: 6px 14px; background: var(--primary); color: white; border: none; border-radius: 6px; font-size: 12px; cursor: pointer; }
+.send-code-btn:disabled { background: #ccc; cursor: not-allowed; }
+.login-btn { width: 100%; padding: 14px; border-radius: 12px; border: none; background: linear-gradient(135deg, var(--primary), var(--primary2)); color: white; font-size: 16px; font-weight: 600; cursor: pointer; margin-top: 8px; letter-spacing: 2px; box-shadow: 0 4px 16px rgba(102,126,234,0.35); transition: transform 0.1s; }
+.login-btn:active { transform: scale(0.98); }
+.login-hint { text-align: center; color: var(--sub); font-size: 12px; margin-top: 12px; }
+
+/* ===== MY PAGE ===== */
+.my-header { background: linear-gradient(135deg, var(--primary), var(--primary2)); padding: 40px 20px 50px; color: white; display: flex; align-items: center; gap: 16px; position: relative; }
+.avatar { width: 68px; height: 68px; border-radius: 50%; background: rgba(255,255,255,0.25); display: flex; align-items: center; justify-content: center; font-size: 30px; border: 3px solid rgba(255,255,255,0.5); flex-shrink: 0; }
+.my-header .info h2 { font-size: 20px; }
+.my-header .info .school { opacity: 0.9; font-size: 12px; margin-top: 4px; }
+.my-header .info .tags-wrap { display: flex; gap: 5px; margin-top: 8px; flex-wrap: wrap; }
+.my-header .info .skill-tag { padding: 2px 8px; background: rgba(255,255,255,0.25); border-radius: 4px; font-size: 11px; }
+.my-stats { display: flex; margin: -28px 12px 0; position: relative; z-index: 1; gap: 8px; }
+.my-stat { flex: 1; background: white; text-align: center; padding: 14px 8px; border-radius: 12px; box-shadow: 0 4px 16px rgba(0,0,0,0.1); }
+.my-stat .num { font-size: 20px; font-weight: 700; color: var(--text); }
+.my-stat .label { font-size: 11px; color: var(--sub); margin-top: 3px; }
+.menu-list { margin: 12px 12px; background: white; border-radius: 14px; overflow: hidden; box-shadow: 0 2px 10px rgba(0,0,0,0.05); }
+.menu-item { display: flex; align-items: center; padding: 15px 16px; border-bottom: 1px solid var(--border); cursor: pointer; transition: background 0.15s; }
+.menu-item:last-child { border-bottom: none; }
+.menu-item:active { background: var(--bg); }
+.menu-item .icon { font-size: 20px; margin-right: 12px; width: 28px; text-align: center; }
+.menu-item .text { flex: 1; font-size: 15px; }
+.menu-item .arrow { color: #cbd5e0; }
+.badge-red { background: #ff4444; color: white; font-size: 11px; padding: 1px 7px; border-radius: 10px; margin-right: 8px; }
+.badge-blue { background: #ede9ff; color: var(--primary); font-size: 11px; padding: 1px 7px; border-radius: 10px; margin-right: 8px; }
+
+/* ===== SUBPAGE HEADER ===== */
+.subpage-header { background: white; padding: 52px 16px 16px; display: flex; align-items: center; gap: 12px; border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 50; }
+.back-btn { width: 36px; height: 36px; border: none; background: var(--bg); border-radius: 10px; font-size: 16px; cursor: pointer; display: flex; align-items: center; justify-content: center; }
+.subpage-header h2 { font-size: 18px; font-weight: 700; }
+
+/* ===== MODAL ===== */
+.modal-overlay { display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.45); z-index: 200; backdrop-filter: blur(3px); }
+.modal-overlay.active { display: flex; align-items: flex-end; justify-content: center; }
+.modal { background: white; border-radius: 20px 20px 0 0; width: 100%; max-width: 480px; max-height: 88vh; overflow-y: auto; padding-bottom: max(env(safe-area-inset-bottom), 12px); animation: slideUp 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
+@keyframes slideUp { from { transform: translateY(100%); } to { transform: translateY(0); } }
+.modal-handle { width: 40px; height: 4px; background: #e2e8f0; border-radius: 2px; margin: 12px auto 0; }
+.modal-header { padding: 16px 20px; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid var(--border); }
+.modal-header h3 { font-size: 18px; font-weight: 700; }
+.modal-close { font-size: 20px; cursor: pointer; color: var(--sub); background: var(--bg); border: none; width: 32px; height: 32px; border-radius: 8px; display: flex; align-items: center; justify-content: center; }
+.modal-body { padding: 20px; }
+.modal-footer { padding: 12px 20px; border-top: 1px solid var(--border); }
+.apply-btn { width: 100%; padding: 14px; border-radius: 12px; border: none; background: linear-gradient(135deg, var(--primary), var(--primary2)); color: white; font-size: 16px; font-weight: 600; cursor: pointer; box-shadow: 0 4px 12px rgba(102,126,234,0.3); transition: opacity 0.2s; }
+.apply-btn:active { opacity: 0.9; }
+.apply-btn.applied { background: #e2e8f0; color: var(--sub); box-shadow: none; }
+.apply-btn.danger { background: linear-gradient(135deg, #f093fb, #f5576c); box-shadow: 0 4px 12px rgba(245,87,108,0.3); }
+
+/* ===== TOAST ===== */
+.toast { position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background: rgba(0,0,0,0.8); color: white; padding: 12px 24px; border-radius: 10px; font-size: 14px; z-index: 9999; display: none; white-space: nowrap; }
+.toast.show { display: block; animation: toastAnim 2.2s ease forwards; }
+@keyframes toastAnim { 0%{opacity:0;transform:translate(-50%,-60%)} 12%{opacity:1;transform:translate(-50%,-50%)} 80%{opacity:1} 100%{opacity:0} }
+
+/* ===== MATCH VISUAL ===== */
+.match-container { background: white; border-radius: 14px; padding: 20px; margin-bottom: 12px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); }
+.match-title { font-size: 16px; font-weight: 700; margin-bottom: 16px; display: flex; align-items: center; gap: 8px; }
+.match-row { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; }
+.match-side { flex: 1; text-align: center; }
+.match-side h4 { font-size: 13px; font-weight: 600; margin-bottom: 8px; color: var(--sub); }
+.match-tags-box { display: flex; flex-wrap: wrap; gap: 5px; justify-content: center; min-height: 40px; align-items: center; }
+.match-tag { padding: 4px 10px; border-radius: 6px; font-size: 12px; background: var(--bg); color: var(--text); transition: all 0.4s; }
+.match-tag.hit { background: var(--primary); color: white; transform: scale(1.1); box-shadow: 0 3px 10px rgba(102,126,234,0.35); }
+.match-arrow { font-size: 20px; color: var(--sub); flex-shrink: 0; }
+.match-score-ring { width: 72px; height: 72px; border-radius: 50%; background: conic-gradient(var(--primary) 0%, var(--primary) var(--pct), #edf2f7 var(--pct)); display: flex; align-items: center; justify-content: center; margin: 16px auto; position: relative; }
+.match-score-ring::before { content: ''; width: 56px; height: 56px; background: white; border-radius: 50%; position: absolute; }
+.match-score-ring span { position: relative; z-index: 1; font-size: 14px; font-weight: 700; color: var(--primary); }
+
+/* ===== CARDS for APPLICATIONS ===== */
+.apply-record { background: white; border-radius: 12px; padding: 14px; margin-bottom: 10px; display: flex; align-items: center; gap: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); }
+.apply-record .logo-box { width: 48px; height: 48px; border-radius: 10px; background: #ede9ff; display: flex; align-items: center; justify-content: center; font-size: 22px; flex-shrink: 0; }
+.apply-record .detail { flex: 1; min-width: 0; }
+.apply-record .detail h4 { font-size: 15px; font-weight: 600; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.apply-record .detail p { font-size: 12px; color: var(--sub); margin-top: 3px; }
+.status-badge { padding: 3px 10px; border-radius: 20px; font-size: 12px; font-weight: 600; flex-shrink: 0; }
+.status-badge.pending { background: #fff8e6; color: #f59e0b; }
+.status-badge.viewed { background: #ede9ff; color: var(--primary); }
+.status-badge.passed { background: #edfbf5; color: var(--green); }
+.status-badge.reject { background: #fff1f0; color: #ef4444; }
+
+/* ===== MSG ===== */
+.msg-card { background: white; border-radius: 12px; padding: 14px; margin-bottom: 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); cursor: pointer; display: flex; gap: 12px; align-items: flex-start; }
+.msg-card .icon-box { width: 44px; height: 44px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 20px; flex-shrink: 0; }
+.msg-card .msg-body { flex: 1; min-width: 0; }
+.msg-card .msg-body h4 { font-size: 14px; font-weight: 600; margin-bottom: 3px; }
+.msg-card .msg-body p { font-size: 13px; color: var(--sub); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.msg-card .msg-body .time { font-size: 11px; color: #c5cdd5; margin-top: 5px; }
+.msg-unread { width: 8px; height: 8px; background: #ff4444; border-radius: 50%; flex-shrink: 0; margin-top: 4px; }
+.msg-read { width: 8px; height: 8px; flex-shrink: 0; }
+
+/* ===== RESUME FORM ===== */
+.resume-section { background: white; border-radius: 14px; padding: 16px; margin-bottom: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); }
+.resume-section h3 { font-size: 15px; font-weight: 700; margin-bottom: 14px; display: flex; align-items: center; gap: 8px; }
+.skill-tags-edit { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 12px; }
+.skill-tag-item { padding: 5px 12px; border-radius: 20px; font-size: 13px; border: 1.5px solid #e2e8f0; background: white; color: #64748b; cursor: pointer; transition: all 0.2s; display: flex; align-items: center; gap: 5px; }
+.skill-tag-item.selected { background: linear-gradient(135deg, var(--primary), var(--primary2)); color: white; border-color: transparent; }
+.exp-item { border-left: 3px solid var(--primary); padding-left: 12px; margin-bottom: 14px; }
+.exp-item h4 { font-size: 14px; font-weight: 600; }
+.exp-item p { font-size: 13px; color: var(--sub); margin-top: 3px; }
+
+/* ===== COMPANY PORTAL ===== */
+.company-header { background: linear-gradient(135deg, #11998e, #38ef7d); padding: 40px 20px 20px; color: white; }
+.company-stat-row { display: flex; gap: 10px; margin: 14px 12px; }
+.company-stat-card { flex: 1; background: white; border-radius: 12px; padding: 14px; text-align: center; box-shadow: 0 2px 8px rgba(0,0,0,0.05); }
+.company-stat-card .n { font-size: 24px; font-weight: 700; color: #11998e; }
+.company-stat-card .l { font-size: 12px; color: var(--sub); margin-top: 3px; }
+.add-btn { display: flex; align-items: center; justify-content: center; gap: 8px; padding: 14px; background: linear-gradient(135deg, #11998e, #38ef7d); color: white; border: none; border-radius: 12px; font-size: 15px; font-weight: 600; cursor: pointer; width: 100%; box-shadow: 0 4px 14px rgba(17,153,142,0.35); }
+.resume-card { background: white; border-radius: 12px; padding: 14px; margin-bottom: 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); cursor: pointer; transition: transform 0.2s; }
+.resume-card:hover { transform: translateY(-2px); }
+.resume-card .top { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
+.resume-card .ava { width: 40px; height: 40px; border-radius: 50%; background: #ede9ff; display: flex; align-items: center; justify-content: center; font-size: 18px; }
+.resume-card .name h4 { font-size: 15px; font-weight: 600; }
+.resume-card .name p { font-size: 12px; color: var(--sub); }
+.resume-card .score-bar { height: 6px; background: var(--bg); border-radius: 3px; overflow: hidden; margin-top: 8px; }
+.resume-card .score-bar-fill { height: 100%; background: linear-gradient(90deg, var(--primary), var(--primary2)); border-radius: 3px; transition: width 1s ease; }
+
+/* ===== PUBLISH FORM ===== */
+.publish-form { padding: 16px; }
+
+/* ===== EMPTY STATE ===== */
+.empty { text-align: center; padding: 60px 20px; }
+.empty .icon { font-size: 56px; margin-bottom: 16px; opacity: 0.5; }
+.empty p { font-size: 14px; color: var(--sub); }
+
+/* ===== PROGRESS BAR ===== */
+.progress-bar { height: 4px; background: var(--bg); border-radius: 2px; overflow: hidden; margin-top: 6px; }
+.progress-bar-fill { height: 100%; background: linear-gradient(90deg, var(--primary), var(--primary2)); border-radius: 2px; }
+
+/* ===== SKELETON ===== */
+.skeleton { background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%); background-size: 200% 100%; animation: skeleton-load 1.4s infinite; border-radius: 6px; }
+@keyframes skeleton-load { 0%{background-position:200% 0} 100%{background-position:-200% 0} }
+
+/* ===== NOTIFY BANNER ===== */
+.notify-banner { margin: 0 12px 14px; background: linear-gradient(135deg, #f093fb, #f5576c); border-radius: 12px; padding: 14px 16px; color: white; display: flex; align-items: center; gap: 10px; cursor: pointer; }
+.notify-banner .icon { font-size: 24px; }
+.notify-banner .text h4 { font-size: 14px; font-weight: 600; }
+.notify-banner .text p { font-size: 12px; opacity: 0.9; margin-top: 2px; }
+
+/* ===== MATCH PAGE ===== */
+.match-page-header { text-align: center; padding: 30px 20px 20px; }
+.match-page-header h2 { font-size: 22px; font-weight: 800; }
+.match-page-header p { font-size: 13px; color: var(--sub); margin-top: 6px; }
+.ai-score-card { margin: 0 12px 14px; background: linear-gradient(135deg, var(--primary), var(--primary2)); border-radius: 16px; padding: 20px; color: white; text-align: center; box-shadow: 0 8px 24px rgba(102,126,234,0.3); }
+.ai-score-card .big { font-size: 56px; font-weight: 800; line-height: 1; }
+.ai-score-card .label { font-size: 14px; opacity: 0.85; margin-top: 8px; }
+.ai-insights { margin: 0 12px 14px; }
+.insight-item { background: white; border-radius: 12px; padding: 14px; margin-bottom: 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); display: flex; gap: 12px; align-items: flex-start; }
+.insight-item .dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; margin-top: 5px; }
+
+/* ===== DIVIDER ===== */
+.divider { height: 8px; background: var(--bg); margin: 12px 0; }
+
+/* responsive tab: 5 items */
+.tab-bar.five .tab-item { font-size: 10px; }
+.tab-bar.five .tab-icon { font-size: 20px; }
+</style>
+</head>
+<body>
+
+<!-- ====== TOAST ====== -->
+<div class="toast" id="toast"></div>
+
+<!-- ====== LOGIN PAGE ====== -->
+<div class="login-page" id="loginPage">
+  <div class="login-logo">
+    <span class="brand-icon">🎯</span>
+    <h1>活动招聘</h1>
+    <p>通过活动场景，精准匹配职业机会</p>
+  </div>
+  <div class="mode-tabs">
+    <div class="mode-tab active" onclick="switchLoginMode('user')" id="tabUser">求职者</div>
+    <div class="mode-tab" onclick="switchLoginMode('company')" id="tabCompany">企业端</div>
+  </div>
+  <div class="form">
+    <div class="form-group">
+      <label>手机号</label>
+      <input type="tel" id="phoneInput" placeholder="请输入手机号" maxlength="11" value="13800138001">
+    </div>
+    <div class="form-group">
+      <label>验证码</label>
+      <div class="send-code">
+        <input type="text" id="codeInput" placeholder="请输入验证码" maxlength="6" value="123456">
+        <button class="send-code-btn" onclick="sendCode()">获取验证码</button>
+      </div>
+    </div>
+    <button class="login-btn" onclick="doLogin()">登 录</button>
+    <p class="login-hint">演示版：验证码固定为 123456</p>
+  </div>
+</div>
+
+<!-- ====== MAIN APP (USER) ====== -->
+<div id="mainApp" style="display:none;">
+
+  <!-- HOME PAGE -->
+  <div class="page active" id="homePage">
+    <div class="header">
+      <h1>🎯 活动招聘</h1>
+      <p>通过活动场景，精准匹配你的职业机会</p>
+      <div class="search-bar">
+        <input type="text" id="searchInput" placeholder="搜索活动或职位..." oninput="handleSearch(this.value)">
+        <button onclick="doSearch()">搜索</button>
+      </div>
+    </div>
+
+    <div class="stats">
+      <div class="stat-item"><div class="num" id="statUsers">3,260</div><div class="label">活跃用户</div></div>
+      <div class="stat-item"><div class="num" id="statEvents">156</div><div class="label">进行中活动</div></div>
+      <div class="stat-item"><div class="num" id="statJobs">89</div><div class="label">招聘职位</div></div>
+      <div class="stat-item"><div class="num">82%</div><div class="label">匹配准确率</div></div>
+    </div>
+
+    <!-- Notify Banner -->
+    <div class="notify-banner" onclick="goToMessages()">
+      <span class="icon">🔔</span>
+      <div class="text">
+        <h4>有新消息：腾讯已查看你的简历</h4>
+        <p>点击查看详情 →</p>
+      </div>
+    </div>
+
+    <!-- Hot Events -->
+    <div class="section">
+      <div class="section-header">
+        <h2>🔥 热门活动</h2>
+        <a href="javascript:void(0)" onclick="switchPage('eventsPage')">查看全部 ›</a>
+      </div>
+      <div class="tags" id="eventTags"></div>
+      <div class="events-scroll" id="hotEvents"></div>
+    </div>
+
+    <!-- Recommend Jobs -->
+    <div class="section">
+      <div class="section-header">
+        <h2>✨ 为你推荐</h2>
+        <a href="javascript:void(0)" onclick="switchPage('jobsPage')">更多职位 ›</a>
+      </div>
+      <div id="recommendJobs"></div>
+    </div>
+  </div>
+
+  <!-- EVENTS PAGE -->
+  <div class="page" id="eventsPage">
+    <div class="header" style="padding-bottom:12px">
+      <h1>活动列表</h1>
+      <p style="opacity:.8;font-size:13px;margin-top:4px">发现身边精彩活动</p>
+      <div class="tags" id="eventFilterTags" style="margin-top:10px"></div>
+    </div>
+    <div style="padding:12px 12px 0" id="eventsList"></div>
+  </div>
+
+  <!-- JOBS PAGE -->
+  <div class="page" id="jobsPage">
+    <div class="header" style="padding-bottom:12px">
+      <h1>职位推荐</h1>
+      <p style="opacity:.8;font-size:13px;margin-top:4px">基于你的标签智能推荐</p>
+      <div class="tags" id="jobFilterTags" style="margin-top:10px"></div>
+    </div>
+    <div style="padding:12px 12px 0" id="jobsList"></div>
+  </div>
+
+  <!-- MATCH PAGE -->
+  <div class="page" id="matchPage">
+    <div class="match-page-header">
+      <h2>🤖 智能匹配</h2>
+      <p>AI 分析你的活动轨迹与技能标签</p>
+    </div>
+    <div class="ai-score-card">
+      <div class="big" id="aiScoreNum">85</div>
+      <div class="label">综合匹配评分（满分100）</div>
+      <div style="display:flex;gap:16px;justify-content:center;margin-top:14px">
+        <div style="text-align:center;cursor:pointer;padding:6px 12px;border-radius:10px;transition:background .2s" onclick="switchPage('jobsPage')" onmouseover="this.style.background='rgba(255,255,255,0.15)'" onmouseout="this.style.background='transparent'"><div style="font-size:20px;font-weight:700">12</div><div style="font-size:11px;opacity:.8">匹配职位 ›</div></div>
+        <div style="width:1px;background:rgba(255,255,255,0.3)"></div>
+        <div style="text-align:center;cursor:pointer;padding:6px 12px;border-radius:10px;transition:background .2s" onclick="switchPage('eventsPage')" onmouseover="this.style.background='rgba(255,255,255,0.15)'" onmouseout="this.style.background='transparent'"><div style="font-size:20px;font-weight:700">5</div><div style="font-size:11px;opacity:.8">参与活动 ›</div></div>
+        <div style="width:1px;background:rgba(255,255,255,0.3)"></div>
+        <div style="text-align:center;cursor:pointer;padding:6px 12px;border-radius:10px;transition:background .2s" onclick="switchPage('myPage')" onmouseover="this.style.background='rgba(255,255,255,0.15)'" onmouseout="this.style.background='transparent'"><div style="font-size:20px;font-weight:700">3</div><div style="font-size:11px;opacity:.8">企业关注 ›</div></div>
+      </div>
+    </div>
+    <div id="matchCards" style="padding:0 12px"></div>
+    <div class="section">
+      <div class="section-header"><h2>💡 AI 分析洞察</h2></div>
+      <div class="ai-insights" id="aiInsights"></div>
+    </div>
+  </div>
+
+  <!-- MY PAGE -->
+  <div class="page" id="myPage">
+    <div class="my-header">
+      <div class="avatar" id="myAvatar">👤</div>
+      <div class="info">
+        <h2 id="myNickname">张三</h2>
+        <div class="school" id="mySchool">北京理工大学 · 计算机科学与技术</div>
+        <div class="tags-wrap" id="mySkillTags"></div>
+      </div>
+    </div>
+    <div class="my-stats" id="myStats">
+      <div class="my-stat"><div class="num">5</div><div class="label">参加活动</div></div>
+      <div class="my-stat"><div class="num" id="myApplyCount">0</div><div class="label">投递简历</div></div>
+      <div class="my-stat"><div class="num" id="myMsgCount">3</div><div class="label">未读消息</div></div>
+      <div class="my-stat"><div class="num">85%</div><div class="label">综合匹配</div></div>
+    </div>
+    <div style="height:50px"></div>
+    <div class="menu-list" style="margin-top:12px">
+      <div class="menu-item" onclick="openSubPage('resumePage')"><span class="icon">📄</span><span class="text">我的简历</span><span class="badge-blue">已完善</span><span class="arrow">›</span></div>
+      <div class="menu-item" onclick="openSubPage('myEventsPage')"><span class="icon">📋</span><span class="text">我的活动</span><span class="arrow">›</span></div>
+      <div class="menu-item" onclick="openSubPage('myApplyPage')"><span class="icon">📝</span><span class="text">我的投递</span><span class="arrow">›</span></div>
+      <div class="menu-item" onclick="openSubPage('messagesPage')"><span class="icon">🔔</span><span class="text">消息通知</span><span class="badge-red" id="msgBadge">3</span><span class="arrow">›</span></div>
+      <div class="menu-item" onclick="openSubPage('settingsPage')"><span class="icon">⚙️</span><span class="text">账号设置</span><span class="arrow">›</span></div>
+      <div class="menu-item" onclick="doLogout()"><span class="icon">🚪</span><span class="text" style="color:#ef4444">退出登录</span></div>
+    </div>
+  </div>
+
+  <!-- TAB BAR -->
+  <div class="tab-bar five" id="mainTabBar">
+    <div class="tab-item active" onclick="switchPage('homePage')" data-page="homePage"><span class="tab-icon">🏠</span><span>首页</span></div>
+    <div class="tab-item" onclick="switchPage('eventsPage')" data-page="eventsPage"><span class="tab-icon">🎉</span><span>活动</span></div>
+    <div class="tab-item" onclick="switchPage('jobsPage')" data-page="jobsPage"><span class="tab-icon">💼</span><span>职位</span></div>
+    <div class="tab-item" onclick="switchPage('matchPage')" data-page="matchPage"><span class="tab-icon">🤖</span><span>匹配</span></div>
+    <div class="tab-item" onclick="switchPage('myPage')" data-page="myPage" style="position:relative">
+      <span class="tab-icon">👤</span><span>我的</span>
+      <div class="tab-dot" id="myTabDot"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ====== COMPANY APP ====== -->
+<div id="companyApp" style="display:none;">
+  <div class="company-header">
+    <h1 style="font-size:22px">🏢 企业管理后台</h1>
+    <p style="opacity:.85;font-size:13px;margin-top:4px" id="companyName">某某科技有限公司</p>
+  </div>
+  <div class="company-stat-row">
+    <div class="company-stat-card"><div class="n" id="cStatJobs">3</div><div class="l">发布职位</div></div>
+    <div class="company-stat-card"><div class="n" id="cStatApply">23</div><div class="l">收到投递</div></div>
+    <div class="company-stat-card"><div class="n" id="cStatEvent">1</div><div class="l">举办活动</div></div>
+    <div class="company-stat-card"><div class="n" id="cStatView">204</div><div class="l">浏览量</div></div>
+  </div>
+  <div style="padding:0 12px 12px;display:flex;gap:10px">
+    <button class="add-btn" style="flex:1" onclick="openPublishJob()">＋ 发布职位</button>
+    <button class="add-btn" style="flex:1;background:linear-gradient(135deg,#f093fb,#f5576c);box-shadow:0 4px 14px rgba(245,87,108,.3)" onclick="openPublishEvent()">＋ 发布活动</button>
+  </div>
+  <div style="padding:0 12px">
+    <div style="font-size:16px;font-weight:700;margin-bottom:12px">📩 最新投递简历</div>
+    <div id="companyResumes"></div>
+  </div>
+  <div style="padding:12px;text-align:center">
+    <button onclick="doLogout()" style="color:var(--sub);background:none;border:none;font-size:14px;cursor:pointer">退出登录</button>
+  </div>
+</div>
+
+<!-- ====== SUB PAGES ====== -->
+
+<!-- Resume Page -->
+<div id="resumePage" class="subpage" style="display:none;background:var(--bg);min-height:100vh">
+  <div class="subpage-header"><button class="back-btn" onclick="closeSubPage()">‹</button><h2>我的简历</h2></div>
+  <div style="padding:12px">
+    <div class="resume-section">
+      <h3>👤 基本信息</h3>
+      <div class="form-group"><label>姓名</label><input type="text" id="resumeName" value="张三"></div>
+      <div class="form-group"><label>学校</label><input type="text" id="resumeSchool" value="北京理工大学"></div>
+      <div class="form-group"><label>专业</label><input type="text" id="resumeMajor" value="计算机科学与技术"></div>
+      <div class="form-group"><label>个人简介</label><textarea id="resumeBio" rows="3" placeholder="简单介绍自己...">热爱技术，对前后端开发有丰富经验，曾参与多个校园项目...</textarea></div>
+    </div>
+    <div class="resume-section">
+      <h3>🏷️ 技能标签 <span style="font-size:12px;font-weight:400;color:var(--sub)">（点击选择）</span></h3>
+      <div class="skill-tags-edit" id="skillTagsEdit"></div>
+    </div>
+    <div class="resume-section">
+      <h3>🎓 教育经历</h3>
+      <div class="exp-item">
+        <h4>北京理工大学</h4>
+        <p>计算机科学与技术 · 本科 · 2022.09 - 2026.06</p>
+      </div>
+    </div>
+    <div class="resume-section">
+      <h3>🚀 项目经历</h3>
+      <div class="exp-item">
+        <h4>校园二手交易平台</h4>
+        <p>Vue3 + Node.js 全栈开发，实现商品发布、搜索、聊天功能</p>
+      </div>
+      <div class="exp-item">
+        <h4>算法竞赛刷题系统</h4>
+        <p>Python + Django，支持在线判题、题解分享</p>
+      </div>
+    </div>
+    <button class="apply-btn" onclick="saveResume()">保存简历</button>
+  </div>
+</div>
+
+<!-- My Events Page -->
+<div id="myEventsPage" class="subpage" style="display:none;background:var(--bg);min-height:100vh">
+  <div class="subpage-header"><button class="back-btn" onclick="closeSubPage()">‹</button><h2>我的活动</h2></div>
+  <div style="padding:12px" id="myEventsList"></div>
+</div>
+
+<!-- My Apply Page -->
+<div id="myApplyPage" class="subpage" style="display:none;background:var(--bg);min-height:100vh">
+  <div class="subpage-header"><button class="back-btn" onclick="closeSubPage()">‹</button><h2>我的投递</h2></div>
+  <div style="padding:12px" id="myApplyList"></div>
+</div>
+
+<!-- Messages Page -->
+<div id="messagesPage" class="subpage" style="display:none;background:var(--bg);min-height:100vh">
+  <div class="subpage-header"><button class="back-btn" onclick="closeSubPage()">‹</button><h2>消息通知</h2>
+    <button onclick="markAllRead()" style="margin-left:auto;color:var(--primary);background:none;border:none;font-size:13px;cursor:pointer">全部已读</button>
+  </div>
+  <div style="padding:12px" id="messagesList"></div>
+</div>
+
+<!-- Settings Page -->
+<div id="settingsPage" class="subpage" style="display:none;background:var(--bg);min-height:100vh">
+  <div class="subpage-header"><button class="back-btn" onclick="closeSubPage()">‹</button><h2>账号设置</h2></div>
+  <div style="padding:12px">
+    <div class="menu-list">
+      <div class="menu-item"><span class="icon">🔔</span><span class="text">推送通知</span><span class="arrow">›</span></div>
+      <div class="menu-item"><span class="icon">🔒</span><span class="text">隐私设置</span><span class="arrow">›</span></div>
+      <div class="menu-item"><span class="icon">📱</span><span class="text">绑定手机</span><span class="arrow">›</span></div>
+      <div class="menu-item"><span class="icon">🎨</span><span class="text">主题外观</span><span class="arrow">›</span></div>
+      <div class="menu-item"><span class="icon">ℹ️</span><span class="text">关于我们</span><span class="arrow">›</span></div>
+    </div>
+    <div style="text-align:center;margin-top:24px;color:var(--sub);font-size:12px">活动招聘 v2.0.0 · Demo</div>
+  </div>
+</div>
+
+<!-- ====== MODALS ====== -->
+
+<!-- Event Detail Modal -->
+<div class="modal-overlay" id="eventModal">
+  <div class="modal">
+    <div class="modal-handle"></div>
+    <div class="modal-header"><h3>活动详情</h3><button class="modal-close" onclick="closeModal('eventModal')">✕</button></div>
+    <div class="modal-body" id="eventDetail"></div>
+    <div class="modal-footer"><button class="apply-btn" id="eventApplyBtn" onclick="registerEvent()">立即报名</button></div>
+  </div>
+</div>
+
+<!-- Job Detail Modal -->
+<div class="modal-overlay" id="jobModal">
+  <div class="modal">
+    <div class="modal-handle"></div>
+    <div class="modal-header"><h3>职位详情</h3><button class="modal-close" onclick="closeModal('jobModal')">✕</button></div>
+    <div class="modal-body" id="jobDetail"></div>
+    <div class="modal-footer"><button class="apply-btn" id="jobApplyBtn" onclick="applyJob()">投递简历</button></div>
+  </div>
+</div>
+
+<!-- Match Detail Modal -->
+<div class="modal-overlay" id="matchModal">
+  <div class="modal">
+    <div class="modal-handle"></div>
+    <div class="modal-header"><h3>匹配分析</h3><button class="modal-close" onclick="closeModal('matchModal')">✕</button></div>
+    <div class="modal-body" id="matchDetail"></div>
+    <div class="modal-footer"><button class="apply-btn" onclick="closeModal('matchModal');applyJobById(currentMatchJobId)">立即投递</button></div>
+  </div>
+</div>
+
+<!-- Publish Job Modal -->
+<div class="modal-overlay" id="publishJobModal">
+  <div class="modal">
+    <div class="modal-handle"></div>
+    <div class="modal-header"><h3>发布职位</h3><button class="modal-close" onclick="closeModal('publishJobModal')">✕</button></div>
+    <div class="modal-body publish-form">
+      <div class="form-group"><label>职位名称</label><input type="text" id="pjTitle" placeholder="如：前端开发工程师"></div>
+      <div class="form-group"><label>薪资范围</label><input type="text" id="pjSalary" placeholder="如：15K-25K"></div>
+      <div class="form-group"><label>工作类型</label>
+        <select id="pjType"><option>全职</option><option>兼职</option><option>实习</option></select>
+      </div>
+      <div class="form-group"><label>工作城市</label><input type="text" id="pjCity" placeholder="北京"></div>
+      <div class="form-group"><label>职位描述</label><textarea id="pjDesc" rows="4" placeholder="描述岗位职责..."></textarea></div>
+      <button class="apply-btn" onclick="publishJob()">发布职位</button>
+    </div>
+  </div>
+</div>
+
+<!-- Publish Event Modal -->
+<div class="modal-overlay" id="publishEventModal">
+  <div class="modal">
+    <div class="modal-handle"></div>
+    <div class="modal-header"><h3>发布活动</h3><button class="modal-close" onclick="closeModal('publishEventModal')">✕</button></div>
+    <div class="modal-body publish-form">
+      <div class="form-group"><label>活动名称</label><input type="text" id="peTitle" placeholder="如：前端技术分享会"></div>
+      <div class="form-group"><label>活动类型</label>
+        <select id="peCategory"><option>讲座</option><option>比赛</option><option>实习</option><option>义卖</option><option>兼职</option></select>
+      </div>
+      <div class="form-group"><label>活动时间</label><input type="text" id="peTime" placeholder="2026-05-01 14:00"></div>
+      <div class="form-group"><label>活动地点</label><input type="text" id="peLocation" placeholder="北京大学..."></div>
+      <div class="form-group"><label>活动人数上限</label><input type="number" id="peMax" value="200"></div>
+      <div class="form-group"><label>活动介绍</label><textarea id="peDesc" rows="4" placeholder="介绍活动内容..."></textarea></div>
+      <button class="apply-btn danger" onclick="publishEvent()">发布活动</button>
+    </div>
+  </div>
+</div>
+
+<!-- Resume Detail Modal (Company View) -->
+<div class="modal-overlay" id="resumeModal">
+  <div class="modal">
+    <div class="modal-handle"></div>
+    <div class="modal-header"><h3>求职者简历</h3><button class="modal-close" onclick="closeModal('resumeModal')">✕</button></div>
+    <div class="modal-body" id="resumeDetail"></div>
+    <div class="modal-footer" style="display:flex;gap:10px">
+      <button class="apply-btn" style="background:var(--green);box-shadow:0 4px 12px rgba(25,195,125,.3)" onclick="contactCandidate()">📞 邀请面试</button>
+      <button class="apply-btn" style="flex:0.5;background:#e2e8f0;color:var(--sub);box-shadow:none" onclick="closeModal('resumeModal')">暂不考虑</button>
+    </div>
+  </div>
+</div>
+
+<script>
+// =================== DATA ===================
+const EVENTS = [
+  { id:1, title:'校园义卖活动', emoji:'🎪', gradient:'linear-gradient(135deg,#f093fb,#f5576c)', category:'义卖',
+    description:'为贫困山区儿童筹集善款的义卖活动，欢迎全校师生参与。活动设有爱心义卖区、互动游戏区和公益演讲区。',
+    start_time:'2026-04-01 10:00', location:'北京理工大学学生活动中心', max:500, current:128, tags:['公益','校园','义卖'], status:'报名中' },
+  { id:2, title:'前端技术分享会', emoji:'💻', gradient:'linear-gradient(135deg,#4facfe,#00f2fe)', category:'讲座',
+    description:'邀请字节跳动、腾讯前端工程师分享 Vue3、React 18 最新技术实践，有机会与大厂工程师面对面交流。',
+    start_time:'2026-04-05 14:00', location:'线上直播', max:1000, current:356, tags:['技术','前端','分享'], status:'报名中' },
+  { id:3, title:'48小时编程马拉松', emoji:'⚡', gradient:'linear-gradient(135deg,#43e97b,#38f9d7)', category:'比赛',
+    description:'48小时编程挑战赛，自由组队，完成一个完整的产品原型。头奖 20000 元现金，丰厚奖品等你来拿！',
+    start_time:'2026-04-10 09:00', location:'线上', max:200, current:89, tags:['编程','比赛','算法','创业'], status:'报名中' },
+  { id:4, title:'AI 实习宣讲会', emoji:'🤖', gradient:'linear-gradient(135deg,#667eea,#764ba2)', category:'实习',
+    description:'百度、阿里、腾讯 AI 部门联合宣讲，现场投递简历，有机会获得直通面试资格。',
+    start_time:'2026-04-15 14:00', location:'北京大学百年讲堂', max:300, current:0, tags:['AI','实习','宣讲','大厂'], status:'报名中' },
+  { id:5, title:'周末兼职招聘会', emoji:'💰', gradient:'linear-gradient(135deg,#f7971e,#ffd200)', category:'兼职',
+    description:'面向大学生的周末兼职岗位专场招聘，涵盖家教、服务员、推广等多个方向，日薪 200-400 元。',
+    start_time:'2026-04-20 09:00', location:'北京理工大学体育馆', max:800, current:0, tags:['兼职','招聘','周末'], status:'即将开始' },
+  { id:6, title:'职业规划训练营', emoji:'🎯', gradient:'linear-gradient(135deg,#11998e,#38ef7d)', category:'讲座',
+    description:'由职业咨询师带队，帮助大学生制定清晰的职业规划，提升求职竞争力。',
+    start_time:'2026-04-25 10:00', location:'中关村创业大街', max:80, current:34, tags:['职业规划','大学生','提升'], status:'报名中' },
+];
+
+const JOBS = [
+  { id:1, company:'腾讯科技有限公司', company_verified:true, emoji:'🐧', title:'Java开发工程师',
+    type:'全职', salary:'15K-25K', city:'北京',
+    description:'负责公司核心系统的开发和维护，参与系统架构设计。团队氛围好，技术栈新，有完整的晋升通道。',
+    requirements:'1. 熟练掌握Java语言\n2. 熟悉Spring Boot框架\n3. 有良好的编程习惯\n4. 有MySQL / Redis 使用经验',
+    tags:['Java','Spring','MySQL','Redis'], match_score:0.85, views:128, applicants:23 },
+  { id:2, company:'字节跳动', company_verified:true, emoji:'🦋', title:'前端开发工程师',
+    type:'全职', salary:'20K-35K', city:'北京',
+    description:'负责公司前端页面开发，包括移动端和PC端。使用最新的前端技术栈，有技术分享会。',
+    requirements:'1. 熟练掌握 Vue.js / React\n2. 有移动端开发经验\n3. 关注前端性能优化',
+    tags:['前端','Vue','React','TypeScript'], match_score:0.92, views:256, applicants:45 },
+  { id:3, company:'百度AI研究院', company_verified:true, emoji:'🔵', title:'Python算法工程师',
+    type:'全职', salary:'20K-35K', city:'北京',
+    description:'负责机器学习算法的研发和优化，包括模型训练和部署。团队有大牛带队，提供GPU资源。',
+    requirements:'1. 熟练掌握Python\n2. 熟悉PyTorch/TensorFlow\n3. 有相关项目经验',
+    tags:['Python','机器学习','深度学习','PyTorch'], match_score:0.72, views:75, applicants:8 },
+  { id:4, company:'美团点评', company_verified:true, emoji:'🐱', title:'产品运营实习生',
+    type:'实习', salary:'3K-5K', city:'北京',
+    description:'协助产品经理进行用户调研、数据分析和产品运营，可以接触完整的产品运营流程。',
+    requirements:'1. 本科在校生\n2. 对互联网产品有热情\n3. 有数据分析经验优先',
+    tags:['产品','运营','实习','数据分析'], match_score:0.55, views:52, applicants:3 },
+  { id:5, company:'拼多多', company_verified:true, emoji:'🛒', title:'Go后端开发',
+    type:'全职', salary:'18K-30K', city:'上海',
+    description:'负责高并发电商系统后端开发，技术栈 Go + Kafka + Redis + MySQL。',
+    requirements:'1. 熟悉Go语言\n2. 了解分布式系统\n3. 有高并发场景经验',
+    tags:['Go','Kafka','Redis','高并发'], match_score:0.68, views:89, applicants:12 },
+  { id:6, company:'小红书', company_verified:true, emoji:'📕', title:'数据分析师',
+    type:'全职', salary:'12K-20K', city:'上海',
+    description:'负责用户行为数据分析，为产品迭代提供数据支撑。',
+    requirements:'1. 熟悉SQL\n2. 会Python数据分析\n3. 有BI工具使用经验',
+    tags:['SQL','Python','数据分析','BI'], match_score:0.60, views:66, applicants:7 },
+];
+
+const MESSAGES = [
+  { id:1, type:'interview', icon:'🎉', color:'#ede9ff', title:'腾讯已查看你的简历', content:'你投递的「Java开发工程师」已被HR查看，请保持手机畅通', time:'10分钟前', read:false },
+  { id:2, type:'match', icon:'🤖', color:'#edfbf5', title:'新职位匹配', content:'系统为你匹配了「字节跳动 前端开发工程师」，匹配度 92%', time:'1小时前', read:false },
+  { id:3, type:'event', icon:'📅', color:'#fff4ef', title:'活动开始提醒', content:'「前端技术分享会」将于明天 14:00 开始，请准时参与', time:'2小时前', read:false },
+  { id:4, type:'system', icon:'🔔', color:'#f0f4ff', title:'系统通知', content:'你的简历已被 5 家企业收藏', time:'昨天', read:true },
+  { id:5, type:'interview', icon:'📞', color:'#ede9ff', title:'百度发来面试邀请', content:'百度AI研究院邀请你参加「Python算法工程师」面试，请确认时间', time:'2天前', read:true },
+];
+
+const APPLICANTS = [
+  { id:1, name:'李明', school:'清华大学', major:'计算机科学', tags:['Java','Spring','MySQL'], score:0.88, status:'viewed' },
+  { id:2, name:'王芳', school:'北京大学', major:'软件工程', tags:['前端','Vue','React'], score:0.92, status:'passed' },
+  { id:3, name:'张三', school:'北京理工大学', major:'计算机科学与技术', tags:['Java','Python','前端'], score:0.85, status:'pending' },
+  { id:4, name:'赵雷', school:'中国人民大学', major:'信息管理', tags:['产品','运营','数据分析'], score:0.70, status:'pending' },
+  { id:5, name:'陈思', school:'北京航空航天大学', major:'人工智能', tags:['Python','机器学习','深度学习'], score:0.79, status:'viewed' },
+];
+
+const ALL_SKILL_TAGS = ['Java','Python','JavaScript','Vue','React','Go','Spring','MySQL','Redis','MongoDB','AI/ML','深度学习','数据分析','产品设计','运营','C++','算法','前端','后端','全栈'];
+
+let currentUser = null;
+let loginMode = 'user'; // 'user' | 'company'
+let registeredEvents = new Set([1, 3]);
+let appliedJobs = new Set();
+let myMessages = [...MESSAGES];
+let mySelectedSkills = new Set(['Java','Python','前端','Vue','算法']);
+let currentEventId = null;
+let currentJobId = null;
+let currentMatchJobId = null;
+let companyJobs = [...JOBS.slice(0,3)];
+
+// =================== LOGIN ===================
+function switchLoginMode(mode) {
+  loginMode = mode;
+  document.getElementById('tabUser').className = 'mode-tab' + (mode==='user'?' active':'');
+  document.getElementById('tabCompany').className = 'mode-tab' + (mode==='company'?' active':'');
+}
+
+let codeTimer = null;
+function sendCode() {
+  const btn = document.querySelector('.send-code-btn');
+  btn.disabled = true;
+  let sec = 60;
+  btn.textContent = sec + 's';
+  codeTimer = setInterval(() => {
+    sec--;
+    if (sec <= 0) { clearInterval(codeTimer); btn.disabled = false; btn.textContent = '获取验证码'; }
+    else btn.textContent = sec + 's';
+  }, 1000);
+  showToast('验证码已发送（演示：123456）');
+}
+
+function doLogin() {
+  const phone = document.getElementById('phoneInput').value;
+  const code = document.getElementById('codeInput').value;
+  if (!phone || phone.length < 11) return showToast('请输入正确的手机号');
+  if (code !== '123456') return showToast('验证码错误，演示码为 123456');
+
+  document.getElementById('loginPage').style.display = 'none';
+
+  if (loginMode === 'company') {
+    document.getElementById('companyApp').style.display = 'block';
+    renderCompanyPage();
+    showToast('🏢 企业端登录成功');
+  } else {
+    currentUser = { phone, nickname: '张三', school: '北京理工大学', major: '计算机科学与技术' };
+    document.getElementById('mainApp').style.display = 'block';
+    renderApp();
+    showToast('✅ 登录成功，欢迎回来！');
+  }
+}
+
+function doLogout() {
+  currentUser = null;
+  document.getElementById('mainApp').style.display = 'none';
+  document.getElementById('companyApp').style.display = 'none';
+  document.getElementById('loginPage').style.display = 'flex';
+  document.getElementById('loginPage').className = 'login-page active';
+}
+
+// =================== NAVIGATION ===================
+function switchPage(pageId) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  const pg = document.getElementById(pageId);
+  if (pg) pg.classList.add('active');
+  document.querySelectorAll('.tab-item').forEach(t => t.classList.remove('active'));
+  document.querySelector(`.tab-item[data-page="${pageId}"]`)?.classList.add('active');
+  if (pageId === 'eventsPage') renderEventList();
+  if (pageId === 'jobsPage') renderJobList();
+  if (pageId === 'matchPage') renderMatchPage();
+  if (pageId === 'myPage') renderMyPage();
+}
+
+let subpageStack = [];
+function openSubPage(pageId) {
+  subpageStack.push(pageId);
+  document.querySelectorAll('.subpage').forEach(p => p.style.display = 'none');
+  const pg = document.getElementById(pageId);
+  if (pg) { pg.style.display = 'block'; pg.scrollTop = 0; }
+  document.getElementById('mainApp').querySelector('.tab-bar').style.display = 'none';
+  if (pageId === 'resumePage') renderResumePage();
+  if (pageId === 'myEventsPage') renderMyEvents();
+  if (pageId === 'myApplyPage') renderMyApply();
+  if (pageId === 'messagesPage') renderMessages();
+}
+
+function closeSubPage() {
+  subpageStack.pop();
+  document.querySelectorAll('.subpage').forEach(p => p.style.display = 'none');
+  document.getElementById('mainApp').querySelector('.tab-bar').style.display = 'flex';
+}
+
+function goToMessages() {
+  switchPage('myPage');
+  setTimeout(() => openSubPage('messagesPage'), 100);
+}
+
+// =================== RENDER ===================
+function renderApp() {
+  renderHotEvents();
+  renderRecommendJobs();
+  renderEventTags();
+  renderJobFilterTags();
+  updateMyTab();
+}
+
+function renderEventTags() {
+  const cats = ['全部','义卖','讲座','比赛','实习','兼职'];
+  const html = cats.map((c,i) => `<div class="tag ${i===0?'active':''}" onclick="filterEventTag(this,'${c}')">${c}</div>`).join('');
+  document.getElementById('eventTags').innerHTML = html;
+  document.getElementById('eventFilterTags').innerHTML = html;
+}
+
+function renderJobFilterTags() {
+  const types = ['全部','全职','兼职','实习'];
+  document.getElementById('jobFilterTags').innerHTML = types.map((t,i) =>
+    `<div class="tag ${i===0?'active':''}" onclick="filterJobTag(this,'${t}')">${t}</div>`
+  ).join('');
+}
+
+let currentEventFilter = '全部';
+let currentJobFilter = '全部';
+
+function filterEventTag(el, cat) {
+  el.parentElement.querySelectorAll('.tag').forEach(t => t.classList.remove('active'));
+  el.classList.add('active');
+  currentEventFilter = cat;
+  renderHotEvents(); renderEventList();
+}
+
+function filterJobTag(el, type) {
+  el.parentElement.querySelectorAll('.tag').forEach(t => t.classList.remove('active'));
+  el.classList.add('active');
+  currentJobFilter = type;
+  renderRecommendJobs(); renderJobList();
+}
+
+function renderHotEvents() {
+  const list = currentEventFilter === '全部' ? EVENTS : EVENTS.filter(e => e.category === currentEventFilter);
+  document.getElementById('hotEvents').innerHTML = list.map(e => `
+    <div class="event-card-h" onclick="showEventDetail(${e.id})">
+      <div class="cover-placeholder" style="background:${e.gradient}">${e.emoji}</div>
+      <div class="info">
+        <h3>${e.title}</h3>
+        <div class="meta">📅 ${e.start_time.split(' ')[0]} · ${e.location.length>10?e.location.slice(0,10)+'…':e.location}</div>
+        <div class="tags-row">
+          ${e.tags.slice(0,3).map(t => `<span class="mini-tag">${t}</span>`).join('')}
+          <span class="mini-tag orange">${e.status}</span>
+        </div>
+      </div>
+    </div>
+  `).join('');
+}
+
+function renderRecommendJobs() {
+  let jobs = currentJobFilter === '全部' ? JOBS : JOBS.filter(j => j.type === currentJobFilter);
+  jobs = [...jobs].sort((a,b) => b.match_score - a.match_score);
+  document.getElementById('recommendJobs').innerHTML = jobs.map(j => renderJobCardHTML(j)).join('');
+}
+
+function renderJobCardHTML(j) {
+  const applied = appliedJobs.has(j.id);
+  const pct = Math.round(j.match_score * 100);
+  return `<div class="job-card" onclick="showJobDetail(${j.id})">
+    <div class="top">
+      <h3>${j.emoji || '🏢'} ${j.title}</h3>
+      <div class="salary">${j.salary}</div>
+    </div>
+    <div class="company">${j.company}${j.company_verified?'<span class="badge">✓ 已认证</span>':''}</div>
+    <div class="tags-row">${j.tags.slice(0,4).map(t=>`<span class="mini-tag">${t}</span>`).join('')}</div>
+    <div class="bottom">
+      <span class="city">📍 ${j.city} · ${j.type}</span>
+      <span class="score">${applied?'✅ 已投递':'匹配 '+pct+'%'}</span>
+    </div>
+    <div class="progress-bar" style="margin-top:8px"><div class="progress-bar-fill" style="width:${pct}%"></div></div>
+  </div>`;
+}
+
+function renderEventList() {
+  const list = currentEventFilter === '全部' ? EVENTS : EVENTS.filter(e => e.category === currentEventFilter);
+  document.getElementById('eventsList').innerHTML = list.map(e => {
+    const reg = registeredEvents.has(e.id);
+    return `<div class="event-list-card" onclick="showEventDetail(${e.id})">
+      <div class="cover-sm-ph" style="background:${e.gradient}">${e.emoji}</div>
+      <div class="info">
+        <h3>${e.title}</h3>
+        <div class="meta">📅 ${e.start_time} · ${e.location.length>12?e.location.slice(0,12)+'…':e.location}</div>
+        <div class="participants">${reg?'✅ 已报名':e.current+'/'+e.max+' 人报名'}</div>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+function renderJobList() {
+  const list = currentJobFilter === '全部' ? JOBS : JOBS.filter(j => j.type === currentJobFilter);
+  document.getElementById('jobsList').innerHTML = list.map(j => renderJobCardHTML(j)).join('');
+}
+
+// =================== MATCH PAGE ===================
+function renderMatchPage() {
+  const userTags = [...mySelectedSkills];
+  const matchedJobs = JOBS.map(j => {
+    const hits = j.tags.filter(t => userTags.some(u => u===t || j.tags.includes(u)));
+    return { ...j, hitTags: hits };
+  }).sort((a,b) => b.match_score - a.match_score).slice(0, 4);
+
+  document.getElementById('matchCards').innerHTML = matchedJobs.map(j => `
+    <div class="match-container" onclick="showMatchDetail(${j.id})">
+      <div class="match-title">
+        <span>${j.emoji||'🏢'} ${j.title}</span>
+        <span style="font-size:13px;color:var(--sub);font-weight:400">${j.company}</span>
+      </div>
+      <div class="match-row">
+        <div class="match-side">
+          <h4>我的技能</h4>
+          <div class="match-tags-box">
+            ${userTags.slice(0,5).map(t => `<span class="match-tag ${j.tags.includes(t)?'hit':''}">${t}</span>`).join('')}
+          </div>
+        </div>
+        <div class="match-arrow">→</div>
+        <div class="match-side">
+          <h4>岗位需求</h4>
+          <div class="match-tags-box">
+            ${j.tags.map(t => `<span class="match-tag ${userTags.includes(t)?'hit':''}">${t}</span>`).join('')}
+          </div>
+        </div>
+      </div>
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-top:8px">
+        <span style="font-size:13px;color:var(--sub)">薪资：${j.salary} · ${j.city}</span>
+        <span style="font-size:14px;font-weight:700;color:var(--primary)">匹配度 ${Math.round(j.match_score*100)}%</span>
+      </div>
+      <div class="progress-bar" style="margin-top:6px"><div class="progress-bar-fill" style="width:${Math.round(j.match_score*100)}%"></div></div>
+    </div>
+  `).join('');
+
+  document.getElementById('aiInsights').innerHTML = `
+    <div class="insight-item"><div class="dot" style="background:#667eea"></div><div><b>优势领域</b>：你的技能标签「Java」「前端」在招聘市场热度高，匹配到 ${JOBS.filter(j=>j.tags.some(t=>mySelectedSkills.has(t))).length} 个岗位</div></div>
+    <div class="insight-item"><div class="dot" style="background:#19c37d"></div><div><b>活动加分</b>：参与过编程马拉松，企业对该活动经历评价较高，有利于求职</div></div>
+    <div class="insight-item"><div class="dot" style="background:#f59e0b"></div><div><b>建议补充</b>：补充「Docker」「Kubernetes」标签，可提升后端岗位匹配度约 15%</div></div>
+    <div class="insight-item"><div class="dot" style="background:#f093fb"></div><div><b>热门趋势</b>：AI方向实习岗位近30天投递量增加 42%，建议关注「AI实习宣讲会」活动</div></div>
+  `;
+}
+
+// =================== MY PAGE ===================
+function renderMyPage() {
+  const count = appliedJobs.size;
+  const unread = myMessages.filter(m => !m.read).length;
+  document.getElementById('myApplyCount').textContent = count;
+  document.getElementById('myMsgCount').textContent = unread;
+  document.getElementById('myTabDot').style.display = unread > 0 ? 'block' : 'none';
+  document.getElementById('msgBadge').textContent = unread;
+  document.getElementById('msgBadge').style.display = unread > 0 ? 'inline' : 'none';
+
+  // Skill tags in header
+  const skills = [...mySelectedSkills].slice(0,4);
+  document.getElementById('mySkillTags').innerHTML = skills.map(s =>
+    `<span class="skill-tag">${s}</span>`
+  ).join('');
+}
+
+function updateMyTab() {
+  const unread = myMessages.filter(m => !m.read).length;
+  document.getElementById('myTabDot').style.display = unread > 0 ? 'block' : 'none';
+}
+
+// =================== RESUME PAGE ===================
+function renderResumePage() {
+  document.getElementById('skillTagsEdit').innerHTML = ALL_SKILL_TAGS.map(t => `
+    <div class="skill-tag-item ${mySelectedSkills.has(t)?'selected':''}" onclick="toggleSkill(this,'${t}')">${t}</div>
+  `).join('');
+}
+
+function toggleSkill(el, tag) {
+  if (mySelectedSkills.has(tag)) { mySelectedSkills.delete(tag); el.classList.remove('selected'); }
+  else { mySelectedSkills.add(tag); el.classList.add('selected'); }
+}
+
+function saveResume() {
+  showToast('✅ 简历已保存，已通知关注你的企业');
+  closeSubPage();
+}
+
+// =================== MY EVENTS ===================
+function renderMyEvents() {
+  const list = EVENTS.filter(e => registeredEvents.has(e.id));
+  if (list.length === 0) {
+    document.getElementById('myEventsList').innerHTML = `<div class="empty"><div class="icon">🎉</div><p>还没有参加任何活动<br>去发现精彩活动吧</p></div>`;
+    return;
+  }
+  document.getElementById('myEventsList').innerHTML = list.map(e => `
+    <div class="event-list-card">
+      <div class="cover-sm-ph" style="background:${e.gradient}">${e.emoji}</div>
+      <div class="info">
+        <h3>${e.title}</h3>
+        <div class="meta">📅 ${e.start_time}</div>
+        <div class="participants" style="color:var(--green)">✅ 已报名</div>
+      </div>
+    </div>
+  `).join('');
+}
+
+// =================== MY APPLY ===================
+function renderMyApply() {
+  const list = [...appliedJobs].map(id => JOBS.find(j => j.id === id)).filter(Boolean);
+  if (list.length === 0) {
+    document.getElementById('myApplyList').innerHTML = `<div class="empty"><div class="icon">📝</div><p>还没有投递任何职位<br>快去发现心仪职位吧</p></div>`;
+    return;
+  }
+  const statuses = ['pending','viewed','passed','reject'];
+  const statusLabels = {pending:'待查看',viewed:'已查看',passed:'通过',reject:'不合适'};
+  document.getElementById('myApplyList').innerHTML = list.map((j,i) => {
+    const st = statuses[i % 3];
+    return `<div class="apply-record">
+      <div class="logo-box">${j.emoji||'🏢'}</div>
+      <div class="detail">
+        <h4>${j.title}</h4>
+        <p>${j.company} · ${j.city}</p>
+        <p style="margin-top:3px;color:var(--primary);font-size:12px">匹配度 ${Math.round(j.match_score*100)}%</p>
+      </div>
+      <div class="status-badge ${st}">${statusLabels[st]}</div>
+    </div>`;
+  }).join('');
+}
+
+// =================== MESSAGES ===================
+function renderMessages() {
+  document.getElementById('messagesList').innerHTML = myMessages.map(m => `
+    <div class="msg-card" onclick="readMessage(${m.id})">
+      <div class="icon-box" style="background:${m.color}">${m.icon}</div>
+      <div class="msg-body">
+        <h4>${m.title}</h4>
+        <p>${m.content}</p>
+        <div class="time">${m.time}</div>
+      </div>
+      <div class="${m.read?'msg-read':'msg-unread'}"></div>
+    </div>
+  `).join('');
+}
+
+function readMessage(id) {
+  const msg = myMessages.find(m => m.id === id);
+  if (msg) { msg.read = true; renderMessages(); updateMyTab(); renderMyPage(); }
+}
+
+function markAllRead() {
+  myMessages.forEach(m => m.read = true);
+  renderMessages(); updateMyTab(); renderMyPage();
+  showToast('✅ 已全部标记为已读');
+}
+
+// =================== EVENT DETAIL ===================
+function showEventDetail(id) {
+  currentEventId = id;
+  const e = EVENTS.find(x => x.id === id);
+  if (!e) return;
+  const reg = registeredEvents.has(id);
+  const pct = Math.round(e.current / e.max * 100);
+  document.getElementById('eventDetail').innerHTML = `
+    <div style="background:${e.gradient};border-radius:14px;height:160px;display:flex;align-items:center;justify-content:center;font-size:64px;margin-bottom:16px">${e.emoji}</div>
+    <h2 style="font-size:20px;font-weight:800;margin-bottom:8px">${e.title}</h2>
+    <div style="display:flex;flex-wrap:wrap;gap:10px;font-size:13px;color:var(--sub);margin-bottom:14px">
+      <span>📅 ${e.start_time}</span><span>📍 ${e.location}</span>
+      <span>👥 ${e.current}/${e.max}人</span><span>🏷️ ${e.category}</span>
+    </div>
+    <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:14px">
+      ${e.tags.map(t=>`<span class="mini-tag">${t}</span>`).join('')}
+      <span class="mini-tag orange">${e.status}</span>
+    </div>
+    <p style="font-size:14px;line-height:1.8;color:#475569">${e.description}</p>
+    <div style="margin-top:16px">
+      <div style="display:flex;justify-content:space-between;font-size:13px;color:var(--sub);margin-bottom:6px">
+        <span>报名进度</span><span>${e.current}/${e.max}</span>
+      </div>
+      <div class="progress-bar" style="height:6px"><div class="progress-bar-fill" style="width:${pct}%"></div></div>
+    </div>
+  `;
+  const btn = document.getElementById('eventApplyBtn');
+  if (reg) { btn.textContent = '✅ 已报名'; btn.className = 'apply-btn applied'; }
+  else { btn.textContent = '立即报名'; btn.className = 'apply-btn'; }
+  document.getElementById('eventModal').classList.add('active');
+}
+
+// =================== JOB DETAIL ===================
+function showJobDetail(id) {
+  currentJobId = id;
+  const j = JOBS.find(x => x.id === id);
+  if (!j) return;
+  const applied = appliedJobs.has(id);
+  const pct = Math.round(j.match_score * 100);
+  const userTags = [...mySelectedSkills];
+  document.getElementById('jobDetail').innerHTML = `
+    <h2 style="font-size:20px;font-weight:800">${j.title}</h2>
+    <div style="font-size:24px;font-weight:700;color:var(--orange);margin:8px 0 14px">${j.salary}</div>
+    <div style="display:flex;flex-wrap:wrap;gap:10px;font-size:13px;color:var(--sub);margin-bottom:14px">
+      <span>🏢 ${j.company}</span><span>📍 ${j.city}</span>
+      <span>👁 ${j.views}浏览</span><span>📝 ${j.applicants}投递</span>
+    </div>
+    <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:16px">
+      ${j.tags.map(t=>`<span class="mini-tag ${userTags.includes(t)?'':'orange'}">${t}${userTags.includes(t)?'✓':''}</span>`).join('')}
+    </div>
+    <div style="background:linear-gradient(135deg,var(--primary),var(--primary2));border-radius:12px;padding:16px;color:white;text-align:center;margin-bottom:16px">
+      <div style="font-size:13px;opacity:.85">AI 匹配度</div>
+      <div style="font-size:40px;font-weight:800;line-height:1.2">${pct}%</div>
+      <div style="font-size:12px;opacity:.8;margin-top:4px">基于你的技能标签和活动经历</div>
+    </div>
+    <h3 style="font-size:15px;font-weight:700;margin-bottom:8px">职位描述</h3>
+    <p style="font-size:14px;line-height:1.8;color:#475569;margin-bottom:14px">${j.description}</p>
+    <h3 style="font-size:15px;font-weight:700;margin-bottom:8px">任职要求</h3>
+    <p style="font-size:14px;line-height:1.8;color:#475569;white-space:pre-line">${j.requirements}</p>
+  `;
+  const btn = document.getElementById('jobApplyBtn');
+  if (applied) { btn.textContent = '✅ 已投递'; btn.className = 'apply-btn applied'; }
+  else { btn.textContent = '投递简历'; btn.className = 'apply-btn'; }
+  document.getElementById('jobModal').classList.add('active');
+}
+
+// =================== MATCH DETAIL ===================
+function showMatchDetail(id) {
+  currentMatchJobId = id;
+  const j = JOBS.find(x => x.id === id);
+  if (!j) return;
+  const userTags = [...mySelectedSkills];
+  const hitTags = j.tags.filter(t => userTags.includes(t));
+  const missTags = j.tags.filter(t => !userTags.includes(t));
+  const pct = Math.round(j.match_score * 100);
+  document.getElementById('matchDetail').innerHTML = `
+    <div style="text-align:center;margin-bottom:20px">
+      <div style="font-size:48px;margin-bottom:8px">${j.emoji||'🏢'}</div>
+      <h2 style="font-size:20px;font-weight:800">${j.title}</h2>
+      <p style="color:var(--sub);font-size:14px">${j.company} · ${j.salary}</p>
+    </div>
+    <div style="display:flex;gap:16px;margin-bottom:20px">
+      <div style="flex:1;text-align:center;background:#edfbf5;border-radius:12px;padding:14px">
+        <div style="font-size:28px;font-weight:800;color:var(--green)">${hitTags.length}</div>
+        <div style="font-size:12px;color:var(--sub);margin-top:4px">命中标签</div>
+      </div>
+      <div style="flex:1;text-align:center;background:#ede9ff;border-radius:12px;padding:14px">
+        <div style="font-size:28px;font-weight:800;color:var(--primary)">${pct}%</div>
+        <div style="font-size:12px;color:var(--sub);margin-top:4px">综合匹配度</div>
+      </div>
+      <div style="flex:1;text-align:center;background:#fff4ef;border-radius:12px;padding:14px">
+        <div style="font-size:28px;font-weight:800;color:var(--orange)">${missTags.length}</div>
+        <div style="font-size:12px;color:var(--sub);margin-top:4px">待补充</div>
+      </div>
+    </div>
+    ${hitTags.length>0?`<div style="margin-bottom:14px"><div style="font-size:13px;font-weight:600;color:var(--green);margin-bottom:8px">✅ 匹配的技能标签</div><div style="display:flex;flex-wrap:wrap;gap:8px">${hitTags.map(t=>`<span style="padding:5px 12px;background:#edfbf5;color:var(--green);border-radius:6px;font-size:13px">${t}</span>`).join('')}</div></div>`:''}
+    ${missTags.length>0?`<div><div style="font-size:13px;font-weight:600;color:var(--orange);margin-bottom:8px">📌 建议补充的标签</div><div style="display:flex;flex-wrap:wrap;gap:8px">${missTags.map(t=>`<span style="padding:5px 12px;background:#fff4ef;color:var(--orange);border-radius:6px;font-size:13px">${t}</span>`).join('')}</div></div>`:''}
+    <div style="margin-top:16px;padding:14px;background:var(--bg);border-radius:10px;font-size:13px;color:var(--sub);line-height:1.7">
+      💡 <b>建议</b>：你的技能与该岗位匹配度${pct}%。${pct>=80?'强烈推荐投递，胜算较大！':pct>=60?'可以尝试投递，展示更多项目经历会加分。':'建议先补充相关技能后再投递。'}
+    </div>
+  `;
+  document.getElementById('matchModal').classList.add('active');
+}
+
+// =================== APPLY ACTIONS ===================
+function registerEvent() {
+  if (!currentUser) return showToast('请先登录');
+  if (registeredEvents.has(currentEventId)) return;
+  registeredEvents.add(currentEventId);
+  const e = EVENTS.find(x => x.id === currentEventId);
+  if (e) e.current++;
+  const btn = document.getElementById('eventApplyBtn');
+  btn.textContent = '✅ 已报名'; btn.className = 'apply-btn applied';
+  renderHotEvents(); renderEventList();
+  showToast('🎉 报名成功！活动开始前我们会提醒你');
+  // Add a system message
+  myMessages.unshift({ id: Date.now(), type:'event', icon:'📅', color:'#fff4ef', title:'活动报名成功', content:`你已成功报名「${e?.title}」，活动前将收到提醒`, time:'刚刚', read:false });
+  updateMyTab();
+}
+
+function applyJob() {
+  if (!currentUser) return showToast('请先登录');
+  if (appliedJobs.has(currentJobId)) return;
+  appliedJobs.add(currentJobId);
+  const j = JOBS.find(x => x.id === currentJobId);
+  if (j) j.applicants++;
+  const pct = j ? Math.round(j.match_score*100) : 0;
+  const btn = document.getElementById('jobApplyBtn');
+  btn.textContent = '✅ 已投递'; btn.className = 'apply-btn applied';
+  renderRecommendJobs(); renderJobList();
+  renderMyPage();
+  showToast(`🎉 投递成功！匹配度 ${pct}%，HR将在3个工作日内回复`);
+  myMessages.unshift({ id: Date.now(), type:'interview', icon:'📩', color:'#ede9ff', title:`已投递${j?.company}`, content:`「${j?.title}」简历已提交，匹配度 ${pct}%`, time:'刚刚', read:false });
+  updateMyTab();
+}
+
+function applyJobById(id) {
+  currentJobId = id;
+  applyJob();
+}
+
+// =================== COMPANY PORTAL ===================
+function renderCompanyPage() {
+  document.getElementById('companyResumes').innerHTML = APPLICANTS.map(a => `
+    <div class="resume-card" onclick="showResume(${a.id})">
+      <div class="top">
+        <div class="ava">👤</div>
+        <div class="name">
+          <h4>${a.name}</h4>
+          <p>${a.school} · ${a.major}</p>
+        </div>
+        <span class="status-badge ${a.status}" style="margin-left:auto">${{pending:'待处理',viewed:'已查看',passed:'通过',reject:'不合适'}[a.status]}</span>
+      </div>
+      <div style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:8px">
+        ${a.tags.map(t=>`<span class="mini-tag">${t}</span>`).join('')}
+      </div>
+      <div style="font-size:12px;color:var(--sub);margin-bottom:6px">AI 岗位匹配度</div>
+      <div class="score-bar"><div class="score-bar-fill" style="width:${Math.round(a.score*100)}%"></div></div>
+      <div style="text-align:right;font-size:13px;font-weight:700;color:var(--primary);margin-top:4px">${Math.round(a.score*100)}%</div>
+    </div>
+  `).join('');
+}
+
+function showResume(id) {
+  const a = APPLICANTS.find(x => x.id === id);
+  if (!a) return;
+  document.getElementById('resumeDetail').innerHTML = `
+    <div style="text-align:center;margin-bottom:20px">
+      <div style="width:80px;height:80px;border-radius:50%;background:#ede9ff;margin:0 auto 12px;display:flex;align-items:center;justify-content:center;font-size:36px">👤</div>
+      <h2 style="font-size:20px;font-weight:800">${a.name}</h2>
+      <p style="color:var(--sub);margin-top:4px">${a.school} · ${a.major}</p>
+    </div>
+    <div style="background:linear-gradient(135deg,#11998e,#38ef7d);border-radius:12px;padding:14px;color:white;text-align:center;margin-bottom:16px">
+      <div style="font-size:12px;opacity:.85">AI 岗位匹配度</div>
+      <div style="font-size:36px;font-weight:800">${Math.round(a.score*100)}%</div>
+    </div>
+    <h3 style="font-size:15px;font-weight:700;margin-bottom:10px">技能标签</h3>
+    <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:16px">${a.tags.map(t=>`<span class="mini-tag">${t}</span>`).join('')}</div>
+    <h3 style="font-size:15px;font-weight:700;margin-bottom:8px">教育经历</h3>
+    <p style="font-size:14px;color:#475569">${a.school} · 本科 · 2022-2026</p>
+  `;
+  document.getElementById('resumeModal').classList.add('active');
+}
+
+function contactCandidate() {
+  closeModal('resumeModal');
+  showToast('📞 面试邀请已发送！');
+}
+
+function openPublishJob() { document.getElementById('publishJobModal').classList.add('active'); }
+function openPublishEvent() { document.getElementById('publishEventModal').classList.add('active'); }
+
+function publishJob() {
+  const title = document.getElementById('pjTitle').value;
+  if (!title) return showToast('请填写职位名称');
+  closeModal('publishJobModal');
+  const n = parseInt(document.getElementById('cStatJobs').textContent) + 1;
+  document.getElementById('cStatJobs').textContent = n;
+  showToast('✅ 职位已发布，将推送给匹配的求职者');
+}
+
+function publishEvent() {
+  const title = document.getElementById('peTitle').value;
+  if (!title) return showToast('请填写活动名称');
+  closeModal('publishEventModal');
+  const n = parseInt(document.getElementById('cStatEvent').textContent) + 1;
+  document.getElementById('cStatEvent').textContent = n;
+  showToast('✅ 活动已发布！');
+}
+
+// =================== MODAL UTILS ===================
+function closeModal(id) {
+  document.getElementById(id).classList.remove('active');
+}
+// Close modal on overlay click
+document.querySelectorAll('.modal-overlay').forEach(overlay => {
+  overlay.addEventListener('click', function(e) {
+    if (e.target === this) this.classList.remove('active');
+  });
+});
+
+// =================== SEARCH ===================
+function handleSearch(val) {
+  if (!val) return;
+}
+
+function doSearch() {
+  const kw = document.getElementById('searchInput').value.trim().toLowerCase();
+  if (!kw) return showToast('请输入搜索词');
+  // Filter jobs
+  const matchJobs = JOBS.filter(j => j.title.toLowerCase().includes(kw) || j.tags.some(t=>t.toLowerCase().includes(kw)) || j.company.toLowerCase().includes(kw));
+  const matchEvents = EVENTS.filter(e => e.title.toLowerCase().includes(kw) || e.tags.some(t=>t.toLowerCase().includes(kw)));
+  if (matchJobs.length > 0) {
+    switchPage('jobsPage');
+    document.getElementById('jobsList').innerHTML = matchJobs.map(j => renderJobCardHTML(j)).join('');
+    showToast(`找到 ${matchJobs.length} 个相关职位`);
+  } else if (matchEvents.length > 0) {
+    switchPage('eventsPage');
+    document.getElementById('eventsList').innerHTML = matchEvents.map(e => `
+      <div class="event-list-card" onclick="showEventDetail(${e.id})">
+        <div class="cover-sm-ph" style="background:${e.gradient}">${e.emoji}</div>
+        <div class="info"><h3>${e.title}</h3><div class="meta">📅 ${e.start_time}</div></div>
+      </div>
+    `).join('');
+    showToast(`找到 ${matchEvents.length} 个相关活动`);
+  } else {
+    showToast('没有找到相关结果');
+  }
+}
+
+// =================== TOAST ===================
+let toastTimer = null;
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.className = 'toast show';
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => t.className = 'toast', 2300);
+}
+
+// =================== STATS ANIMATION ===================
+function animateNumber(el, target) {
+  let current = 0;
+  const step = Math.ceil(target / 40);
+  const timer = setInterval(() => {
+    current = Math.min(current + step, target);
+    el.textContent = current.toLocaleString();
+    if (current >= target) clearInterval(timer);
+  }, 30);
+}
+
+// =================== INIT ===================
+window.addEventListener('load', () => {
+  // Auto show login
+  document.getElementById('loginPage').className = 'login-page active';
+  // Animate stats after login
+});
+
+// Animate platform stats on login
+(function() {
+  const origDoLogin = window.doLogin;
+  window.doLogin = function() {
+    origDoLogin();
+    // Animate stat numbers after login
+    setTimeout(() => {
+      const statUsers = document.getElementById('statUsers');
+      const statEvents = document.getElementById('statEvents');
+      const statJobs = document.getElementById('statJobs');
+      if (statUsers) animateNumber(statUsers, 3260);
+      if (statEvents) animateNumber(statEvents, 156);
+      if (statJobs) animateNumber(statJobs, 89);
+    }, 300);
+  };
+})();
+
+// ===== PWA: Service Worker Registration =====
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('/sw.js', { scope: '/' }).then((reg) => {
+      console.log('[PWA] Service Worker registered, scope:', reg.scope);
+      
+      // Check for updates
+      reg.addEventListener('updatefound', () => {
+        const newWorker = reg.installing;
+        newWorker.addEventListener('statechange', () => {
+          if (newWorker.state === 'activated') {
+            showToast('应用已更新，请刷新页面', 'success');
+          }
+        });
+      });
+    }).catch((err) => {
+      console.warn('[PWA] SW registration failed:', err);
+    });
+  });
+}
+
+// ===== PWA: Install Prompt =====
+let deferredPrompt;
+window.addEventListener('beforeinstallprompt', (e) => {
+  e.preventDefault();
+  deferredPrompt = e;
+  // Show install banner after login
+  showInstallBanner();
+});
+
+function showInstallBanner() {
+  // Don't show if already dismissed or already installed
+  if (localStorage.getItem('pwa-install-dismissed') || window.matchMedia('(display-mode: standalone)').matches) return;
+  
+  const banner = document.createElement('div');
+  banner.id = 'pwa-install-banner';
+  banner.style.cssText = 'position:fixed;bottom:70px;left:50%;transform:translateX(-50%);background:linear-gradient(135deg,#667eea,#764ba2);color:white;padding:14px 20px;border-radius:14px;display:flex;align-items:center;gap:12px;z-index:10000;box-shadow:0 8px 32px rgba(102,126,234,0.4);max-width:90%;';
+  banner.innerHTML = `
+    <div style="flex:1">
+      <div style="font-weight:700;font-size:15px;">安装到手机桌面</div>
+      <div style="font-size:12px;opacity:0.85;margin-top:2px;">像App一样使用，支持离线访问</div>
+    </div>
+    <button onclick="installPWA()" style="background:white;color:#667eea;border:none;padding:8px 16px;border-radius:20px;font-weight:700;font-size:13px;cursor:pointer;white-space:nowrap;">立即安装</button>
+    <button onclick="dismissInstallBanner()" style="background:none;border:none;color:white;font-size:20px;cursor:pointer;padding:4px;line-height:1;">&times;</button>
+  `;
+  document.body.appendChild(banner);
+  
+  // Auto hide after 15 seconds
+  setTimeout(() => {
+    if (document.getElementById('pwa-install-banner')) {
+      dismissInstallBanner();
+    }
+  }, 15000);
+}
+
+function installPWA() {
+  if (!deferredPrompt) return;
+  deferredPrompt.prompt();
+  deferredPrompt.userChoice.then((result) => {
+    if (result.outcome === 'accepted') {
+      showToast('安装成功！', 'success');
+    }
+    deferredPrompt = null;
+    dismissInstallBanner();
+  });
+}
+
+function dismissInstallBanner() {
+  localStorage.setItem('pwa-install-dismissed', '1');
+  const banner = document.getElementById('pwa-install-banner');
+  if (banner) banner.remove();
+}
+</script>
+</body>
+</html>

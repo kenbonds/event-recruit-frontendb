@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CloudBase API 测试</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: Arial, sans-serif; padding: 20px; background: #f5f5f5; }
+    .container { max-width: 800px; margin: 0 auto; background: white; padding: 30px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+    h1 { color: #333; margin-bottom: 20px; }
+    .test-section { margin-bottom: 30px; padding: 15px; background: #f9f9f9; border-radius: 4px; }
+    .test-section h2 { font-size: 16px; margin-bottom: 10px; color: #667eea; }
+    .btn { padding: 10px 20px; background: #667eea; color: white; border: none; border-radius: 4px; cursor: pointer; margin-right: 10px; font-size: 14px; }
+    .btn:hover { background: #5568d3; }
+    .result { margin-top: 15px; padding: 15px; background: #fff; border-left: 4px solid #48bb78; border-radius: 4px; white-space: pre-wrap; font-family: monospace; font-size: 12px; max-height: 300px; overflow-y: auto; }
+    .result.error { border-left-color: #f56565; background: #fff5f5; }
+    .loading { color: #667eea; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>🔥 CloudBase API 测试</h1>
+
+    <div class="test-section">
+      <h2>认证服务测试</h2>
+      <button class="btn" onclick="testAuth()">测试 /api/auth</button>
+    </div>
+
+    <div class="test-section">
+      <h2>活动管理测试</h2>
+      <button class="btn" onclick="testEvents()">测试 /api/events</button>
+    </div>
+
+    <div class="test-section">
+      <h2>岗位管理测试</h2>
+      <button class="btn" onclick="testJobs()">测试 /api/jobs</button>
+    </div>
+
+    <div class="test-section">
+      <h2>消息系统测试</h2>
+      <button class="btn" onclick="testMessages()">测试 /api/messages</button>
+    </div>
+
+    <div class="test-section">
+      <h2>测试结果</h2>
+      <div class="result" id="result">
+        <div class="loading">等待测试...</div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const API_BASE_URL = 'https://zhaojiba1-0gqnm5h075fc5ccf-1300229407.ap-shanghai.app.tcloudbase.com/api';
+
+    async function callAPI(endpoint, data) {
+      const resultDiv = document.getElementById('result');
+      resultDiv.className = 'result';
+      resultDiv.innerHTML = '<div class="loading">正在调用 API...</div>';
+
+      console.log('调用 API:', endpoint, data);
+
+      try {
+        const response = await fetch(`${API_BASE_URL}${endpoint}`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(data)
+        });
+
+        const result = await response.json();
+
+        console.log('API 响应:', result);
+
+        resultDiv.className = 'result';
+        resultDiv.innerHTML = `<strong>成功！</strong><br><br>${JSON.stringify(result, null, 2)}`;
+
+        return result;
+      } catch (error) {
+        console.error('API 错误:', error);
+        resultDiv.className = 'result error';
+        resultDiv.innerHTML = `<strong>失败！</strong><br><br>错误信息: ${error.message}`;
+        throw error;
+      }
+    }
+
+    async function testAuth() {
+      await callAPI('/auth', { action: 'test' });
+    }
+
+    async function testEvents() {
+      await callAPI('/events', { action: 'list', page: 1 });
+    }
+
+    async function testJobs() {
+      await callAPI('/jobs', { action: 'list', page: 1 });
+    }
+
+    async function testMessages() {
+      await callAPI('/messages', { action: 'list', page: 1 });
+    }
+  </script>
+</body>
+</html>

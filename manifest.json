@@ -1,7 +1,7 @@
 {
-  "name": "活动招聘 - 双向导流平台",
-  "short_name": "活动招聘",
-  "description": "连接活动与招聘的双向导流平台，让每一场活动都成为人才发现的机会",
+  "name": "召集吧 - 让成长发生",
+  "short_name": "召集吧",
+  "description": "连接活动与人才的双向平台，让每一次召集都成为成长的起点",
   "start_url": "/demo.html",
   "display": "standalone",
   "orientation": "portrait",

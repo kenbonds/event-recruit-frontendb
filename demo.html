@@ -6,10 +6,10 @@
 <meta name="theme-color" content="#667eea">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="apple-mobile-web-app-title" content="活动招聘">
+<meta name="apple-mobile-web-app-title" content="召集吧">
 <link rel="manifest" href="/manifest.json">
 <link rel="apple-touch-icon" href="/icons/icon-192.png">
-<title>活动招聘 - 活动招聘双向导流平台</title>
+<title>召集吧 · 让成长发生</title>
 <style>
 * { margin: 0; padding: 0; box-sizing: border-box; }
 :root {
@@ -284,14 +284,23 @@ h1,h2,h3 { line-height: 1.3; }
 <div class="login-page" id="loginPage">
   <div class="login-logo">
     <span class="brand-icon">🎯</span>
-    <h1>活动招聘</h1>
-    <p>通过活动场景，精准匹配职业机会</p>
+    <h1>召集吧</h1>
+    <p>召集，让成长发生</p>
   </div>
+  
+  <!-- 登录/注册切换标签 -->
+  <div class="auth-tabs" style="display:flex;justify-content:center;gap:20px;margin-bottom:16px">
+    <span class="auth-tab active" onclick="switchAuthMode('login')" id="authTabLogin" style="font-size:15px;color:#667eea;font-weight:600;cursor:pointer;border-bottom:2px solid #667eea;padding-bottom:4px">登录</span>
+    <span class="auth-tab" onclick="switchAuthMode('register')" id="authTabRegister" style="font-size:15px;color:#8492a6;cursor:pointer;padding-bottom:4px">注册</span>
+  </div>
+  
   <div class="mode-tabs">
     <div class="mode-tab active" onclick="switchLoginMode('user')" id="tabUser">求职者</div>
-    <div class="mode-tab" onclick="switchLoginMode('company')" id="tabCompany">企业端</div>
+    <div class="mode-tab" onclick="switchLoginMode('company')" id="tabCompany">召集方</div>
   </div>
-  <div class="form">
+  
+  <!-- 登录表单 -->
+  <div class="form" id="loginForm">
     <div class="form-group">
       <label>手机号</label>
       <input type="tel" id="phoneInput" placeholder="请输入手机号" maxlength="11" value="13800138001">
@@ -306,6 +315,82 @@ h1,h2,h3 { line-height: 1.3; }
     <button class="login-btn" onclick="doLogin()">登 录</button>
     <p class="login-hint">演示版：验证码固定为 123456</p>
   </div>
+  
+  <!-- 企业注册表单 -->
+  <div class="form" id="companyRegisterForm" style="display:none">
+    <div class="form-group">
+      <label>联系人姓名 <span style="color:#ff6b35">*</span></label>
+      <input type="text" id="compRegName" placeholder="请输入联系人姓名">
+    </div>
+    <div class="form-group">
+      <label>单位名称 <span style="color:#ff6b35">*</span></label>
+      <input type="text" id="compRegCompany" placeholder="请输入单位全称（企业/学校/协会等）">
+    </div>
+    <div class="form-group">
+      <label>联系电话 <span style="color:#ff6b35">*</span></label>
+      <input type="tel" id="compRegPhone" placeholder="请输入联系电话" maxlength="11">
+    </div>
+    <div class="form-group">
+      <label>微信号 <span style="color:#ff6b35">*</span></label>
+      <input type="text" id="compRegWechat" placeholder="请输入微信号">
+    </div>
+    <button class="login-btn" onclick="doCompanyRegister()">企业注册</button>
+    <p class="login-hint">召集方注册仅需基本信息，审核通过后即可发布活动和职位</p>
+  </div>
+  
+  <!-- 个人注册表单 -->
+  <div class="form" id="userRegisterForm" style="display:none">
+    <div class="form-group">
+      <label>手机号 <span style="color:#ff6b35">*</span></label>
+      <div class="send-code">
+        <input type="tel" id="userRegPhone" placeholder="请输入手机号" maxlength="11">
+        <button class="send-code-btn" onclick="sendUserRegCode()">获取验证码</button>
+      </div>
+    </div>
+    <div class="form-group">
+      <label>验证码 <span style="color:#ff6b35">*</span></label>
+      <input type="text" id="userRegCode" placeholder="请输入验证码" maxlength="6">
+    </div>
+    <div class="form-group">
+      <label>真实姓名 <span style="color:#ff6b35">*</span></label>
+      <input type="text" id="userRegName" placeholder="请输入真实姓名">
+    </div>
+    <div class="form-group">
+      <label>毕业证照片 <span style="color:#ff6b35">*</span></label>
+      <div class="upload-box" onclick="document.getElementById('diplomaUpload').click()" style="border:2px dashed #d0d5dd;border-radius:10px;padding:20px;text-align:center;cursor:pointer;background:#fafbfc">
+        <div id="diplomaPreview" style="font-size:40px;color:#d0d5dd">📷</div>
+        <p style="font-size:13px;color:#8492a6;margin-top:8px">点击上传毕业证照片</p>
+        <p style="font-size:11px;color:#a0aec0">支持 JPG、PNG 格式</p>
+      </div>
+      <input type="file" id="diplomaUpload" accept="image/*" style="display:none" onchange="handleDiplomaUpload(this)">
+    </div>
+    <div class="form-group">
+      <label>学校 <span style="color:#ff6b35">*</span></label>
+      <input type="text" id="userRegSchool" placeholder="请输入毕业院校">
+    </div>
+    <div class="form-group">
+      <label>专业 <span style="color:#ff6b35">*</span></label>
+      <input type="text" id="userRegMajor" placeholder="请输入专业名称">
+    </div>
+    <div class="form-group">
+      <label>学历 <span style="color:#ff6b35">*</span></label>
+      <select id="userRegDegree" style="width:100%;padding:12px;border:1px solid #e2e8f0;border-radius:10px;font-size:14px;background:white">
+        <option value="">请选择学历</option>
+        <option value="大专">大专</option>
+        <option value="本科">本科</option>
+        <option value="硕士">硕士</option>
+        <option value="博士">博士</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label>毕业年份 <span style="color:#ff6b35">*</span></label>
+      <select id="userRegGradYear" style="width:100%;padding:12px;border:1px solid #e2e8f0;border-radius:10px;font-size:14px;background:white">
+        <option value="">请选择毕业年份</option>
+      </select>
+    </div>
+    <button class="login-btn" onclick="doUserRegister()">完成注册</button>
+    <p class="login-hint">完善信息有助于获得更精准的职位推荐</p>
+  </div>
 </div>
 
 <!-- ====== MAIN APP (USER) ====== -->
@@ -314,10 +399,10 @@ h1,h2,h3 { line-height: 1.3; }
   <!-- HOME PAGE -->
   <div class="page active" id="homePage">
     <div class="header">
-      <h1>🎯 活动招聘</h1>
-      <p>通过活动场景，精准匹配你的职业机会</p>
+      <h1>🎯 召集吧</h1>
+      <p>真诚召集，彼此成就</p>
       <div class="search-bar">
-        <input type="text" id="searchInput" placeholder="搜索活动或职位..." oninput="handleSearch(this.value)">
+        <input type="text" id="searchInput" placeholder="搜索活动或岗位..." oninput="handleSearch(this.value)">
         <button onclick="doSearch()">搜索</button>
       </div>
     </div>
@@ -325,16 +410,16 @@ h1,h2,h3 { line-height: 1.3; }
     <div class="stats">
       <div class="stat-item"><div class="num" id="statUsers">3,260</div><div class="label">活跃用户</div></div>
       <div class="stat-item"><div class="num" id="statEvents">156</div><div class="label">进行中活动</div></div>
-      <div class="stat-item"><div class="num" id="statJobs">89</div><div class="label">招聘职位</div></div>
+      <div class="stat-item"><div class="num" id="statJobs">89</div><div class="label">招募岗位</div></div>
       <div class="stat-item"><div class="num">82%</div><div class="label">匹配准确率</div></div>
     </div>
 
     <!-- Notify Banner -->
-    <div class="notify-banner" onclick="goToMessages()">
+    <div class="notify-banner" id="notifyBanner" onclick="goToMessages()">
       <span class="icon">🔔</span>
       <div class="text">
-        <h4>有新消息：腾讯已查看你的简历</h4>
-        <p>点击查看详情 →</p>
+        <h4 id="notifyBannerTitle">欢迎回到召集吧！</h4>
+        <p id="notifyBannerSub">点击查看最新消息 →</p>
       </div>
     </div>
 
@@ -352,7 +437,7 @@ h1,h2,h3 { line-height: 1.3; }
     <div class="section">
       <div class="section-header">
         <h2>✨ 为你推荐</h2>
-        <a href="javascript:void(0)" onclick="switchPage('jobsPage')">更多职位 ›</a>
+        <a href="javascript:void(0)" onclick="switchPage('jobsPage')">更多岗位 ›</a>
       </div>
       <div id="recommendJobs"></div>
     </div>
@@ -371,7 +456,7 @@ h1,h2,h3 { line-height: 1.3; }
   <!-- JOBS PAGE -->
   <div class="page" id="jobsPage">
     <div class="header" style="padding-bottom:12px">
-      <h1>职位推荐</h1>
+      <h1>岗位推荐</h1>
       <p style="opacity:.8;font-size:13px;margin-top:4px">基于你的标签智能推荐</p>
       <div class="tags" id="jobFilterTags" style="margin-top:10px"></div>
     </div>
@@ -445,7 +530,7 @@ h1,h2,h3 { line-height: 1.3; }
 <!-- ====== COMPANY APP ====== -->
 <div id="companyApp" style="display:none;">
   <div class="company-header">
-    <h1 style="font-size:22px">🏢 企业管理后台</h1>
+    <h1 style="font-size:22px">🏢 召集方管理后台</h1>
     <p style="opacity:.85;font-size:13px;margin-top:4px" id="companyName">某某科技有限公司</p>
   </div>
   <div class="company-stat-row">
@@ -531,13 +616,16 @@ h1,h2,h3 { line-height: 1.3; }
   <div class="subpage-header"><button class="back-btn" onclick="closeSubPage()">‹</button><h2>账号设置</h2></div>
   <div style="padding:12px">
     <div class="menu-list">
-      <div class="menu-item"><span class="icon">🔔</span><span class="text">推送通知</span><span class="arrow">›</span></div>
-      <div class="menu-item"><span class="icon">🔒</span><span class="text">隐私设置</span><span class="arrow">›</span></div>
-      <div class="menu-item"><span class="icon">📱</span><span class="text">绑定手机</span><span class="arrow">›</span></div>
-      <div class="menu-item"><span class="icon">🎨</span><span class="text">主题外观</span><span class="arrow">›</span></div>
-      <div class="menu-item"><span class="icon">ℹ️</span><span class="text">关于我们</span><span class="arrow">›</span></div>
+      <div class="menu-item" onclick="openSettingDetail('notification')"><span class="icon">🔔</span><span class="text">推送通知</span><span class="badge-blue" id="notifyStatus">已开启</span><span class="arrow">›</span></div>
+      <div class="menu-item" onclick="openSettingDetail('privacy')"><span class="icon">🔒</span><span class="text">隐私设置</span><span class="arrow">›</span></div>
+      <div class="menu-item" onclick="openSettingDetail('phone')"><span class="icon">📱</span><span class="text">绑定手机</span><span class="badge-blue">已绑定</span><span class="arrow">›</span></div>
+      <div class="menu-item" onclick="openSettingDetail('theme')"><span class="icon">🎨</span><span class="text">主题外观</span><span class="arrow">›</span></div>
+      <div class="menu-item" onclick="openSettingDetail('about')"><span class="icon">ℹ️</span><span class="text">关于我们</span><span class="arrow">›</span></div>
     </div>
-    <div style="text-align:center;margin-top:24px;color:var(--sub);font-size:12px">活动招聘 v2.0.0 · Demo</div>
+    <div style="margin-top:20px">
+      <button onclick="doLogout()" style="width:100%;padding:14px;border-radius:12px;border:1.5px solid #ef4444;background:white;color:#ef4444;font-size:15px;font-weight:600;cursor:pointer">退出登录</button>
+    </div>
+    <div style="text-align:center;margin-top:16px;color:var(--sub);font-size:12px">召集吧 v2.2.0 · 让成长发生</div>
   </div>
 </div>
 
@@ -585,27 +673,234 @@ h1,h2,h3 { line-height: 1.3; }
         <select id="pjType"><option>全职</option><option>兼职</option><option>实习</option></select>
       </div>
       <div class="form-group"><label>工作城市</label><input type="text" id="pjCity" placeholder="北京"></div>
-      <div class="form-group"><label>职位描述</label><textarea id="pjDesc" rows="4" placeholder="描述岗位职责..."></textarea></div>
+      <div class="form-group"><label>岗位描述</label><textarea id="pjDesc" rows="4" placeholder="描述岗位职责..."></textarea></div>
       <button class="apply-btn" onclick="publishJob()">发布职位</button>
     </div>
   </div>
 </div>
 
-<!-- Publish Event Modal -->
+<!-- Publish Event Modal - 优化版分步表单 -->
 <div class="modal-overlay" id="publishEventModal">
-  <div class="modal">
+  <div class="modal" style="max-height:90vh;overflow:hidden">
     <div class="modal-handle"></div>
-    <div class="modal-header"><h3>发布活动</h3><button class="modal-close" onclick="closeModal('publishEventModal')">✕</button></div>
-    <div class="modal-body publish-form">
-      <div class="form-group"><label>活动名称</label><input type="text" id="peTitle" placeholder="如：前端技术分享会"></div>
-      <div class="form-group"><label>活动类型</label>
-        <select id="peCategory"><option>讲座</option><option>比赛</option><option>实习</option><option>义卖</option><option>兼职</option></select>
+    <div class="modal-header">
+      <h3>🎉 发布新活动</h3>
+      <button class="modal-close" onclick="closeModal('publishEventModal')">✕</button>
+    </div>
+    
+    <!-- 步骤指示器 -->
+    <div class="step-indicator" style="display:flex;justify-content:center;gap:8px;padding:16px 20px 0;border-bottom:1px solid var(--border)">
+      <div class="step-item active" data-step="1" style="display:flex;align-items:center;gap:6px;padding:8px 16px;border-radius:20px;background:linear-gradient(135deg,var(--primary),var(--primary2));color:white;font-size:13px">
+        <span class="step-num" style="width:20px;height:20px;border-radius:50%;background:rgba(255,255,255,0.3);display:flex;align-items:center;justify-content:center;font-size:12px">1</span>
+        <span>基本信息</span>
       </div>
-      <div class="form-group"><label>活动时间</label><input type="text" id="peTime" placeholder="2026-05-01 14:00"></div>
-      <div class="form-group"><label>活动地点</label><input type="text" id="peLocation" placeholder="北京大学..."></div>
-      <div class="form-group"><label>活动人数上限</label><input type="number" id="peMax" value="200"></div>
-      <div class="form-group"><label>活动介绍</label><textarea id="peDesc" rows="4" placeholder="介绍活动内容..."></textarea></div>
-      <button class="apply-btn danger" onclick="publishEvent()">发布活动</button>
+      <div class="step-line" style="width:30px;height:2px;background:#e2e8f0;margin-top:14px"></div>
+      <div class="step-item" data-step="2" style="display:flex;align-items:center;gap:6px;padding:8px 16px;border-radius:20px;background:#f1f5f9;color:#64748b;font-size:13px">
+        <span class="step-num" style="width:20px;height:20px;border-radius:50%;background:#cbd5e1;display:flex;align-items:center;justify-content:center;font-size:12px;color:white">2</span>
+        <span>时间地点</span>
+      </div>
+      <div class="step-line" style="width:30px;height:2px;background:#e2e8f0;margin-top:14px"></div>
+      <div class="step-item" data-step="3" style="display:flex;align-items:center;gap:6px;padding:8px 16px;border-radius:20px;background:#f1f5f9;color:#64748b;font-size:13px">
+        <span class="step-num" style="width:20px;height:20px;border-radius:50%;background:#cbd5e1;display:flex;align-items:center;justify-content:center;font-size:12px;color:white">3</span>
+        <span>详情设置</span>
+      </div>
+    </div>
+    
+    <div class="modal-body" style="padding:0;overflow-y:auto;max-height:calc(90vh - 140px)">
+      <!-- Step 1: 基本信息 -->
+      <div class="publish-step" id="publishStep1" style="padding:20px">
+        <!-- 封面图上传 -->
+        <div class="form-group">
+          <label>活动封面 <span style="color:#ff6b35">*</span></label>
+          <div class="cover-upload" onclick="document.getElementById('eventCoverInput').click()" style="border:2px dashed #d0d5dd;border-radius:12px;padding:30px;text-align:center;cursor:pointer;background:#fafbfc;transition:all .2s">
+            <div id="eventCoverPreview" style="font-size:48px;color:#d0d5dd">📷</div>
+            <p style="font-size:14px;color:#64748b;margin-top:12px">点击上传活动封面</p>
+            <p style="font-size:12px;color:#a0aec0;margin-top:4px">建议尺寸 1200×600，支持 JPG、PNG</p>
+          </div>
+          <input type="file" id="eventCoverInput" accept="image/*" style="display:none" onchange="handleEventCoverUpload(this)">
+        </div>
+        
+        <!-- 活动名称 -->
+        <div class="form-group">
+          <label>活动名称 <span style="color:#ff6b35">*</span></label>
+          <input type="text" id="peTitle" placeholder="给你的活动起个吸引人的名字" style="font-size:16px;font-weight:500">
+          <p style="font-size:12px;color:#a0aec0;margin-top:4px">好的标题能让参与率提升 30%</p>
+        </div>
+        
+        <!-- 活动类型 -->
+        <div class="form-group">
+          <label>活动类型 <span style="color:#ff6b35">*</span></label>
+          <div class="type-grid" style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px">
+            <div class="type-option" data-type="讲座" onclick="selectEventType(this)" style="padding:12px;border:2px solid #e2e8f0;border-radius:10px;text-align:center;cursor:pointer;transition:all .2s">
+              <div style="font-size:24px">🎤</div>
+              <div style="font-size:13px;margin-top:4px;color:#475569">讲座分享</div>
+            </div>
+            <div class="type-option" data-type="比赛" onclick="selectEventType(this)" style="padding:12px;border:2px solid #e2e8f0;border-radius:10px;text-align:center;cursor:pointer;transition:all .2s">
+              <div style="font-size:24px">🏆</div>
+              <div style="font-size:13px;margin-top:4px;color:#475569">比赛竞技</div>
+            </div>
+            <div class="type-option" data-type="实习" onclick="selectEventType(this)" style="padding:12px;border:2px solid #e2e8f0;border-radius:10px;text-align:center;cursor:pointer;transition:all .2s">
+              <div style="font-size:24px">💼</div>
+              <div style="font-size:13px;margin-top:4px;color:#475569">实习宣讲</div>
+            </div>
+            <div class="type-option" data-type="义卖" onclick="selectEventType(this)" style="padding:12px;border:2px solid #e2e8f0;border-radius:10px;text-align:center;cursor:pointer;transition:all .2s">
+              <div style="font-size:24px">🎁</div>
+              <div style="font-size:13px;margin-top:4px;color:#475569">义卖公益</div>
+            </div>
+            <div class="type-option" data-type="兼职" onclick="selectEventType(this)" style="padding:12px;border:2px solid #e2e8f0;border-radius:10px;text-align:center;cursor:pointer;transition:all .2s">
+              <div style="font-size:24px">💰</div>
+              <div style="font-size:13px;margin-top:4px;color:#475569">兼职招聘</div>
+            </div>
+            <div class="type-option" data-type="社交" onclick="selectEventType(this)" style="padding:12px;border:2px solid #e2e8f0;border-radius:10px;text-align:center;cursor:pointer;transition:all .2s">
+              <div style="font-size:24px">🎉</div>
+              <div style="font-size:13px;margin-top:4px;color:#475569">社交聚会</div>
+            </div>
+          </div>
+          <input type="hidden" id="peCategory" value="">
+        </div>
+        
+        <!-- 关联岗位（平台特色） -->
+        <div class="form-group">
+          <label style="display:flex;align-items:center;gap:6px">
+            关联岗位 <span style="background:linear-gradient(135deg,#ff6b35,#f5576c);color:white;font-size:10px;padding:2px 6px;border-radius:4px">平台特色</span>
+          </label>
+          <select id="peRelatedJob" style="width:100%;padding:12px;border:1px solid #e2e8f0;border-radius:10px;font-size:14px;background:white">
+            <option value="">选择要关联的岗位（可选）</option>
+            <option value="1">Java开发工程师 - 腾讯科技</option>
+            <option value="2">前端开发工程师 - 字节跳动</option>
+            <option value="3">产品经理实习生 - 美团</option>
+          </select>
+          <p style="font-size:12px;color:#667eea;margin-top:4px">💡 关联岗位后，活动参与者可直接投递简历</p>
+        </div>
+        
+        <button class="apply-btn" onclick="goToPublishStep(2)" style="margin-top:20px">下一步：设置时间地点</button>
+      </div>
+      
+      <!-- Step 2: 时间地点 -->
+      <div class="publish-step" id="publishStep2" style="padding:20px;display:none">
+        <div class="form-group">
+          <label>开始时间 <span style="color:#ff6b35">*</span></label>
+          <input type="datetime-local" id="peStartTime" style="width:100%;padding:12px;border:1px solid #e2e8f0;border-radius:10px;font-size:14px">
+        </div>
+        
+        <div class="form-group">
+          <label>结束时间 <span style="color:#ff6b35">*</span></label>
+          <input type="datetime-local" id="peEndTime" style="width:100%;padding:12px;border:1px solid #e2e8f0;border-radius:10px;font-size:14px">
+        </div>
+        
+        <div class="form-group">
+          <label>报名截止时间</label>
+          <input type="datetime-local" id="peDeadline" style="width:100%;padding:12px;border:1px solid #e2e8f0;border-radius:10px;font-size:14px">
+          <p style="font-size:12px;color:#a0aec0;margin-top:4px">不设置则默认为活动开始前1小时</p>
+        </div>
+        
+        <div class="form-group">
+          <label>活动地点 <span style="color:#ff6b35">*</span></label>
+          <div style="display:flex;gap:10px">
+            <select id="peLocationType" style="width:100px;padding:12px;border:1px solid #e2e8f0;border-radius:10px;font-size:14px;background:white" onchange="toggleLocationInput()">
+              <option value="offline">线下</option>
+              <option value="online">线上</option>
+            </select>
+            <input type="text" id="peLocation" placeholder="搜索地点..." style="flex:1">
+          </div>
+        </div>
+        
+        <div class="form-group">
+          <label>人数限制</label>
+          <div style="display:flex;align-items:center;gap:12px">
+            <input type="range" id="peMaxRange" min="10" max="1000" value="100" style="flex:1" oninput="document.getElementById('peMax').value=this.value">
+            <input type="number" id="peMax" value="100" style="width:80px;text-align:center" oninput="document.getElementById('peMaxRange').value=this.value">
+            <span style="color:#64748b;font-size:14px">人</span>
+          </div>
+        </div>
+        
+        <div style="display:flex;gap:10px;margin-top:20px">
+          <button class="apply-btn" style="flex:1;background:#e2e8f0;color:#64748b;box-shadow:none" onclick="goToPublishStep(1)">上一步</button>
+          <button class="apply-btn" style="flex:2" onclick="goToPublishStep(3)">下一步：完善详情</button>
+        </div>
+      </div>
+      
+      <!-- Step 3: 详情设置 -->
+      <div class="publish-step" id="publishStep3" style="padding:20px;display:none">
+        <!-- 活动标签 -->
+        <div class="form-group">
+          <label>活动标签 <span style="color:#ff6b35">*</span></label>
+          <div class="tag-select" style="display:flex;flex-wrap:wrap;gap:8px">
+            <span class="tag-option" onclick="toggleEventTag(this)" style="padding:6px 14px;border:1.5px solid #e2e8f0;border-radius:20px;font-size:13px;color:#64748b;cursor:pointer;transition:all .2s">技术</span>
+            <span class="tag-option" onclick="toggleEventTag(this)" style="padding:6px 14px;border:1.5px solid #e2e8f0;border-radius:20px;font-size:13px;color:#64748b;cursor:pointer;transition:all .2s">公益</span>
+            <span class="tag-option" onclick="toggleEventTag(this)" style="padding:6px 14px;border:1.5px solid #e2e8f0;border-radius:20px;font-size:13px;color:#64748b;cursor:pointer;transition:all .2s">社交</span>
+            <span class="tag-option" onclick="toggleEventTag(this)" style="padding:6px 14px;border:1.5px solid #e2e8f0;border-radius:20px;font-size:13px;color:#64748b;cursor:pointer;transition:all .2s">学习</span>
+            <span class="tag-option" onclick="toggleEventTag(this)" style="padding:6px 14px;border:1.5px solid #e2e8f0;border-radius:20px;font-size:13px;color:#64748b;cursor:pointer;transition:all .2s">创业</span>
+            <span class="tag-option" onclick="toggleEventTag(this)" style="padding:6px 14px;border:1.5px solid #e2e8f0;border-radius:20px;font-size:13px;color:#64748b;cursor:pointer;transition:all .2s">职场</span>
+          </div>
+          <input type="hidden" id="peTags" value="">
+        </div>
+        
+        <!-- 活动详情 -->
+        <div class="form-group">
+          <label>活动详情 <span style="color:#ff6b35">*</span></label>
+          <textarea id="peDesc" rows="6" placeholder="详细介绍活动内容、流程、亮点...
+
+建议包含：
+• 活动背景和目标
+• 详细流程安排
+• 参与方式和要求
+• 联系方式"></textarea>
+        </div>
+        
+        <!-- 费用设置 -->
+        <div class="form-group">
+          <label>参与费用</label>
+          <div style="display:flex;gap:10px;margin-bottom:10px">
+            <label style="display:flex;align-items:center;gap:6px;cursor:pointer;padding:10px 16px;border:2px solid var(--primary);border-radius:10px;background:#ede9ff;color:var(--primary)">
+              <input type="radio" name="peFeeType" value="free" checked onchange="toggleFeeInput()" style="accent-color:var(--primary)"> 免费
+            </label>
+            <label style="display:flex;align-items:center;gap:6px;cursor:pointer;padding:10px 16px;border:2px solid #e2e8f0;border-radius:10px">
+              <input type="radio" name="peFeeType" value="paid" onchange="toggleFeeInput()"> 收费
+            </label>
+          </div>
+          <div id="feeInput" style="display:none">
+            <input type="number" id="peFee" placeholder="输入金额（元）" style="width:100%">
+          </div>
+        </div>
+        
+        <!-- 报名表单设置 -->
+        <div class="form-group">
+          <label style="display:flex;align-items:center;justify-content:space-between">
+            <span>报名信息设置</span>
+            <span style="font-size:12px;color:#667eea;cursor:pointer" onclick="showCustomFields()">+ 添加自定义问题</span>
+          </label>
+          <div style="background:#f8fafc;border-radius:10px;padding:12px">
+            <label style="display:flex;align-items:center;gap:8px;padding:8px 0;border-bottom:1px solid #e2e8f0">
+              <input type="checkbox" checked disabled> 姓名（必填）
+            </label>
+            <label style="display:flex;align-items:center;gap:8px;padding:8px 0;border-bottom:1px solid #e2e8f0">
+              <input type="checkbox" checked disabled> 手机号（必填）
+            </label>
+            <label style="display:flex;align-items:center;gap:8px;padding:8px 0">
+              <input type="checkbox" id="peNeedSchool"> 学校/单位
+            </label>
+            <label style="display:flex;align-items:center;gap:8px;padding:8px 0">
+              <input type="checkbox" id="peNeedResume"> 允许投递简历
+            </label>
+          </div>
+        </div>
+        
+        <!-- 预览卡片 -->
+        <div class="form-group">
+          <label>活动预览</label>
+          <div id="eventPreviewCard" style="background:white;border-radius:12px;padding:16px;box-shadow:0 2px 12px rgba(0,0,0,0.08)">
+            <div style="height:120px;background:linear-gradient(135deg,#667eea,#764ba2);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:48px;color:white">🎉</div>
+            <h4 style="margin-top:12px;font-size:16px">活动标题将显示在这里</h4>
+            <p style="font-size:13px;color:#64748b;margin-top:4px">📅 时间 · 📍 地点</p>
+          </div>
+        </div>
+        
+        <div style="display:flex;gap:10px;margin-top:20px">
+          <button class="apply-btn" style="flex:1;background:#e2e8f0;color:#64748b;box-shadow:none" onclick="goToPublishStep(2)">上一步</button>
+          <button class="apply-btn" style="flex:2;background:linear-gradient(135deg,#ff6b35,#f5576c);box-shadow:0 4px 14px rgba(255,107,53,0.35)" onclick="publishEvent()">🚀 立即发布活动</button>
+        </div>
+      </div>
     </div>
   </div>
 </div>
@@ -640,7 +935,7 @@ const EVENTS = [
     start_time:'2026-04-15 14:00', location:'北京大学百年讲堂', max:300, current:0, tags:['AI','实习','宣讲','大厂'], status:'报名中' },
   { id:5, title:'周末兼职招聘会', emoji:'💰', gradient:'linear-gradient(135deg,#f7971e,#ffd200)', category:'兼职',
     description:'面向大学生的周末兼职岗位专场招聘，涵盖家教、服务员、推广等多个方向，日薪 200-400 元。',
-    start_time:'2026-04-20 09:00', location:'北京理工大学体育馆', max:800, current:0, tags:['兼职','招聘','周末'], status:'即将开始' },
+    start_time:'2026-04-20 09:00', location:'北京理工大学体育馆', max:800, current:0, tags:['兼职','招募','周末'], status:'即将开始' },
   { id:6, title:'职业规划训练营', emoji:'🎯', gradient:'linear-gradient(135deg,#11998e,#38ef7d)', category:'讲座',
     description:'由职业咨询师带队，帮助大学生制定清晰的职业规划，提升求职竞争力。',
     start_time:'2026-04-25 10:00', location:'中关村创业大街', max:80, current:34, tags:['职业规划','大学生','提升'], status:'报名中' },
@@ -699,6 +994,7 @@ const ALL_SKILL_TAGS = ['Java','Python','JavaScript','Vue','React','Go','Spring'
 
 let currentUser = null;
 let loginMode = 'user'; // 'user' | 'company'
+let authMode = 'login'; // 'login' | 'register'
 let registeredEvents = new Set([1, 3]);
 let appliedJobs = new Set();
 let myMessages = [...MESSAGES];
@@ -707,12 +1003,171 @@ let currentEventId = null;
 let currentJobId = null;
 let currentMatchJobId = null;
 let companyJobs = [...JOBS.slice(0,3)];
+let uploadedDiploma = null; // 存储上传的毕业证照片
 
-// =================== LOGIN ===================
+// =================== LOGIN & REGISTER ===================
 function switchLoginMode(mode) {
   loginMode = mode;
   document.getElementById('tabUser').className = 'mode-tab' + (mode==='user'?' active':'');
   document.getElementById('tabCompany').className = 'mode-tab' + (mode==='company'?' active':'');
+  // 切换模式时刷新表单显示
+  switchAuthMode(authMode);
+}
+
+function switchAuthMode(mode) {
+  authMode = mode;
+  const loginTab = document.getElementById('authTabLogin');
+  const registerTab = document.getElementById('authTabRegister');
+  
+  if (mode === 'login') {
+    loginTab.style.color = '#667eea';
+    loginTab.style.fontWeight = '600';
+    loginTab.style.borderBottom = '2px solid #667eea';
+    registerTab.style.color = '#8492a6';
+    registerTab.style.fontWeight = '400';
+    registerTab.style.borderBottom = 'none';
+    
+    document.getElementById('loginForm').style.display = 'block';
+    document.getElementById('companyRegisterForm').style.display = 'none';
+    document.getElementById('userRegisterForm').style.display = 'none';
+  } else {
+    registerTab.style.color = '#667eea';
+    registerTab.style.fontWeight = '600';
+    registerTab.style.borderBottom = '2px solid #667eea';
+    loginTab.style.color = '#8492a6';
+    loginTab.style.fontWeight = '400';
+    loginTab.style.borderBottom = 'none';
+    
+    document.getElementById('loginForm').style.display = 'none';
+    if (loginMode === 'company') {
+      document.getElementById('companyRegisterForm').style.display = 'block';
+      document.getElementById('userRegisterForm').style.display = 'none';
+    } else {
+      document.getElementById('companyRegisterForm').style.display = 'none';
+      document.getElementById('userRegisterForm').style.display = 'block';
+    }
+  }
+}
+
+// 初始化毕业年份选项
+function initGradYearOptions() {
+  const select = document.getElementById('userRegGradYear');
+  const currentYear = new Date().getFullYear();
+  for (let i = currentYear; i >= currentYear - 10; i--) {
+    const option = document.createElement('option');
+    option.value = i;
+    option.textContent = i + '年';
+    select.appendChild(option);
+  }
+}
+
+// 处理毕业证上传
+function handleDiplomaUpload(input) {
+  const file = input.files[0];
+  if (!file) return;
+  
+  if (!file.type.startsWith('image/')) {
+    showToast('请上传图片文件');
+    return;
+  }
+  
+  const reader = new FileReader();
+  reader.onload = function(e) {
+    uploadedDiploma = e.target.result;
+    const preview = document.getElementById('diplomaPreview');
+    preview.innerHTML = `<img src="${uploadedDiploma}" style="max-width:100%;max-height:150px;border-radius:8px">`;
+    preview.style.fontSize = 'inherit';
+  };
+  reader.readAsDataURL(file);
+}
+
+// 发送个人注册验证码
+function sendUserRegCode() {
+  const phone = document.getElementById('userRegPhone').value;
+  if (!phone || phone.length < 11) {
+    showToast('请输入正确的手机号');
+    return;
+  }
+  
+  const btn = event.target;
+  btn.disabled = true;
+  let sec = 60;
+  btn.textContent = sec + 's';
+  const timer = setInterval(() => {
+    sec--;
+    if (sec <= 0) { clearInterval(timer); btn.disabled = false; btn.textContent = '获取验证码'; }
+    else btn.textContent = sec + 's';
+  }, 1000);
+  showToast('验证码已发送（演示：123456）');
+}
+
+// 企业注册
+function doCompanyRegister() {
+  const name = document.getElementById('compRegName').value.trim();
+  const company = document.getElementById('compRegCompany').value.trim();
+  const phone = document.getElementById('compRegPhone').value.trim();
+  const wechat = document.getElementById('compRegWechat').value.trim();
+  
+  if (!name) return showToast('请输入联系人姓名');
+  if (!company) return showToast('请输入单位名称');
+  if (!phone || phone.length < 11) return showToast('请输入正确的联系电话');
+  if (!wechat) return showToast('请输入微信号');
+  
+  // 模拟注册成功
+  currentUser = { 
+    type: 'company',
+    name, 
+    company, 
+    phone, 
+    wechat,
+    role: 'enterprise'
+  };
+  
+  document.getElementById('loginPage').style.display = 'none';
+  document.getElementById('companyApp').style.display = 'block';
+  document.getElementById('companyName').textContent = company;
+  renderCompanyPage();
+  showToast('🏢 召集方注册成功，欢迎入驻！');
+}
+
+// 个人注册
+function doUserRegister() {
+  const phone = document.getElementById('userRegPhone').value.trim();
+  const code = document.getElementById('userRegCode').value.trim();
+  const name = document.getElementById('userRegName').value.trim();
+  const school = document.getElementById('userRegSchool').value.trim();
+  const major = document.getElementById('userRegMajor').value.trim();
+  const degree = document.getElementById('userRegDegree').value;
+  const gradYear = document.getElementById('userRegGradYear').value;
+  
+  if (!phone || phone.length < 11) return showToast('请输入正确的手机号');
+  if (code !== '123456') return showToast('验证码错误，演示码为 123456');
+  if (!name) return showToast('请输入真实姓名');
+  if (!uploadedDiploma) return showToast('请上传毕业证照片');
+  if (!school) return showToast('请输入学校');
+  if (!major) return showToast('请输入专业');
+  if (!degree) return showToast('请选择学历');
+  if (!gradYear) return showToast('请选择毕业年份');
+  
+  // 模拟注册成功
+  currentUser = { 
+    type: 'user',
+    phone, 
+    name,
+    nickname: name,
+    school, 
+    major,
+    degree,
+    gradYear,
+    diploma: uploadedDiploma,
+    tags: [],
+    activity_score: 0
+  };
+  
+  document.getElementById('loginPage').style.display = 'none';
+  document.getElementById('mainApp').style.display = 'block';
+  renderApp();
+  showToast('✅ 注册成功，欢迎加入！');
 }
 
 let codeTimer = null;
@@ -740,9 +1195,9 @@ function doLogin() {
   if (loginMode === 'company') {
     document.getElementById('companyApp').style.display = 'block';
     renderCompanyPage();
-    showToast('🏢 企业端登录成功');
+    showToast('🏢 召集方登录成功');
   } else {
-    currentUser = { phone, nickname: '张三', school: '北京理工大学', major: '计算机科学与技术' };
+    currentUser = { phone, name: '张三', nickname: '张三', school: '北京理工大学', major: '计算机科学与技术' };
     document.getElementById('mainApp').style.display = 'block';
     renderApp();
     showToast('✅ 登录成功，欢迎回来！');
@@ -776,22 +1231,43 @@ function openSubPage(pageId) {
   document.querySelectorAll('.subpage').forEach(p => p.style.display = 'none');
   const pg = document.getElementById(pageId);
   if (pg) { pg.style.display = 'block'; pg.scrollTop = 0; }
-  document.getElementById('mainApp').querySelector('.tab-bar').style.display = 'none';
+  const tabBar = document.getElementById('mainTabBar');
+  if (tabBar) tabBar.style.display = 'none';
   if (pageId === 'resumePage') renderResumePage();
   if (pageId === 'myEventsPage') renderMyEvents();
   if (pageId === 'myApplyPage') renderMyApply();
   if (pageId === 'messagesPage') renderMessages();
-}
+  if (pageId === 'settingsPage') { /* 静态页无需额外渲染 */ }
 
 function closeSubPage() {
   subpageStack.pop();
   document.querySelectorAll('.subpage').forEach(p => p.style.display = 'none');
-  document.getElementById('mainApp').querySelector('.tab-bar').style.display = 'flex';
+  const tabBar = document.getElementById('mainTabBar');
+  if (tabBar) tabBar.style.display = 'flex';
 }
 
 function goToMessages() {
   switchPage('myPage');
   setTimeout(() => openSubPage('messagesPage'), 100);
+}
+
+// =================== SETTINGS ===================
+function openSettingDetail(type) {
+  const titles = {
+    notification: '推送通知',
+    privacy: '隐私设置',
+    phone: '绑定手机',
+    theme: '主题外观',
+    about: '关于我们'
+  };
+  const contents = {
+    notification: '活动报名提醒、简历状态更新、消息通知等推送设置功能即将上线，敬请期待！',
+    privacy: '个人信息保护设置：可控制谁能查看你的简历、联系方式等，功能即将上线。',
+    phone: '当前已绑定手机号：138****8001。更换绑定请联系客服。',
+    theme: '深色模式、字体大小调整等外观设置功能即将上线，敬请期待！',
+    about: '召集吧 v2.2.0\n\n使命：让每一次召集，都成为成长的起点\n\n召集·共长 | 真诚召集，彼此成就\n\n© 2025 召集吧 · 免费·共享·平等·服务·成长'
+  };
+  showToast(contents[type] || '功能开发中...');
 }
 
 // =================== RENDER ===================
@@ -801,6 +1277,20 @@ function renderApp() {
   renderEventTags();
   renderJobFilterTags();
   updateMyTab();
+  // 更新通知横幅
+  const unread = myMessages.filter(m => !m.read).length;
+  const titleEl = document.getElementById('notifyBannerTitle');
+  const subEl = document.getElementById('notifyBannerSub');
+  if (titleEl && subEl) {
+    if (unread > 0) {
+      const latestUnread = myMessages.find(m => !m.read);
+      titleEl.textContent = latestUnread ? latestUnread.title : `你有 ${unread} 条新消息`;
+      subEl.textContent = `点击查看详情 →`;
+    } else {
+      titleEl.textContent = `欢迎回到召集吧，${currentUser?.nickname || currentUser?.name || ''}！`;
+      subEl.textContent = '发现精彩活动和岗位 →';
+    }
+  }
 }
 
 function renderEventTags() {
@@ -933,8 +1423,8 @@ function renderMatchPage() {
   `).join('');
 
   document.getElementById('aiInsights').innerHTML = `
-    <div class="insight-item"><div class="dot" style="background:#667eea"></div><div><b>优势领域</b>：你的技能标签「Java」「前端」在招聘市场热度高，匹配到 ${JOBS.filter(j=>j.tags.some(t=>mySelectedSkills.has(t))).length} 个岗位</div></div>
-    <div class="insight-item"><div class="dot" style="background:#19c37d"></div><div><b>活动加分</b>：参与过编程马拉松，企业对该活动经历评价较高，有利于求职</div></div>
+    <div class="insight-item"><div class="dot" style="background:#667eea"></div><div><b>优势领域</b>：你的技能标签「Java」「前端」在招募市场热度高，匹配到 ${JOBS.filter(j=>j.tags.some(t=>mySelectedSkills.has(t))).length} 个岗位</div></div>
+    <div class="insight-item"><div class="dot" style="background:#19c37d"></div><div><b>活动加分</b>：参与过编程马拉松，召集方对该活动经历评价较高，有利于求职</div></div>
     <div class="insight-item"><div class="dot" style="background:#f59e0b"></div><div><b>建议补充</b>：补充「Docker」「Kubernetes」标签，可提升后端岗位匹配度约 15%</div></div>
     <div class="insight-item"><div class="dot" style="background:#f093fb"></div><div><b>热门趋势</b>：AI方向实习岗位近30天投递量增加 42%，建议关注「AI实习宣讲会」活动</div></div>
   `;
@@ -950,6 +1440,16 @@ function renderMyPage() {
   document.getElementById('msgBadge').textContent = unread;
   document.getElementById('msgBadge').style.display = unread > 0 ? 'inline' : 'none';
 
+  // 更新用户信息
+  if (currentUser) {
+    const nameEl = document.getElementById('myNickname');
+    const schoolEl = document.getElementById('mySchool');
+    if (nameEl) nameEl.textContent = currentUser.nickname || currentUser.name || '用户';
+    if (schoolEl) schoolEl.textContent = 
+      (currentUser.school && currentUser.major) ? `${currentUser.school} · ${currentUser.major}` :
+      currentUser.company ? `${currentUser.company}（召集方）` : '完善个人信息';
+  }
+
   // Skill tags in header
   const skills = [...mySelectedSkills].slice(0,4);
   document.getElementById('mySkillTags').innerHTML = skills.map(s =>
@@ -964,6 +1464,15 @@ function updateMyTab() {
 
 // =================== RESUME PAGE ===================
 function renderResumePage() {
+  // 用currentUser数据回填表单
+  if (currentUser) {
+    const nameEl = document.getElementById('resumeName');
+    const schoolEl = document.getElementById('resumeSchool');
+    const majorEl = document.getElementById('resumeMajor');
+    if (nameEl && currentUser.name) nameEl.value = currentUser.name;
+    if (schoolEl && currentUser.school) schoolEl.value = currentUser.school;
+    if (majorEl && currentUser.major) majorEl.value = currentUser.major;
+  }
   document.getElementById('skillTagsEdit').innerHTML = ALL_SKILL_TAGS.map(t => `
     <div class="skill-tag-item ${mySelectedSkills.has(t)?'selected':''}" onclick="toggleSkill(this,'${t}')">${t}</div>
   `).join('');
@@ -975,7 +1484,16 @@ function toggleSkill(el, tag) {
 }
 
 function saveResume() {
-  showToast('✅ 简历已保存，已通知关注你的企业');
+  if (currentUser) {
+    const name = document.getElementById('resumeName').value.trim();
+    const school = document.getElementById('resumeSchool').value.trim();
+    const major = document.getElementById('resumeMajor').value.trim();
+    if (name) currentUser.nickname = name;
+    if (school) currentUser.school = school;
+    if (major) currentUser.major = major;
+  }
+  renderMyPage();
+  showToast('✅ 简历已保存，已通知关注你的召集方');
   closeSubPage();
 }
 
@@ -1245,16 +1763,230 @@ function publishJob() {
   closeModal('publishJobModal');
   const n = parseInt(document.getElementById('cStatJobs').textContent) + 1;
   document.getElementById('cStatJobs').textContent = n;
-  showToast('✅ 职位已发布，将推送给匹配的求职者');
+  showToast('✅ 岗位已发布，将推送给匹配的人才');
+}
+
+// =================== PUBLISH EVENT FUNCTIONS ===================
+let currentPublishStep = 1;
+let selectedEventType = '';
+let selectedEventTags = [];
+let eventCoverImage = null;
+
+function goToPublishStep(step) {
+  // 验证当前步骤
+  if (step > currentPublishStep) {
+    if (!validatePublishStep(currentPublishStep)) return;
+  }
+  
+  // 隐藏所有步骤
+  document.querySelectorAll('.publish-step').forEach(el => el.style.display = 'none');
+  document.getElementById('publishStep' + step).style.display = 'block';
+  
+  // 更新步骤指示器
+  document.querySelectorAll('.step-item').forEach((el, idx) => {
+    const stepNum = idx + 1;
+    if (stepNum === step) {
+      el.style.background = 'linear-gradient(135deg,var(--primary),var(--primary2))';
+      el.style.color = 'white';
+      el.querySelector('.step-num').style.background = 'rgba(255,255,255,0.3)';
+    } else if (stepNum < step) {
+      el.style.background = '#edfbf5';
+      el.style.color = 'var(--green)';
+      el.querySelector('.step-num').style.background = 'var(--green)';
+      el.querySelector('.step-num').textContent = '✓';
+    } else {
+      el.style.background = '#f1f5f9';
+      el.style.color = '#64748b';
+      el.querySelector('.step-num').style.background = '#cbd5e1';
+      el.querySelector('.step-num').textContent = stepNum;
+    }
+  });
+  
+  currentPublishStep = step;
+  
+  // 如果是最后一步，更新预览
+  if (step === 3) {
+    updateEventPreview();
+  }
+}
+
+function validatePublishStep(step) {
+  if (step === 1) {
+    if (!eventCoverImage) {
+      showToast('请上传活动封面');
+      return false;
+    }
+    if (!document.getElementById('peTitle').value.trim()) {
+      showToast('请填写活动名称');
+      return false;
+    }
+    if (!selectedEventType) {
+      showToast('请选择活动类型');
+      return false;
+    }
+  }
+  if (step === 2) {
+    if (!document.getElementById('peStartTime').value) {
+      showToast('请选择开始时间');
+      return false;
+    }
+    if (!document.getElementById('peEndTime').value) {
+      showToast('请选择结束时间');
+      return false;
+    }
+    if (!document.getElementById('peLocation').value.trim()) {
+      showToast('请填写活动地点');
+      return false;
+    }
+  }
+  return true;
+}
+
+function selectEventType(el) {
+  document.querySelectorAll('.type-option').forEach(opt => {
+    opt.style.borderColor = '#e2e8f0';
+    opt.style.background = 'white';
+  });
+  el.style.borderColor = 'var(--primary)';
+  el.style.background = '#ede9ff';
+  selectedEventType = el.dataset.type;
+  document.getElementById('peCategory').value = selectedEventType;
+}
+
+function toggleEventTag(el) {
+  const tag = el.textContent;
+  if (selectedEventTags.includes(tag)) {
+    selectedEventTags = selectedEventTags.filter(t => t !== tag);
+    el.style.borderColor = '#e2e8f0';
+    el.style.background = 'white';
+    el.style.color = '#64748b';
+  } else {
+    if (selectedEventTags.length >= 3) {
+      showToast('最多选择3个标签');
+      return;
+    }
+    selectedEventTags.push(tag);
+    el.style.borderColor = 'var(--primary)';
+    el.style.background = '#ede9ff';
+    el.style.color = 'var(--primary)';
+  }
+  document.getElementById('peTags').value = selectedEventTags.join(',');
+}
+
+function handleEventCoverUpload(input) {
+  const file = input.files[0];
+  if (!file) return;
+  
+  if (!file.type.startsWith('image/')) {
+    showToast('请上传图片文件');
+    return;
+  }
+  
+  const reader = new FileReader();
+  reader.onload = function(e) {
+    eventCoverImage = e.target.result;
+    const preview = document.getElementById('eventCoverPreview');
+    preview.innerHTML = `<img src="${eventCoverImage}" style="max-width:100%;max-height:150px;border-radius:8px">`;
+    preview.style.fontSize = 'inherit';
+    preview.parentElement.style.borderColor = 'var(--primary)';
+    preview.parentElement.style.background = '#ede9ff';
+  };
+  reader.readAsDataURL(file);
+}
+
+function toggleLocationInput() {
+  const type = document.getElementById('peLocationType').value;
+  const locationInput = document.getElementById('peLocation');
+  if (type === 'online') {
+    locationInput.placeholder = '输入线上平台链接，如腾讯会议、Zoom...';
+  } else {
+    locationInput.placeholder = '搜索地点...';
+  }
+}
+
+function toggleFeeInput() {
+  const feeType = document.querySelector('input[name="peFeeType"]:checked').value;
+  const feeInput = document.getElementById('feeInput');
+  if (feeType === 'paid') {
+    feeInput.style.display = 'block';
+  } else {
+    feeInput.style.display = 'none';
+  }
+}
+
+function updateEventPreview() {
+  const title = document.getElementById('peTitle').value || '活动标题将显示在这里';
+  const startTime = document.getElementById('peStartTime').value;
+  const location = document.getElementById('peLocation').value || '地点';
+  const type = selectedEventType;
+  
+  const emojiMap = {
+    '讲座': '🎤', '比赛': '🏆', '实习': '💼', 
+    '义卖': '🎁', '兼职': '💰', '社交': '🎉'
+  };
+  
+  const timeStr = startTime ? new Date(startTime).toLocaleString('zh-CN', {
+    month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit'
+  }) : '时间';
+  
+  const preview = document.getElementById('eventPreviewCard');
+  if (preview) {
+    preview.innerHTML = `
+      <div style="height:120px;background:${eventCoverImage ? `url(${eventCoverImage}) center/cover` : 'linear-gradient(135deg,#667eea,#764ba2)'};border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:48px;color:white">${eventCoverImage ? '' : (emojiMap[type] || '🎉')}</div>
+      <h4 style="margin-top:12px;font-size:16px">${title}</h4>
+      <p style="font-size:13px;color:#64748b;margin-top:4px">📅 ${timeStr} · 📍 ${location}</p>
+      ${selectedEventTags.length > 0 ? `<div style="display:flex;gap:6px;margin-top:8px">${selectedEventTags.map(t => `<span style="padding:3px 10px;background:#ede9ff;color:var(--primary);border-radius:4px;font-size:12px">${t}</span>`).join('')}</div>` : ''}
+    `;
+  }
+}
+
+function showCustomFields() {
+  showToast('自定义问题功能开发中...');
 }
 
 function publishEvent() {
+  // 验证最后一步
+  if (selectedEventTags.length === 0) {
+    showToast('请至少选择一个活动标签');
+    return;
+  }
+  if (!document.getElementById('peDesc').value.trim()) {
+    showToast('请填写活动详情');
+    return;
+  }
+  
   const title = document.getElementById('peTitle').value;
-  if (!title) return showToast('请填写活动名称');
+  const relatedJob = document.getElementById('peRelatedJob').value;
+  
   closeModal('publishEventModal');
+  
+  // 重置表单
+  currentPublishStep = 1;
+  selectedEventType = '';
+  selectedEventTags = [];
+  eventCoverImage = null;
+  document.getElementById('peTitle').value = '';
+  document.getElementById('peDesc').value = '';
+  document.getElementById('eventCoverPreview').innerHTML = '📷';
+  document.querySelectorAll('.type-option').forEach(opt => {
+    opt.style.borderColor = '#e2e8f0';
+    opt.style.background = 'white';
+  });
+  document.querySelectorAll('.tag-option').forEach(tag => {
+    tag.style.borderColor = '#e2e8f0';
+    tag.style.background = 'white';
+    tag.style.color = '#64748b';
+  });
+  goToPublishStep(1);
+  
   const n = parseInt(document.getElementById('cStatEvent').textContent) + 1;
   document.getElementById('cStatEvent').textContent = n;
-  showToast('✅ 活动已发布！');
+  
+  if (relatedJob) {
+    showToast(`🎉 活动发布成功！已关联岗位，参与者可直接投递简历`);
+  } else {
+    showToast('🎉 活动发布成功！');
+  }
 }
 
 // =================== MODAL UTILS ===================
@@ -1282,7 +2014,7 @@ function doSearch() {
   if (matchJobs.length > 0) {
     switchPage('jobsPage');
     document.getElementById('jobsList').innerHTML = matchJobs.map(j => renderJobCardHTML(j)).join('');
-    showToast(`找到 ${matchJobs.length} 个相关职位`);
+    showToast(`找到 ${matchJobs.length} 个相关岗位`);
   } else if (matchEvents.length > 0) {
     switchPage('eventsPage');
     document.getElementById('eventsList').innerHTML = matchEvents.map(e => `
@@ -1322,6 +2054,8 @@ function animateNumber(el, target) {
 window.addEventListener('load', () => {
   // Auto show login
   document.getElementById('loginPage').className = 'login-page active';
+  // Initialize grad year options
+  initGradYearOptions();
   // Animate stats after login
 });
 

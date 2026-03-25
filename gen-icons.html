@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head><title>Icon Generator</title></head>
+<body style="margin:0;background:#333;display:flex;flex-direction:column;align-items:center;padding:20px;gap:20px;">
+<div id="info" style="color:#fff;font-family:sans-serif;"></div>
+<canvas id="c192" width="192" height="192"></canvas>
+<canvas id="c512" width="512" height="512"></canvas>
+<script>
+function drawIcon(canvas) {
+  const ctx = canvas.getContext('2d');
+  const s = canvas.width;
+  const r = s * 0.18;
+  const m = s * 0.06;
+
+  // Rounded rect background with gradient
+  ctx.save();
+  roundRect(ctx, m, m, s - 2*m, s - 2*m, r);
+  const grad = ctx.createLinearGradient(0, 0, s, s);
+  grad.addColorStop(0, '#667eea');
+  grad.addColorStop(1, '#764ba2');
+  ctx.fillStyle = grad;
+  ctx.fill();
+  ctx.restore();
+
+  // Decorative circle pattern
+  ctx.save();
+  ctx.globalAlpha = 0.1;
+  ctx.fillStyle = '#ffffff';
+  ctx.beginPath();
+  ctx.arc(s * 0.75, s * 0.25, s * 0.2, 0, Math.PI * 2);
+  ctx.fill();
+  ctx.beginPath();
+  ctx.arc(s * 0.2, s * 0.8, s * 0.15, 0, Math.PI * 2);
+  ctx.fill();
+  ctx.restore();
+
+  // Main text "招" 
+  ctx.save();
+  ctx.fillStyle = '#ffffff';
+  ctx.font = `bold ${s * 0.5}px "PingFang SC", "Microsoft YaHei", sans-serif`;
+  ctx.textAlign = 'center';
+  ctx.textBaseline = 'middle';
+  ctx.shadowColor = 'rgba(0,0,0,0.2)';
+  ctx.shadowBlur = s * 0.03;
+  ctx.shadowOffsetY = s * 0.01;
+  ctx.fillText('招', s/2, s/2 + s*0.02);
+  ctx.restore();
+
+  // Small "聘" text below
+  ctx.save();
+  ctx.fillStyle = 'rgba(255,255,255,0.8)';
+  ctx.font = `${s * 0.16}px "PingFang SC", "Microsoft YaHei", sans-serif`;
+  ctx.textAlign = 'center';
+  ctx.textBaseline = 'middle';
+  ctx.fillText('聘', s/2, s * 0.82);
+  ctx.restore();
+}
+
+function roundRect(ctx, x, y, w, h, r) {
+  ctx.beginPath();
+  ctx.moveTo(x + r, y);
+  ctx.arcTo(x + w, y, x + w, y + h, r);
+  ctx.arcTo(x + w, y + h, x, y + h, r);
+  ctx.arcTo(x, y + h, x, y, r);
+  ctx.arcTo(x, y, x + w, y, r);
+  ctx.closePath();
+}
+
+// Generate both
+drawIcon(document.getElementById('c192'));
+drawIcon(document.getElementById('c512'));
+
+// Download links
+document.getElementById('info').innerHTML = 
+  '<p>Right-click > Save images, or use the download URLs below:</p>' +
+  '<p><a href="' + document.getElementById('c192').toDataURL('image/png') + '" download="icon-192.png">Download 192x192</a></p>' +
+  '<p><a href="' + document.getElementById('c512').toDataURL('image/png') + '" download="icon-512.png">Download 512x512</a></p>';
+</script>
+</body>
+</html>

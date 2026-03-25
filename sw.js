@@ -1,4 +1,4 @@
-// Service Worker for 活动招聘 PWA
+// Service Worker for 召集吧 PWA
 const CACHE_NAME = 'event-recruit-v1';
 const ASSETS_TO_CACHE = [
   '/demo.html',

@@ -68,6 +68,9 @@ h1,h2,h3 { line-height: 1.3; }
 .mini-tag { padding: 2px 8px; border-radius: 4px; font-size: 11px; background: #ede9ff; color: var(--primary); }
 .mini-tag.orange { background: #fff4ef; color: var(--orange); }
 .mini-tag.green { background: #edfbf5; color: var(--green); }
+.mini-tag.style-formal { background: #eff6ff; color: #3b82f6; }
+.mini-tag.style-casual { background: #fefce8; color: #ca8a04; }
+.mini-tag.style-supportive { background: #fdf4ff; color: #9333ea; }
 
 /* ===== JOB CARDS ===== */
 .job-card { background: white; border-radius: 14px; padding: 16px; margin-bottom: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); cursor: pointer; transition: transform 0.2s, box-shadow 0.2s; }
@@ -1498,8 +1501,11 @@ h1,h2,h3 { line-height: 1.3; }
 
         <!-- 召集主题（initiate_type，支持多选） -->
         <div class="form-group">
-          <label style="display:flex;align-items:center;gap:8px">
-            召集主题 <span style="font-size:11px;color:#94a3b8;font-weight:400">多选，用于精准推荐</span>
+          <label style="display:flex;align-items:center;justify-content:space-between">
+            <span style="display:flex;align-items:center;gap:6px">
+              召集主题 <span style="font-size:11px;color:#94a3b8;font-weight:400">最少1个，最多3个</span>
+            </span>
+            <span id="initiateTypeHint" style="font-size:11px;color:#94a3b8;font-weight:500;transition:color .2s">请至少选择 1 个</span>
           </label>
           <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:8px" id="initiateTypeGrid">
             <div class="initiate-type-btn" data-key="career"
@@ -2498,7 +2504,8 @@ async function renderHotEvents() {
         <h3>${e.title}</h3>
         <div class="meta">📅 ${(e.start_time||'').slice(0,10).replace('T',' ')} · ${(e.location||'').slice(0,10)}${(e.location||'').length>10?'…':''}</div>
         <div class="tags-row">
-          ${(e.tags||[]).slice(0,3).map(t=>`<span class="mini-tag">${t}</span>`).join('')}
+          ${(e.tags||[]).slice(0,2).map(t=>`<span class="mini-tag">${t}</span>`).join('')}
+          ${gatheringStyleTag(e.gathering_style)}
           <span class="mini-tag orange">${statusLabel}</span>
         </div>
       </div>
@@ -2510,6 +2517,18 @@ function renderRecommendJobs() {
   let jobs = currentJobFilter === '全部' ? JOBS : JOBS.filter(j => j.type === currentJobFilter);
   jobs = [...jobs].sort((a,b) => b.match_score - a.match_score);
   document.getElementById('recommendJobs').innerHTML = jobs.map(j => renderJobCardHTML(j)).join('');
+}
+
+/** 氛围标签 HTML（供卡片和详情页复用） */
+function gatheringStyleTag(style) {
+  if (!style) return '';
+  const MAP = {
+    formal:      { cls: 'style-formal',     label: '🎩 正式' },
+    casual:      { cls: 'style-casual',     label: '☕ 随意' },
+    supportive:  { cls: 'style-supportive', label: '💛 互助' },
+  };
+  const m = MAP[style];
+  return m ? `<span class="mini-tag ${m.cls}">${m.label}</span>` : '';
 }
 
 function renderJobCardHTML(j) {
@@ -2555,7 +2574,10 @@ async function renderEventList() {
       <div class="info">
         <h3>${e.title}</h3>
         <div class="meta">📅 ${(e.start_time||'').slice(0,16).replace('T',' ')} · ${(e.location||'').slice(0,12)}${(e.location||'').length>12?'…':''}</div>
-        <div class="participants">${reg?'✅ 已报名':current+'/'+max+' 人报名'}</div>
+        <div style="display:flex;align-items:center;gap:6px;margin-top:4px">
+          <span class="participants">${reg?'✅ 已报名':current+'/'+max+' 人报名'}</span>
+          ${gatheringStyleTag(e.gathering_style)}
+        </div>
       </div>
     </div>`;
   }).join('') || '<div style="padding:40px;text-align:center"><div style="font-size:40px;margin-bottom:12px">🎉</div><p style="color:var(--sub)">还没有活动，快来发起召集！</p><button class="apply-btn" style="margin-top:16px;max-width:200px" onclick="openPublishEvent()">＋ 发起召集</button></div>';
@@ -2806,9 +2828,18 @@ async function showEventDetail(id) {
     </div>
     <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:16px">
       ${(e.tags||[]).map(t=>`<span class="mini-tag">${t}</span>`).join('')}
+      ${gatheringStyleTag(e.gathering_style)}
       <span class="mini-tag orange">${statusLabel}</span>
       ${e.category ? `<span class="mini-tag">${e.category}</span>` : ''}
     </div>
+    ${(e.initiate_type && e.initiate_type.length > 0) ? `
+    <div style="display:flex;align-items:center;gap:8px;margin-bottom:14px;padding:10px 12px;background:#f8f8ff;border-radius:10px;flex-wrap:wrap">
+      <span style="font-size:12px;color:#94a3b8;white-space:nowrap">召集主题</span>
+      ${(Array.isArray(e.initiate_type)?e.initiate_type:[]).map(t => {
+        const tMap = { career:'🚀 事业共创', training:'📚 技能研习', hobby:'🎨 兴趣爱好', social:'🤝 社交结识', mindfulness:'🌱 心灵成长' };
+        return `<span style="font-size:12px;padding:2px 10px;background:rgba(102,126,234,0.1);color:var(--primary);border-radius:20px">${tMap[t]||t}</span>`;
+      }).join('')}
+    </div>` : ''}
     <p style="font-size:14px;line-height:1.9;color:#475569;margin-bottom:16px">${(e.description||'').replace(/\n/g,'<br>')}</p>
     ${e.deadline ? `<div style="font-size:12px;color:var(--sub);margin-bottom:12px">⏰ 报名截止：${e.deadline.slice(0,16).replace('T',' ')}</div>` : ''}
     <div style="margin-bottom:8px">
@@ -3250,9 +3281,12 @@ function openPublishEvent() {
   document.querySelectorAll('.initiate-type-btn').forEach(btn => {
     btn.style.borderColor = '#e2e8f0';
     btn.style.background = 'white';
+    btn.style.transform = 'scale(1)';
     btn.querySelector('div:last-child').style.color = '#475569';
   });
   document.getElementById('peInitiateType').value = '';
+  const hint = document.getElementById('initiateTypeHint');
+  if (hint) { hint.textContent = '请至少选择 1 个'; hint.style.color = '#94a3b8'; }
   document.getElementById('publishEventModal').classList.add('active');
   loadPublishJobOptions();
   // 埋点：漏斗 Step1 —— 打开发起弹窗
@@ -3261,24 +3295,44 @@ function openPublishEvent() {
   trackEvent({ event_type: 'click', element_id: 'tabbar_publish_btn', page: 'home', funnel_session_id: _funnelSessionId });
 }
 
-/** 召集主题多选切换 */
+/** 召集主题多选切换（最少1个，最多3个） */
 function toggleInitiateType(el, key) {
+  const MAX_TYPE = 3;
   const idx = _selectedInitiateTypes.indexOf(key);
   if (idx === -1) {
+    // 超过3个时拦截
+    if (_selectedInitiateTypes.length >= MAX_TYPE) {
+      showToast(`最多选 ${MAX_TYPE} 个主题，请先取消一个再选`);
+      // 抖动提示
+      el.style.animation = 'none';
+      el.style.transform = 'scale(0.95)';
+      setTimeout(() => { el.style.transform = 'scale(1)'; }, 150);
+      return;
+    }
     _selectedInitiateTypes.push(key);
     el.style.borderColor = 'var(--primary)';
-    el.style.background = 'rgba(102,126,234,0.06)';
+    el.style.background = 'rgba(102,126,234,0.08)';
+    el.style.transform = 'scale(1.04)';
+    setTimeout(() => { el.style.transform = 'scale(1)'; }, 150);
     el.querySelector('div:last-child').style.color = 'var(--primary)';
     // 埋点：类型点击
-    trackEvent({ event_type: 'type_select', element_id: key, funnel_session_id: _funnelSessionId, meta: { type_key: key, action: 'select' } });
+    trackEvent({ event_type: 'type_select', element_id: key, funnel_session_id: _funnelSessionId, meta: { type_key: key, action: 'select', count: _selectedInitiateTypes.length } });
   } else {
     _selectedInitiateTypes.splice(idx, 1);
     el.style.borderColor = '#e2e8f0';
     el.style.background = 'white';
+    el.style.transform = 'scale(1)';
     el.querySelector('div:last-child').style.color = '#475569';
-    trackEvent({ event_type: 'type_select', element_id: key, funnel_session_id: _funnelSessionId, meta: { type_key: key, action: 'deselect' } });
+    trackEvent({ event_type: 'type_select', element_id: key, funnel_session_id: _funnelSessionId, meta: { type_key: key, action: 'deselect', count: _selectedInitiateTypes.length } });
   }
   document.getElementById('peInitiateType').value = _selectedInitiateTypes.join(',');
+  // 更新"已选X个"提示文字
+  const hint = document.getElementById('initiateTypeHint');
+  if (hint) {
+    const n = _selectedInitiateTypes.length;
+    hint.textContent = n > 0 ? `已选 ${n}/3` : '请至少选择 1 个';
+    hint.style.color = n > 0 ? 'var(--primary)' : '#94a3b8';
+  }
 }
 
 /** 通用埋点上报（后端可用时发真实请求，否则存 localStorage） */
@@ -3380,6 +3434,18 @@ function validatePublishStep(step) {
     }
     if (!selectedEventType) {
       showToast('请选择活动类型');
+      return false;
+    }
+    // ── Q1：强制至少1个召集主题 ──
+    if (_selectedInitiateTypes.length === 0) {
+      showToast('请至少选择 1 个召集主题，帮助精准匹配参与者');
+      // 高亮整个选择区
+      const grid = document.getElementById('initiateTypeGrid');
+      if (grid) {
+        grid.style.outline = '2px solid var(--orange)';
+        grid.style.borderRadius = '12px';
+        setTimeout(() => { grid.style.outline = ''; }, 1500);
+      }
       return false;
     }
   }

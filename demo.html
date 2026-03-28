@@ -642,6 +642,75 @@ h1,h2,h3 { line-height: 1.3; }
 .avatar-ring-3 { background: linear-gradient(135deg, #43e97b, #38f9d7); }
 .avatar-ring-4 { background: linear-gradient(135deg, #f7971e, #ffd200); }
 .avatar-ring-5 { background: linear-gradient(135deg, #11998e, #38ef7d); }
+
+/* ===== 举报弹窗 ===== */
+.report-modal-overlay {
+  position: fixed; inset: 0; background: rgba(0,0,0,0.5);
+  display: none; align-items: flex-end; justify-content: center;
+  z-index: 500;
+}
+.report-modal-overlay.open { display: flex; }
+.report-sheet {
+  background: white; width: 100%; max-width: 480px;
+  border-radius: 20px 20px 0 0; padding: 20px 0 max(env(safe-area-inset-bottom),20px);
+}
+.report-sheet h3 { font-size: 16px; font-weight: 700; text-align: center; padding: 0 20px 16px; border-bottom: 1px solid var(--border); }
+.report-option {
+  display: flex; align-items: center; gap: 12px;
+  padding: 14px 20px; cursor: pointer; font-size: 15px;
+  transition: background 0.15s;
+}
+.report-option:hover { background: #f8fafc; }
+.report-option .r-icon { font-size: 20px; width: 28px; text-align: center; }
+.report-cancel {
+  margin: 10px 16px 0; padding: 14px; border-radius: 12px;
+  border: 1.5px solid var(--border); background: white;
+  font-size: 15px; font-weight: 600; color: var(--sub); width: calc(100% - 32px);
+  cursor: pointer;
+}
+
+/* ===== 积分卡片 ===== */
+.points-card {
+  margin: 0 12px 14px; border-radius: 16px; overflow: hidden;
+  background: linear-gradient(135deg, #f7971e 0%, #ffd200 100%);
+  padding: 16px 20px; color: white;
+  box-shadow: 0 6px 20px rgba(247,151,30,0.3);
+  cursor: pointer; position: relative;
+}
+.points-card .pts-num { font-size: 36px; font-weight: 800; line-height: 1; }
+.points-card .pts-label { font-size: 13px; opacity: 0.9; margin-top: 2px; }
+.points-card .pts-entry { position: absolute; right: 20px; top: 50%; transform: translateY(-50%); font-size: 13px; background: rgba(255,255,255,0.25); padding: 6px 14px; border-radius: 20px; backdrop-filter: blur(4px); }
+.points-card .pts-tip { font-size: 11px; opacity: 0.75; margin-top: 8px; }
+
+/* ===== 报名状态徽章 ===== */
+.apply-status { display: inline-flex; align-items: center; gap: 4px; padding: 3px 10px; border-radius: 20px; font-size: 12px; font-weight: 600; }
+.apply-status.pending { background: #fff7ed; color: #f97316; }
+.apply-status.approved { background: #f0fdf4; color: #16a34a; }
+.apply-status.rejected { background: #fef2f2; color: #dc2626; }
+.apply-status.completed { background: #ede9ff; color: var(--primary); }
+
+/* ===== 活动回顾区域 ===== */
+.event-review-section {
+  margin: 12px 0; padding: 14px; background: linear-gradient(135deg, #ede9ff 0%, #dbeafe 100%);
+  border-radius: 12px;
+}
+.event-review-section h4 { font-size: 14px; font-weight: 700; margin-bottom: 10px; color: var(--text); }
+.review-stat-row { display: flex; gap: 16px; }
+.review-stat { text-align: center; flex: 1; }
+.review-stat .n { font-size: 20px; font-weight: 800; color: var(--primary); }
+.review-stat .l { font-size: 11px; color: var(--sub); margin-top: 2px; }
+.review-photo-row { display: flex; gap: 6px; margin-top: 10px; overflow-x: auto; scrollbar-width: none; }
+.review-photo-row::-webkit-scrollbar { display: none; }
+.review-photo { width: 80px; height: 80px; border-radius: 8px; object-fit: cover; flex-shrink: 0; background: linear-gradient(135deg, #667eea22, #764ba222); display: flex; align-items: center; justify-content: center; font-size: 28px; }
+
+/* ===== FAQ / 帮助页 ===== */
+.faq-item { background: white; border-radius: 12px; margin-bottom: 10px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.04); }
+.faq-q { padding: 16px; font-size: 14px; font-weight: 600; display: flex; justify-content: space-between; align-items: center; cursor: pointer; }
+.faq-q .arrow { font-size: 18px; color: var(--sub); transition: transform 0.25s; }
+.faq-q.open .arrow { transform: rotate(90deg); }
+.faq-a { padding: 0 16px; max-height: 0; overflow: hidden; transition: max-height 0.3s ease, padding 0.3s; font-size: 13px; color: #64748b; line-height: 1.7; }
+.faq-a.open { max-height: 200px; padding: 0 16px 16px; }
+.faq-category { font-size: 13px; font-weight: 700; color: var(--sub); padding: 12px 4px 6px; }
 </style>
 </head>
 <body>
@@ -655,6 +724,7 @@ h1,h2,h3 { line-height: 1.3; }
     <span class="brand-icon">🎯</span>
     <h1>召集吧</h1>
     <p>召集，让成长发生</p>
+    <p style="font-size:12px;color:#a0aec0;margin-top:6px">免费 · 共享 · 平等 · 服务 · 成长</p>
   </div>
   
   <!-- 登录/注册切换标签 -->
@@ -938,12 +1008,24 @@ h1,h2,h3 { line-height: 1.3; }
       <div class="my-stat"><div class="num">85%</div><div class="label">综合匹配</div></div>
     </div>
     <div style="height:50px"></div>
+    <!-- 积分卡片 -->
+    <div class="points-card" onclick="openPointsModal()">
+      <div style="display:flex;align-items:center;justify-content:space-between">
+        <div>
+          <div class="pts-num" id="myPointsNum">150</div>
+          <div class="pts-label">🏆 我的积分</div>
+          <div class="pts-tip">邀请好友可获得最多 100积分/人</div>
+        </div>
+        <div class="pts-entry">去兑换 ›</div>
+      </div>
+    </div>
     <div class="menu-list" style="margin-top:12px">
       <div class="menu-item" onclick="openSubPage('resumePage')"><span class="icon">📄</span><span class="text">我的简历</span><span class="badge-blue">已完善</span><span class="arrow">›</span></div>
-      <div class="menu-item" onclick="openSubPage('myEventsPage')"><span class="icon">📋</span><span class="text">我的活动</span><span class="arrow">›</span></div>
+      <div class="menu-item" onclick="openSubPage('myEventsPage')"><span class="icon">📋</span><span class="text">我的活动</span><span class="badge-blue" id="myEventsBadge">报名记录</span><span class="arrow">›</span></div>
       <div class="menu-item" onclick="openSubPage('myApplyPage')"><span class="icon">📝</span><span class="text">我的投递</span><span class="arrow">›</span></div>
       <div class="menu-item" onclick="switchPage('chatPage')"><span class="icon">💬</span><span class="text">我的聊天</span><span class="badge-red" id="chatBadge" style="display:none">2</span><span class="arrow">›</span></div>
       <div class="menu-item" onclick="openSubPage('messagesPage')"><span class="icon">🔔</span><span class="text">消息通知</span><span class="badge-red" id="msgBadge">3</span><span class="arrow">›</span></div>
+      <div class="menu-item" onclick="openSubPage('helpPage')"><span class="icon">❓</span><span class="text">帮助与反馈</span><span class="arrow">›</span></div>
       <div class="menu-item" onclick="openSubPage('settingsPage')"><span class="icon">⚙️</span><span class="text">账号设置</span><span class="arrow">›</span></div>
       <div class="menu-item" onclick="doLogout()"><span class="icon">🚪</span><span class="text" style="color:#ef4444">退出登录</span></div>
     </div>
@@ -973,6 +1055,117 @@ h1,h2,h3 { line-height: 1.3; }
     <div class="tab-item" onclick="switchPage('myPage')" data-page="myPage" style="position:relative">
       <span class="tab-icon">👤</span><span>我的</span>
       <div class="tab-dot" id="myTabDot"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ====== 举报弹窗 ====== -->
+<div class="report-modal-overlay" id="reportModal" onclick="closeReportModal(event)">
+  <div class="report-sheet" onclick="event.stopPropagation()">
+    <h3>举报内容</h3>
+    <div class="report-option" onclick="submitReport('虚假信息')"><span class="r-icon">🚫</span>虚假/误导性信息</div>
+    <div class="report-option" onclick="submitReport('违规内容')"><span class="r-icon">⚠️</span>违法违规内容</div>
+    <div class="report-option" onclick="submitReport('诈骗')"><span class="r-icon">💸</span>疑似诈骗/恶意收费</div>
+    <div class="report-option" onclick="submitReport('骚扰')"><span class="r-icon">😤</span>骚扰或人身攻击</div>
+    <div class="report-option" onclick="submitReport('其他')"><span class="r-icon">📝</span>其他原因</div>
+    <button class="report-cancel" onclick="closeReportModal()">取消</button>
+  </div>
+</div>
+
+<!-- ====== 积分说明弹窗 ====== -->
+<div class="report-modal-overlay" id="pointsModal" onclick="closePointsModal(event)">
+  <div class="report-sheet" onclick="event.stopPropagation()">
+    <h3>🏆 我的积分</h3>
+    <div style="padding:16px 20px">
+      <div style="background:linear-gradient(135deg,#f7971e,#ffd200);border-radius:14px;padding:20px;color:white;text-align:center;margin-bottom:16px">
+        <div style="font-size:48px;font-weight:800" id="pointsModalNum">150</div>
+        <div style="font-size:14px;opacity:.9;margin-top:4px">当前积分</div>
+      </div>
+      <div style="font-size:14px;font-weight:700;margin-bottom:10px;color:var(--text)">获取方式</div>
+      <div style="display:flex;flex-direction:column;gap:8px;margin-bottom:16px">
+        <div style="display:flex;justify-content:space-between;align-items:center;padding:10px 14px;background:var(--bg);border-radius:10px">
+          <span style="font-size:13px">邀请好友注册</span><span style="color:#f97316;font-weight:700;font-size:13px">+10积分</span>
+        </div>
+        <div style="display:flex;justify-content:space-between;align-items:center;padding:10px 14px;background:var(--bg);border-radius:10px">
+          <span style="font-size:13px">好友首次报名活动</span><span style="color:#f97316;font-weight:700;font-size:13px">+50积分</span>
+        </div>
+        <div style="display:flex;justify-content:space-between;align-items:center;padding:10px 14px;background:var(--bg);border-radius:10px">
+          <span style="font-size:13px">好友首次参与活动</span><span style="color:#f97316;font-weight:700;font-size:13px">+100积分</span>
+        </div>
+        <div style="display:flex;justify-content:space-between;align-items:center;padding:10px 14px;background:var(--bg);border-radius:10px">
+          <span style="font-size:13px">完善个人简历</span><span style="color:#f97316;font-weight:700;font-size:13px">+30积分</span>
+        </div>
+      </div>
+      <div style="font-size:14px;font-weight:700;margin-bottom:10px;color:var(--text)">积分兑换</div>
+      <div style="display:flex;flex-direction:column;gap:8px;margin-bottom:20px">
+        <div style="display:flex;justify-content:space-between;align-items:center;padding:10px 14px;background:var(--bg);border-radius:10px">
+          <span style="font-size:13px">活动优先报名权</span><span style="color:var(--primary);font-weight:700;font-size:13px">100积分</span>
+        </div>
+        <div style="display:flex;justify-content:space-between;align-items:center;padding:10px 14px;background:var(--bg);border-radius:10px">
+          <span style="font-size:13px">平台周边礼品</span><span style="color:var(--primary);font-weight:700;font-size:13px">500积分</span>
+        </div>
+        <div style="display:flex;justify-content:space-between;align-items:center;padding:10px 14px;background:var(--bg);border-radius:10px">
+          <span style="font-size:13px">线下活动免费名额</span><span style="color:var(--primary);font-weight:700;font-size:13px">1000积分</span>
+        </div>
+      </div>
+      <button onclick="openInviteFriend()" style="width:100%;padding:14px;border-radius:12px;border:none;background:linear-gradient(135deg,var(--primary),var(--primary2));color:white;font-size:15px;font-weight:700;cursor:pointer">📤 邀请好友，立得10积分</button>
+    </div>
+    <button class="report-cancel" onclick="closePointsModal()">关闭</button>
+  </div>
+</div>
+
+<!-- ====== 帮助与反馈子页 ====== -->
+<div id="helpPage" class="subpage" style="display:none;background:var(--bg);min-height:100vh">
+  <div class="subpage-header"><button class="back-btn" onclick="closeSubPage()">‹</button><h2>帮助与反馈</h2></div>
+  <div style="padding:12px">
+    <!-- 快捷入口 -->
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:16px">
+      <div onclick="openFeedbackChat()" style="background:white;border-radius:14px;padding:16px;text-align:center;cursor:pointer;box-shadow:0 2px 10px rgba(0,0,0,0.05)">
+        <div style="font-size:32px;margin-bottom:8px">💬</div>
+        <div style="font-size:13px;font-weight:600">联系客服</div>
+        <div style="font-size:11px;color:var(--sub);margin-top:3px">9:00-21:00 在线</div>
+      </div>
+      <div onclick="showToast('意见反馈功能开发中，感谢您的支持！')" style="background:white;border-radius:14px;padding:16px;text-align:center;cursor:pointer;box-shadow:0 2px 10px rgba(0,0,0,0.05)">
+        <div style="font-size:32px;margin-bottom:8px">📝</div>
+        <div style="font-size:13px;font-weight:600">意见反馈</div>
+        <div style="font-size:11px;color:var(--sub);margin-top:3px">帮我们做得更好</div>
+      </div>
+    </div>
+    <!-- FAQ -->
+    <div style="font-size:16px;font-weight:700;margin-bottom:12px">常见问题</div>
+    <div class="faq-category">🙋 追随者（参与者）</div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)"><span>报名后怎么知道是否通过？</span><span class="arrow">›</span></div>
+      <div class="faq-a">报名后召集方会在24小时内审核，您可以在「我的」→「我的活动」中查看状态。我们也会通过消息通知您，请保持关注。</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)"><span>活动收费吗？</span><span class="arrow">›</span></div>
+      <div class="faq-a">平台本身完全免费！具体活动是否收费由召集方决定，活动详情页会明确标注费用信息。我们承诺所有收费信息公开透明。</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)"><span>遇到虚假活动怎么办？</span><span class="arrow">›</span></div>
+      <div class="faq-a">我们严厉打击虚假信息！如遇可疑活动，请点击活动详情页右上角的「举报」按钮，我们会在1小时内处理。建议参加活动前核实召集方信息。</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)"><span>积分怎么获得和使用？</span><span class="arrow">›</span></div>
+      <div class="faq-a">邀请好友注册得10积分，好友首次报名得50积分，好友首次参与活动得100积分。100积分可换活动优先报名权，500积分换平台周边礼品。</div>
+    </div>
+    <div class="faq-category">📣 召集方（发起者）</div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)"><span>发布活动/招募收费吗？</span><span class="arrow">›</span></div>
+      <div class="faq-a">目前平台完全免费！我们致力于零门槛连接创造可能。未来可能推出增值服务，但基础发布功能永远免费。</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)"><span>如何提升活动曝光？</span><span class="arrow">›</span></div>
+      <div class="faq-a">建议您：① 完善活动信息，添加吸引人的封面图；② 使用精准的标签；③ 分享到社交媒体；④ 保持诚信记录，优质召集方会获得平台推荐。</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)"><span>审核需要多久？</span><span class="arrow">›</span></div>
+      <div class="faq-a">普通内容2小时内审核，紧急内容30分钟内处理。审核通过后立即上线，如需修改会说明原因并通知您。</div>
+    </div>
+    <div style="text-align:center;padding:20px;color:var(--sub);font-size:12px">
+      召集吧 v2.2.0 · 免费 · 共享 · 平等 · 服务 · 成长<br>
+      <span style="color:var(--primary);margin-top:6px;display:block">© 2025 召集吧 · 让每一次召集，都成为成长的起点</span>
     </div>
   </div>
 </div>
@@ -1080,6 +1273,14 @@ h1,h2,h3 { line-height: 1.3; }
 <!-- My Events Page -->
 <div id="myEventsPage" class="subpage" style="display:none;background:var(--bg);min-height:100vh">
   <div class="subpage-header"><button class="back-btn" onclick="closeSubPage()">‹</button><h2>我的活动</h2></div>
+  <!-- 状态筛选 -->
+  <div style="padding:10px 12px 0;display:flex;gap:8px;overflow-x:auto;scrollbar-width:none">
+    <div class="tag active" id="eventFilterAll" onclick="filterMyEvents('all')">全部</div>
+    <div class="tag" id="eventFilterPending" onclick="filterMyEvents('pending')">⏳ 审核中</div>
+    <div class="tag" id="eventFilterApproved" onclick="filterMyEvents('approved')">✅ 已通过</div>
+    <div class="tag" id="eventFilterCompleted" onclick="filterMyEvents('completed')">🎉 已完成</div>
+    <div class="tag" id="eventFilterRejected" onclick="filterMyEvents('rejected')">❌ 未通过</div>
+  </div>
   <div style="padding:12px" id="myEventsList"></div>
 </div>
 
@@ -1124,6 +1325,7 @@ h1,h2,h3 { line-height: 1.3; }
     <div class="modal-header" style="flex-shrink:0">
       <h3>召集详情</h3>
       <div style="display:flex;gap:10px;align-items:center">
+        <button onclick="openReportModal('event')" style="background:none;border:none;font-size:18px;cursor:pointer;padding:4px;opacity:.6" title="举报">🚩</button>
         <button onclick="shareEvent()" style="background:none;border:none;font-size:18px;cursor:pointer;padding:4px" title="分享">🔗</button>
         <button class="modal-close" onclick="closeModal('eventModal')">✕</button>
       </div>
@@ -1159,7 +1361,13 @@ h1,h2,h3 { line-height: 1.3; }
 <div class="modal-overlay" id="jobModal">
   <div class="modal">
     <div class="modal-handle"></div>
-    <div class="modal-header"><h3>职位详情</h3><button class="modal-close" onclick="closeModal('jobModal')">✕</button></div>
+    <div class="modal-header">
+      <h3>职位详情</h3>
+      <div style="display:flex;gap:8px;align-items:center">
+        <button onclick="openReportModal('job')" style="background:none;border:none;font-size:18px;cursor:pointer;padding:4px;opacity:.6" title="举报">🚩</button>
+        <button class="modal-close" onclick="closeModal('jobModal')">✕</button>
+      </div>
+    </div>
     <div class="modal-body" id="jobDetail"></div>
     <div class="modal-footer" style="display:flex;gap:8px">
       <button class="apply-btn" id="jobApplyBtn" onclick="applyJob()" style="flex:3">投递简历</button>
@@ -1969,7 +2177,7 @@ function openSubPage(pageId) {
   const tabBar = document.getElementById('mainTabBar');
   if (tabBar) tabBar.style.display = 'none';
   if (pageId === 'resumePage') renderResumePage();
-  if (pageId === 'myEventsPage') renderMyEvents();
+  if (pageId === 'myEventsPage') { _myEventsFilter = 'all'; document.querySelectorAll('#myEventsPage .tag').forEach(t => t.classList.remove('active')); document.getElementById('eventFilterAll')?.classList.add('active'); renderMyEventsList(); }
   if (pageId === 'myApplyPage') renderMyApply();
   if (pageId === 'messagesPage') renderMessages();
   if (pageId === 'settingsPage') { /* 静态页无需额外渲染 */ }
@@ -1987,6 +2195,151 @@ function goToMessages() {
   setTimeout(() => openSubPage('messagesPage'), 100);
 }
 
+// =================== 举报功能 ===================
+let _reportTarget = null; // { type: 'event'|'job', id }
+
+function openReportModal(type) {
+  _reportTarget = { type, id: type === 'event' ? (currentEvent?.id) : (currentJob?.id) };
+  document.getElementById('reportModal').classList.add('open');
+}
+
+function closeReportModal(e) {
+  if (!e || e.target === document.getElementById('reportModal')) {
+    document.getElementById('reportModal').classList.remove('open');
+  }
+}
+
+function submitReport(reason) {
+  document.getElementById('reportModal').classList.remove('open');
+  // 实际可调用后端 API，这里演示
+  showToast(`已收到举报：${reason}。我们会在1小时内处理，感谢您的监督！`);
+}
+
+// =================== 积分系统 ===================
+let myPoints = 150; // 演示数据
+
+function openPointsModal() {
+  document.getElementById('pointsModalNum').textContent = myPoints;
+  document.getElementById('pointsModal').classList.add('open');
+}
+
+function closePointsModal(e) {
+  if (!e || e.target === document.getElementById('pointsModal')) {
+    document.getElementById('pointsModal').classList.remove('open');
+  }
+}
+
+function openInviteFriend() {
+  closePointsModal();
+  const inviteLink = `https://frontend-five-tan-49.vercel.app?invite=${currentUser?.id || 'demo'}`;
+  if (navigator.share) {
+    navigator.share({ title: '召集吧', text: '我在召集吧发现了很多成长机会，邀请你一起加入！', url: inviteLink });
+  } else if (navigator.clipboard) {
+    navigator.clipboard.writeText(inviteLink).then(() => showToast('邀请链接已复制！分享给好友，他注册后你得10积分 🎉'));
+  } else {
+    showToast('邀请链接：' + inviteLink);
+  }
+}
+
+// =================== FAQ 帮助 ===================
+function toggleFaq(qEl) {
+  const aEl = qEl.nextElementSibling;
+  const isOpen = qEl.classList.contains('open');
+  // 关闭所有
+  document.querySelectorAll('.faq-q.open').forEach(el => {
+    el.classList.remove('open');
+    el.nextElementSibling.classList.remove('open');
+  });
+  if (!isOpen) {
+    qEl.classList.add('open');
+    aEl.classList.add('open');
+  }
+}
+
+function openFeedbackChat() {
+  closeSubPage();
+  const sessionId = createOrFindSession({
+    peerId: 'service',
+    peerName: '召集吧客服',
+    peerRole: '官方客服',
+    peerEmoji: '🎯',
+    avatarClass: 'avatar-ring-0',
+    context: null,
+    initMsg: '您好！我是召集吧客服，很高兴为您服务。请问有什么可以帮助您的？\n\n服务时间：每天 9:00-21:00',
+  });
+  openChatSession(sessionId);
+}
+
+// =================== 我的活动状态筛选 ===================
+let _myEventsFilter = 'all';
+
+// 演示用报名记录数据（含状态）
+const MY_EVENT_REGISTRATIONS = [
+  { event_id: 1, event_title: '创业者见面会', event_emoji: '🚀', event_gradient: 'linear-gradient(135deg,#667eea,#764ba2)', date: '2026-04-05 14:00', status: 'approved', joined_at: '3天前' },
+  { event_id: 2, event_title: '前端技术分享会', event_emoji: '💻', event_gradient: 'linear-gradient(135deg,#4facfe,#00f2fe)', date: '2026-04-12 14:00', status: 'pending', joined_at: '1天前' },
+  { event_id: 3, event_title: '48小时编程马拉松', event_emoji: '⌨️', event_gradient: 'linear-gradient(135deg,#43e97b,#38f9d7)', date: '2026-03-15 09:00', status: 'completed', joined_at: '2周前' },
+  { event_id: 4, event_title: 'UI设计工作坊', event_emoji: '🎨', event_gradient: 'linear-gradient(135deg,#f093fb,#f5576c)', date: '2026-03-01 10:00', status: 'rejected', joined_at: '1个月前' },
+];
+
+function renderMyEventsList() {
+  const container = document.getElementById('myEventsList');
+  if (!container) return;
+  const list = _myEventsFilter === 'all'
+    ? MY_EVENT_REGISTRATIONS
+    : MY_EVENT_REGISTRATIONS.filter(r => r.status === _myEventsFilter);
+  if (!list.length) {
+    container.innerHTML = `<div style="text-align:center;padding:60px 20px;color:var(--sub)"><div style="font-size:48px;margin-bottom:12px">📋</div><p>暂无相关记录</p></div>`;
+    return;
+  }
+  const statusMap = { pending: ['⏳ 审核中', 'pending'], approved: ['✅ 已通过', 'approved'], completed: ['🎉 已完成', 'completed'], rejected: ['❌ 未通过', 'rejected'] };
+  container.innerHTML = list.map(r => {
+    const [label, cls] = statusMap[r.status] || ['未知', 'pending'];
+    const isCompleted = r.status === 'completed';
+    return `
+    <div style="background:white;border-radius:14px;padding:16px;margin-bottom:10px;box-shadow:0 2px 10px rgba(0,0,0,0.05);display:flex;gap:12px;cursor:pointer" onclick="showEventDetail(${r.event_id})">
+      <div style="width:64px;height:64px;border-radius:10px;background:${r.event_gradient};flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:28px">${r.event_emoji}</div>
+      <div style="flex:1;min-width:0">
+        <div style="font-size:14px;font-weight:600;margin-bottom:4px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${r.event_title}</div>
+        <div style="font-size:12px;color:var(--sub);margin-bottom:8px">📅 ${r.date}</div>
+        <div style="display:flex;justify-content:space-between;align-items:center">
+          <span class="apply-status ${cls}">${label}</span>
+          ${isCompleted ? `<button onclick="event.stopPropagation();showEventReview(${r.event_id})" style="font-size:12px;color:var(--primary);background:none;border:none;cursor:pointer">查看回顾 ›</button>` : ''}
+          <span style="font-size:11px;color:var(--sub)">${r.joined_at}报名</span>
+        </div>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+function filterMyEvents(status) {
+  _myEventsFilter = status;
+  document.querySelectorAll('#myEventsPage .tag').forEach(t => t.classList.remove('active'));
+  document.getElementById('eventFilter' + status.charAt(0).toUpperCase() + status.slice(1))?.classList.add('active');
+  renderMyEventsList();
+}
+
+// =================== 活动回顾 ===================
+function showEventReview(eventId) {
+  // 在活动详情里插入回顾区域（演示）
+  const reviewHtml = `
+  <div class="event-review-section" style="margin:0 0 12px">
+    <h4>📸 活动回顾</h4>
+    <div class="review-stat-row">
+      <div class="review-stat"><div class="n">32</div><div class="l">参与人数</div></div>
+      <div class="review-stat"><div class="n">4.8</div><div class="l">满意度</div></div>
+      <div class="review-stat"><div class="n">96%</div><div class="l">完成率</div></div>
+    </div>
+    <div class="review-photo-row" style="margin-top:10px">
+      <div class="review-photo">🎉</div>
+      <div class="review-photo">💻</div>
+      <div class="review-photo">👥</div>
+      <div class="review-photo">🏆</div>
+    </div>
+    <div style="font-size:13px;color:#64748b;margin-top:10px;line-height:1.7">"这是一次非常棒的活动，认识了很多志同道合的朋友，也学到了很多实用的技术！感谢召集方的精心组织。" —— 参与者评论</div>
+  </div>`;
+  showToast('活动回顾功能即将上线，敬请期待 🎉');
+}
+
 // =================== SETTINGS ===================
 function openSettingDetail(type) {
   const titles = {
@@ -2001,7 +2354,7 @@ function openSettingDetail(type) {
     privacy: '个人信息保护设置：可控制谁能查看你的简历、联系方式等，功能即将上线。',
     phone: '当前已绑定手机号：138****8001。更换绑定请联系客服。',
     theme: '深色模式、字体大小调整等外观设置功能即将上线，敬请期待！',
-    about: '召集吧 v2.2.0\n\n使命：让每一次召集，都成为成长的起点\n\n召集·共长 | 真诚召集，彼此成就\n\n© 2025 召集吧 · 免费·共享·平等·服务·成长'
+    about: '召集吧 v2.2.0\n\n🎯 使命：让每一次召集，都成为成长的起点\n\n核心理念：免费 · 共享 · 平等 · 服务 · 成长\n\n我们连接「想做事缺人」的召集方与「想成长缺机会」的年轻人，零门槛、真诚、彼此成就。\n\n© 2025 召集吧 · 召集，让成长发生'
   };
   showToast(contents[type] || '功能开发中...');
 }
@@ -3610,6 +3963,14 @@ function createOrFindSession(opts) {
         cardSub: opts.context.type === 'event' ? opts.context.time : opts.context.company,
         cardEmoji: opts.context.emoji || (opts.context.type === 'event' ? '🎉' : '💼'),
         cardGradient: opts.context.gradient || 'linear-gradient(135deg,#667eea,#764ba2)',
+        time: new Date().getHours().toString().padStart(2,'0') + ':' + new Date().getMinutes().toString().padStart(2,'0'),
+      }] : []),
+      // 如果有初始消息（如客服欢迎语）
+      ...(opts.initMsg ? [{
+        id: 3,
+        from: 'peer',
+        type: 'text',
+        content: opts.initMsg,
         time: new Date().getHours().toString().padStart(2,'0') + ':' + new Date().getMinutes().toString().padStart(2,'0'),
       }] : []),
     ]

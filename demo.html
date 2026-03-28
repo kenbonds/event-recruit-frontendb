@@ -273,6 +273,375 @@ h1,h2,h3 { line-height: 1.3; }
 /* responsive tab: 5 items */
 .tab-bar.five .tab-item { font-size: 10px; }
 .tab-bar.five .tab-icon { font-size: 20px; }
+
+/* ===== ROLE SWITCH TOGGLE (双端切换) ===== */
+.role-switch-bar {
+  background: rgba(255,255,255,0.15);
+  backdrop-filter: blur(8px);
+  border-radius: 22px;
+  padding: 4px;
+  display: inline-flex;
+  align-items: center;
+  border: 1px solid rgba(255,255,255,0.25);
+  position: relative;
+}
+.role-switch-bar .role-opt {
+  padding: 5px 14px;
+  border-radius: 18px;
+  font-size: 13px;
+  color: rgba(255,255,255,0.75);
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4,0,0.2,1);
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-weight: 500;
+  white-space: nowrap;
+  position: relative;
+  z-index: 1;
+}
+.role-switch-bar .role-opt.active {
+  background: white;
+  color: var(--primary);
+  font-weight: 700;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.15);
+}
+
+/* ===== CALLER MODE (召集端) STYLES ===== */
+.caller-header {
+  background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+  padding: 44px 20px 20px;
+  color: white;
+}
+.caller-header h1 { font-size: 22px; margin-bottom: 4px; }
+.caller-header p { font-size: 13px; opacity: 0.85; }
+
+.caller-stat-row { display: flex; gap: 10px; margin: 14px 12px; }
+.caller-stat-card {
+  flex: 1;
+  background: white;
+  border-radius: 12px;
+  padding: 14px 10px;
+  text-align: center;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+.caller-stat-card:hover { transform: translateY(-2px); }
+.caller-stat-card .n { font-size: 22px; font-weight: 700; color: #11998e; }
+.caller-stat-card .l { font-size: 11px; color: var(--sub); margin-top: 3px; }
+
+.caller-action-row {
+  display: flex;
+  gap: 10px;
+  margin: 0 12px 14px;
+}
+.caller-action-btn {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 14px 10px;
+  border: none;
+  border-radius: 14px;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s;
+  color: white;
+}
+.caller-action-btn:active { transform: scale(0.97); }
+.btn-green { background: linear-gradient(135deg,#11998e,#38ef7d); box-shadow: 0 4px 14px rgba(17,153,142,0.35); }
+.btn-pink  { background: linear-gradient(135deg,#f093fb,#f5576c); box-shadow: 0 4px 14px rgba(245,87,108,0.30); }
+
+/* 发布活动卡片 */
+.my-event-manage { background: white; border-radius: 14px; padding: 14px; margin: 0 12px 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); }
+.my-event-manage .top { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
+.my-event-manage .cover-mini { width: 52px; height: 52px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 24px; flex-shrink: 0; }
+.my-event-manage .info h4 { font-size: 14px; font-weight: 700; }
+.my-event-manage .info p { font-size: 12px; color: var(--sub); margin-top: 2px; }
+.my-event-manage .actions { display: flex; gap: 8px; margin-top: 10px; }
+.my-event-manage .action-tag { flex: 1; text-align: center; padding: 7px; border-radius: 8px; font-size: 12px; font-weight: 600; cursor: pointer; border: 1.5px solid; transition: all 0.2s; }
+
+/* 招募管理 */
+.recruit-card { background: white; border-radius: 14px; padding: 14px; margin: 0 12px 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); display: flex; align-items: center; gap: 12px; cursor: pointer; transition: transform 0.2s; }
+.recruit-card:hover { transform: translateX(3px); }
+.recruit-card .role-icon { width: 46px; height: 46px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 22px; flex-shrink: 0; }
+.recruit-card .detail { flex: 1; min-width: 0; }
+.recruit-card .detail h4 { font-size: 14px; font-weight: 700; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.recruit-card .detail p { font-size: 12px; color: var(--sub); margin-top: 2px; }
+.recruit-count { text-align: right; flex-shrink: 0; }
+.recruit-count .n { font-size: 20px; font-weight: 800; color: var(--primary); }
+.recruit-count .l { font-size: 10px; color: var(--sub); }
+
+/* ===== CHAT STYLES ===== */
+/* 聊天列表 */
+.chat-list-item {
+  background: white;
+  border-radius: 14px;
+  padding: 14px;
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  cursor: pointer;
+  transition: all 0.2s;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+}
+.chat-list-item:active { background: var(--bg); transform: scale(0.99); }
+.chat-avatar-wrap { position: relative; flex-shrink: 0; }
+.chat-avatar {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  flex-shrink: 0;
+  overflow: hidden;
+}
+.chat-unread-dot {
+  position: absolute;
+  top: -2px;
+  right: -2px;
+  background: #ff4444;
+  color: white;
+  font-size: 10px;
+  min-width: 18px;
+  height: 18px;
+  border-radius: 9px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  border: 2px solid white;
+  padding: 0 3px;
+}
+.chat-info { flex: 1; min-width: 0; }
+.chat-info .name { font-size: 15px; font-weight: 700; }
+.chat-info .last-msg { font-size: 13px; color: var(--sub); margin-top: 3px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.chat-meta { text-align: right; flex-shrink: 0; }
+.chat-meta .time { font-size: 11px; color: #c5cdd5; }
+
+/* 聊天室 */
+.chat-room { display: none; position: fixed; top: 0; left: 50%; transform: translateX(-50%); width: 100%; max-width: 480px; height: 100vh; background: white; z-index: 300; flex-direction: column; }
+.chat-room.active { display: flex; }
+.chat-room-header {
+  background: white;
+  padding: 44px 16px 12px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  border-bottom: 1px solid var(--border);
+  flex-shrink: 0;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+}
+.chat-room-header .back { width: 36px; height: 36px; border: none; background: var(--bg); border-radius: 10px; font-size: 16px; cursor: pointer; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.chat-room-header .peer-info { flex: 1; min-width: 0; }
+.chat-room-header .peer-info h3 { font-size: 17px; font-weight: 700; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.chat-room-header .peer-info p { font-size: 12px; color: var(--sub); margin-top: 1px; }
+.chat-room-header .more-btn { width: 36px; height: 36px; border: none; background: var(--bg); border-radius: 10px; font-size: 18px; cursor: pointer; display: flex; align-items: center; justify-content: center; }
+
+.chat-messages {
+  flex: 1;
+  overflow-y: auto;
+  padding: 16px 16px 8px;
+  background: var(--bg);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.chat-msg { display: flex; align-items: flex-end; gap: 8px; }
+.chat-msg.me { flex-direction: row-reverse; }
+
+.chat-bubble-wrap { max-width: 70%; display: flex; flex-direction: column; }
+.chat-msg.me .chat-bubble-wrap { align-items: flex-end; }
+
+.chat-bubble {
+  padding: 10px 14px;
+  border-radius: 16px;
+  font-size: 15px;
+  line-height: 1.5;
+  word-break: break-word;
+}
+.chat-msg:not(.me) .chat-bubble {
+  background: white;
+  color: var(--text);
+  border-bottom-left-radius: 4px;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+}
+.chat-msg.me .chat-bubble {
+  background: linear-gradient(135deg, var(--primary), var(--primary2));
+  color: white;
+  border-bottom-right-radius: 4px;
+  box-shadow: 0 2px 8px rgba(102,126,234,0.3);
+}
+.chat-time {
+  font-size: 11px;
+  color: var(--sub);
+  margin-top: 4px;
+  text-align: center;
+  align-self: center;
+  padding: 2px 10px;
+}
+.chat-sys-msg {
+  text-align: center;
+  font-size: 12px;
+  color: var(--sub);
+  background: rgba(0,0,0,0.04);
+  border-radius: 8px;
+  padding: 5px 12px;
+  margin: 4px auto;
+  max-width: 80%;
+}
+
+/* 聊天卡片消息（活动/职位分享卡片） */
+.chat-card-msg {
+  background: white;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  max-width: 240px;
+  cursor: pointer;
+}
+.chat-card-msg .card-cover {
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 36px;
+}
+.chat-card-msg .card-info { padding: 8px 10px; }
+.chat-card-msg .card-info .type-label { font-size: 11px; color: var(--sub); margin-bottom: 3px; }
+.chat-card-msg .card-info h4 { font-size: 13px; font-weight: 700; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.chat-card-msg .card-info p { font-size: 12px; color: var(--sub); margin-top: 2px; }
+
+/* 聊天输入框 */
+.chat-input-bar {
+  background: white;
+  border-top: 1px solid var(--border);
+  padding: 10px 12px max(env(safe-area-inset-bottom), 10px);
+  display: flex;
+  align-items: flex-end;
+  gap: 8px;
+  flex-shrink: 0;
+}
+.chat-input-bar .attach-btn {
+  width: 38px;
+  height: 38px;
+  border: none;
+  background: var(--bg);
+  border-radius: 10px;
+  font-size: 18px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.chat-input-bar .text-area {
+  flex: 1;
+  padding: 9px 12px;
+  border: 1.5px solid var(--border);
+  border-radius: 20px;
+  font-size: 15px;
+  outline: none;
+  background: var(--bg);
+  resize: none;
+  max-height: 100px;
+  min-height: 38px;
+  line-height: 1.4;
+  transition: border-color 0.2s;
+  font-family: inherit;
+}
+.chat-input-bar .text-area:focus { border-color: var(--primary); background: white; }
+.chat-input-bar .send-btn {
+  width: 38px;
+  height: 38px;
+  border: none;
+  background: linear-gradient(135deg, var(--primary), var(--primary2));
+  border-radius: 50%;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: transform 0.15s, opacity 0.15s;
+  box-shadow: 0 2px 8px rgba(102,126,234,0.35);
+}
+.chat-input-bar .send-btn:active { transform: scale(0.92); }
+
+/* 聊天工具栏 */
+.chat-extra-tools {
+  display: none;
+  background: white;
+  border-top: 1px solid var(--border);
+  padding: 14px 16px;
+  display: none;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+}
+.chat-extra-tools.show { display: grid; }
+.chat-tool-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+}
+.chat-tool-btn .icon-wrap {
+  width: 50px;
+  height: 50px;
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  background: var(--bg);
+}
+.chat-tool-btn span { font-size: 11px; color: var(--sub); }
+
+/* 发起沟通浮动按钮 */
+.initiate-chat-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 12px;
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s;
+  background: linear-gradient(135deg, #11998e, #38ef7d);
+  color: white;
+  box-shadow: 0 3px 12px rgba(17,153,142,0.3);
+}
+.initiate-chat-btn:active { transform: scale(0.97); }
+
+/* 空聊天状态 */
+.chat-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 60vh;
+  color: var(--sub);
+}
+.chat-empty .emoji { font-size: 60px; margin-bottom: 16px; opacity: 0.5; }
+.chat-empty p { font-size: 14px; }
+
+/* 头像颜色环 */
+.avatar-ring-0 { background: linear-gradient(135deg, #667eea, #764ba2); }
+.avatar-ring-1 { background: linear-gradient(135deg, #f093fb, #f5576c); }
+.avatar-ring-2 { background: linear-gradient(135deg, #4facfe, #00f2fe); }
+.avatar-ring-3 { background: linear-gradient(135deg, #43e97b, #38f9d7); }
+.avatar-ring-4 { background: linear-gradient(135deg, #f7971e, #ffd200); }
+.avatar-ring-5 { background: linear-gradient(135deg, #11998e, #38ef7d); }
 </style>
 </head>
 <body>
@@ -398,48 +767,111 @@ h1,h2,h3 { line-height: 1.3; }
 
   <!-- HOME PAGE -->
   <div class="page active" id="homePage">
-    <div class="header">
-      <h1>🎯 召集吧</h1>
-      <p>真诚召集，彼此成就</p>
+    <div class="header" id="homeHeader">
+      <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:10px">
+        <div>
+          <h1 id="homeHeaderTitle">🎯 召集吧</h1>
+          <p id="homeHeaderSub">真诚召集，彼此成就</p>
+        </div>
+        <!-- 双端切换开关 -->
+        <div class="role-switch-bar" id="roleSwitchBar" style="margin-top:4px">
+          <div class="role-opt active" id="roleFollowOpt" onclick="switchRole('follow')">🙋 追随</div>
+          <div class="role-opt" id="roleCallerOpt" onclick="switchRole('caller')">📣 召集</div>
+        </div>
+      </div>
       <div class="search-bar">
         <input type="text" id="searchInput" placeholder="搜索活动或岗位..." oninput="handleSearch(this.value)">
         <button onclick="doSearch()">搜索</button>
       </div>
     </div>
 
-    <div class="stats">
-      <div class="stat-item"><div class="num" id="statUsers">3,260</div><div class="label">活跃用户</div></div>
-      <div class="stat-item"><div class="num" id="statEvents">156</div><div class="label">进行中活动</div></div>
-      <div class="stat-item"><div class="num" id="statJobs">89</div><div class="label">招募岗位</div></div>
-      <div class="stat-item"><div class="num">82%</div><div class="label">匹配准确率</div></div>
-    </div>
+    <!-- ===== 追随端内容（默认显示） ===== -->
+    <div id="followContent">
+      <div class="stats">
+        <div class="stat-item"><div class="num" id="statUsers">3,260</div><div class="label">活跃用户</div></div>
+        <div class="stat-item"><div class="num" id="statEvents">156</div><div class="label">进行中活动</div></div>
+        <div class="stat-item"><div class="num" id="statJobs">89</div><div class="label">招募岗位</div></div>
+        <div class="stat-item"><div class="num">82%</div><div class="label">匹配准确率</div></div>
+      </div>
 
-    <!-- Notify Banner -->
-    <div class="notify-banner" id="notifyBanner" onclick="goToMessages()">
-      <span class="icon">🔔</span>
-      <div class="text">
-        <h4 id="notifyBannerTitle">欢迎回到召集吧！</h4>
-        <p id="notifyBannerSub">点击查看最新消息 →</p>
+      <!-- Notify Banner -->
+      <div class="notify-banner" id="notifyBanner" onclick="goToMessages()">
+        <span class="icon">🔔</span>
+        <div class="text">
+          <h4 id="notifyBannerTitle">欢迎回到召集吧！</h4>
+          <p id="notifyBannerSub">点击查看最新消息 →</p>
+        </div>
+      </div>
+
+      <!-- Hot Events -->
+      <div class="section">
+        <div class="section-header">
+          <h2>🔥 热门召集</h2>
+          <a href="javascript:void(0)" onclick="switchPage('eventsPage')">查看全部 ›</a>
+        </div>
+        <div class="tags" id="eventTags"></div>
+        <div class="events-scroll" id="hotEvents"></div>
+      </div>
+
+      <!-- Recommend Jobs -->
+      <div class="section">
+        <div class="section-header">
+          <h2>✨ 为你推荐</h2>
+          <a href="javascript:void(0)" onclick="switchPage('jobsPage')">更多岗位 ›</a>
+        </div>
+        <div id="recommendJobs"></div>
       </div>
     </div>
 
-    <!-- Hot Events -->
-    <div class="section">
-      <div class="section-header">
-        <h2>🔥 热门活动</h2>
-        <a href="javascript:void(0)" onclick="switchPage('eventsPage')">查看全部 ›</a>
+    <!-- ===== 召集端内容（默认隐藏） ===== -->
+    <div id="callerContent" style="display:none">
+      <!-- 召集方统计 -->
+      <div class="caller-stat-row">
+        <div class="caller-stat-card" onclick="openCallerEvents()">
+          <div class="n" id="cStatEvent">2</div>
+          <div class="l">我的活动</div>
+        </div>
+        <div class="caller-stat-card" onclick="openCallerJobs()">
+          <div class="n" id="cStatJobs">3</div>
+          <div class="l">招募岗位</div>
+        </div>
+        <div class="caller-stat-card" onclick="openCallerApplicants()">
+          <div class="n" id="cStatApply">23</div>
+          <div class="l">收到投递</div>
+        </div>
+        <div class="caller-stat-card">
+          <div class="n" id="cStatView">204</div>
+          <div class="l">浏览量</div>
+        </div>
       </div>
-      <div class="tags" id="eventTags"></div>
-      <div class="events-scroll" id="hotEvents"></div>
-    </div>
 
-    <!-- Recommend Jobs -->
-    <div class="section">
-      <div class="section-header">
-        <h2>✨ 为你推荐</h2>
-        <a href="javascript:void(0)" onclick="switchPage('jobsPage')">更多岗位 ›</a>
+      <!-- 快捷发布 -->
+      <div class="caller-action-row">
+        <button class="caller-action-btn btn-pink" onclick="openPublishEvent()">
+          <span style="font-size:18px">🎉</span> 发起活动
+        </button>
+        <button class="caller-action-btn btn-green" onclick="openPublishJob()">
+          <span style="font-size:18px">💼</span> 发布招募
+        </button>
       </div>
-      <div id="recommendJobs"></div>
+
+      <!-- 我的活动管理 -->
+      <div class="section">
+        <div class="section-header">
+          <h2>🗂 我的活动</h2>
+          <a href="javascript:void(0)" onclick="openCallerEvents()">全部 ›</a>
+        </div>
+        <div id="callerEventList"></div>
+      </div>
+
+      <!-- 招募人才 -->
+      <div class="section">
+        <div class="section-header">
+          <h2>👥 招募动态</h2>
+          <a href="javascript:void(0)" onclick="openCallerApplicants()">查看投递 ›</a>
+        </div>
+        <div id="callerRecruitList"></div>
+      </div>
     </div>
   </div>
 
@@ -496,6 +928,8 @@ h1,h2,h3 { line-height: 1.3; }
         <div class="school" id="mySchool">北京理工大学 · 计算机科学与技术</div>
         <div class="tags-wrap" id="mySkillTags"></div>
       </div>
+      <!-- 角色标识 -->
+      <div id="myRoleBadge" style="position:absolute;right:16px;top:16px;background:rgba(255,255,255,0.2);border:1px solid rgba(255,255,255,0.35);padding:5px 12px;border-radius:20px;font-size:12px;font-weight:600">🙋 追随方</div>
     </div>
     <div class="my-stats" id="myStats">
       <div class="my-stat"><div class="num">5</div><div class="label">参加活动</div></div>
@@ -508,21 +942,73 @@ h1,h2,h3 { line-height: 1.3; }
       <div class="menu-item" onclick="openSubPage('resumePage')"><span class="icon">📄</span><span class="text">我的简历</span><span class="badge-blue">已完善</span><span class="arrow">›</span></div>
       <div class="menu-item" onclick="openSubPage('myEventsPage')"><span class="icon">📋</span><span class="text">我的活动</span><span class="arrow">›</span></div>
       <div class="menu-item" onclick="openSubPage('myApplyPage')"><span class="icon">📝</span><span class="text">我的投递</span><span class="arrow">›</span></div>
+      <div class="menu-item" onclick="switchPage('chatPage')"><span class="icon">💬</span><span class="text">我的聊天</span><span class="badge-red" id="chatBadge" style="display:none">2</span><span class="arrow">›</span></div>
       <div class="menu-item" onclick="openSubPage('messagesPage')"><span class="icon">🔔</span><span class="text">消息通知</span><span class="badge-red" id="msgBadge">3</span><span class="arrow">›</span></div>
       <div class="menu-item" onclick="openSubPage('settingsPage')"><span class="icon">⚙️</span><span class="text">账号设置</span><span class="arrow">›</span></div>
       <div class="menu-item" onclick="doLogout()"><span class="icon">🚪</span><span class="text" style="color:#ef4444">退出登录</span></div>
     </div>
   </div>
 
+  <!-- CHAT PAGE (聊天列表 Tab页) -->
+  <div class="page" id="chatPage">
+    <div style="background:linear-gradient(135deg,var(--primary),var(--primary2));padding:44px 20px 20px;color:white">
+      <h1 style="font-size:22px;margin-bottom:4px">💬 聊天</h1>
+      <p style="font-size:13px;opacity:.85">与召集方、参与者直接沟通</p>
+    </div>
+    <div style="padding:12px" id="chatListContainer"></div>
+  </div>
+
   <!-- TAB BAR -->
-  <div class="tab-bar five" id="mainTabBar">
+  <div class="tab-bar five" id="mainTabBar" data-role="follow">
     <div class="tab-item active" onclick="switchPage('homePage')" data-page="homePage"><span class="tab-icon">🏠</span><span>首页</span></div>
     <div class="tab-item" onclick="switchPage('eventsPage')" data-page="eventsPage"><span class="tab-icon">🎉</span><span>活动</span></div>
-    <div class="tab-item" onclick="switchPage('jobsPage')" data-page="jobsPage"><span class="tab-icon">💼</span><span>职位</span></div>
-    <div class="tab-item" onclick="switchPage('matchPage')" data-page="matchPage"><span class="tab-icon">🤖</span><span>匹配</span></div>
+    <div class="tab-item tab-publish-btn" onclick="openPublishEvent()" style="position:relative">
+      <div id="tabCenterBtn" style="width:46px;height:46px;background:linear-gradient(135deg,#667eea,#764ba2);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:24px;color:white;box-shadow:0 4px 16px rgba(102,126,234,0.45);margin-top:-18px;border:3px solid white">＋</div>
+      <span id="tabCenterLabel" style="font-size:10px;color:var(--primary);font-weight:700;margin-top:2px">发起</span>
+    </div>
+    <div class="tab-item" id="tabChatItem" onclick="switchPage('chatPage')" data-page="chatPage" style="position:relative">
+      <span class="tab-icon">💬</span><span>聊天</span>
+      <div class="tab-dot" id="chatTabDot" style="display:none"></div>
+    </div>
     <div class="tab-item" onclick="switchPage('myPage')" data-page="myPage" style="position:relative">
       <span class="tab-icon">👤</span><span>我的</span>
       <div class="tab-dot" id="myTabDot"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ====== CHAT ROOM (全屏浮层) ====== -->
+<div class="chat-room" id="chatRoom">
+  <div class="chat-room-header">
+    <button class="back" onclick="closeChatRoom()">‹</button>
+    <div class="peer-info">
+      <h3 id="chatRoomName">对方名称</h3>
+      <p id="chatRoomSub">通过活动认识</p>
+    </div>
+    <button class="more-btn" onclick="showChatMore()">⋯</button>
+  </div>
+  <div class="chat-messages" id="chatMessages"></div>
+  <div id="chatContextCard" style="display:none;padding:8px 12px;background:var(--bg);border-top:1px solid var(--border)"></div>
+  <div class="chat-input-bar">
+    <button class="attach-btn" onclick="toggleChatTools()" id="attachBtn">＋</button>
+    <textarea class="text-area" id="chatInputText" placeholder="输入消息…" rows="1"
+      oninput="autoResizeChatInput(this)"
+      onkeydown="if(event.key==='Enter'&&!event.shiftKey){event.preventDefault();sendChatMsg()}"
+    ></textarea>
+    <button class="send-btn" onclick="sendChatMsg()">➤</button>
+  </div>
+  <div class="chat-extra-tools" id="chatExtraTools">
+    <div class="chat-tool-btn" onclick="sendChatEventCard()">
+      <div class="icon-wrap">🎉</div><span>分享活动</span>
+    </div>
+    <div class="chat-tool-btn" onclick="sendChatJobCard()">
+      <div class="icon-wrap">💼</div><span>分享职位</span>
+    </div>
+    <div class="chat-tool-btn" onclick="sendChatLocation()">
+      <div class="icon-wrap">📍</div><span>位置</span>
+    </div>
+    <div class="chat-tool-btn" onclick="showToast('名片功能开发中...')">
+      <div class="icon-wrap">👤</div><span>名片</span>
     </div>
   </div>
 </div>
@@ -534,10 +1020,10 @@ h1,h2,h3 { line-height: 1.3; }
     <p style="opacity:.85;font-size:13px;margin-top:4px" id="companyName">某某科技有限公司</p>
   </div>
   <div class="company-stat-row">
-    <div class="company-stat-card"><div class="n" id="cStatJobs">3</div><div class="l">发布职位</div></div>
-    <div class="company-stat-card"><div class="n" id="cStatApply">23</div><div class="l">收到投递</div></div>
-    <div class="company-stat-card"><div class="n" id="cStatEvent">1</div><div class="l">举办活动</div></div>
-    <div class="company-stat-card"><div class="n" id="cStatView">204</div><div class="l">浏览量</div></div>
+    <div class="company-stat-card"><div class="n" id="cpStatJobs">3</div><div class="l">发布职位</div></div>
+    <div class="company-stat-card"><div class="n" id="cpStatApply">23</div><div class="l">收到投递</div></div>
+    <div class="company-stat-card"><div class="n" id="cpStatEvent">1</div><div class="l">举办活动</div></div>
+    <div class="company-stat-card"><div class="n" id="cpStatView">204</div><div class="l">浏览量</div></div>
   </div>
   <div style="padding:0 12px 12px;display:flex;gap:10px">
     <button class="add-btn" style="flex:1" onclick="openPublishJob()">＋ 发布职位</button>
@@ -631,13 +1117,41 @@ h1,h2,h3 { line-height: 1.3; }
 
 <!-- ====== MODALS ====== -->
 
-<!-- Event Detail Modal -->
+<!-- Event Detail Modal —— 升级版：参与者头像墙 + 评论区 + 分享 -->
 <div class="modal-overlay" id="eventModal">
-  <div class="modal">
+  <div class="modal" style="max-height:92vh;display:flex;flex-direction:column">
     <div class="modal-handle"></div>
-    <div class="modal-header"><h3>活动详情</h3><button class="modal-close" onclick="closeModal('eventModal')">✕</button></div>
-    <div class="modal-body" id="eventDetail"></div>
-    <div class="modal-footer"><button class="apply-btn" id="eventApplyBtn" onclick="registerEvent()">立即报名</button></div>
+    <div class="modal-header" style="flex-shrink:0">
+      <h3>召集详情</h3>
+      <div style="display:flex;gap:10px;align-items:center">
+        <button onclick="shareEvent()" style="background:none;border:none;font-size:18px;cursor:pointer;padding:4px" title="分享">🔗</button>
+        <button class="modal-close" onclick="closeModal('eventModal')">✕</button>
+      </div>
+    </div>
+    <div class="modal-body" id="eventDetail" style="flex:1;overflow-y:auto"></div>
+    <!-- 参与者头像墙 -->
+    <div id="eventParticipants" style="padding:12px 16px;border-top:1px solid var(--border);display:none">
+      <div style="font-size:13px;font-weight:600;color:var(--text);margin-bottom:10px">
+        👥 已报名 <span id="participantCount" style="color:var(--primary)">0</span> 人
+      </div>
+      <div id="participantAvatars" style="display:flex;flex-wrap:wrap;gap:6px"></div>
+    </div>
+    <!-- 评论区 -->
+    <div id="eventCommentSection" style="border-top:1px solid var(--border);max-height:220px;display:none;flex-direction:column">
+      <div style="padding:10px 16px 0;font-size:13px;font-weight:600;color:var(--text);flex-shrink:0">
+        💬 讨论 <span id="commentCount" style="color:var(--sub);font-weight:400"></span>
+      </div>
+      <div id="commentList" style="flex:1;overflow-y:auto;padding:8px 16px;max-height:140px"></div>
+      <div id="commentInput" style="padding:8px 12px;display:flex;gap:8px;flex-shrink:0;border-top:1px solid var(--border)">
+        <input type="text" id="commentText" placeholder="说点什么…" style="flex:1;padding:8px 12px;border:1px solid var(--border);border-radius:20px;font-size:13px;outline:none;background:var(--bg)" onkeydown="if(event.key==='Enter')submitComment()">
+        <button onclick="submitComment()" style="padding:8px 14px;background:var(--primary);color:white;border:none;border-radius:20px;font-size:13px;cursor:pointer;white-space:nowrap">发送</button>
+      </div>
+    </div>
+    <div class="modal-footer" style="flex-shrink:0;gap:8px;display:flex">
+      <button class="apply-btn" id="eventApplyBtn" onclick="registerEvent()" style="flex:3">立即报名</button>
+      <button onclick="initiateChatFromEvent()" class="initiate-chat-btn" style="flex:2;font-size:13px;padding:12px 10px">💬 发起沟通</button>
+      <button onclick="toggleComments()" style="flex:0 0 46px;padding:12px 0;border:1.5px solid var(--border);background:white;border-radius:12px;font-size:18px;cursor:pointer" id="commentToggleBtn">💬</button>
+    </div>
   </div>
 </div>
 
@@ -647,7 +1161,10 @@ h1,h2,h3 { line-height: 1.3; }
     <div class="modal-handle"></div>
     <div class="modal-header"><h3>职位详情</h3><button class="modal-close" onclick="closeModal('jobModal')">✕</button></div>
     <div class="modal-body" id="jobDetail"></div>
-    <div class="modal-footer"><button class="apply-btn" id="jobApplyBtn" onclick="applyJob()">投递简历</button></div>
+    <div class="modal-footer" style="display:flex;gap:8px">
+      <button class="apply-btn" id="jobApplyBtn" onclick="applyJob()" style="flex:3">投递简历</button>
+      <button onclick="initiateChatFromJob()" class="initiate-chat-btn" style="flex:2;font-size:13px;padding:12px 10px">💬 发起沟通</button>
+    </div>
   </div>
 </div>
 
@@ -679,12 +1196,12 @@ h1,h2,h3 { line-height: 1.3; }
   </div>
 </div>
 
-<!-- Publish Event Modal - 优化版分步表单 -->
+<!-- Publish Event Modal - 优化版分步表单（所有用户均可发起召集） -->
 <div class="modal-overlay" id="publishEventModal">
   <div class="modal" style="max-height:90vh;overflow:hidden">
     <div class="modal-handle"></div>
     <div class="modal-header">
-      <h3>🎉 发布新活动</h3>
+      <h3>🎉 发起召集</h3>
       <button class="modal-close" onclick="closeModal('publishEventModal')">✕</button>
     </div>
     
@@ -766,9 +1283,7 @@ h1,h2,h3 { line-height: 1.3; }
           </label>
           <select id="peRelatedJob" style="width:100%;padding:12px;border:1px solid #e2e8f0;border-radius:10px;font-size:14px;background:white">
             <option value="">选择要关联的岗位（可选）</option>
-            <option value="1">Java开发工程师 - 腾讯科技</option>
-            <option value="2">前端开发工程师 - 字节跳动</option>
-            <option value="3">产品经理实习生 - 美团</option>
+            <!-- 动态加载：loadPublishJobOptions() -->
           </select>
           <p style="font-size:12px;color:#667eea;margin-top:4px">💡 关联岗位后，活动参与者可直接投递简历</p>
         </div>
@@ -919,7 +1434,203 @@ h1,h2,h3 { line-height: 1.3; }
 </div>
 
 <script>
-// =================== DATA ===================
+// =================== CONFIG ===================
+const API_BASE = '/api/v1';
+
+// =================== 双端角色状态 ===================
+let currentRole = 'follow'; // 'follow'(追随端) | 'caller'(召集端)
+
+/**
+ * 切换角色：follow(追随) <-> caller(召集)
+ */
+function switchRole(role) {
+  if (role === currentRole) return;
+  currentRole = role;
+
+  const followOpt = document.getElementById('roleFollowOpt');
+  const callerOpt = document.getElementById('roleCallerOpt');
+  const followContent = document.getElementById('followContent');
+  const callerContent = document.getElementById('callerContent');
+  const homeHeader = document.getElementById('homeHeader');
+  const homeHeaderTitle = document.getElementById('homeHeaderTitle');
+  const homeHeaderSub = document.getElementById('homeHeaderSub');
+  const tabBar = document.getElementById('mainTabBar');
+  const roleBadge = document.getElementById('myRoleBadge');
+
+  if (role === 'caller') {
+    // 召集端激活
+    callerOpt.classList.add('active');
+    followOpt.classList.remove('active');
+    followContent.style.display = 'none';
+    callerContent.style.display = 'block';
+    homeHeader.style.background = 'linear-gradient(135deg, #11998e 0%, #38ef7d 100%)';
+    homeHeaderTitle.textContent = '📣 我的召集';
+    homeHeaderSub.textContent = '管理活动，招募人才';
+    if (roleBadge) roleBadge.textContent = '📣 召集方';
+
+    // TabBar变为召集端模式：首页、活动管理、[+]、招募、我的
+    updateTabBarForCaller();
+    renderCallerContent();
+  } else {
+    // 追随端激活
+    followOpt.classList.add('active');
+    callerOpt.classList.remove('active');
+    followContent.style.display = 'block';
+    callerContent.style.display = 'none';
+    homeHeader.style.background = 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)';
+    homeHeaderTitle.textContent = '🎯 召集吧';
+    homeHeaderSub.textContent = '真诚召集，彼此成就';
+    if (roleBadge) roleBadge.textContent = '🙋 追随方';
+
+    updateTabBarForFollow();
+    renderHotEvents();
+    renderRecommendJobs();
+  }
+}
+
+/** 追随端 TabBar */
+function updateTabBarForFollow() {
+  const tabBar = document.getElementById('mainTabBar');
+  tabBar.innerHTML = `
+    <div class="tab-item" onclick="switchPage('homePage')" data-page="homePage"><span class="tab-icon">🏠</span><span>首页</span></div>
+    <div class="tab-item" onclick="switchPage('eventsPage')" data-page="eventsPage"><span class="tab-icon">🎉</span><span>活动</span></div>
+    <div class="tab-item tab-publish-btn" onclick="openPublishEvent()" style="position:relative">
+      <div style="width:46px;height:46px;background:linear-gradient(135deg,#667eea,#764ba2);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:24px;color:white;box-shadow:0 4px 16px rgba(102,126,234,0.45);margin-top:-18px;border:3px solid white">＋</div>
+      <span style="font-size:10px;color:var(--primary);font-weight:700;margin-top:2px">发起</span>
+    </div>
+    <div class="tab-item" onclick="switchPage('chatPage')" data-page="chatPage" style="position:relative">
+      <span class="tab-icon">💬</span><span>聊天</span>
+      <div class="tab-dot" id="chatTabDot" style="display:none"></div>
+    </div>
+    <div class="tab-item" onclick="switchPage('myPage')" data-page="myPage" style="position:relative">
+      <span class="tab-icon">👤</span><span>我的</span>
+      <div class="tab-dot" id="myTabDot"></div>
+    </div>
+  `;
+  // 激活当前页对应tab
+  activateCurrentTab();
+  updateMyTab();
+  updateChatTab();
+}
+
+/** 召集端 TabBar */
+function updateTabBarForCaller() {
+  const tabBar = document.getElementById('mainTabBar');
+  tabBar.innerHTML = `
+    <div class="tab-item" onclick="switchPage('homePage')" data-page="homePage"><span class="tab-icon">🏠</span><span>管理</span></div>
+    <div class="tab-item" onclick="switchPage('eventsPage')" data-page="eventsPage"><span class="tab-icon">🎉</span><span>活动</span></div>
+    <div class="tab-item tab-publish-btn" onclick="openPublishEvent()" style="position:relative">
+      <div style="width:46px;height:46px;background:linear-gradient(135deg,#11998e,#38ef7d);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:24px;color:white;box-shadow:0 4px 16px rgba(17,153,142,0.45);margin-top:-18px;border:3px solid white">＋</div>
+      <span style="font-size:10px;color:#11998e;font-weight:700;margin-top:2px">发布</span>
+    </div>
+    <div class="tab-item" onclick="switchPage('jobsPage')" data-page="jobsPage"><span class="tab-icon">💼</span><span>招募</span></div>
+    <div class="tab-item" onclick="switchPage('myPage')" data-page="myPage" style="position:relative">
+      <span class="tab-icon">👤</span><span>我的</span>
+      <div class="tab-dot" id="myTabDot"></div>
+    </div>
+  `;
+  activateCurrentTab();
+  updateMyTab();
+}
+
+function activateCurrentTab() {
+  const pages = ['homePage','eventsPage','jobsPage','chatPage','matchPage','myPage'];
+  let activePage = pages.find(p => {
+    const el = document.getElementById(p);
+    return el && el.classList.contains('active');
+  }) || 'homePage';
+  document.querySelectorAll('.tab-item[data-page]').forEach(t => t.classList.remove('active'));
+  const activeTab = document.querySelector(`.tab-item[data-page="${activePage}"]`);
+  if (activeTab) activeTab.classList.add('active');
+}
+
+/** 渲染召集端首页内容 */
+function renderCallerContent() {
+  renderCallerEvents();
+  renderCallerRecruits();
+}
+
+function renderCallerEvents() {
+  const container = document.getElementById('callerEventList');
+  if (!container) return;
+  const myEvents = EVENTS.slice(0, 3);
+  container.innerHTML = myEvents.map(e => `
+    <div class="my-event-manage">
+      <div class="top">
+        <div class="cover-mini" style="background:${e.gradient||'linear-gradient(135deg,#667eea,#764ba2)'}">${e.emoji||'🎉'}</div>
+        <div class="info" style="flex:1">
+          <h4>${e.title}</h4>
+          <p>📅 ${(e.start_time||'').slice(0,10)} · 📍 ${(e.location||'').slice(0,10)}</p>
+          <p style="color:var(--primary);font-size:12px;margin-top:2px">👥 ${e.current||0}/${e.max||100} 人报名</p>
+        </div>
+        <span class="mini-tag green" style="align-self:flex-start">${e.status||'报名中'}</span>
+      </div>
+      <div class="actions">
+        <div class="action-tag" style="border-color:var(--primary);color:var(--primary);background:#ede9ff" onclick="showEventDetail(${e.id})">查看详情</div>
+        <div class="action-tag" style="border-color:#11998e;color:#11998e;background:#edfbf5" onclick="openChatWithParticipants(${e.id})">💬 联系参与者</div>
+        <div class="action-tag" style="border-color:var(--orange);color:var(--orange);background:#fff4ef" onclick="showToast('编辑功能开发中...')">编辑</div>
+      </div>
+    </div>
+  `).join('') || `<div class="empty"><div class="icon">🎉</div><p>还没有发起任何活动</p></div>`;
+}
+
+function renderCallerRecruits() {
+  const container = document.getElementById('callerRecruitList');
+  if (!container) return;
+  container.innerHTML = APPLICANTS.slice(0, 4).map(a => `
+    <div class="recruit-card" onclick="openChatWithUser(${a.id}, '${a.name}', '求职者')">
+      <div class="role-icon" style="background:#ede9ff">👤</div>
+      <div class="detail">
+        <h4>${a.name}</h4>
+        <p>${a.school} · ${a.major}</p>
+        <div style="display:flex;gap:4px;margin-top:4px;flex-wrap:wrap">
+          ${a.tags.slice(0,3).map(t=>`<span class="mini-tag">${t}</span>`).join('')}
+        </div>
+      </div>
+      <div class="recruit-count">
+        <div style="font-size:22px;font-weight:800;color:var(--primary)">${Math.round(a.score*100)}%</div>
+        <div style="font-size:10px;color:var(--sub)">匹配度</div>
+        <div style="margin-top:4px;font-size:11px;background:#edfbf5;color:#11998e;padding:2px 6px;border-radius:6px;cursor:pointer">💬 沟通</div>
+      </div>
+    </div>
+  `).join('');
+}
+
+function openCallerEvents() { switchPage('eventsPage'); }
+function openCallerJobs() { switchPage('jobsPage'); }
+function openCallerApplicants() { openSubPage('myApplyPage'); }
+
+// =================== API 通信层 ===================
+let _authToken = localStorage.getItem('zjb_token') || '';
+
+function setToken(t) { _authToken = t; localStorage.setItem('zjb_token', t); }
+function clearToken() { _authToken = ''; localStorage.removeItem('zjb_token'); }
+
+async function apiCall(path, options = {}) {
+  const headers = { 'Content-Type': 'application/json', ...(options.headers || {}) };
+  if (_authToken) headers['Authorization'] = 'Bearer ' + _authToken;
+  try {
+    const res = await fetch(API_BASE + path, { ...options, headers });
+    const data = await res.json();
+    return data;
+  } catch (e) {
+    console.warn('[API] Error:', path, e.message);
+    return { code: 500, message: e.message, data: null };
+  }
+}
+
+// 判断后端是否可用
+let _backendAlive = null;
+async function checkBackend() {
+  if (_backendAlive !== null) return _backendAlive;
+  try {
+    const r = await fetch(API_BASE + '/events?pageSize=1', { signal: AbortSignal.timeout(2000) });
+    _backendAlive = r.ok;
+  } catch { _backendAlive = false; }
+  return _backendAlive;
+}
+
+// =================== DATA（本地演示兜底）===================
 const EVENTS = [
   { id:1, title:'校园义卖活动', emoji:'🎪', gradient:'linear-gradient(135deg,#f093fb,#f5576c)', category:'义卖',
     description:'为贫困山区儿童筹集善款的义卖活动，欢迎全校师生参与。活动设有爱心义卖区、互动游戏区和公益演讲区。',
@@ -1184,11 +1895,33 @@ function sendCode() {
   showToast('验证码已发送（演示：123456）');
 }
 
-function doLogin() {
+async function doLogin() {
   const phone = document.getElementById('phoneInput').value;
   const code = document.getElementById('codeInput').value;
   if (!phone || phone.length < 11) return showToast('请输入正确的手机号');
   if (code !== '123456') return showToast('验证码错误，演示码为 123456');
+
+  // 尝试真实后端登录
+  const alive = await checkBackend();
+  if (alive) {
+    const r = await apiCall('/auth/login', {
+      method: 'POST',
+      body: JSON.stringify({ phone, code, role: loginMode === 'company' ? 'company' : 'user' }),
+    });
+    if (r.code === 0 && r.data?.token) {
+      setToken(r.data.token);
+      currentUser = { ...r.data.user, type: loginMode };
+    }
+  }
+
+  // 本地演示兜底（后端不通或无账号时）
+  if (!currentUser) {
+    if (loginMode === 'company') {
+      currentUser = { type: 'company', name: '腾讯科技', company: '腾讯科技有限公司', phone, role: 'company' };
+    } else {
+      currentUser = { phone, name: '张三', nickname: '张三', school: '北京理工大学', major: '计算机科学与技术', type: 'user' };
+    }
+  }
 
   document.getElementById('loginPage').style.display = 'none';
 
@@ -1197,7 +1930,6 @@ function doLogin() {
     renderCompanyPage();
     showToast('🏢 召集方登录成功');
   } else {
-    currentUser = { phone, name: '张三', nickname: '张三', school: '北京理工大学', major: '计算机科学与技术' };
     document.getElementById('mainApp').style.display = 'block';
     renderApp();
     showToast('✅ 登录成功，欢迎回来！');
@@ -1206,6 +1938,8 @@ function doLogin() {
 
 function doLogout() {
   currentUser = null;
+  clearToken();
+  _backendAlive = null;
   document.getElementById('mainApp').style.display = 'none';
   document.getElementById('companyApp').style.display = 'none';
   document.getElementById('loginPage').style.display = 'flex';
@@ -1223,6 +1957,7 @@ function switchPage(pageId) {
   if (pageId === 'jobsPage') renderJobList();
   if (pageId === 'matchPage') renderMatchPage();
   if (pageId === 'myPage') renderMyPage();
+  if (pageId === 'chatPage') renderChatList();
 }
 
 let subpageStack = [];
@@ -1238,6 +1973,7 @@ function openSubPage(pageId) {
   if (pageId === 'myApplyPage') renderMyApply();
   if (pageId === 'messagesPage') renderMessages();
   if (pageId === 'settingsPage') { /* 静态页无需额外渲染 */ }
+}
 
 function closeSubPage() {
   subpageStack.pop();
@@ -1277,6 +2013,7 @@ function renderApp() {
   renderEventTags();
   renderJobFilterTags();
   updateMyTab();
+  updateChatTab();
   // 更新通知横幅
   const unread = myMessages.filter(m => !m.read).length;
   const titleEl = document.getElementById('notifyBannerTitle');
@@ -1294,7 +2031,7 @@ function renderApp() {
 }
 
 function renderEventTags() {
-  const cats = ['全部','义卖','讲座','比赛','实习','兼职'];
+  const cats = ['全部','义卖','讲座','比赛','实习','兼职','社交'];
   const html = cats.map((c,i) => `<div class="tag ${i===0?'active':''}" onclick="filterEventTag(this,'${c}')">${c}</div>`).join('');
   document.getElementById('eventTags').innerHTML = html;
   document.getElementById('eventFilterTags').innerHTML = html;
@@ -1324,21 +2061,37 @@ function filterJobTag(el, type) {
   renderRecommendJobs(); renderJobList();
 }
 
-function renderHotEvents() {
-  const list = currentEventFilter === '全部' ? EVENTS : EVENTS.filter(e => e.category === currentEventFilter);
-  document.getElementById('hotEvents').innerHTML = list.map(e => `
-    <div class="event-card-h" onclick="showEventDetail(${e.id})">
-      <div class="cover-placeholder" style="background:${e.gradient}">${e.emoji}</div>
+// 渲染首页热门活动（优先从后端加载）
+async function renderHotEvents() {
+  const container = document.getElementById('hotEvents');
+  if (!container) return;
+  const alive = await checkBackend();
+  let list;
+  if (alive) {
+    const params = currentEventFilter !== '全部' ? `&category=${encodeURIComponent(currentEventFilter)}` : '';
+    const r = await apiCall(`/events?pageSize=6&status=1${params}`);
+    list = (r.code === 0 && r.data.list.length) ? r.data.list : filterLocalEvents(EVENTS, currentEventFilter);
+  } else {
+    list = filterLocalEvents(EVENTS, currentEventFilter);
+  }
+  container.innerHTML = list.map(e => {
+    const gradient = e.cover_gradient || e.gradient || 'linear-gradient(135deg,#667eea,#764ba2)';
+    const emoji = e.cover_emoji || e.emoji || '🎉';
+    const current = e.current_participants ?? e.current ?? 0;
+    const max = e.max_participants ?? e.max ?? 100;
+    const statusLabel = typeof e.status === 'string' ? e.status : '报名中';
+    return `<div class="event-card-h" onclick="showEventDetail(${e.id})">
+      <div class="cover-placeholder" style="background:${gradient}">${emoji}</div>
       <div class="info">
         <h3>${e.title}</h3>
-        <div class="meta">📅 ${e.start_time.split(' ')[0]} · ${e.location.length>10?e.location.slice(0,10)+'…':e.location}</div>
+        <div class="meta">📅 ${(e.start_time||'').slice(0,10).replace('T',' ')} · ${(e.location||'').slice(0,10)}${(e.location||'').length>10?'…':''}</div>
         <div class="tags-row">
-          ${e.tags.slice(0,3).map(t => `<span class="mini-tag">${t}</span>`).join('')}
-          <span class="mini-tag orange">${e.status}</span>
+          ${(e.tags||[]).slice(0,3).map(t=>`<span class="mini-tag">${t}</span>`).join('')}
+          <span class="mini-tag orange">${statusLabel}</span>
         </div>
       </div>
-    </div>
-  `).join('');
+    </div>`;
+  }).join('') || '<div style="padding:20px;text-align:center;color:var(--sub)">快来发起第一个召集！</div>';
 }
 
 function renderRecommendJobs() {
@@ -1365,19 +2118,39 @@ function renderJobCardHTML(j) {
   </div>`;
 }
 
-function renderEventList() {
-  const list = currentEventFilter === '全部' ? EVENTS : EVENTS.filter(e => e.category === currentEventFilter);
-  document.getElementById('eventsList').innerHTML = list.map(e => {
-    const reg = registeredEvents.has(e.id);
+// 渲染活动列表页（优先从后端加载）
+async function renderEventList() {
+  const container = document.getElementById('eventsList');
+  if (!container) return;
+  container.innerHTML = '<div style="padding:20px;text-align:center;color:var(--sub)">加载中…</div>';
+  const alive = await checkBackend();
+  let list;
+  if (alive) {
+    const params = currentEventFilter !== '全部' ? `&category=${encodeURIComponent(currentEventFilter)}` : '';
+    const r = await apiCall(`/events?pageSize=30&status=1${params}`);
+    list = (r.code === 0 && r.data.list.length) ? r.data.list : filterLocalEvents(EVENTS, currentEventFilter);
+  } else {
+    list = filterLocalEvents(EVENTS, currentEventFilter);
+  }
+  container.innerHTML = list.map(e => {
+    const reg = e.is_registered || registeredEvents.has(e.id);
+    const current = e.current_participants ?? e.current ?? 0;
+    const max = e.max_participants ?? e.max ?? 100;
+    const gradient = e.cover_gradient || e.gradient || 'linear-gradient(135deg,#667eea,#764ba2)';
+    const emoji = e.cover_emoji || e.emoji || '🎉';
     return `<div class="event-list-card" onclick="showEventDetail(${e.id})">
-      <div class="cover-sm-ph" style="background:${e.gradient}">${e.emoji}</div>
+      <div class="cover-sm-ph" style="background:${gradient}">${emoji}</div>
       <div class="info">
         <h3>${e.title}</h3>
-        <div class="meta">📅 ${e.start_time} · ${e.location.length>12?e.location.slice(0,12)+'…':e.location}</div>
-        <div class="participants">${reg?'✅ 已报名':e.current+'/'+e.max+' 人报名'}</div>
+        <div class="meta">📅 ${(e.start_time||'').slice(0,16).replace('T',' ')} · ${(e.location||'').slice(0,12)}${(e.location||'').length>12?'…':''}</div>
+        <div class="participants">${reg?'✅ 已报名':current+'/'+max+' 人报名'}</div>
       </div>
     </div>`;
-  }).join('');
+  }).join('') || '<div style="padding:40px;text-align:center"><div style="font-size:40px;margin-bottom:12px">🎉</div><p style="color:var(--sub)">还没有活动，快来发起召集！</p><button class="apply-btn" style="margin-top:16px;max-width:200px" onclick="openPublishEvent()">＋ 发起召集</button></div>';
+}
+
+function filterLocalEvents(events, category) {
+  return category === '全部' ? events : events.filter(e => e.category === category);
 }
 
 function renderJobList() {
@@ -1566,35 +2339,263 @@ function markAllRead() {
 }
 
 // =================== EVENT DETAIL ===================
-function showEventDetail(id) {
+let _currentEventData = null; // 缓存当前活动数据（含评论/参与者）
+
+async function showEventDetail(id) {
   currentEventId = id;
-  const e = EVENTS.find(x => x.id === id);
-  if (!e) return;
-  const reg = registeredEvents.has(id);
-  const pct = Math.round(e.current / e.max * 100);
-  document.getElementById('eventDetail').innerHTML = `
-    <div style="background:${e.gradient};border-radius:14px;height:160px;display:flex;align-items:center;justify-content:center;font-size:64px;margin-bottom:16px">${e.emoji}</div>
-    <h2 style="font-size:20px;font-weight:800;margin-bottom:8px">${e.title}</h2>
-    <div style="display:flex;flex-wrap:wrap;gap:10px;font-size:13px;color:var(--sub);margin-bottom:14px">
-      <span>📅 ${e.start_time}</span><span>📍 ${e.location}</span>
-      <span>👥 ${e.current}/${e.max}人</span><span>🏷️ ${e.category}</span>
-    </div>
-    <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:14px">
-      ${e.tags.map(t=>`<span class="mini-tag">${t}</span>`).join('')}
-      <span class="mini-tag orange">${e.status}</span>
-    </div>
-    <p style="font-size:14px;line-height:1.8;color:#475569">${e.description}</p>
-    <div style="margin-top:16px">
-      <div style="display:flex;justify-content:space-between;font-size:13px;color:var(--sub);margin-bottom:6px">
-        <span>报名进度</span><span>${e.current}/${e.max}</span>
-      </div>
-      <div class="progress-bar" style="height:6px"><div class="progress-bar-fill" style="width:${pct}%"></div></div>
-    </div>
-  `;
-  const btn = document.getElementById('eventApplyBtn');
-  if (reg) { btn.textContent = '✅ 已报名'; btn.className = 'apply-btn applied'; }
-  else { btn.textContent = '立即报名'; btn.className = 'apply-btn'; }
+  // 先用本地数据快速渲染，再用后端数据更新
+  const localE = EVENTS.find(x => x.id === id);
+  const gradient = localE?.cover_gradient || localE?.gradient || 'linear-gradient(135deg,#667eea,#764ba2)';
+  const emoji = localE?.cover_emoji || localE?.emoji || '🎉';
+
+  // 渲染骨架
+  document.getElementById('eventDetail').innerHTML = '<div style="padding:20px;text-align:center;color:var(--sub)">加载中…</div>';
+  // 隐藏评论区和头像墙
+  const participantsEl = document.getElementById('eventParticipants');
+  const commentSection = document.getElementById('eventCommentSection');
+  if (participantsEl) participantsEl.style.display = 'none';
+  if (commentSection) commentSection.style.display = 'none';
   document.getElementById('eventModal').classList.add('active');
+
+  let e = localE ? { ...localE, participants: [], comments: [], is_registered: registeredEvents.has(id) } : null;
+
+  // 尝试从后端加载完整数据
+  const alive = await checkBackend();
+  if (alive) {
+    const r = await apiCall(`/events/${id}`);
+    if (r.code === 0) {
+      e = r.data;
+      // 更新本地报名状态
+      if (e.is_registered) registeredEvents.add(id);
+    }
+  }
+  if (!e) { showToast('活动不存在'); closeModal('eventModal'); return; }
+  _currentEventData = e;
+
+  const current = e.current_participants ?? e.current ?? 0;
+  const max = e.max_participants ?? e.max ?? 100;
+  const pct = Math.round(current / (max || 100) * 100);
+  const reg = e.is_registered || registeredEvents.has(id);
+  const statusLabel = typeof e.status === 'string' ? e.status : '报名中';
+  const feeStr = e.fee_type === 'paid' ? `💰 报名费 ¥${e.fee_amount}` : '🆓 免费';
+  const isOrganizer = currentUser && (e.organizer_id === currentUser.id);
+  const gradientStr = e.cover_gradient || gradient;
+  const emojiStr = e.cover_emoji || emoji;
+
+  document.getElementById('eventDetail').innerHTML = `
+    <div style="background:${gradientStr};border-radius:14px;height:160px;display:flex;align-items:center;justify-content:center;font-size:64px;margin-bottom:16px">${emojiStr}</div>
+    <h2 style="font-size:20px;font-weight:800;margin-bottom:8px">${e.title}</h2>
+    ${e.organizer_name ? `<div style="font-size:13px;color:var(--sub);margin-bottom:10px">👤 ${e.organizer_type==='company'?'🏢':''} ${e.organizer_name} 发起</div>` : ''}
+    <div style="display:flex;flex-wrap:wrap;gap:8px;font-size:13px;margin-bottom:14px">
+      <span style="background:#f0f4ff;color:var(--primary);padding:4px 10px;border-radius:8px">📅 ${(e.start_time||'').slice(0,16).replace('T',' ')}</span>
+      <span style="background:#f5f5f5;color:#475569;padding:4px 10px;border-radius:8px">📍 ${e.location||'地点待定'}</span>
+      <span style="background:#edfbf5;color:var(--green);padding:4px 10px;border-radius:8px">👥 ${current}/${max}人</span>
+      <span style="background:#fff4ef;color:var(--orange);padding:4px 10px;border-radius:8px">${feeStr}</span>
+    </div>
+    <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:16px">
+      ${(e.tags||[]).map(t=>`<span class="mini-tag">${t}</span>`).join('')}
+      <span class="mini-tag orange">${statusLabel}</span>
+      ${e.category ? `<span class="mini-tag">${e.category}</span>` : ''}
+    </div>
+    <p style="font-size:14px;line-height:1.9;color:#475569;margin-bottom:16px">${(e.description||'').replace(/\n/g,'<br>')}</p>
+    ${e.deadline ? `<div style="font-size:12px;color:var(--sub);margin-bottom:12px">⏰ 报名截止：${e.deadline.slice(0,16).replace('T',' ')}</div>` : ''}
+    <div style="margin-bottom:8px">
+      <div style="display:flex;justify-content:space-between;font-size:13px;color:var(--sub);margin-bottom:6px">
+        <span>报名进度</span><span>${current}/${max} 人</span>
+      </div>
+      <div class="progress-bar" style="height:8px;border-radius:4px"><div class="progress-bar-fill" style="width:${pct}%;border-radius:4px"></div></div>
+    </div>
+    ${e.related_job_id ? `<div style="margin-top:14px;padding:12px;background:linear-gradient(135deg,#ede9ff,#f0f4ff);border-radius:12px;font-size:13px"><b style="color:var(--primary)">💼 关联岗位</b><br><span style="color:#475569;margin-top:4px;display:block">参与活动后可直接投递简历</span></div>` : ''}
+  `;
+
+  // 更新报名按钮
+  const btn = document.getElementById('eventApplyBtn');
+  if (isOrganizer) {
+    btn.textContent = '📋 我发起的';
+    btn.className = 'apply-btn';
+    btn.style.background = 'linear-gradient(135deg,#11998e,#38ef7d)';
+    btn.onclick = null;
+  } else if (reg) {
+    btn.textContent = '✅ 已报名  ·  取消';
+    btn.className = 'apply-btn applied';
+    btn.style.background = '';
+    btn.onclick = cancelRegistration;
+  } else if (current >= max) {
+    btn.textContent = '😔 名额已满';
+    btn.className = 'apply-btn';
+    btn.style.background = '#e2e8f0';
+    btn.style.color = '#64748b';
+    btn.onclick = null;
+  } else {
+    btn.textContent = '🙋 立即报名';
+    btn.className = 'apply-btn';
+    btn.style.background = '';
+    btn.style.color = '';
+    btn.onclick = registerEvent;
+  }
+
+  // 渲染参与者头像墙
+  const participants = e.participants || [];
+  if (participantsEl && participants.length > 0) {
+    participantsEl.style.display = 'block';
+    document.getElementById('participantCount').textContent = current;
+    const avatarHTML = participants.slice(0, 30).map(p => {
+      const initials = (p.nickname || '?').slice(0, 1);
+      const colors = ['#667eea','#764ba2','#f093fb','#4facfe','#43e97b','#f7971e','#11998e','#f5576c'];
+      const color = colors[p.id % colors.length] || '#667eea';
+      return `<div title="${p.nickname}${p.school ? ' · ' + p.school : ''}" style="width:36px;height:36px;border-radius:50%;background:${color};display:flex;align-items:center;justify-content:center;color:white;font-size:14px;font-weight:700;flex-shrink:0;border:2px solid white;box-shadow:0 2px 6px rgba(0,0,0,0.1)">${initials}</div>`;
+    }).join('');
+    const more = current > 30 ? `<div style="width:36px;height:36px;border-radius:50%;background:#f1f5f9;display:flex;align-items:center;justify-content:center;font-size:11px;color:var(--sub);font-weight:600;flex-shrink:0">+${current-30}</div>` : '';
+    document.getElementById('participantAvatars').innerHTML = avatarHTML + more;
+  }
+
+  // 渲染评论区
+  if (commentSection) {
+    const comments = e.comments || [];
+    commentSection.style.display = comments.length > 0 ? 'flex' : 'none';
+    document.getElementById('commentCount').textContent = comments.length ? `(${comments.length})` : '';
+    renderCommentList(comments);
+  }
+}
+
+function renderCommentList(comments) {
+  const list = document.getElementById('commentList');
+  if (!list) return;
+  if (!comments.length) {
+    list.innerHTML = '<div style="padding:12px 0;text-align:center;color:var(--sub);font-size:13px">还没有人留言，说点什么吧</div>';
+    return;
+  }
+  list.innerHTML = comments.map(c => `
+    <div style="display:flex;gap:10px;padding:8px 0;border-bottom:1px solid var(--border)">
+      <div style="width:28px;height:28px;border-radius:50%;background:var(--primary);flex-shrink:0;display:flex;align-items:center;justify-content:center;color:white;font-size:12px;font-weight:700">${(c.nickname||'?').slice(0,1)}</div>
+      <div style="flex:1;min-width:0">
+        <div style="font-size:12px;font-weight:600;color:var(--text)">${c.nickname||'用户'}${c.school?' <span style="color:var(--sub);font-weight:400">· '+c.school+'</span>':''}</div>
+        <div style="font-size:13px;color:#475569;margin-top:3px;line-height:1.6">${c.content}</div>
+        <div style="display:flex;align-items:center;gap:12px;margin-top:4px">
+          <span style="font-size:11px;color:var(--sub)">${fmtTimeAgo(c.created_at)}</span>
+          <button onclick="likeComment(${c.id})" style="background:none;border:none;font-size:11px;color:var(--sub);cursor:pointer;padding:0">👍 ${c.likes||0}</button>
+        </div>
+      </div>
+    </div>
+  `).join('');
+}
+
+async function submitComment() {
+  if (!currentUser) { showToast('请先登录后再评论'); return; }
+  const input = document.getElementById('commentText');
+  const content = input.value.trim();
+  if (!content) { showToast('请输入评论内容'); return; }
+
+  const alive = await checkBackend();
+  if (alive && _authToken) {
+    const r = await apiCall(`/events/${currentEventId}/comments`, {
+      method: 'POST',
+      body: JSON.stringify({ content }),
+    });
+    if (r.code === 201 || r.code === 0) {
+      input.value = '';
+      // 刷新评论区
+      const newComment = r.data;
+      if (_currentEventData) {
+        _currentEventData.comments = _currentEventData.comments || [];
+        _currentEventData.comments.unshift(newComment);
+        const commentSection = document.getElementById('eventCommentSection');
+        if (commentSection) commentSection.style.display = 'flex';
+        document.getElementById('commentCount').textContent = `(${_currentEventData.comments.length})`;
+        renderCommentList(_currentEventData.comments);
+      }
+      showToast('💬 评论成功');
+      return;
+    }
+  }
+  // 本地演示兜底
+  input.value = '';
+  const fakeComment = {
+    id: Date.now(),
+    content,
+    nickname: currentUser.nickname || currentUser.name || '你',
+    school: currentUser.school || '',
+    likes: 0,
+    created_at: new Date().toISOString(),
+  };
+  if (_currentEventData) {
+    _currentEventData.comments = _currentEventData.comments || [];
+    _currentEventData.comments.unshift(fakeComment);
+    const commentSection = document.getElementById('eventCommentSection');
+    if (commentSection) commentSection.style.display = 'flex';
+    document.getElementById('commentCount').textContent = `(${_currentEventData.comments.length})`;
+    renderCommentList(_currentEventData.comments);
+  }
+  showToast('💬 评论成功');
+}
+
+async function likeComment(commentId) {
+  const alive = await checkBackend();
+  if (alive) {
+    await apiCall(`/events/${currentEventId}/comments/${commentId}/like`, { method: 'POST' });
+  }
+  // 本地更新
+  if (_currentEventData?.comments) {
+    const c = _currentEventData.comments.find(x => x.id === commentId);
+    if (c) { c.likes = (c.likes || 0) + 1; renderCommentList(_currentEventData.comments); }
+  }
+}
+
+function toggleComments() {
+  if (!currentUser) { showToast('请先登录后查看/参与讨论'); return; }
+  const commentSection = document.getElementById('eventCommentSection');
+  if (!commentSection) return;
+  const btn = document.getElementById('commentToggleBtn');
+  if (commentSection.style.display === 'none' || commentSection.style.display === '') {
+    commentSection.style.display = 'flex';
+    btn.style.color = 'var(--primary)';
+    btn.style.borderColor = 'var(--primary)';
+    // 如果没有评论也展示输入框
+    const comments = _currentEventData?.comments || [];
+    renderCommentList(comments);
+    // 聚焦输入框
+    setTimeout(() => document.getElementById('commentText')?.focus(), 100);
+  } else {
+    commentSection.style.display = 'none';
+    btn.style.color = 'var(--sub)';
+    btn.style.borderColor = 'var(--border)';
+  }
+}
+
+// 分享活动
+function shareEvent() {
+  const e = _currentEventData;
+  if (!e) return;
+  const text = `召集！${e.title}\n📅 ${(e.start_time||'').slice(0,10)} · 📍 ${e.location||''}\n快来报名：${location.origin}`;
+  if (navigator.share) {
+    navigator.share({ title: e.title, text, url: location.origin })
+      .catch(() => copyToClipboard(text));
+  } else {
+    copyToClipboard(text);
+    showToast('📋 活动信息已复制，可直接发给好友');
+  }
+}
+
+function copyToClipboard(text) {
+  const ta = document.createElement('textarea');
+  ta.value = text;
+  ta.style.position = 'fixed';
+  ta.style.opacity = '0';
+  document.body.appendChild(ta);
+  ta.select();
+  document.execCommand('copy');
+  document.body.removeChild(ta);
+}
+
+function fmtTimeAgo(iso) {
+  if (!iso) return '';
+  const diff = Date.now() - new Date(iso).getTime();
+  const m = Math.floor(diff / 60000);
+  if (m < 1) return '刚刚';
+  if (m < 60) return `${m}分钟前`;
+  const h = Math.floor(m / 60);
+  if (h < 24) return `${h}小时前`;
+  return `${Math.floor(h/24)}天前`;
 }
 
 // =================== JOB DETAIL ===================
@@ -1670,19 +2671,87 @@ function showMatchDetail(id) {
 }
 
 // =================== APPLY ACTIONS ===================
-function registerEvent() {
-  if (!currentUser) return showToast('请先登录');
+async function registerEvent() {
+  if (!currentUser) return showToast('请先登录后才能报名');
   if (registeredEvents.has(currentEventId)) return;
+
+  const btn = document.getElementById('eventApplyBtn');
+  const origText = btn.textContent;
+  btn.textContent = '报名中…';
+  btn.disabled = true;
+
+  const alive = await checkBackend();
+  if (alive && _authToken) {
+    const r = await apiCall(`/events/${currentEventId}/register`, { method: 'POST', body: JSON.stringify({}) });
+    btn.disabled = false;
+    if (r.code === 0) {
+      registeredEvents.add(currentEventId);
+      if (_currentEventData) _currentEventData.current_participants = (_currentEventData.current_participants || 0) + 1;
+      btn.textContent = '✅ 已报名  ·  取消';
+      btn.className = 'apply-btn applied';
+      btn.onclick = cancelRegistration;
+      // 刷新头像墙人数
+      const cp = _currentEventData?.current_participants || 0;
+      const pc = document.getElementById('participantCount');
+      if (pc) pc.textContent = cp;
+      renderHotEvents(); renderEventList();
+      showToast('🎉 报名成功！活动开始前我们会提醒你');
+      myMessages.unshift({ id: Date.now(), type:'event', icon:'📅', color:'#fff4ef', title:'活动报名成功', content:`你已成功报名「${_currentEventData?.title||'活动'}」`, time:'刚刚', read:false });
+      updateMyTab();
+      return;
+    } else {
+      btn.textContent = origText;
+      showToast(r.message || '报名失败，请重试');
+      return;
+    }
+  }
+
+  // 本地兜底（无后端时）
+  btn.disabled = false;
   registeredEvents.add(currentEventId);
   const e = EVENTS.find(x => x.id === currentEventId);
-  if (e) e.current++;
-  const btn = document.getElementById('eventApplyBtn');
-  btn.textContent = '✅ 已报名'; btn.className = 'apply-btn applied';
+  if (e) e.current = (e.current || 0) + 1;
+  btn.textContent = '✅ 已报名  ·  取消';
+  btn.className = 'apply-btn applied';
+  btn.onclick = cancelRegistration;
   renderHotEvents(); renderEventList();
   showToast('🎉 报名成功！活动开始前我们会提醒你');
-  // Add a system message
-  myMessages.unshift({ id: Date.now(), type:'event', icon:'📅', color:'#fff4ef', title:'活动报名成功', content:`你已成功报名「${e?.title}」，活动前将收到提醒`, time:'刚刚', read:false });
+  myMessages.unshift({ id: Date.now(), type:'event', icon:'📅', color:'#fff4ef', title:'活动报名成功', content:`你已成功报名「${e?.title||'活动'}」`, time:'刚刚', read:false });
   updateMyTab();
+}
+
+async function cancelRegistration() {
+  if (!currentUser) return;
+  const btn = document.getElementById('eventApplyBtn');
+  btn.textContent = '取消中…';
+  btn.disabled = true;
+
+  const alive = await checkBackend();
+  if (alive && _authToken) {
+    const r = await apiCall(`/events/${currentEventId}/register`, { method: 'DELETE' });
+    btn.disabled = false;
+    if (r.code === 0) {
+      registeredEvents.delete(currentEventId);
+      if (_currentEventData) _currentEventData.current_participants = Math.max(0, (_currentEventData.current_participants || 1) - 1);
+      btn.textContent = '🙋 立即报名';
+      btn.className = 'apply-btn';
+      btn.style.background = '';
+      btn.onclick = registerEvent;
+      renderHotEvents(); renderEventList();
+      showToast('已取消报名');
+      return;
+    }
+  }
+  // 本地兜底
+  btn.disabled = false;
+  registeredEvents.delete(currentEventId);
+  const e = EVENTS.find(x => x.id === currentEventId);
+  if (e) e.current = Math.max(0, (e.current || 1) - 1);
+  btn.textContent = '🙋 立即报名';
+  btn.className = 'apply-btn';
+  btn.onclick = registerEvent;
+  renderHotEvents(); renderEventList();
+  showToast('已取消报名');
 }
 
 function applyJob() {
@@ -1755,7 +2824,11 @@ function contactCandidate() {
 }
 
 function openPublishJob() { document.getElementById('publishJobModal').classList.add('active'); }
-function openPublishEvent() { document.getElementById('publishEventModal').classList.add('active'); }
+function openPublishEvent() {
+  if (!currentUser) { showToast('请先登录后再发起召集'); return; }
+  document.getElementById('publishEventModal').classList.add('active');
+  loadPublishJobOptions();
+}
 
 function publishJob() {
   const title = document.getElementById('pjTitle').value;
@@ -1771,6 +2844,8 @@ let currentPublishStep = 1;
 let selectedEventType = '';
 let selectedEventTags = [];
 let eventCoverImage = null;
+let eventCoverEmoji = '🎉';
+let eventCoverGradient = 'linear-gradient(135deg,#667eea,#764ba2)';
 
 function goToPublishStep(step) {
   // 验证当前步骤
@@ -1944,30 +3019,109 @@ function showCustomFields() {
   showToast('自定义问题功能开发中...');
 }
 
-function publishEvent() {
+async function publishEvent() {
   // 验证最后一步
-  if (selectedEventTags.length === 0) {
-    showToast('请至少选择一个活动标签');
-    return;
+  if (selectedEventTags.length === 0) { showToast('请至少选择一个活动标签'); return; }
+  const desc = document.getElementById('peDesc').value.trim();
+  if (!desc) { showToast('请填写活动详情'); return; }
+
+  const title       = document.getElementById('peTitle').value.trim();
+  const startTime   = document.getElementById('peStartTime').value;
+  const endTime     = document.getElementById('peEndTime').value;
+  const deadline    = document.getElementById('peDeadline').value;
+  const locationType= document.getElementById('peLocationType').value;
+  const location    = document.getElementById('peLocation').value.trim();
+  const maxPeople   = document.getElementById('peMax').value;
+  const relatedJob  = document.getElementById('peRelatedJob').value;
+  const feeType     = document.querySelector('input[name="peFeeType"]:checked')?.value || 'free';
+  const feeAmount   = document.getElementById('peFee')?.value || 0;
+  const needSchool  = document.getElementById('peNeedSchool')?.checked;
+  const needResume  = document.getElementById('peNeedResume')?.checked;
+
+  const payload = {
+    title,
+    category: selectedEventType || selectedEventTags[0] || '其他',
+    description: desc,
+    start_time: startTime,
+    end_time: endTime || null,
+    deadline: deadline || null,
+    location: location || (locationType === 'online' ? '线上' : '待定'),
+    location_type: locationType,
+    max_participants: parseInt(maxPeople) || 100,
+    tags: [...selectedEventTags],
+    fee_type: feeType,
+    fee_amount: feeType === 'paid' ? parseFloat(feeAmount) : 0,
+    related_job_id: relatedJob ? parseInt(relatedJob) : null,
+    need_school: needSchool,
+    need_resume: needResume,
+    cover_emoji: eventCoverEmoji || '🎉',
+    cover_gradient: eventCoverGradient || 'linear-gradient(135deg,#667eea,#764ba2)',
+  };
+
+  // 禁用提交按钮
+  const submitBtn = document.querySelector('#publishStep3 .apply-btn:last-child');
+  if (submitBtn) { submitBtn.disabled = true; submitBtn.textContent = '发布中…'; }
+
+  let published = false;
+  const alive = await checkBackend();
+  if (alive && _authToken) {
+    const r = await apiCall('/events', { method: 'POST', body: JSON.stringify(payload) });
+    if (r.code === 201 || r.code === 0) {
+      published = true;
+      // 刷新活动列表
+      renderHotEvents();
+      renderEventList();
+    } else {
+      if (submitBtn) { submitBtn.disabled = false; submitBtn.textContent = '🚀 立即发布活动'; }
+      showToast(r.message || '发布失败，请重试');
+      return;
+    }
+  } else {
+    // 本地兜底：写入 EVENTS 数组
+    const fakeId = Date.now();
+    EVENTS.unshift({
+      id: fakeId,
+      title,
+      emoji: payload.cover_emoji,
+      gradient: payload.cover_gradient,
+      category: payload.category,
+      description: desc,
+      start_time: startTime,
+      location: payload.location,
+      max: parseInt(maxPeople) || 100,
+      current: 0,
+      tags: [...selectedEventTags],
+      status: '报名中',
+    });
+    renderHotEvents();
+    renderEventList();
+    published = true;
   }
-  if (!document.getElementById('peDesc').value.trim()) {
-    showToast('请填写活动详情');
-    return;
-  }
-  
-  const title = document.getElementById('peTitle').value;
-  const relatedJob = document.getElementById('peRelatedJob').value;
-  
+
   closeModal('publishEventModal');
-  
-  // 重置表单
+  _resetPublishEventForm();
+
+  const statEl = document.getElementById('cStatEvent');
+  if (statEl) statEl.textContent = parseInt(statEl.textContent || 0) + 1;
+
+  showToast(relatedJob
+    ? '🎉 召集发布成功！已关联岗位，参与者可直接投递简历'
+    : '🎉 召集发布成功！期待大家报名参与');
+}
+
+function _resetPublishEventForm() {
   currentPublishStep = 1;
   selectedEventType = '';
   selectedEventTags = [];
   eventCoverImage = null;
-  document.getElementById('peTitle').value = '';
-  document.getElementById('peDesc').value = '';
-  document.getElementById('eventCoverPreview').innerHTML = '📷';
+  eventCoverEmoji = '🎉';
+  eventCoverGradient = 'linear-gradient(135deg,#667eea,#764ba2)';
+  const titleEl = document.getElementById('peTitle');
+  const descEl = document.getElementById('peDesc');
+  const previewEl = document.getElementById('eventCoverPreview');
+  if (titleEl) titleEl.value = '';
+  if (descEl) descEl.value = '';
+  if (previewEl) previewEl.innerHTML = '📷';
   document.querySelectorAll('.type-option').forEach(opt => {
     opt.style.borderColor = '#e2e8f0';
     opt.style.background = 'white';
@@ -1977,15 +3131,34 @@ function publishEvent() {
     tag.style.background = 'white';
     tag.style.color = '#64748b';
   });
+  const submitBtn = document.querySelector('#publishStep3 .apply-btn:last-child');
+  if (submitBtn) { submitBtn.disabled = false; submitBtn.textContent = '🚀 立即发布活动'; }
   goToPublishStep(1);
-  
-  const n = parseInt(document.getElementById('cStatEvent').textContent) + 1;
-  document.getElementById('cStatEvent').textContent = n;
-  
-  if (relatedJob) {
-    showToast(`🎉 活动发布成功！已关联岗位，参与者可直接投递简历`);
+}
+
+// 动态加载发布活动时关联岗位选项
+async function loadPublishJobOptions() {
+  const sel = document.getElementById('peRelatedJob');
+  if (!sel) return;
+  sel.innerHTML = '<option value="">选择要关联的岗位（可选）</option>';
+  const alive = await checkBackend();
+  if (!alive || !_authToken) {
+    // 本地 JOBS 兜底
+    JOBS.forEach(j => {
+      sel.innerHTML += `<option value="${j.id}">${j.title} - ${j.company}</option>`;
+    });
+    return;
+  }
+  const r = await apiCall('/jobs?my=1&limit=20');
+  const list = r.code === 0 ? (r.data.list || r.data || []) : [];
+  if (list.length) {
+    list.forEach(j => {
+      sel.innerHTML += `<option value="${j.id}">${j.title}${j.company_name ? ' - ' + j.company_name : ''}</option>`;
+    });
   } else {
-    showToast('🎉 活动发布成功！');
+    JOBS.forEach(j => {
+      sel.innerHTML += `<option value="${j.id}">${j.title} - ${j.company}</option>`;
+    });
   }
 }
 
@@ -2026,6 +3199,481 @@ function doSearch() {
     showToast(`找到 ${matchEvents.length} 个相关活动`);
   } else {
     showToast('没有找到相关结果');
+  }
+}
+
+// =================== CHAT DATA ===================
+// 演示聊天会话数据
+let chatSessions = [
+  {
+    id: 1,
+    peerId: 101,
+    peerName: '腾讯招聘官',
+    peerRole: '召集方',
+    peerEmoji: '🐧',
+    avatarClass: 'avatar-ring-0',
+    context: { type: 'job', id: 1, title: 'Java开发工程师', company: '腾讯科技' },
+    lastMsg: '您好！我们对您的简历非常感兴趣，请问您方便参加面试吗？',
+    lastTime: '10分钟前',
+    unread: 2,
+    messages: [
+      { id: 1, from: 'peer', content: '您好！感谢您投递「Java开发工程师」，我是腾讯招聘官张华。', time: '09:00' },
+      { id: 2, from: 'me', content: '您好！很荣幸能有这个机会，我对这个岗位非常感兴趣。', time: '09:05' },
+      { id: 3, from: 'peer', content: '请问您有空做一个30分钟的视频面试吗？', time: '09:10' },
+      { id: 4, from: 'peer', content: '您好！我们对您的简历非常感兴趣，请问您方便参加面试吗？', time: '09:15' },
+    ]
+  },
+  {
+    id: 2,
+    peerId: 102,
+    peerName: '前端技术分享会·组织者',
+    peerRole: '活动召集方',
+    peerEmoji: '💻',
+    avatarClass: 'avatar-ring-2',
+    context: { type: 'event', id: 2, title: '前端技术分享会', emoji: '💻' },
+    lastMsg: '活动将于明天下午2点准时开始，请提前进入腾讯会议等候',
+    lastTime: '1小时前',
+    unread: 1,
+    messages: [
+      { id: 1, from: 'peer', type: 'card', cardType: 'event', cardTitle: '前端技术分享会', cardSub: '2026-04-05 14:00 · 线上直播', cardEmoji: '💻', cardGradient: 'linear-gradient(135deg,#4facfe,#00f2fe)', time: '昨天' },
+      { id: 2, from: 'me', content: '太棒了！我已经报名，非常期待！', time: '昨天' },
+      { id: 3, from: 'peer', content: '欢迎！活动将于明天下午2点准时开始，请提前进入腾讯会议等候', time: '1小时前' },
+    ]
+  },
+  {
+    id: 3,
+    peerId: 103,
+    peerName: '李明（编程马拉松队友）',
+    peerRole: '参与者',
+    peerEmoji: '👨‍💻',
+    avatarClass: 'avatar-ring-3',
+    context: { type: 'event', id: 3, title: '48小时编程马拉松' },
+    lastMsg: '你好，我在马拉松活动看到你的技能标签，想和你组队！',
+    lastTime: '2天前',
+    unread: 0,
+    messages: [
+      { id: 1, from: 'peer', content: '你好，我在马拉松活动看到你的技能标签，想和你组队！', time: '2天前' },
+      { id: 2, from: 'me', content: '好啊！你主要做什么方向？', time: '2天前' },
+      { id: 3, from: 'peer', content: '我做后端，你做前端的话刚好互补！', time: '2天前' },
+    ]
+  }
+];
+
+let currentChatSessionId = null;
+let chatInputContextCard = null; // 待发送的卡片附件
+
+// =================== CHAT - 列表渲染 ===================
+function renderChatList() {
+  const container = document.getElementById('chatListContainer');
+  if (!container) return;
+
+  const totalUnread = chatSessions.reduce((s, c) => s + c.unread, 0);
+  updateChatTab(totalUnread);
+
+  if (chatSessions.length === 0) {
+    container.innerHTML = `
+      <div class="chat-empty">
+        <div class="emoji">💬</div>
+        <p>还没有聊天记录</p>
+        <p style="margin-top:6px;font-size:12px">在活动或职位页点击「发起沟通」开始聊天</p>
+      </div>`;
+    return;
+  }
+
+  container.innerHTML = chatSessions.map(s => `
+    <div class="chat-list-item" onclick="openChatSession(${s.id})">
+      <div class="chat-avatar-wrap">
+        <div class="chat-avatar ${s.avatarClass}">${s.peerEmoji}</div>
+        ${s.unread > 0 ? `<div class="chat-unread-dot">${s.unread}</div>` : ''}
+      </div>
+      <div class="chat-info">
+        <div style="display:flex;justify-content:space-between;align-items:center">
+          <span class="name">${s.peerName}</span>
+          <span class="chat-meta"><span class="time">${s.lastTime}</span></span>
+        </div>
+        ${s.context ? `<div style="font-size:11px;color:var(--primary);margin-top:1px;margin-bottom:2px">${s.context.type==='event'?'🎉':'💼'} ${s.context.title}</div>` : ''}
+        <div class="last-msg" style="color:${s.unread>0?'var(--text)':'var(--sub)'};font-weight:${s.unread>0?'600':'400'}">${s.lastMsg}</div>
+      </div>
+    </div>
+  `).join('');
+}
+
+// =================== CHAT - 打开会话 ===================
+function openChatSession(sessionId) {
+  const session = chatSessions.find(s => s.id === sessionId);
+  if (!session) return;
+  currentChatSessionId = sessionId;
+  session.unread = 0;
+  updateChatTab();
+
+  // 渲染聊天室
+  document.getElementById('chatRoomName').textContent = session.peerName;
+  document.getElementById('chatRoomSub').textContent =
+    session.context
+      ? `通过「${session.context.title}」认识`
+      : session.peerRole;
+  document.getElementById('chatRoom').classList.add('active');
+  renderChatMessages(session);
+
+  // 若有上下文卡片，展示在输入框上方
+  if (session.context && session.messages.length <= 1) {
+    chatInputContextCard = session.context;
+    renderChatContextCard(session.context);
+  } else {
+    hideChatContextCard();
+  }
+
+  // 滚动到底部
+  setTimeout(() => {
+    const msgs = document.getElementById('chatMessages');
+    if (msgs) msgs.scrollTop = msgs.scrollHeight;
+  }, 50);
+}
+
+function renderChatMessages(session) {
+  const container = document.getElementById('chatMessages');
+  if (!container) return;
+
+  container.innerHTML = session.messages.map(msg => {
+    if (msg.type === 'card') {
+      return `
+        <div class="chat-msg ${msg.from === 'me' ? 'me' : ''}">
+          ${msg.from !== 'me' ? `<div class="chat-avatar ${session.avatarClass}" style="width:32px;height:32px;font-size:16px;flex-shrink:0">${session.peerEmoji}</div>` : ''}
+          <div class="chat-bubble-wrap">
+            <div class="chat-card-msg" onclick="${msg.cardType==='event'?`showEventDetail(${msg.cardId||1})`:`showJobDetail(${msg.cardId||1})`}">
+              <div class="card-cover" style="background:${msg.cardGradient||'linear-gradient(135deg,#667eea,#764ba2)'}">${msg.cardEmoji||'🎉'}</div>
+              <div class="card-info">
+                <div class="type-label">${msg.cardType==='event'?'活动':'职位'}</div>
+                <h4>${msg.cardTitle}</h4>
+                <p>${msg.cardSub||''}</p>
+              </div>
+            </div>
+            <span class="chat-time">${msg.time}</span>
+          </div>
+          ${msg.from === 'me' ? `<div class="chat-avatar avatar-ring-0" style="width:32px;height:32px;font-size:16px;flex-shrink:0">我</div>` : ''}
+        </div>`;
+    }
+    if (msg.type === 'sys') {
+      return `<div class="chat-sys-msg">${msg.content}</div>`;
+    }
+    const isMe = msg.from === 'me';
+    return `
+      <div class="chat-msg ${isMe ? 'me' : ''}">
+        ${!isMe ? `<div class="chat-avatar ${session.avatarClass}" style="width:32px;height:32px;font-size:16px;flex-shrink:0">${session.peerEmoji}</div>` : ''}
+        <div class="chat-bubble-wrap">
+          <div class="chat-bubble">${escapeHTML(msg.content)}</div>
+          <span class="chat-time">${msg.time}</span>
+        </div>
+        ${isMe ? `<div class="chat-avatar avatar-ring-0" style="width:32px;height:32px;font-size:16px;flex-shrink:0;display:flex;align-items:center;justify-content:center;color:white;font-size:12px;font-weight:700;border-radius:50%">我</div>` : ''}
+      </div>`;
+  }).join('');
+}
+
+function escapeHTML(str) {
+  return String(str)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;');
+}
+
+// =================== CHAT - 发送消息 ===================
+function sendChatMsg() {
+  const input = document.getElementById('chatInputText');
+  const content = input.value.trim();
+  if (!content && !chatInputContextCard) { return; }
+  if (!currentChatSessionId) return;
+
+  const session = chatSessions.find(s => s.id === currentChatSessionId);
+  if (!session) return;
+
+  const now = new Date();
+  const timeStr = now.getHours().toString().padStart(2,'0') + ':' + now.getMinutes().toString().padStart(2,'0');
+
+  // 如果有附加卡片，先发卡片
+  if (chatInputContextCard) {
+    const ctx = chatInputContextCard;
+    const cardMsg = {
+      id: Date.now(),
+      from: 'me',
+      type: 'card',
+      cardType: ctx.type,
+      cardId: ctx.id,
+      cardTitle: ctx.title,
+      cardSub: ctx.type === 'event' ? (ctx.time || '') : (ctx.company || ''),
+      cardEmoji: ctx.emoji || (ctx.type === 'event' ? '🎉' : '💼'),
+      cardGradient: ctx.gradient || 'linear-gradient(135deg,#667eea,#764ba2)',
+      time: timeStr,
+    };
+    session.messages.push(cardMsg);
+    chatInputContextCard = null;
+    hideChatContextCard();
+  }
+
+  if (content) {
+    const newMsg = { id: Date.now() + 1, from: 'me', content, time: timeStr };
+    session.messages.push(newMsg);
+    session.lastMsg = content;
+    session.lastTime = '刚刚';
+    input.value = '';
+    input.style.height = 'auto';
+  }
+
+  renderChatMessages(session);
+  renderChatList();
+  setTimeout(() => {
+    const msgs = document.getElementById('chatMessages');
+    if (msgs) msgs.scrollTop = msgs.scrollHeight;
+    // 模拟对方回复
+    simulatePeerReply(session, timeStr);
+  }, 100);
+}
+
+// 模拟对方自动回复（演示用）
+const AUTO_REPLIES = [
+  '收到！稍等回复您～',
+  '好的，我们稍后联系！',
+  '感谢您的消息，我会尽快回复。',
+  '明白了，期待与您合作！',
+  '太好了，我们约个时间详聊？',
+];
+function simulatePeerReply(session, baseTime) {
+  if (Math.random() > 0.6) return; // 40%概率回复
+  setTimeout(() => {
+    const now = new Date();
+    const t = now.getHours().toString().padStart(2,'0') + ':' + now.getMinutes().toString().padStart(2,'0');
+    const reply = AUTO_REPLIES[Math.floor(Math.random() * AUTO_REPLIES.length)];
+    session.messages.push({ id: Date.now(), from: 'peer', content: reply, time: t });
+    session.lastMsg = reply;
+    session.lastTime = '刚刚';
+    if (currentChatSessionId !== session.id) session.unread++;
+    if (currentChatSessionId === session.id) {
+      renderChatMessages(session);
+      const msgs = document.getElementById('chatMessages');
+      if (msgs) msgs.scrollTop = msgs.scrollHeight;
+    }
+    renderChatList();
+    updateChatTab();
+  }, 1500 + Math.random() * 2000);
+}
+
+function closeChatRoom() {
+  document.getElementById('chatRoom').classList.remove('active');
+  currentChatSessionId = null;
+  chatInputContextCard = null;
+  hideChatContextCard();
+  renderChatList();
+  // 关闭工具栏
+  const tools = document.getElementById('chatExtraTools');
+  if (tools) tools.classList.remove('show');
+}
+
+function toggleChatTools() {
+  const tools = document.getElementById('chatExtraTools');
+  if (!tools) return;
+  tools.classList.toggle('show');
+  const btn = document.getElementById('attachBtn');
+  if (btn) btn.textContent = tools.classList.contains('show') ? '✕' : '＋';
+}
+
+function autoResizeChatInput(el) {
+  el.style.height = 'auto';
+  el.style.height = Math.min(el.scrollHeight, 100) + 'px';
+}
+
+// =================== CHAT - 上下文卡片 ===================
+function renderChatContextCard(ctx) {
+  const cardEl = document.getElementById('chatContextCard');
+  if (!cardEl) return;
+  cardEl.style.display = 'block';
+  cardEl.innerHTML = `
+    <div style="display:flex;align-items:center;gap:10px;padding:8px 0">
+      <div style="width:40px;height:40px;border-radius:8px;background:${ctx.gradient||'linear-gradient(135deg,#667eea,#764ba2)'};display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0">${ctx.emoji||'🎉'}</div>
+      <div style="flex:1;min-width:0">
+        <div style="font-size:11px;color:var(--sub)">${ctx.type==='event'?'分享活动':'分享职位'}</div>
+        <div style="font-size:13px;font-weight:700;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${ctx.title}</div>
+      </div>
+      <button onclick="hideChatContextCard()" style="background:none;border:none;color:var(--sub);font-size:18px;cursor:pointer;padding:4px">✕</button>
+    </div>`;
+}
+
+function hideChatContextCard() {
+  chatInputContextCard = null;
+  const cardEl = document.getElementById('chatContextCard');
+  if (cardEl) cardEl.style.display = 'none';
+}
+
+// =================== CHAT - 发起沟通入口 ===================
+
+/** 从活动详情页发起沟通 */
+function initiateChatFromEvent() {
+  if (!currentUser) { showToast('请先登录后再发起沟通'); return; }
+  const e = _currentEventData;
+  if (!e) return;
+  closeModal('eventModal');
+
+  const sessionId = createOrFindSession({
+    peerId: e.organizer_id || 200,
+    peerName: e.organizer_name || '活动组织者',
+    peerRole: '活动召集方',
+    peerEmoji: e.organizer_type === 'company' ? '🏢' : '🎯',
+    avatarClass: 'avatar-ring-1',
+    context: {
+      type: 'event',
+      id: e.id,
+      title: e.title,
+      emoji: e.cover_emoji || e.emoji || '🎉',
+      gradient: e.cover_gradient || e.gradient || 'linear-gradient(135deg,#667eea,#764ba2)',
+      time: (e.start_time||'').slice(0,10),
+    }
+  });
+  switchPage('chatPage');
+  setTimeout(() => openChatSession(sessionId), 100);
+}
+
+/** 从职位详情页发起沟通 */
+function initiateChatFromJob() {
+  if (!currentUser) { showToast('请先登录后再发起沟通'); return; }
+  const j = JOBS.find(x => x.id === currentJobId);
+  if (!j) return;
+  closeModal('jobModal');
+
+  const sessionId = createOrFindSession({
+    peerId: 300 + j.id,
+    peerName: j.company + ' 招聘官',
+    peerRole: '召集方',
+    peerEmoji: j.emoji || '🏢',
+    avatarClass: 'avatar-ring-' + (j.id % 6),
+    context: {
+      type: 'job',
+      id: j.id,
+      title: j.title,
+      company: j.company,
+      emoji: j.emoji || '🏢',
+      gradient: 'linear-gradient(135deg,#667eea,#764ba2)',
+    }
+  });
+  switchPage('chatPage');
+  setTimeout(() => openChatSession(sessionId), 100);
+}
+
+/** 从招募卡片发起沟通（召集端用） */
+function openChatWithUser(userId, name, role) {
+  const sessionId = createOrFindSession({
+    peerId: userId,
+    peerName: name,
+    peerRole: role,
+    peerEmoji: '👤',
+    avatarClass: 'avatar-ring-' + (userId % 6),
+    context: null,
+  });
+  openChatSession(sessionId);
+}
+
+function openChatWithParticipants(eventId) {
+  showToast('批量消息功能即将上线～');
+}
+
+/**
+ * 创建或查找已有会话，返回 sessionId
+ */
+function createOrFindSession(opts) {
+  let existing = chatSessions.find(s => s.peerId === opts.peerId);
+  if (existing) return existing.id;
+
+  const newSession = {
+    id: Date.now(),
+    peerId: opts.peerId,
+    peerName: opts.peerName,
+    peerRole: opts.peerRole,
+    peerEmoji: opts.peerEmoji,
+    avatarClass: opts.avatarClass || 'avatar-ring-0',
+    context: opts.context,
+    lastMsg: '发起了沟通',
+    lastTime: '刚刚',
+    unread: 0,
+    messages: [
+      {
+        id: 1,
+        type: 'sys',
+        content: `你通过「${opts.context?.title || '召集吧'}」与 ${opts.peerName} 建立了联系`,
+        time: '',
+      },
+      // 如果有卡片上下文，自动发一条卡片
+      ...(opts.context ? [{
+        id: 2,
+        from: 'me',
+        type: 'card',
+        cardType: opts.context.type,
+        cardId: opts.context.id,
+        cardTitle: opts.context.title,
+        cardSub: opts.context.type === 'event' ? opts.context.time : opts.context.company,
+        cardEmoji: opts.context.emoji || (opts.context.type === 'event' ? '🎉' : '💼'),
+        cardGradient: opts.context.gradient || 'linear-gradient(135deg,#667eea,#764ba2)',
+        time: new Date().getHours().toString().padStart(2,'0') + ':' + new Date().getMinutes().toString().padStart(2,'0'),
+      }] : []),
+    ]
+  };
+  chatSessions.unshift(newSession);
+  return newSession.id;
+}
+
+// =================== CHAT - 工具栏功能 ===================
+function sendChatEventCard() {
+  if (!currentChatSessionId) return;
+  toggleChatTools();
+  // 让用户选择活动
+  const e = EVENTS[0]; // 演示取第一个，实际可弹选择器
+  chatInputContextCard = {
+    type: 'event',
+    id: e.id,
+    title: e.title,
+    emoji: e.emoji || '🎉',
+    gradient: e.gradient || 'linear-gradient(135deg,#667eea,#764ba2)',
+    time: (e.start_time||'').slice(0,10),
+  };
+  renderChatContextCard(chatInputContextCard);
+  document.getElementById('chatInputText').focus();
+  showToast('活动卡片已添加，输入消息后发送');
+}
+
+function sendChatJobCard() {
+  if (!currentChatSessionId) return;
+  toggleChatTools();
+  const j = JOBS[0];
+  chatInputContextCard = {
+    type: 'job',
+    id: j.id,
+    title: j.title,
+    company: j.company,
+    emoji: j.emoji || '💼',
+    gradient: 'linear-gradient(135deg,#667eea,#764ba2)',
+  };
+  renderChatContextCard(chatInputContextCard);
+  document.getElementById('chatInputText').focus();
+  showToast('职位卡片已添加，输入消息后发送');
+}
+
+function sendChatLocation() {
+  showToast('位置功能开发中，当前演示版不支持');
+  toggleChatTools();
+}
+
+function showChatMore() {
+  showToast('更多功能开发中...');
+}
+
+// =================== CHAT - Tab徽章 ===================
+function updateChatTab(unreadCount) {
+  const count = unreadCount !== undefined
+    ? unreadCount
+    : chatSessions.reduce((s, c) => s + c.unread, 0);
+  const dot = document.getElementById('chatTabDot');
+  const badge = document.getElementById('chatBadge');
+  if (dot) dot.style.display = count > 0 ? 'block' : 'none';
+  if (badge) {
+    badge.textContent = count;
+    badge.style.display = count > 0 ? 'inline' : 'none';
   }
 }
 

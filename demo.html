@@ -1495,6 +1495,65 @@ h1,h2,h3 { line-height: 1.3; }
           </select>
           <p style="font-size:12px;color:#667eea;margin-top:4px">💡 关联岗位后，活动参与者可直接投递简历</p>
         </div>
+
+        <!-- 召集主题（initiate_type，支持多选） -->
+        <div class="form-group">
+          <label style="display:flex;align-items:center;gap:8px">
+            召集主题 <span style="font-size:11px;color:#94a3b8;font-weight:400">多选，用于精准推荐</span>
+          </label>
+          <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:8px" id="initiateTypeGrid">
+            <div class="initiate-type-btn" data-key="career"
+              onclick="toggleInitiateType(this,'career')"
+              style="padding:10px 4px;border:2px solid #e2e8f0;border-radius:12px;text-align:center;cursor:pointer;transition:all .2s">
+              <div style="font-size:22px">🚀</div>
+              <div style="font-size:11px;margin-top:4px;color:#475569;font-weight:500">事业共创</div>
+            </div>
+            <div class="initiate-type-btn" data-key="training"
+              onclick="toggleInitiateType(this,'training')"
+              style="padding:10px 4px;border:2px solid #e2e8f0;border-radius:12px;text-align:center;cursor:pointer;transition:all .2s">
+              <div style="font-size:22px">📚</div>
+              <div style="font-size:11px;margin-top:4px;color:#475569;font-weight:500">技能研习</div>
+            </div>
+            <div class="initiate-type-btn" data-key="hobby"
+              onclick="toggleInitiateType(this,'hobby')"
+              style="padding:10px 4px;border:2px solid #e2e8f0;border-radius:12px;text-align:center;cursor:pointer;transition:all .2s">
+              <div style="font-size:22px">🎨</div>
+              <div style="font-size:11px;margin-top:4px;color:#475569;font-weight:500">兴趣爱好</div>
+            </div>
+            <div class="initiate-type-btn" data-key="social"
+              onclick="toggleInitiateType(this,'social')"
+              style="padding:10px 4px;border:2px solid #e2e8f0;border-radius:12px;text-align:center;cursor:pointer;transition:all .2s">
+              <div style="font-size:22px">🤝</div>
+              <div style="font-size:11px;margin-top:4px;color:#475569;font-weight:500">社交结识</div>
+            </div>
+            <div class="initiate-type-btn" data-key="mindfulness"
+              onclick="toggleInitiateType(this,'mindfulness')"
+              style="padding:10px 4px;border:2px solid #e2e8f0;border-radius:12px;text-align:center;cursor:pointer;transition:all .2s">
+              <div style="font-size:22px">🌱</div>
+              <div style="font-size:11px;margin-top:4px;color:#475569;font-weight:500">心灵成长</div>
+            </div>
+          </div>
+          <input type="hidden" id="peInitiateType" value="">
+        </div>
+
+        <!-- 召集氛围（gathering_style） -->
+        <div class="form-group">
+          <label>召集氛围</label>
+          <div style="display:flex;gap:10px" id="gatheringStyleRow">
+            <label style="flex:1;display:flex;align-items:center;gap:8px;padding:10px 12px;border:2px solid #e2e8f0;border-radius:10px;cursor:pointer;transition:border .2s" id="gsLabel_formal">
+              <input type="radio" name="peGatheringStyle" value="formal" style="accent-color:var(--primary)"> 
+              <span style="font-size:13px">🎩 正式专业</span>
+            </label>
+            <label style="flex:1;display:flex;align-items:center;gap:8px;padding:10px 12px;border:2px solid #e2e8f0;border-radius:10px;cursor:pointer;transition:border .2s" id="gsLabel_casual">
+              <input type="radio" name="peGatheringStyle" value="casual" style="accent-color:var(--primary)">
+              <span style="font-size:13px">☕ 轻松随意</span>
+            </label>
+            <label style="flex:1;display:flex;align-items:center;gap:8px;padding:10px 12px;border:2px solid #e2e8f0;border-radius:10px;cursor:pointer;transition:border .2s" id="gsLabel_supportive">
+              <input type="radio" name="peGatheringStyle" value="supportive" style="accent-color:var(--primary)">
+              <span style="font-size:13px">💛 支持互助</span>
+            </label>
+          </div>
+        </div>
         
         <button class="apply-btn" onclick="goToPublishStep(2)" style="margin-top:20px">下一步：设置时间地点</button>
       </div>
@@ -3177,10 +3236,77 @@ function contactCandidate() {
 }
 
 function openPublishJob() { document.getElementById('publishJobModal').classList.add('active'); }
+
+// ── 漏斗 Session ID（每次打开发起弹窗生成新的） ──
+let _funnelSessionId = null;
+let _selectedInitiateTypes = [];
+
 function openPublishEvent() {
   if (!currentUser) { showToast('请先登录后再发起召集'); return; }
+  // 生成本次漏斗会话ID
+  _funnelSessionId = 'f_' + Date.now() + '_' + Math.random().toString(36).slice(2, 6);
+  _selectedInitiateTypes = [];
+  // 重置类型按钮状态
+  document.querySelectorAll('.initiate-type-btn').forEach(btn => {
+    btn.style.borderColor = '#e2e8f0';
+    btn.style.background = 'white';
+    btn.querySelector('div:last-child').style.color = '#475569';
+  });
+  document.getElementById('peInitiateType').value = '';
   document.getElementById('publishEventModal').classList.add('active');
   loadPublishJobOptions();
+  // 埋点：漏斗 Step1 —— 打开发起弹窗
+  trackEvent({ event_type: 'funnel_step', funnel_name: 'initiate_event', step: 1, step_name: 'click_initiate_btn', funnel_session_id: _funnelSessionId });
+  // 埋点："发起"按钮曝光（已在 tabBar 渲染时曝光，这里记点击）
+  trackEvent({ event_type: 'click', element_id: 'tabbar_publish_btn', page: 'home', funnel_session_id: _funnelSessionId });
+}
+
+/** 召集主题多选切换 */
+function toggleInitiateType(el, key) {
+  const idx = _selectedInitiateTypes.indexOf(key);
+  if (idx === -1) {
+    _selectedInitiateTypes.push(key);
+    el.style.borderColor = 'var(--primary)';
+    el.style.background = 'rgba(102,126,234,0.06)';
+    el.querySelector('div:last-child').style.color = 'var(--primary)';
+    // 埋点：类型点击
+    trackEvent({ event_type: 'type_select', element_id: key, funnel_session_id: _funnelSessionId, meta: { type_key: key, action: 'select' } });
+  } else {
+    _selectedInitiateTypes.splice(idx, 1);
+    el.style.borderColor = '#e2e8f0';
+    el.style.background = 'white';
+    el.querySelector('div:last-child').style.color = '#475569';
+    trackEvent({ event_type: 'type_select', element_id: key, funnel_session_id: _funnelSessionId, meta: { type_key: key, action: 'deselect' } });
+  }
+  document.getElementById('peInitiateType').value = _selectedInitiateTypes.join(',');
+}
+
+/** 通用埋点上报（后端可用时发真实请求，否则存 localStorage） */
+function trackEvent(payload) {
+  const ev = { ...payload, user_id: currentUser?.id || null, ts: new Date().toISOString() };
+  // 先推本地缓冲
+  try {
+    const buf = JSON.parse(localStorage.getItem('_analytics_buf') || '[]');
+    buf.push(ev);
+    // 只保留最近200条
+    if (buf.length > 200) buf.splice(0, buf.length - 200);
+    localStorage.setItem('_analytics_buf', JSON.stringify(buf));
+  } catch (_) {}
+  // 后端可用时发送（fire and forget）
+  checkBackend().then(alive => {
+    if (!alive) return;
+    fetch('/api/v1/analytics/track', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', ...((_authToken) ? { Authorization: `Bearer ${_authToken}` } : {}) },
+      body: JSON.stringify(ev),
+    }).catch(() => {});
+  });
+}
+
+/** 漏斗步骤推进时打埋点（供 goToPublishStep 调用） */
+function trackFunnelStep(step, stepName) {
+  if (!_funnelSessionId) return;
+  trackEvent({ event_type: 'funnel_step', funnel_name: 'initiate_event', step, step_name: stepName, funnel_session_id: _funnelSessionId });
 }
 
 function publishJob() {
@@ -3232,6 +3358,10 @@ function goToPublishStep(step) {
   
   currentPublishStep = step;
   
+  // ── 埋点：漏斗步骤进入 ──
+  const stepNames = { 1: 'select_type', 2: 'fill_form', 3: 'preview' };
+  if (stepNames[step]) trackFunnelStep(step, stepNames[step]);
+
   // 如果是最后一步，更新预览
   if (step === 3) {
     updateEventPreview();
@@ -3409,6 +3539,10 @@ async function publishEvent() {
     need_resume: needResume,
     cover_emoji: eventCoverEmoji || '🎉',
     cover_gradient: eventCoverGradient || 'linear-gradient(135deg,#667eea,#764ba2)',
+    // ── 2026-03-28 新增字段 ──
+    initiate_type: _selectedInitiateTypes.length > 0 ? _selectedInitiateTypes : null,
+    gathering_style: document.querySelector('input[name="peGatheringStyle"]:checked')?.value || null,
+    funnel_session_id: _funnelSessionId,
   };
 
   // 禁用提交按钮
@@ -3454,6 +3588,11 @@ async function publishEvent() {
   closeModal('publishEventModal');
   _resetPublishEventForm();
 
+  // ── 埋点：漏斗 Step4 完成（本地兜底模式下手动打点，后端模式由后端自动记录） ──
+  if (_funnelSessionId && published) {
+    trackFunnelStep(4, 'publish_success');
+  }
+
   const statEl = document.getElementById('cStatEvent');
   if (statEl) statEl.textContent = parseInt(statEl.textContent || 0) + 1;
 
@@ -3469,6 +3608,17 @@ function _resetPublishEventForm() {
   eventCoverImage = null;
   eventCoverEmoji = '🎉';
   eventCoverGradient = 'linear-gradient(135deg,#667eea,#764ba2)';
+  // ── 重置新增字段 ──
+  _selectedInitiateTypes = [];
+  _funnelSessionId = null;
+  document.querySelectorAll('.initiate-type-btn').forEach(btn => {
+    btn.style.borderColor = '#e2e8f0';
+    btn.style.background = 'white';
+    if (btn.querySelector('div:last-child')) btn.querySelector('div:last-child').style.color = '#475569';
+  });
+  const peInitiateType = document.getElementById('peInitiateType');
+  if (peInitiateType) peInitiateType.value = '';
+  document.querySelectorAll('input[name="peGatheringStyle"]').forEach(r => r.checked = false);
   const titleEl = document.getElementById('peTitle');
   const descEl = document.getElementById('peDesc');
   const previewEl = document.getElementById('eventCoverPreview');

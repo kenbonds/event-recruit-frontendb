@@ -10,6 +10,14 @@
       "destination": "https://zhaojiba1-0gqnm5h075fc5ccf-1300229407.ap-shanghai.app.tcloudbase.com/api/:1"
     },
     {
+      "source": "/admin",
+      "destination": "/admin/index.html"
+    },
+    {
+      "source": "/admin/(.*)",
+      "destination": "/admin/index.html"
+    },
+    {
       "source": "/(.*)",
       "destination": "/demo.html"
     }

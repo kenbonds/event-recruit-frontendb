@@ -1,0 +1,1419 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>召集吧 - 管理系统</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+:root {
+  --primary: #667eea;
+  --primary2: #764ba2;
+  --success: #19c37d;
+  --warning: #f59e0b;
+  --danger: #ef4444;
+  --bg: #f5f6fa;
+  --card: #ffffff;
+  --text: #2c3e50;
+  --sub: #8492a6;
+  --border: #edf2f7;
+}
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', sans-serif; background: var(--bg); color: var(--text); }
+
+/* 登录页 */
+.login-page { min-height: 100vh; display: flex; align-items: center; justify-content: center; background: linear-gradient(135deg, var(--primary) 0%, var(--primary2) 100%); }
+.login-box { background: white; padding: 40px; border-radius: 16px; width: 100%; max-width: 400px; box-shadow: 0 20px 60px rgba(0,0,0,0.3); }
+.login-box h1 { font-size: 24px; margin-bottom: 8px; text-align: center; }
+.login-box p { color: var(--sub); text-align: center; margin-bottom: 30px; }
+.form-group { margin-bottom: 20px; }
+.form-group label { display: block; font-size: 14px; margin-bottom: 6px; color: var(--sub); }
+.form-group input { width: 100%; padding: 12px 16px; border: 1px solid var(--border); border-radius: 8px; font-size: 14px; outline: none; transition: border-color 0.2s; }
+.form-group input:focus { border-color: var(--primary); }
+.btn { width: 100%; padding: 14px; border: none; border-radius: 8px; font-size: 16px; font-weight: 600; cursor: pointer; transition: all 0.2s; }
+.btn-primary { background: linear-gradient(135deg, var(--primary), var(--primary2)); color: white; }
+.btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(102,126,234,0.4); }
+
+/* 管理后台布局 */
+.admin-layout { display: none; min-height: 100vh; }
+.sidebar { position: fixed; left: 0; top: 0; width: 240px; height: 100vh; background: white; border-right: 1px solid var(--border); padding: 20px 0; }
+.logo { padding: 0 20px 20px; border-bottom: 1px solid var(--border); margin-bottom: 20px; }
+.logo h2 { font-size: 20px; color: var(--primary); }
+.logo p { font-size: 12px; color: var(--sub); }
+.nav-item { display: flex; align-items: center; padding: 14px 20px; cursor: pointer; transition: all 0.2s; color: var(--sub); text-decoration: none; }
+.nav-item:hover, .nav-item.active { background: #f8f9ff; color: var(--primary); }
+.nav-item i { width: 24px; margin-right: 12px; font-size: 18px; }
+.main-content { margin-left: 240px; padding: 30px; }
+.header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; }
+.header h1 { font-size: 24px; }
+.user-info { display: flex; align-items: center; gap: 12px; }
+.user-avatar { width: 40px; height: 40px; border-radius: 50%; background: linear-gradient(135deg, var(--primary), var(--primary2)); color: white; display: flex; align-items: center; justify-content: center; font-weight: 600; }
+
+/* 统计卡片 */
+.stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; margin-bottom: 30px; }
+.stat-card { background: white; padding: 24px; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.04); }
+.stat-card .label { font-size: 14px; color: var(--sub); margin-bottom: 8px; }
+.stat-card .value { font-size: 32px; font-weight: 700; color: var(--text); }
+.stat-card .trend { font-size: 13px; margin-top: 8px; }
+.stat-card .trend.up { color: var(--success); }
+.stat-card .trend.down { color: var(--danger); }
+
+/* 内容区域 */
+.content-card { background: white; border-radius: 12px; padding: 24px; box-shadow: 0 2px 8px rgba(0,0,0,0.04); }
+.card-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
+.card-header h3 { font-size: 18px; }
+.search-box { display: flex; gap: 12px; }
+.search-box input { padding: 10px 16px; border: 1px solid var(--border); border-radius: 8px; font-size: 14px; outline: none; width: 240px; }
+.btn-sm { padding: 10px 20px; font-size: 14px; width: auto; }
+
+/* 表格 */
+table { width: 100%; border-collapse: collapse; }
+th, td { padding: 14px; text-align: left; border-bottom: 1px solid var(--border); }
+th { font-weight: 600; color: var(--sub); font-size: 13px; text-transform: uppercase; }
+tr:hover { background: #f8f9ff; }
+.status { display: inline-block; padding: 4px 12px; border-radius: 20px; font-size: 12px; font-weight: 500; }
+.status.pending { background: #fff8e6; color: var(--warning); }
+.status.active { background: #edfbf5; color: var(--success); }
+.status.rejected { background: #fef2f2; color: var(--danger); }
+.actions { display: flex; gap: 8px; }
+.action-btn { padding: 6px 12px; border: none; border-radius: 6px; font-size: 12px; cursor: pointer; transition: all 0.2s; }
+.action-btn.view { background: #e0e7ff; color: var(--primary); }
+.action-btn.approve { background: #edfbf5; color: var(--success); }
+.action-btn.reject { background: #fef2f2; color: var(--danger); }
+
+/* 标签页 */
+.tabs { display: flex; gap: 8px; margin-bottom: 20px; border-bottom: 1px solid var(--border); }
+.tab { padding: 12px 20px; cursor: pointer; border-bottom: 2px solid transparent; transition: all 0.2s; }
+.tab.active { color: var(--primary); border-bottom-color: var(--primary); font-weight: 600; }
+.tab:hover { color: var(--primary); }
+
+/* 分页 */
+.pagination { display: flex; justify-content: center; gap: 8px; margin-top: 20px; }
+.page-btn { padding: 8px 14px; border: 1px solid var(--border); background: white; border-radius: 6px; cursor: pointer; transition: all 0.2s; }
+.page-btn:hover, .page-btn.active { background: var(--primary); color: white; border-color: var(--primary); }
+
+/* 隐藏/显示 */
+.page-section { display: none; }
+.page-section.active { display: block; }
+
+/* 来源管理样式 */
+.source-stats { margin-top: 20px; }
+.source-type { margin-bottom: 30px; }
+.source-type h4 { font-size: 16px; margin-bottom: 16px; display: flex; align-items: center; gap: 8px; color: var(--text); }
+.type-icon { font-size: 18px; }
+.source-list { display: flex; flex-wrap: wrap; gap: 12px; }
+.source-tag { 
+  display: inline-flex; 
+  align-items: center; 
+  gap: 8px; 
+  padding: 10px 16px; 
+  background: #f8f9ff; 
+  border: 1px solid #e0e7ff; 
+  border-radius: 8px; 
+  font-size: 14px;
+  transition: all 0.2s;
+}
+.source-tag:hover { background: #e0e7ff; border-color: var(--primary); }
+.source-tag .name { font-weight: 500; }
+.source-tag .count { 
+  background: var(--primary); 
+  color: white; 
+  padding: 2px 8px; 
+  border-radius: 10px; 
+  font-size: 12px;
+}
+.source-tag .actions { display: flex; gap: 4px; margin-left: 8px; }
+.source-tag .actions button {
+  background: none; border: none; cursor: pointer; padding: 2px 6px; border-radius: 4px; font-size: 12px;
+}
+.source-tag .actions button:hover { background: rgba(0,0,0,0.1); }
+.source-tag .actions .edit { color: var(--primary); }
+.source-tag .actions .delete { color: var(--danger); }
+
+/* 抓取源详细样式 */
+.crawl-source-card {
+  background: #f8f9ff;
+  border: 1px solid #e0e7ff;
+  border-radius: 10px;
+  padding: 14px;
+  margin-bottom: 12px;
+  width: 100%;
+}
+.crawl-source-card .header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+.crawl-source-card .name-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.crawl-source-card .name {
+  font-weight: 600;
+  font-size: 15px;
+}
+.crawl-source-card .method-tag {
+  font-size: 11px;
+  padding: 2px 8px;
+  border-radius: 4px;
+  background: #e0e7ff;
+  color: var(--primary);
+}
+.crawl-source-card .method-tag.login { background: #fef3c7; color: #d97706; }
+.crawl-source-card .method-tag.api { background: #d1fae5; color: #059669; }
+.crawl-source-card .method-tag.manual { background: #f3f4f6; color: #6b7280; }
+.crawl-source-card .status-badge {
+  font-size: 11px;
+  padding: 3px 10px;
+  border-radius: 12px;
+}
+.crawl-source-card .status-badge.active {
+  background: #d1fae5;
+  color: #059669;
+}
+.crawl-source-card .status-badge.inactive {
+  background: #f3f4f6;
+  color: #9ca3af;
+}
+.crawl-source-card .info-row {
+  display: flex;
+  gap: 16px;
+  font-size: 13px;
+  color: var(--sub);
+  margin-bottom: 8px;
+}
+.crawl-source-card .info-row span {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+.crawl-source-card .stats {
+  display: flex;
+  gap: 16px;
+  padding-top: 10px;
+  border-top: 1px solid #e5e7eb;
+  font-size: 13px;
+}
+.crawl-source-card .stat-item {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+.crawl-source-card .stat-item .value {
+  font-weight: 600;
+  color: var(--text);
+}
+.crawl-source-card .actions {
+  display: flex;
+  gap: 6px;
+  margin-top: 10px;
+  padding-top: 10px;
+  border-top: 1px solid #e5e7eb;
+}
+.crawl-source-card .action-btn {
+  flex: 1;
+  padding: 6px;
+  border: none;
+  border-radius: 6px;
+  font-size: 12px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.crawl-source-card .action-btn.run { background: #dbeafe; color: #2563eb; }
+.crawl-source-card .action-btn.run:hover { background: #2563eb; color: white; }
+.crawl-source-card .action-btn.edit { background: #e0e7ff; color: var(--primary); }
+.crawl-source-card .action-btn.edit:hover { background: var(--primary); color: white; }
+.crawl-source-card .action-btn.toggle { background: #f3f4f6; color: #6b7280; }
+.crawl-source-card .action-btn.toggle:hover { background: #9ca3af; color: white; }
+.crawl-source-card .action-btn.delete { background: #fef2f2; color: var(--danger); }
+.crawl-source-card .action-btn.delete:hover { background: var(--danger); color: white; }
+
+/* 抓取配置弹窗 */
+.crawl-config-section {
+  margin-bottom: 16px;
+  padding: 12px;
+  background: #f9fafb;
+  border-radius: 8px;
+}
+.crawl-config-section h5 {
+  font-size: 13px;
+  color: var(--sub);
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.crawl-config-section .form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+.crawl-config-section .form-group {
+  margin-bottom: 10px;
+}
+.crawl-config-section .form-group label {
+  display: block;
+  font-size: 12px;
+  color: var(--sub);
+  margin-bottom: 4px;
+}
+.crawl-config-section .form-group input,
+.crawl-config-section .form-group select {
+  width: 100%;
+  padding: 8px 10px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  font-size: 13px;
+}
+.crawl-config-section .form-group textarea {
+  width: 100%;
+  padding: 8px 10px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  font-size: 13px;
+  min-height: 60px;
+  resize: vertical;
+}
+
+/* 抓取方式选择 */
+.method-selector {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+  margin-bottom: 16px;
+}
+.method-option {
+  padding: 12px 8px;
+  border: 2px solid var(--border);
+  border-radius: 8px;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.method-option:hover { border-color: var(--primary); }
+.method-option.selected {
+  border-color: var(--primary);
+  background: #f0f4ff;
+}
+.method-option .icon { font-size: 24px; display: block; margin-bottom: 4px; }
+.method-option .label { font-size: 12px; color: var(--text); }
+.method-option.selected .label { color: var(--primary); font-weight: 600; }
+
+/* 弹窗样式 */
+.modal-overlay {
+  display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0,0,0,0.5); z-index: 1000; align-items: center; justify-content: center;
+}
+.modal-overlay.active { display: flex; }
+.modal {
+  background: white; border-radius: 12px; width: 100%; max-width: 480px; padding: 24px;
+  animation: modalIn 0.2s ease;
+}
+@keyframes modalIn {
+  from { transform: translateY(-20px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+.modal h3 { font-size: 18px; margin-bottom: 20px; }
+.modal .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px; }
+.modal .form-group { margin-bottom: 16px; }
+.modal .form-group label { display: block; font-size: 14px; margin-bottom: 6px; color: var(--sub); }
+.modal .form-group input, .modal .form-group select {
+  width: 100%; padding: 10px 14px; border: 1px solid var(--border); border-radius: 8px; font-size: 14px;
+}
+.modal .form-group input:focus, .modal .form-group select:focus { border-color: var(--primary); outline: none; }
+.modal-btns { display: flex; gap: 12px; justify-content: flex-end; margin-top: 20px; }
+.modal-btns button { padding: 10px 20px; border-radius: 8px; font-size: 14px; cursor: pointer; border: none; }
+.modal-btns .btn-cancel { background: var(--bg); color: var(--text); }
+.modal-btns .btn-confirm { background: var(--primary); color: white; }
+.modal-btns .btn-confirm:hover { background: var(--primary2); }
+</style>
+</head>
+<body>
+
+<!-- 登录页面 -->
+<div class="login-page" id="loginPage">
+  <div class="login-box">
+    <h1>「召集」管理平台</h1>
+    <p>后台管理系统</p>
+    <form id="loginForm">
+      <div class="form-group">
+        <label>管理员账号</label>
+        <input type="text" id="username" placeholder="请输入账号" required>
+      </div>
+      <div class="form-group">
+        <label>密码</label>
+        <input type="password" id="password" placeholder="请输入密码" required>
+      </div>
+      <button type="submit" class="btn btn-primary">登录</button>
+    </form>
+  </div>
+</div>
+
+<!-- 管理后台 -->
+<div class="admin-layout" id="adminLayout">
+  <!-- 侧边栏 -->
+  <aside class="sidebar">
+    <div class="logo">
+      <h2>召集吧</h2>
+      <p>后台管理系统</p>
+    </div>
+    <nav>
+      <a class="nav-item active" data-page="dashboard">
+        <i>📊</i> 数据概览
+      </a>
+      <a class="nav-item" data-page="companies">
+        <i>🏢</i> 召集方管理
+      </a>
+      <a class="nav-item" data-page="users">
+        <i>👥</i> 响应者管理
+      </a>
+      <a class="nav-item" data-page="events">
+        <i>📅</i> 活动管理
+      </a>
+      <a class="nav-item" data-page="jobs">
+        <i>💼</i> 岗位管理
+      </a>
+      <a class="nav-item" data-page="content">
+        <i>📝</i> 内容审核
+      </a>
+      <a class="nav-item" data-page="sources">
+        <i>🔗</i> 来源管理
+      </a>
+      <a class="nav-item" data-page="settings">
+        <i>⚙️</i> 系统设置
+      </a>
+    </nav>
+  </aside>
+
+  <!-- 主内容区 -->
+  <main class="main-content">
+    <!-- 顶部栏 -->
+    <div class="header">
+      <h1 id="pageTitle">数据概览</h1>
+      <div class="user-info">
+        <span>管理员</span>
+        <div class="user-avatar">管</div>
+        <button class="action-btn" onclick="logout()">退出</button>
+      </div>
+    </div>
+
+    <!-- Dashboard 页面 -->
+    <div class="page-section active" id="dashboardPage">
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="label">今日新增召集方</div>
+          <div class="value" id="newCompaniesToday">0</div>
+          <div class="trend up">↑ 12%</div>
+        </div>
+        <div class="stat-card">
+          <div class="label">今日新增响应者</div>
+          <div class="value" id="newUsersToday">0</div>
+          <div class="trend up">↑ 8%</div>
+        </div>
+        <div class="stat-card">
+          <div class="label">待审核召集方</div>
+          <div class="value" id="pendingCompanies">0</div>
+          <div class="trend down">需处理</div>
+        </div>
+        <div class="stat-card">
+          <div class="label">总活动数</div>
+          <div class="value" id="totalEvents">0</div>
+          <div class="trend up">↑ 5%</div>
+        </div>
+      </div>
+
+      <div class="content-card">
+        <div class="card-header">
+          <h3>待审核召集方</h3>
+          <a href="#" onclick="showPage('companies')">查看全部 →</a>
+        </div>
+        <table>
+          <thead>
+            <tr>
+              <th>企业名称</th>
+              <th>联系人</th>
+              <th>联系电话</th>
+              <th>注册时间</th>
+              <th>状态</th>
+              <th>操作</th>
+            </tr>
+          </thead>
+          <tbody id="pendingCompaniesTable">
+            <!-- 动态填充 -->
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- 召集方管理页面 -->
+    <div class="page-section" id="companiesPage">
+      <div class="content-card">
+        <div class="card-header">
+          <h3>召集方列表</h3>
+          <div class="search-box">
+            <input type="text" placeholder="搜索企业名称/联系人" id="companySearch">
+            <button class="btn btn-primary btn-sm">搜索</button>
+          </div>
+        </div>
+        <div class="tabs">
+          <div class="tab active" data-filter="all">全部</div>
+          <div class="tab" data-filter="pending">待审核</div>
+          <div class="tab" data-filter="active">已通过</div>
+          <div class="tab" data-filter="rejected">已拒绝</div>
+        </div>
+        <table>
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>企业名称</th>
+              <th>联系人</th>
+              <th>联系电话</th>
+              <th>微信号</th>
+              <th>注册时间</th>
+              <th>状态</th>
+              <th>操作</th>
+            </tr>
+          </thead>
+          <tbody id="companiesTable">
+            <!-- 动态填充 -->
+          </tbody>
+        </table>
+        <div class="pagination">
+          <button class="page-btn">上一页</button>
+          <button class="page-btn active">1</button>
+          <button class="page-btn">2</button>
+          <button class="page-btn">3</button>
+          <button class="page-btn">下一页</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- 响应者管理页面 -->
+    <div class="page-section" id="usersPage">
+      <div class="content-card">
+        <div class="card-header">
+          <h3>响应者列表</h3>
+          <div class="search-box">
+            <input type="text" placeholder="搜索姓名/学校/手机号" id="userSearch">
+            <button class="btn btn-primary btn-sm">搜索</button>
+          </div>
+        </div>
+        <table>
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>姓名</th>
+              <th>手机号</th>
+              <th>学校</th>
+              <th>专业</th>
+              <th>学历</th>
+              <th>注册时间</th>
+              <th>操作</th>
+            </tr>
+          </thead>
+          <tbody id="usersTable">
+            <!-- 动态填充 -->
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- 活动管理页面 -->
+    <div class="page-section" id="eventsPage">
+      <div class="content-card">
+        <div class="card-header">
+          <h3>活动列表</h3>
+          <div class="search-box">
+            <input type="text" placeholder="搜索活动标题" id="eventSearch">
+            <button class="btn btn-primary btn-sm">搜索</button>
+          </div>
+        </div>
+        <table>
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>活动标题</th>
+              <th>类型</th>
+              <th>开始时间</th>
+              <th>地点</th>
+              <th>报名人数</th>
+              <th>状态</th>
+              <th>操作</th>
+            </tr>
+          </thead>
+          <tbody id="eventsTable">
+            <!-- 动态填充 -->
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- 岗位管理页面 -->
+    <div class="page-section" id="jobsPage">
+      <div class="content-card">
+        <div class="card-header">
+          <h3>岗位列表</h3>
+          <div class="search-box">
+            <input type="text" placeholder="搜索岗位名称" id="jobSearch">
+            <button class="btn btn-primary btn-sm">搜索</button>
+          </div>
+        </div>
+        <table>
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>岗位名称</th>
+              <th>企业</th>
+              <th>类型</th>
+              <th>薪资范围</th>
+              <th>城市</th>
+              <th>投递数</th>
+              <th>状态</th>
+              <th>操作</th>
+            </tr>
+          </thead>
+          <tbody id="jobsTable">
+            <!-- 动态填充 -->
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- 内容审核页面 -->
+    <div class="page-section" id="contentPage">
+      <div class="content-card">
+        <div class="card-header">
+          <h3>内容审核</h3>
+        </div>
+        <div class="tabs">
+          <div class="tab active">待审核活动</div>
+          <div class="tab">待审核岗位</div>
+          <div class="tab">举报处理</div>
+        </div>
+        <p style="padding: 40px; text-align: center; color: var(--sub);">
+          暂无待审核内容
+        </p>
+      </div>
+    </div>
+
+    <!-- 来源管理页面 -->
+    <div class="page-section" id="sourcesPage">
+      <div class="content-card">
+        <div class="card-header">
+          <h3>来源渠道管理</h3>
+          <button class="btn btn-primary btn-sm" onclick="showAddSourceModal()">+ 添加来源</button>
+        </div>
+        
+        <div class="tabs" id="sourceTabs">
+          <div class="tab active" data-filter="all">全部</div>
+          <div class="tab" data-filter="online">线上渠道</div>
+          <div class="tab" data-filter="offline">线下渠道</div>
+          <div class="tab" data-filter="partner">合作渠道</div>
+          <div class="tab" data-filter="crawl">人工抓取源</div>
+        </div>
+
+        <div class="source-stats">
+          <div class="source-type">
+            <h4><span class="type-icon">🌐</span> 线上渠道</h4>
+            <div class="source-list" id="onlineSources"></div>
+          </div>
+          <div class="source-type">
+            <h4><span class="type-icon">📍</span> 线下渠道</h4>
+            <div class="source-list" id="offlineSources"></div>
+          </div>
+          <div class="source-type">
+            <h4><span class="type-icon">🤝</span> 合作渠道</h4>
+            <div class="source-list" id="partnerSources"></div>
+          </div>
+          <div class="source-type">
+            <h4><span class="type-icon">🕷️</span> 人工抓取源</h4>
+            <div class="source-list" id="crawlSources"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 系统设置页面 -->
+    <div class="page-section" id="settingsPage">
+      <div class="content-card">
+        <div class="card-header">
+          <h3>系统设置</h3>
+        </div>
+        <p style="padding: 40px; text-align: center; color: var(--sub);">
+          系统设置功能开发中...
+        </p>
+      </div>
+    </div>
+  </main>
+</div>
+
+<script>
+// 页面切换
+function showPage(pageName) {
+  // 隐藏所有页面
+  document.querySelectorAll('.page-section').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+  
+  // 显示目标页面
+  document.getElementById(pageName + 'Page').classList.add('active');
+  document.querySelector(`[data-page="${pageName}"]`).classList.add('active');
+  
+  // 更新标题
+  const titles = {
+    dashboard: '数据概览',
+    companies: '召集方管理',
+    users: '响应者管理',
+    events: '活动管理',
+    jobs: '岗位管理',
+    content: '内容审核',
+    sources: '来源管理',
+    settings: '系统设置'
+  };
+  document.getElementById('pageTitle').textContent = titles[pageName];
+}
+
+// 导航点击事件
+document.querySelectorAll('.nav-item').forEach(item => {
+  item.addEventListener('click', (e) => {
+    e.preventDefault();
+    showPage(item.dataset.page);
+  });
+});
+
+// 标签切换
+document.querySelectorAll('.tabs').forEach(tabs => {
+  tabs.querySelectorAll('.tab').forEach(tab => {
+    tab.addEventListener('click', () => {
+      tabs.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+      tab.classList.add('active');
+    });
+  });
+});
+
+// 登录处理
+document.getElementById('loginForm').addEventListener('submit', (e) => {
+  e.preventDefault();
+  const username = document.getElementById('username').value;
+  const password = document.getElementById('password').value;
+  
+  // 简单验证（实际应调用后端 API）
+  if (username === 'admin' && password === 'admin123') {
+    localStorage.setItem('adminToken', 'demo_token');
+    document.getElementById('loginPage').style.display = 'none';
+    document.getElementById('adminLayout').style.display = 'block';
+    loadDashboardData();
+  } else {
+    alert('账号或密码错误');
+  }
+});
+
+// 退出登录
+function logout() {
+  localStorage.removeItem('adminToken');
+  document.getElementById('loginPage').style.display = 'flex';
+  document.getElementById('adminLayout').style.display = 'none';
+}
+
+// 加载 Dashboard 数据
+async function loadDashboardData() {
+  // 模拟数据，实际应从后端 API 获取
+  const mockData = {
+    newCompaniesToday: 5,
+    newUsersToday: 23,
+    pendingCompanies: 8,
+    totalEvents: 156
+  };
+  
+  document.getElementById('newCompaniesToday').textContent = mockData.newCompaniesToday;
+  document.getElementById('newUsersToday').textContent = mockData.newUsersToday;
+  document.getElementById('pendingCompanies').textContent = mockData.pendingCompanies;
+  document.getElementById('totalEvents').textContent = mockData.totalEvents;
+  
+  // 填充待审核列表
+  const pendingTable = document.getElementById('pendingCompaniesTable');
+  pendingTable.innerHTML = `
+    <tr>
+      <td>腾讯科技</td>
+      <td>张三</td>
+      <td>138****8888</td>
+      <td>2026-03-21</td>
+      <td><span class="status pending">待审核</span></td>
+      <td class="actions">
+        <button class="action-btn view">查看</button>
+        <button class="action-btn approve">通过</button>
+        <button class="action-btn reject">拒绝</button>
+      </td>
+    </tr>
+  `;
+}
+
+// 检查登录状态
+if (localStorage.getItem('adminToken')) {
+  document.getElementById('loginPage').style.display = 'none';
+  document.getElementById('adminLayout').style.display = 'block';
+  loadDashboardData();
+}
+
+// ========== 来源管理 ==========
+// 默认来源数据
+let sourcesData = JSON.parse(localStorage.getItem('sourcesData')) || [
+  // 线上渠道
+  { id: 1, name: '小程序', type: 'online', count: 1250 },
+  { id: 2, name: 'APP', type: 'online', count: 890 },
+  { id: 3, name: '官网', type: 'online', count: 456 },
+  { id: 4, name: '微信推广', type: 'online', count: 780 },
+  // 线下渠道
+  { id: 5, name: '线下活动', type: 'offline', count: 320 },
+  { id: 6, name: '门店推广', type: 'offline', count: 210 },
+  { id: 7, name: '朋友介绍', type: 'offline', count: 540 },
+  // 合作渠道
+  { id: 8, name: '合作伙伴', type: 'partner', count: 180 },
+  { id: 9, name: '广告投放', type: 'partner', count: 420 },
+  { id: 10, name: '社交媒体', type: 'partner', count: 650 },
+  // 人工抓取源 - 带详细配置
+  { 
+    id: 11, 
+    name: 'BOSS直聘', 
+    type: 'crawl', 
+    count: 890,
+    method: 'login',
+    url: 'https://www.zhipin.com',
+    frequency: 'daily',
+    keywords: '前端开发,Java工程师',
+    status: 'active',
+    priority: 1,
+    lastRun: '2026-03-28 10:30',
+    success: 156,
+    failed: 3
+  },
+  { 
+    id: 12, 
+    name: '智联招聘', 
+    type: 'crawl', 
+    count: 1200,
+    method: 'api',
+    url: 'https://api.zhaopin.com',
+    frequency: 'hourly',
+    keywords: '实习招聘',
+    status: 'active',
+    priority: 2,
+    lastRun: '2026-03-29 08:00',
+    success: 89,
+    failed: 1
+  },
+  { 
+    id: 13, 
+    name: '高校就业网', 
+    type: 'crawl', 
+    count: 560,
+    method: 'crawl',
+    url: 'https://career.njnu.edu.cn',
+    frequency: 'weekly',
+    keywords: '校园招聘,宣讲会',
+    status: 'active',
+    priority: 3,
+    lastRun: '2026-03-25 09:00',
+    success: 45,
+    failed: 0
+  },
+  { 
+    id: 14, 
+    name: '企业HR直推', 
+    type: 'crawl', 
+    count: 230,
+    method: 'manual',
+    url: '',
+    frequency: 'manual',
+    keywords: '',
+    status: 'active',
+    priority: 2,
+    lastRun: '2026-03-28 14:00',
+    success: 12,
+    failed: 0
+  },
+  {
+    id: 15,
+    name: '微信朋友圈采集',
+    type: 'crawl',
+    count: 180,
+    method: 'login',
+    url: 'https://weixin.qq.com',
+    frequency: 'daily',
+    keywords: '招聘,求职,跳槽',
+    status: 'inactive',
+    priority: 1,
+    lastRun: '2026-03-20 11:00',
+    success: 0,
+    failed: 0
+  },
+  {
+    id: 16,
+    name: '脉脉人才库',
+    type: 'crawl',
+    count: 320,
+    method: 'login',
+    url: 'https://maimai.cn',
+    frequency: 'weekly',
+    keywords: '技术人才,产品经理',
+    status: 'active',
+    priority: 2,
+    lastRun: '2026-03-27 16:00',
+    success: 28,
+    failed: 2
+  },
+  {
+    id: 17,
+    name: 'LinkedIn外籍人才',
+    type: 'crawl',
+    count: 150,
+    method: 'login',
+    url: 'https://linkedin.com',
+    frequency: 'weekly',
+    keywords: 'software engineer,data scientist',
+    status: 'inactive',
+    priority: 3,
+    lastRun: '2026-03-15 10:00',
+    success: 5,
+    failed: 8
+  },
+  {
+    id: 18,
+    name: 'GitHub人才库',
+    type: 'crawl',
+    count: 420,
+    method: 'api',
+    url: 'https://api.github.com',
+    frequency: 'daily',
+    keywords: 'react,vue,python',
+    status: 'active',
+    priority: 1,
+    lastRun: '2026-03-29 06:00',
+    success: 67,
+    failed: 0
+  },
+  {
+    id: 19,
+    name: '知乎人才频道',
+    type: 'crawl',
+    count: 280,
+    method: 'crawl',
+    url: 'https://www.zhihu.com/topic/19550517',
+    frequency: 'daily',
+    keywords: '程序员,工程师,招聘',
+    status: 'active',
+    priority: 2,
+    lastRun: '2026-03-29 07:30',
+    success: 34,
+    failed: 2
+  },
+  {
+    id: 20,
+    name: '线下招聘会录入',
+    type: 'crawl',
+    count: 90,
+    method: 'manual',
+    url: '',
+    frequency: 'manual',
+    keywords: '',
+    status: 'active',
+    priority: 3,
+    lastRun: '2026-03-26 15:00',
+    success: 8,
+    failed: 0
+  }
+];
+
+let currentFilter = 'all';
+let editingSourceId = null;
+
+// 保存到 localStorage
+function saveSources() {
+  localStorage.setItem('sourcesData', JSON.stringify(sourcesData));
+}
+
+// 渲染来源列表
+function renderSources() {
+  // 按类型分组渲染
+  const typeMap = { online: 'onlineSources', offline: 'offlineSources', partner: 'partnerSources', crawl: 'crawlSources' };
+  
+  Object.keys(typeMap).forEach(type => {
+    const container = document.getElementById(typeMap[type]);
+    const sources = sourcesData.filter(s => s.type === type);
+    
+    if (sources.length === 0) {
+      container.innerHTML = '<p style="color: var(--sub); font-size: 14px; padding: 10px 0;">暂无来源</p>';
+      return;
+    }
+    
+    // 人工抓取源显示详细卡片，普通来源显示标签
+    if (type === 'crawl') {
+      container.innerHTML = sources.map(s => `
+        <div class="crawl-source-card" data-id="${s.id}">
+          <div class="header">
+            <div class="name-row">
+              <span class="name">${s.name}</span>
+              <span class="method-tag ${s.method || 'crawl'}">${getMethodLabel(s.method)}</span>
+            </div>
+            <span class="status-badge ${s.status || 'active'}">${s.status === 'inactive' ? '已停用' : '运行中'}</span>
+          </div>
+          <div class="info-row">
+            <span>📡 ${s.url || '-'}</span>
+            <span>⏰ ${getFrequencyLabel(s.frequency)}</span>
+            <span>🔑 ${s.keywords || '无关键词'}</span>
+          </div>
+          <div class="stats">
+            <div class="stat-item">📅 上次运行: <span class="value">${s.lastRun || '从未'}</span></div>
+            <div class="stat-item">✅ 成功: <span class="value" style="color: #059669;">${s.success || 0}</span></div>
+            <div class="stat-item">❌ 失败: <span class="value" style="color: #dc2626;">${s.failed || 0}</span></div>
+          </div>
+          <div class="actions">
+            <button class="action-btn run" onclick="runCrawl(${s.id})" title="立即执行">▶️ 执行</button>
+            <button class="action-btn edit" onclick="editSource(${s.id})" title="编辑">✏️ 编辑</button>
+            <button class="action-btn toggle" onclick="toggleSource(${s.id})" title="启用/停用">${s.status === 'inactive' ? '▶️ 启用' : '⏸ 停用'}</button>
+            <button class="action-btn delete" onclick="deleteSource(${s.id})" title="删除">🗑️</button>
+          </div>
+        </div>
+      `).join('');
+    } else {
+      // 普通来源显示标签
+      container.innerHTML = sources.map(s => `
+        <div class="source-tag" data-id="${s.id}">
+          <span class="name">${s.name}</span>
+          <span class="count">${s.count}</span>
+          <div class="actions">
+            <button class="edit" onclick="editSource(${s.id})" title="编辑">✏️</button>
+            <button class="delete" onclick="deleteSource(${s.id})" title="删除">🗑️</button>
+          </div>
+        </div>
+      `).join('');
+    }
+  });
+}
+
+// 获取抓取方式标签
+function getMethodLabel(method) {
+  const labels = {
+    crawl: '🕷️ 页面爬虫',
+    login: '🔐 登录抓取',
+    api: '🔗 API接口',
+    manual: '✍️ 手动录入'
+  };
+  return labels[method] || '🕷️ 页面爬虫';
+}
+
+// 获取抓取频率标签
+function getFrequencyLabel(frequency) {
+  const labels = {
+    manual: '手动执行',
+    hourly: '每小时',
+    daily: '每天',
+    weekly: '每周'
+  };
+  return labels[frequency] || '手动执行';
+}
+
+// 执行抓取
+function runCrawl(id) {
+  const source = sourcesData.find(s => s.id === id);
+  if (!source) return;
+  
+  if (source.status === 'inactive') {
+    alert('该来源已停用，请先启用后再执行');
+    return;
+  }
+  
+  // 模拟抓取过程
+  const btn = event.target;
+  btn.textContent = '⏳ 执行中...';
+  btn.disabled = true;
+  
+  setTimeout(() => {
+    // 模拟抓取结果
+    const newSuccess = Math.floor(Math.random() * 20) + 5;
+    const newFailed = Math.floor(Math.random() * 3);
+    
+    const idx = sourcesData.findIndex(s => s.id === id);
+    if (idx >= 0) {
+      sourcesData[idx].lastRun = new Date().toLocaleString('zh-CN');
+      sourcesData[idx].success = (sourcesData[idx].success || 0) + newSuccess;
+      sourcesData[idx].failed = (sourcesData[idx].failed || 0) + newFailed;
+      sourcesData[idx].count = (sourcesData[idx].count || 0) + newSuccess;
+    }
+    
+    saveSources();
+    renderSources();
+    alert(`✅ 抓取完成！成功: ${newSuccess} 条, 失败: ${newFailed} 条`);
+  }, 2000);
+}
+
+// 切换来源启用/停用状态
+function toggleSource(id) {
+  const source = sourcesData.find(s => s.id === id);
+  if (!source) return;
+  
+  const idx = sourcesData.findIndex(s => s.id === id);
+  if (idx >= 0) {
+    sourcesData[idx].status = sourcesData[idx].status === 'inactive' ? 'active' : 'inactive';
+    saveSources();
+    renderSources();
+  }
+}
+
+// 显示添加弹窗
+function showAddSourceModal() {
+  editingSourceId = null;
+  document.getElementById('modalTitle').textContent = '添加来源';
+  document.getElementById('sourceName').value = '';
+  document.getElementById('sourceType').value = 'crawl';  // 默认人工抓取源
+  document.getElementById('sourceCount').value = '0';
+  document.getElementById('sourceUrl').value = '';
+  document.getElementById('sourceDesc').value = '';
+  
+  // 重置抓取配置
+  document.getElementById('crawlMethod').value = 'crawl';
+  document.getElementById('crawlUrl').value = '';
+  document.getElementById('crawlFrequency').value = 'daily';
+  document.getElementById('loginUsername').value = '';
+  document.getElementById('loginPassword').value = '';
+  document.getElementById('apiUrl').value = '';
+  document.getElementById('apiKey').value = '';
+  document.getElementById('apiMethod').value = 'GET';
+  document.getElementById('searchKeywords').value = '';
+  document.getElementById('customHeaders').value = '';
+  document.getElementById('crawlStatus').value = 'active';
+  document.getElementById('crawlPriority').value = '2';
+  
+  // 重置抓取方式选择
+  document.querySelectorAll('.method-option').forEach(opt => opt.classList.remove('selected'));
+  document.querySelector('.method-option[data-method="crawl"]').classList.add('selected');
+  
+  // 显示抓取配置
+  toggleCrawlConfig();
+  document.getElementById('sourceModal').classList.add('active');
+}
+
+// 切换抓取配置显示
+function toggleCrawlConfig() {
+  const type = document.getElementById('sourceType').value;
+  const crawlConfig = document.getElementById('crawlConfig');
+  const normalUrlGroup = document.getElementById('normalUrlGroup');
+  
+  if (type === 'crawl') {
+    crawlConfig.style.display = 'block';
+    normalUrlGroup.style.display = 'none';
+  } else {
+    crawlConfig.style.display = 'none';
+    normalUrlGroup.style.display = 'block';
+  }
+}
+
+// 选择抓取方式
+function selectMethod(method) {
+  document.getElementById('crawlMethod').value = method;
+  document.querySelectorAll('.method-option').forEach(opt => opt.classList.remove('selected'));
+  document.querySelector(`.method-option[data-method="${method}"]`).classList.add('selected');
+  
+  // 显示/隐藏相关配置
+  document.getElementById('loginConfig').style.display = method === 'login' ? 'block' : 'none';
+  document.getElementById('apiConfig').style.display = method === 'api' ? 'block' : 'none';
+}
+
+// 编辑来源
+function editSource(id) {
+  const source = sourcesData.find(s => s.id === id);
+  if (!source) return;
+  
+  editingSourceId = id;
+  document.getElementById('modalTitle').textContent = '编辑来源';
+  document.getElementById('sourceName').value = source.name;
+  document.getElementById('sourceType').value = source.type;
+  document.getElementById('sourceCount').value = source.count || 0;
+  document.getElementById('sourceUrl').value = source.url || '';
+  document.getElementById('sourceDesc').value = source.description || '';
+  
+  // 抓取源配置
+  if (source.type === 'crawl') {
+    document.getElementById('crawlMethod').value = source.method || 'crawl';
+    document.getElementById('crawlUrl').value = source.url || '';
+    document.getElementById('crawlFrequency').value = source.frequency || 'daily';
+    document.getElementById('loginUsername').value = source.loginUsername || '';
+    document.getElementById('loginPassword').value = source.loginPassword || '';
+    document.getElementById('apiUrl').value = source.apiUrl || '';
+    document.getElementById('apiKey').value = source.apiKey || '';
+    document.getElementById('apiMethod').value = source.apiMethod || 'GET';
+    document.getElementById('searchKeywords').value = source.keywords || '';
+    document.getElementById('customHeaders').value = source.customHeaders || '';
+    document.getElementById('crawlStatus').value = source.status || 'active';
+    document.getElementById('crawlPriority').value = source.priority || '2';
+    
+    // 更新抓取方式选择UI
+    document.querySelectorAll('.method-option').forEach(opt => opt.classList.remove('selected'));
+    document.querySelector(`.method-option[data-method="${source.method || 'crawl'}"]`)?.classList.add('selected');
+    
+    // 显示/隐藏相关配置
+    document.getElementById('loginConfig').style.display = (source.method === 'login') ? 'block' : 'none';
+    document.getElementById('apiConfig').style.display = (source.method === 'api') ? 'block' : 'none';
+  }
+  
+  toggleCrawlConfig();
+  document.getElementById('sourceModal').classList.add('active');
+}
+
+// 删除来源
+function deleteSource(id) {
+  if (!confirm('确定要删除这个来源吗？')) return;
+  
+  sourcesData = sourcesData.filter(s => s.id !== id);
+  saveSources();
+  renderSources();
+}
+
+// 保存来源
+function saveSource() {
+  const name = document.getElementById('sourceName').value.trim();
+  const type = document.getElementById('sourceType').value;
+  const count = parseInt(document.getElementById('sourceCount').value) || 0;
+  const url = document.getElementById('sourceUrl').value.trim();
+  const description = document.getElementById('sourceDesc').value.trim();
+  
+  if (!name) {
+    alert('请输入来源名称');
+    return;
+  }
+  
+  // 如果是人工抓取源，获取抓取配置
+  let crawlData = {};
+  if (type === 'crawl') {
+    crawlData = {
+      method: document.getElementById('crawlMethod').value,
+      url: document.getElementById('crawlUrl').value.trim(),
+      frequency: document.getElementById('crawlFrequency').value,
+      loginUsername: document.getElementById('loginUsername').value.trim(),
+      loginPassword: document.getElementById('loginPassword').value.trim(),
+      apiUrl: document.getElementById('apiUrl').value.trim(),
+      apiKey: document.getElementById('apiKey').value.trim(),
+      apiMethod: document.getElementById('apiMethod').value,
+      keywords: document.getElementById('searchKeywords').value.trim(),
+      customHeaders: document.getElementById('customHeaders').value.trim(),
+      status: document.getElementById('crawlStatus').value,
+      priority: parseInt(document.getElementById('crawlPriority').value)
+    };
+    
+    // 如果没有填写URL，使用普通URL字段
+    if (!crawlData.url && url) {
+      crawlData.url = url;
+    }
+  }
+  
+  if (editingSourceId) {
+    // 编辑
+    const idx = sourcesData.findIndex(s => s.id === editingSourceId);
+    if (idx >= 0) {
+      sourcesData[idx] = { 
+        ...sourcesData[idx], 
+        name, 
+        type, 
+        count, 
+        url, 
+        description,
+        ...crawlData
+      };
+    }
+  } else {
+    // 添加
+    const newId = Math.max(0, ...sourcesData.map(s => s.id)) + 1;
+    sourcesData.push({ 
+      id: newId, 
+      name, 
+      type, 
+      count, 
+      url, 
+      description,
+      ...crawlData,
+      lastRun: null,
+      success: 0,
+      failed: 0
+    });
+  }
+  
+  saveSources();
+  renderSources();
+  document.getElementById('sourceModal').classList.remove('active');
+}
+
+// 关闭弹窗
+function closeSourceModal() {
+  document.getElementById('sourceModal').classList.remove('active');
+}
+
+// 来源标签页切换
+document.getElementById('sourceTabs').addEventListener('click', (e) => {
+  const tab = e.target.closest('.tab');
+  if (!tab) return;
+  
+  document.querySelectorAll('#sourceTabs .tab').forEach(t => t.classList.remove('active'));
+  tab.classList.add('active');
+  currentFilter = tab.dataset.filter;
+  renderSources();
+});
+</script>
+
+<!-- 来源管理弹窗 -->
+<div class="modal-overlay" id="sourceModal">
+  <div class="modal" style="max-width: 560px;">
+    <h3 id="modalTitle">添加来源</h3>
+    
+    <!-- 基础信息 -->
+    <div class="form-group">
+      <label>来源名称 *</label>
+      <input type="text" id="sourceName" placeholder="如：BOSS直聘、智联招聘、高校就业网等">
+    </div>
+    <div class="form-row">
+      <div class="form-group">
+        <label>来源类型 *</label>
+        <select id="sourceType" onchange="toggleCrawlConfig()">
+          <option value="online">🌐 线上渠道</option>
+          <option value="offline">📍 线下渠道</option>
+          <option value="partner">🤝 合作渠道</option>
+          <option value="crawl">🕷️ 人工抓取源</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>初始数量</label>
+        <input type="number" id="sourceCount" value="0" min="0">
+      </div>
+    </div>
+    
+    <!-- 人工抓取源配置 -->
+    <div id="crawlConfig" style="display: none;">
+      <div class="crawl-config-section">
+        <h5>🕷️ 抓取方式配置</h5>
+        
+        <!-- 抓取方式选择 -->
+        <div class="method-selector" id="methodSelector">
+          <div class="method-option selected" data-method="crawl" onclick="selectMethod('crawl')">
+            <span class="icon">🕷️</span>
+            <span class="label">页面爬虫</span>
+          </div>
+          <div class="method-option" data-method="login" onclick="selectMethod('login')">
+            <span class="icon">🔐</span>
+            <span class="label">登录抓取</span>
+          </div>
+          <div class="method-option" data-method="api" onclick="selectMethod('api')">
+            <span class="icon">🔗</span>
+            <span class="label">API接口</span>
+          </div>
+          <div class="method-option" data-method="manual" onclick="selectMethod('manual')">
+            <span class="icon">✍️</span>
+            <span class="label">手动录入</span>
+          </div>
+        </div>
+        <input type="hidden" id="crawlMethod" value="crawl">
+        
+        <div class="form-row">
+          <div class="form-group">
+            <label>目标URL *</label>
+            <input type="url" id="crawlUrl" placeholder="https://...">
+          </div>
+          <div class="form-group">
+            <label>抓取频率</label>
+            <select id="crawlFrequency">
+              <option value="manual">手动执行</option>
+              <option value="hourly">每小时</option>
+              <option value="daily">每天</option>
+              <option value="weekly">每周</option>
+            </select>
+          </div>
+        </div>
+        
+        <!-- 登录凭据（仅登录抓取显示） -->
+        <div id="loginConfig" style="display: none;">
+          <div class="form-row">
+            <div class="form-group">
+              <label>登录用户名</label>
+              <input type="text" id="loginUsername" placeholder="网站登录账号">
+            </div>
+            <div class="form-group">
+              <label>登录密码</label>
+              <input type="password" id="loginPassword" placeholder="网站登录密码">
+            </div>
+          </div>
+        </div>
+        
+        <!-- API配置 -->
+        <div id="apiConfig" style="display: none;">
+          <div class="form-group">
+            <label>API接口地址</label>
+            <input type="url" id="apiUrl" placeholder="https://api.example.com/...">
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label>API Key（可选）</label>
+              <input type="text" id="apiKey" placeholder="API密钥">
+            </div>
+            <div class="form-group">
+              <label>请求方法</label>
+              <select id="apiMethod">
+                <option value="GET">GET</option>
+                <option value="POST">POST</option>
+              </select>
+            </div>
+          </div>
+        </div>
+        
+        <!-- 搜索配置 -->
+        <div class="form-group">
+          <label>搜索关键词（可选，多个用逗号分隔）</label>
+          <input type="text" id="searchKeywords" placeholder="如：前端开发, Java工程师, 实习招聘">
+        </div>
+        
+        <!-- Cookie/Headers配置 -->
+        <div class="form-group">
+          <label>附加Headers（可选）</label>
+          <textarea id="customHeaders" placeholder="如：User-Agent: Mozilla/5.0&#10;Referer: https://..."></textarea>
+        </div>
+        
+        <div class="form-row">
+          <div class="form-group">
+            <label>状态</label>
+            <select id="crawlStatus">
+              <option value="active">启用</option>
+              <option value="inactive">停用</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>优先级</label>
+            <select id="crawlPriority">
+              <option value="1">高</option>
+              <option value="2" selected>中</option>
+              <option value="3">低</option>
+            </select>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- 普通来源URL -->
+    <div class="form-group" id="normalUrlGroup">
+      <label>来源URL（可选）</label>
+      <input type="url" id="sourceUrl" placeholder="https://...">
+    </div>
+    <div class="form-group">
+      <label>描述说明（可选）</label>
+      <input type="text" id="sourceDesc" placeholder="简短描述">
+    </div>
+    <div class="modal-btns">
+      <button class="btn-cancel" onclick="closeSourceModal()">取消</button>
+      <button class="btn-confirm" onclick="saveSource()">保存</button>
+    </div>
+  </div>
+</div>
+
+<script>
+  // 初始化来源管理
+  renderSources();
+</script>
+
+</body>
+</html>

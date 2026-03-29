@@ -149,6 +149,11 @@ h1,h2,h3 { line-height: 1.3; }
 .badge-red { background: #ff4444; color: white; font-size: 11px; padding: 1px 7px; border-radius: 10px; margin-right: 8px; }
 .badge-blue { background: #ede9ff; color: var(--primary); font-size: 11px; padding: 1px 7px; border-radius: 10px; margin-right: 8px; }
 
+/* ===== SUBPAGE (全屏覆盖) ===== */
+.subpage { position: fixed; top: 0; left: 50%; transform: translateX(-50%); width: 100%; max-width: 480px; height: 100vh; background: var(--bg); z-index: 150; overflow-y: auto; display: none; }
+.subpage.active { display: block; animation: fadeIn 0.2s ease; }
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
 /* ===== SUBPAGE HEADER ===== */
 .subpage-header { background: white; padding: 52px 16px 16px; display: flex; align-items: center; gap: 12px; border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 50; }
 .back-btn { width: 36px; height: 36px; border: none; background: var(--bg); border-radius: 10px; font-size: 16px; cursor: pointer; display: flex; align-items: center; justify-content: center; }
@@ -731,16 +736,11 @@ h1,h2,h3 { line-height: 1.3; }
   </div>
   
   <!-- 登录/注册切换标签 -->
-  <div class="auth-tabs" style="display:flex;justify-content:center;gap:20px;margin-bottom:16px">
+  <div class="auth-tabs" style="display:flex;justify-content:center;gap:20px;margin-bottom:20px">
     <span class="auth-tab active" onclick="switchAuthMode('login')" id="authTabLogin" style="font-size:15px;color:#667eea;font-weight:600;cursor:pointer;border-bottom:2px solid #667eea;padding-bottom:4px">登录</span>
     <span class="auth-tab" onclick="switchAuthMode('register')" id="authTabRegister" style="font-size:15px;color:#8492a6;cursor:pointer;padding-bottom:4px">注册</span>
   </div>
-  
-  <div class="mode-tabs">
-    <div class="mode-tab active" onclick="switchLoginMode('user')" id="tabUser">求职者</div>
-    <div class="mode-tab" onclick="switchLoginMode('company')" id="tabCompany">召集方</div>
-  </div>
-  
+
   <!-- 登录表单 -->
   <div class="form" id="loginForm">
     <div class="form-group">
@@ -757,81 +757,26 @@ h1,h2,h3 { line-height: 1.3; }
     <button class="login-btn" onclick="doLogin()">登 录</button>
     <p class="login-hint">演示版：验证码固定为 123456</p>
   </div>
-  
-  <!-- 企业注册表单 -->
-  <div class="form" id="companyRegisterForm" style="display:none">
-    <div class="form-group">
-      <label>联系人姓名 <span style="color:#ff6b35">*</span></label>
-      <input type="text" id="compRegName" placeholder="请输入联系人姓名">
-    </div>
-    <div class="form-group">
-      <label>单位名称 <span style="color:#ff6b35">*</span></label>
-      <input type="text" id="compRegCompany" placeholder="请输入单位全称（企业/学校/协会等）">
-    </div>
-    <div class="form-group">
-      <label>联系电话 <span style="color:#ff6b35">*</span></label>
-      <input type="tel" id="compRegPhone" placeholder="请输入联系电话" maxlength="11">
-    </div>
-    <div class="form-group">
-      <label>微信号 <span style="color:#ff6b35">*</span></label>
-      <input type="text" id="compRegWechat" placeholder="请输入微信号">
-    </div>
-    <button class="login-btn" onclick="doCompanyRegister()">企业注册</button>
-    <p class="login-hint">召集方注册仅需基本信息，审核通过后即可发布活动和职位</p>
-  </div>
-  
-  <!-- 个人注册表单 -->
-  <div class="form" id="userRegisterForm" style="display:none">
+
+  <!-- 注册表单（统一，手机验证码即可） -->
+  <div class="form" id="registerForm" style="display:none">
     <div class="form-group">
       <label>手机号 <span style="color:#ff6b35">*</span></label>
       <div class="send-code">
-        <input type="tel" id="userRegPhone" placeholder="请输入手机号" maxlength="11">
-        <button class="send-code-btn" onclick="sendUserRegCode()">获取验证码</button>
+        <input type="tel" id="regPhone" placeholder="请输入手机号" maxlength="11">
+        <button class="send-code-btn" id="regSendBtn" onclick="sendRegCode()">获取验证码</button>
       </div>
     </div>
     <div class="form-group">
       <label>验证码 <span style="color:#ff6b35">*</span></label>
-      <input type="text" id="userRegCode" placeholder="请输入验证码" maxlength="6">
+      <input type="text" id="regCode" placeholder="请输入验证码" maxlength="6">
     </div>
     <div class="form-group">
-      <label>真实姓名 <span style="color:#ff6b35">*</span></label>
-      <input type="text" id="userRegName" placeholder="请输入真实姓名">
+      <label>昵称 <span style="color:#ff6b35">*</span></label>
+      <input type="text" id="regNickname" placeholder="给自己起个名字吧">
     </div>
-    <div class="form-group">
-      <label>毕业证照片 <span style="color:#ff6b35">*</span></label>
-      <div class="upload-box" onclick="document.getElementById('diplomaUpload').click()" style="border:2px dashed #d0d5dd;border-radius:10px;padding:20px;text-align:center;cursor:pointer;background:#fafbfc">
-        <div id="diplomaPreview" style="font-size:40px;color:#d0d5dd">📷</div>
-        <p style="font-size:13px;color:#8492a6;margin-top:8px">点击上传毕业证照片</p>
-        <p style="font-size:11px;color:#a0aec0">支持 JPG、PNG 格式</p>
-      </div>
-      <input type="file" id="diplomaUpload" accept="image/*" style="display:none" onchange="handleDiplomaUpload(this)">
-    </div>
-    <div class="form-group">
-      <label>学校 <span style="color:#ff6b35">*</span></label>
-      <input type="text" id="userRegSchool" placeholder="请输入毕业院校">
-    </div>
-    <div class="form-group">
-      <label>专业 <span style="color:#ff6b35">*</span></label>
-      <input type="text" id="userRegMajor" placeholder="请输入专业名称">
-    </div>
-    <div class="form-group">
-      <label>学历 <span style="color:#ff6b35">*</span></label>
-      <select id="userRegDegree" style="width:100%;padding:12px;border:1px solid #e2e8f0;border-radius:10px;font-size:14px;background:white">
-        <option value="">请选择学历</option>
-        <option value="大专">大专</option>
-        <option value="本科">本科</option>
-        <option value="硕士">硕士</option>
-        <option value="博士">博士</option>
-      </select>
-    </div>
-    <div class="form-group">
-      <label>毕业年份 <span style="color:#ff6b35">*</span></label>
-      <select id="userRegGradYear" style="width:100%;padding:12px;border:1px solid #e2e8f0;border-radius:10px;font-size:14px;background:white">
-        <option value="">请选择毕业年份</option>
-      </select>
-    </div>
-    <button class="login-btn" onclick="doUserRegister()">完成注册</button>
-    <p class="login-hint">完善信息有助于获得更精准的职位推荐</p>
+    <button class="login-btn" onclick="doRegister()">注 册</button>
+    <p class="login-hint" style="margin-top:10px">注册后可在 <strong>发起活动 / 发布招募</strong> 功能中以召集方身份发布内容<br>演示版：验证码固定为 123456</p>
   </div>
 </div>
 
@@ -1118,7 +1063,7 @@ h1,h2,h3 { line-height: 1.3; }
 </div>
 
 <!-- ====== 帮助与反馈子页 ====== -->
-<div id="helpPage" class="subpage" style="display:none;background:var(--bg);min-height:100vh">
+<div id="helpPage" class="subpage" style="background:var(--bg);min-height:100vh">
   <div class="subpage-header"><button class="back-btn" onclick="closeSubPage()">‹</button><h2>帮助与反馈</h2></div>
   <div style="padding:12px">
     <!-- 快捷入口 -->
@@ -1237,7 +1182,7 @@ h1,h2,h3 { line-height: 1.3; }
 <!-- ====== SUB PAGES ====== -->
 
 <!-- Resume Page -->
-<div id="resumePage" class="subpage" style="display:none;background:var(--bg);min-height:100vh">
+<div id="resumePage" class="subpage" style="background:var(--bg);min-height:100vh">
   <div class="subpage-header"><button class="back-btn" onclick="closeSubPage()">‹</button><h2>我的简历</h2></div>
   <div style="padding:12px">
     <div class="resume-section">
@@ -1274,7 +1219,7 @@ h1,h2,h3 { line-height: 1.3; }
 </div>
 
 <!-- My Events Page -->
-<div id="myEventsPage" class="subpage" style="display:none;background:var(--bg);min-height:100vh">
+<div id="myEventsPage" class="subpage" style="background:var(--bg);min-height:100vh">
   <div class="subpage-header"><button class="back-btn" onclick="closeSubPage()">‹</button><h2>我的活动</h2></div>
   <!-- 状态筛选 -->
   <div style="padding:10px 12px 0;display:flex;gap:8px;overflow-x:auto;scrollbar-width:none">
@@ -1288,13 +1233,13 @@ h1,h2,h3 { line-height: 1.3; }
 </div>
 
 <!-- My Apply Page -->
-<div id="myApplyPage" class="subpage" style="display:none;background:var(--bg);min-height:100vh">
+<div id="myApplyPage" class="subpage" style="background:var(--bg);min-height:100vh">
   <div class="subpage-header"><button class="back-btn" onclick="closeSubPage()">‹</button><h2>我的投递</h2></div>
   <div style="padding:12px" id="myApplyList"></div>
 </div>
 
 <!-- Messages Page -->
-<div id="messagesPage" class="subpage" style="display:none;background:var(--bg);min-height:100vh">
+<div id="messagesPage" class="subpage" style="background:var(--bg);min-height:100vh">
   <div class="subpage-header"><button class="back-btn" onclick="closeSubPage()">‹</button><h2>消息通知</h2>
     <button onclick="markAllRead()" style="margin-left:auto;color:var(--primary);background:none;border:none;font-size:13px;cursor:pointer">全部已读</button>
   </div>
@@ -1302,7 +1247,7 @@ h1,h2,h3 { line-height: 1.3; }
 </div>
 
 <!-- Settings Page -->
-<div id="settingsPage" class="subpage" style="display:none;background:var(--bg);min-height:100vh">
+<div id="settingsPage" class="subpage" style="background:var(--bg);min-height:100vh">
   <div class="subpage-header"><button class="back-btn" onclick="closeSubPage()">‹</button><h2>账号设置</h2></div>
   <div style="padding:12px">
     <div class="menu-list">
@@ -1375,6 +1320,7 @@ h1,h2,h3 { line-height: 1.3; }
     <div class="modal-footer" style="display:flex;gap:8px">
       <button class="apply-btn" id="jobApplyBtn" onclick="applyJob()" style="flex:3">投递简历</button>
       <button onclick="initiateChatFromJob()" class="initiate-chat-btn" style="flex:2;font-size:13px;padding:12px 10px">💬 发起沟通</button>
+      <button id="jobCallBtn" onclick="callJobContact()" style="flex:2;font-size:13px;padding:12px 10px;border-radius:12px;border:none;background:linear-gradient(135deg,#19c37d,#0ea770);color:white;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:4px">📞 电话</button>
     </div>
   </div>
 </div>
@@ -1390,7 +1336,39 @@ h1,h2,h3 { line-height: 1.3; }
 </div>
 
 <!-- Publish Job Modal -->
+<!-- ====== 召集方身份确认弹窗 ====== -->
+<div class="modal-overlay" id="callerIdentityModal">
+  <div class="modal" style="max-height:90vh;overflow-y:auto">
+    <div class="modal-handle"></div>
+    <div class="modal-header">
+      <h3>以召集方身份发布</h3>
+      <button class="modal-close" onclick="closeModal('callerIdentityModal')">✕</button>
+    </div>
+    <div class="modal-body" style="padding:20px">
+      <p style="color:#475569;font-size:14px;margin-bottom:20px;line-height:1.6">
+        发起活动 / 发布招募 需要以 <strong>召集方</strong> 身份操作。<br>
+        请填写您的单位信息，完成身份认定后即可发布内容。
+      </p>
+      <div class="form-group">
+        <label>单位名称 <span style="color:#ff6b35">*</span></label>
+        <input type="text" id="ciOrgName" placeholder="企业/学校/协会/团队名称" style="width:100%;padding:12px;border:1px solid #e2e8f0;border-radius:10px;font-size:14px;box-sizing:border-box">
+      </div>
+      <div class="form-group">
+        <label>联系人 <span style="color:#ff6b35">*</span></label>
+        <input type="text" id="ciContactName" placeholder="您的姓名" style="width:100%;padding:12px;border:1px solid #e2e8f0;border-radius:10px;font-size:14px;box-sizing:border-box">
+      </div>
+      <div class="form-group">
+        <label>微信号</label>
+        <input type="text" id="ciWechat" placeholder="方便我们与您联系（选填）" style="width:100%;padding:12px;border:1px solid #e2e8f0;border-radius:10px;font-size:14px;box-sizing:border-box">
+      </div>
+      <button class="login-btn" onclick="confirmCallerIdentity()" style="margin-top:4px">确认身份，继续发布</button>
+      <p style="text-align:center;color:#94a3b8;font-size:12px;margin-top:10px">填写后本次及后续操作均以召集方身份进行</p>
+    </div>
+  </div>
+</div>
+
 <div class="modal-overlay" id="publishJobModal">
+
   <div class="modal">
     <div class="modal-handle"></div>
     <div class="modal-header"><h3>发布职位</h3><button class="modal-close" onclick="closeModal('publishJobModal')">✕</button></div>
@@ -1930,32 +1908,32 @@ const JOBS = [
     type:'全职', salary:'15K-25K', city:'北京',
     description:'负责公司核心系统的开发和维护，参与系统架构设计。团队氛围好，技术栈新，有完整的晋升通道。',
     requirements:'1. 熟练掌握Java语言\n2. 熟悉Spring Boot框架\n3. 有良好的编程习惯\n4. 有MySQL / Redis 使用经验',
-    tags:['Java','Spring','MySQL','Redis'], match_score:0.85, views:128, applicants:23 },
+    tags:['Java','Spring','MySQL','Redis'], match_score:0.85, views:128, applicants:23, contact_phone:'010-12345678', contact_name:'李HR', contact_wechat:'tencent_hr' },
   { id:2, company:'字节跳动', company_verified:true, emoji:'🦋', title:'前端开发工程师',
     type:'全职', salary:'20K-35K', city:'北京',
     description:'负责公司前端页面开发，包括移动端和PC端。使用最新的前端技术栈，有技术分享会。',
     requirements:'1. 熟练掌握 Vue.js / React\n2. 有移动端开发经验\n3. 关注前端性能优化',
-    tags:['前端','Vue','React','TypeScript'], match_score:0.92, views:256, applicants:45 },
+    tags:['前端','Vue','React','TypeScript'], match_score:0.92, views:256, applicants:45, contact_phone:'13912345678', contact_name:'王招聘', contact_wechat:'byte_recruit' },
   { id:3, company:'百度AI研究院', company_verified:true, emoji:'🔵', title:'Python算法工程师',
     type:'全职', salary:'20K-35K', city:'北京',
     description:'负责机器学习算法的研发和优化，包括模型训练和部署。团队有大牛带队，提供GPU资源。',
     requirements:'1. 熟练掌握Python\n2. 熟悉PyTorch/TensorFlow\n3. 有相关项目经验',
-    tags:['Python','机器学习','深度学习','PyTorch'], match_score:0.72, views:75, applicants:8 },
+    tags:['Python','机器学习','深度学习','PyTorch'], match_score:0.72, views:75, applicants:8, contact_phone:'13811111111', contact_name:'张工', contact_wechat:'baidu_ai_hr' },
   { id:4, company:'美团点评', company_verified:true, emoji:'🐱', title:'产品运营实习生',
     type:'实习', salary:'3K-5K', city:'北京',
     description:'协助产品经理进行用户调研、数据分析和产品运营，可以接触完整的产品运营流程。',
     requirements:'1. 本科在校生\n2. 对互联网产品有热情\n3. 有数据分析经验优先',
-    tags:['产品','运营','实习','数据分析'], match_score:0.55, views:52, applicants:3 },
+    tags:['产品','运营','实习','数据分析'], match_score:0.55, views:52, applicants:3, contact_phone:'13622222222', contact_name:'赵HR', contact_wechat:'meituan_intern' },
   { id:5, company:'拼多多', company_verified:true, emoji:'🛒', title:'Go后端开发',
     type:'全职', salary:'18K-30K', city:'上海',
     description:'负责高并发电商系统后端开发，技术栈 Go + Kafka + Redis + MySQL。',
     requirements:'1. 熟悉Go语言\n2. 了解分布式系统\n3. 有高并发场景经验',
-    tags:['Go','Kafka','Redis','高并发'], match_score:0.68, views:89, applicants:12 },
+    tags:['Go','Kafka','Redis','高并发'], match_score:0.68, views:89, applicants:12, contact_phone:'02198765432', contact_name:'孙工', contact_wechat:'pdd_backend' },
   { id:6, company:'小红书', company_verified:true, emoji:'📕', title:'数据分析师',
     type:'全职', salary:'12K-20K', city:'上海',
     description:'负责用户行为数据分析，为产品迭代提供数据支撑。',
     requirements:'1. 熟悉SQL\n2. 会Python数据分析\n3. 有BI工具使用经验',
-    tags:['SQL','Python','数据分析','BI'], match_score:0.60, views:66, applicants:7 },
+    tags:['SQL','Python','数据分析','BI'], match_score:0.60, views:66, applicants:7, contact_phone:'13533333333', contact_name:'周数据', contact_wechat:'xhs_data_hr' },
 ];
 
 const MESSAGES = [
@@ -1991,18 +1969,15 @@ let uploadedDiploma = null; // 存储上传的毕业证照片
 
 // =================== LOGIN & REGISTER ===================
 function switchLoginMode(mode) {
+  // 保留兼容，登录页已无身份区分，仅更新变量
   loginMode = mode;
-  document.getElementById('tabUser').className = 'mode-tab' + (mode==='user'?' active':'');
-  document.getElementById('tabCompany').className = 'mode-tab' + (mode==='company'?' active':'');
-  // 切换模式时刷新表单显示
-  switchAuthMode(authMode);
 }
 
 function switchAuthMode(mode) {
   authMode = mode;
   const loginTab = document.getElementById('authTabLogin');
   const registerTab = document.getElementById('authTabRegister');
-  
+
   if (mode === 'login') {
     loginTab.style.color = '#667eea';
     loginTab.style.fontWeight = '600';
@@ -2010,10 +1985,8 @@ function switchAuthMode(mode) {
     registerTab.style.color = '#8492a6';
     registerTab.style.fontWeight = '400';
     registerTab.style.borderBottom = 'none';
-    
     document.getElementById('loginForm').style.display = 'block';
-    document.getElementById('companyRegisterForm').style.display = 'none';
-    document.getElementById('userRegisterForm').style.display = 'none';
+    document.getElementById('registerForm').style.display = 'none';
   } else {
     registerTab.style.color = '#667eea';
     registerTab.style.fontWeight = '600';
@@ -2021,59 +1994,16 @@ function switchAuthMode(mode) {
     loginTab.style.color = '#8492a6';
     loginTab.style.fontWeight = '400';
     loginTab.style.borderBottom = 'none';
-    
     document.getElementById('loginForm').style.display = 'none';
-    if (loginMode === 'company') {
-      document.getElementById('companyRegisterForm').style.display = 'block';
-      document.getElementById('userRegisterForm').style.display = 'none';
-    } else {
-      document.getElementById('companyRegisterForm').style.display = 'none';
-      document.getElementById('userRegisterForm').style.display = 'block';
-    }
+    document.getElementById('registerForm').style.display = 'block';
   }
 }
 
-// 初始化毕业年份选项
-function initGradYearOptions() {
-  const select = document.getElementById('userRegGradYear');
-  const currentYear = new Date().getFullYear();
-  for (let i = currentYear; i >= currentYear - 10; i--) {
-    const option = document.createElement('option');
-    option.value = i;
-    option.textContent = i + '年';
-    select.appendChild(option);
-  }
-}
-
-// 处理毕业证上传
-function handleDiplomaUpload(input) {
-  const file = input.files[0];
-  if (!file) return;
-  
-  if (!file.type.startsWith('image/')) {
-    showToast('请上传图片文件');
-    return;
-  }
-  
-  const reader = new FileReader();
-  reader.onload = function(e) {
-    uploadedDiploma = e.target.result;
-    const preview = document.getElementById('diplomaPreview');
-    preview.innerHTML = `<img src="${uploadedDiploma}" style="max-width:100%;max-height:150px;border-radius:8px">`;
-    preview.style.fontSize = 'inherit';
-  };
-  reader.readAsDataURL(file);
-}
-
-// 发送个人注册验证码
-function sendUserRegCode() {
-  const phone = document.getElementById('userRegPhone').value;
-  if (!phone || phone.length < 11) {
-    showToast('请输入正确的手机号');
-    return;
-  }
-  
-  const btn = event.target;
+// 注册页发送验证码
+function sendRegCode() {
+  const phone = document.getElementById('regPhone').value;
+  if (!phone || phone.length < 11) { showToast('请输入正确的手机号'); return; }
+  const btn = document.getElementById('regSendBtn');
   btn.disabled = true;
   let sec = 60;
   btn.textContent = sec + 's';
@@ -2085,74 +2015,45 @@ function sendUserRegCode() {
   showToast('验证码已发送（演示：123456）');
 }
 
-// 企业注册
-function doCompanyRegister() {
-  const name = document.getElementById('compRegName').value.trim();
-  const company = document.getElementById('compRegCompany').value.trim();
-  const phone = document.getElementById('compRegPhone').value.trim();
-  const wechat = document.getElementById('compRegWechat').value.trim();
-  
-  if (!name) return showToast('请输入联系人姓名');
-  if (!company) return showToast('请输入单位名称');
-  if (!phone || phone.length < 11) return showToast('请输入正确的联系电话');
-  if (!wechat) return showToast('请输入微信号');
-  
-  // 模拟注册成功
-  currentUser = { 
-    type: 'company',
-    name, 
-    company, 
-    phone, 
-    wechat,
-    role: 'enterprise'
-  };
-  
-  document.getElementById('loginPage').style.display = 'none';
-  document.getElementById('companyApp').style.display = 'block';
-  document.getElementById('companyName').textContent = company;
-  renderCompanyPage();
-  showToast('🏢 召集方注册成功，欢迎入驻！');
-}
-
-// 个人注册
-function doUserRegister() {
-  const phone = document.getElementById('userRegPhone').value.trim();
-  const code = document.getElementById('userRegCode').value.trim();
-  const name = document.getElementById('userRegName').value.trim();
-  const school = document.getElementById('userRegSchool').value.trim();
-  const major = document.getElementById('userRegMajor').value.trim();
-  const degree = document.getElementById('userRegDegree').value;
-  const gradYear = document.getElementById('userRegGradYear').value;
-  
+// 统一注册（手机+验证码+昵称）
+async function doRegister() {
+  const phone = document.getElementById('regPhone').value.trim();
+  const code = document.getElementById('regCode').value.trim();
+  const nickname = document.getElementById('regNickname').value.trim();
   if (!phone || phone.length < 11) return showToast('请输入正确的手机号');
   if (code !== '123456') return showToast('验证码错误，演示码为 123456');
-  if (!name) return showToast('请输入真实姓名');
-  if (!uploadedDiploma) return showToast('请上传毕业证照片');
-  if (!school) return showToast('请输入学校');
-  if (!major) return showToast('请输入专业');
-  if (!degree) return showToast('请选择学历');
-  if (!gradYear) return showToast('请选择毕业年份');
-  
-  // 模拟注册成功
-  currentUser = { 
-    type: 'user',
-    phone, 
-    name,
-    nickname: name,
-    school, 
-    major,
-    degree,
-    gradYear,
-    diploma: uploadedDiploma,
-    tags: [],
-    activity_score: 0
-  };
-  
+  if (!nickname) return showToast('请输入昵称');
+
+  // 尝试真实后端注册
+  const alive = await checkBackend();
+  if (alive) {
+    const r = await apiCall('/auth/register', {
+      method: 'POST',
+      body: JSON.stringify({ phone, code, nickname, role: 'user' }),
+    });
+    if (r.code === 0 && r.data?.token) {
+      setToken(r.data.token);
+      currentUser = { ...r.data.user, type: 'user', nickname };
+    }
+  }
+
+  // 本地演示兜底
+  if (!currentUser) {
+    currentUser = { phone, name: nickname, nickname, type: 'user', role: 'user' };
+  }
+
   document.getElementById('loginPage').style.display = 'none';
   document.getElementById('mainApp').style.display = 'block';
   renderApp();
-  showToast('✅ 注册成功，欢迎加入！');
+  showToast('✅ 注册成功，欢迎加入召集吧！');
 }
+
+// ——以下旧函数保留空壳兼容（不再调用）——
+function sendUserRegCode() { sendRegCode(); }
+function doCompanyRegister() {}
+function doUserRegister() {}
+function handleDiplomaUpload() {}
+function initGradYearOptions() {}
 
 let codeTimer = null;
 function sendCode() {
@@ -2179,34 +2080,23 @@ async function doLogin() {
   if (alive) {
     const r = await apiCall('/auth/login', {
       method: 'POST',
-      body: JSON.stringify({ phone, code, role: loginMode === 'company' ? 'company' : 'user' }),
+      body: JSON.stringify({ phone, code }),
     });
     if (r.code === 0 && r.data?.token) {
       setToken(r.data.token);
-      currentUser = { ...r.data.user, type: loginMode };
+      currentUser = { ...r.data.user, type: 'user' };
     }
   }
 
-  // 本地演示兜底（后端不通或无账号时）
+  // 本地演示兜底
   if (!currentUser) {
-    if (loginMode === 'company') {
-      currentUser = { type: 'company', name: '腾讯科技', company: '腾讯科技有限公司', phone, role: 'company' };
-    } else {
-      currentUser = { phone, name: '张三', nickname: '张三', school: '北京理工大学', major: '计算机科学与技术', type: 'user' };
-    }
+    currentUser = { phone, name: '用户' + phone.slice(-4), nickname: '用户' + phone.slice(-4), type: 'user', role: 'user' };
   }
 
   document.getElementById('loginPage').style.display = 'none';
-
-  if (loginMode === 'company') {
-    document.getElementById('companyApp').style.display = 'block';
-    renderCompanyPage();
-    showToast('🏢 召集方登录成功');
-  } else {
-    document.getElementById('mainApp').style.display = 'block';
-    renderApp();
-    showToast('✅ 登录成功，欢迎回来！');
-  }
+  document.getElementById('mainApp').style.display = 'block';
+  renderApp();
+  showToast('✅ 登录成功，欢迎回来！');
 }
 
 function doLogout() {
@@ -2236,11 +2126,21 @@ function switchPage(pageId) {
 let subpageStack = [];
 function openSubPage(pageId) {
   subpageStack.push(pageId);
-  document.querySelectorAll('.subpage').forEach(p => p.style.display = 'none');
+  // 隐藏所有 subpage，移除 active 类
+  document.querySelectorAll('.subpage').forEach(p => {
+    p.style.display = 'none';
+    p.classList.remove('active');
+  });
   const pg = document.getElementById(pageId);
-  if (pg) { pg.style.display = 'block'; pg.scrollTop = 0; }
+  if (pg) {
+    pg.style.display = 'block';
+    pg.classList.add('active');
+    pg.scrollTop = 0;
+  }
   const tabBar = document.getElementById('mainTabBar');
   if (tabBar) tabBar.style.display = 'none';
+  // 隐藏主页面的 page 内容，避免重叠显示
+  document.querySelectorAll('.page.active').forEach(p => p.style.display = 'none');
   if (pageId === 'resumePage') renderResumePage();
   if (pageId === 'myEventsPage') { _myEventsFilter = 'all'; document.querySelectorAll('#myEventsPage .tag').forEach(t => t.classList.remove('active')); document.getElementById('eventFilterAll')?.classList.add('active'); renderMyEventsList(); }
   if (pageId === 'myApplyPage') renderMyApply();
@@ -2250,7 +2150,13 @@ function openSubPage(pageId) {
 
 function closeSubPage() {
   subpageStack.pop();
-  document.querySelectorAll('.subpage').forEach(p => p.style.display = 'none');
+  // 隐藏所有 subpage
+  document.querySelectorAll('.subpage').forEach(p => {
+    p.style.display = 'none';
+    p.classList.remove('active');
+  });
+  // 恢复显示主页面的 page 内容
+  document.querySelectorAll('.page').forEach(p => p.classList.add('active'));
   const tabBar = document.getElementById('mainTabBar');
   if (tabBar) tabBar.style.display = 'flex';
 }
@@ -3068,11 +2974,44 @@ function showJobDetail(id) {
     <p style="font-size:14px;line-height:1.8;color:#475569;margin-bottom:14px">${j.description}</p>
     <h3 style="font-size:15px;font-weight:700;margin-bottom:8px">任职要求</h3>
     <p style="font-size:14px;line-height:1.8;color:#475569;white-space:pre-line">${j.requirements}</p>
+    ${j.contact_name ? `
+    <div style="margin-top:16px;background:#f0fdf4;border:1px solid #bbf7d0;border-radius:12px;padding:14px">
+      <div style="font-size:13px;font-weight:700;color:#16a34a;margin-bottom:8px">📋 联系方式</div>
+      <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">
+        <span style="font-size:14px;color:#334155">👤 ${j.contact_name}</span>
+        <a href="tel:${j.contact_phone}" style="display:inline-flex;align-items:center;gap:4px;padding:6px 14px;background:#19c37d;color:white;border-radius:8px;font-size:13px;font-weight:600;text-decoration:none">📞 ${j.contact_phone}</a>
+        ${j.contact_wechat ? `<span style="font-size:13px;color:#64748b">微信: ${j.contact_wechat}</span>` : ''}
+      </div>
+    </div>` : ''}
   `;
   const btn = document.getElementById('jobApplyBtn');
   if (applied) { btn.textContent = '✅ 已投递'; btn.className = 'apply-btn applied'; }
   else { btn.textContent = '投递简历'; btn.className = 'apply-btn'; }
+  // 电话按钮
+  const callBtn = document.getElementById('jobCallBtn');
+  if (callBtn) {
+    if (j.contact_phone) {
+      callBtn.style.display = '';
+      callBtn.dataset.phone = j.contact_phone;
+      callBtn.dataset.name = j.contact_name || '招聘方';
+    } else {
+      callBtn.style.display = 'none';
+    }
+  }
   document.getElementById('jobModal').classList.add('active');
+}
+
+function callJobContact() {
+  const btn = document.getElementById('jobCallBtn');
+  const phone = btn && btn.dataset.phone;
+  const name = btn && btn.dataset.name;
+  if (!phone) return showToast('暂未提供联系电话');
+  // 移动端直接拨号，PC端显示弹窗
+  if (/Mobi|Android|iPhone/i.test(navigator.userAgent)) {
+    window.location.href = `tel:${phone}`;
+  } else {
+    showToast(`📞 联系${name}：${phone}`);
+  }
 }
 
 // =================== MATCH DETAIL ===================
@@ -3266,7 +3205,45 @@ function contactCandidate() {
   showToast('📞 面试邀请已发送！');
 }
 
-function openPublishJob() { document.getElementById('publishJobModal').classList.add('active'); }
+// ── 召集方身份确认 ──
+// 存储当前待触发的发布动作：'event' | 'job'
+let _pendingPublishAction = null;
+
+function requireCallerIdentity(action) {
+  // 如果已是召集方或已填过单位信息，直接放行
+  if (currentUser && currentUser.callerOrg) {
+    if (action === 'event') _doOpenPublishEvent();
+    else _doOpenPublishJob();
+    return;
+  }
+  // 否则弹出身份填写弹窗
+  _pendingPublishAction = action;
+  // 预填已知昵称
+  const nameInput = document.getElementById('ciContactName');
+  if (nameInput && currentUser?.nickname) nameInput.value = currentUser.nickname;
+  document.getElementById('callerIdentityModal').classList.add('active');
+}
+
+function confirmCallerIdentity() {
+  const org = document.getElementById('ciOrgName').value.trim();
+  const contact = document.getElementById('ciContactName').value.trim();
+  if (!org) return showToast('请输入单位名称');
+  if (!contact) return showToast('请输入联系人姓名');
+  const wechat = document.getElementById('ciWechat').value.trim();
+  // 写入 currentUser
+  currentUser.callerOrg = org;
+  currentUser.callerContact = contact;
+  if (wechat) currentUser.callerWechat = wechat;
+  closeModal('callerIdentityModal');
+  showToast('✅ 召集方身份已确认');
+  // 触发原来的动作
+  if (_pendingPublishAction === 'event') _doOpenPublishEvent();
+  else if (_pendingPublishAction === 'job') _doOpenPublishJob();
+  _pendingPublishAction = null;
+}
+
+function openPublishJob() { requireCallerIdentity('job'); }
+function _doOpenPublishJob() { document.getElementById('publishJobModal').classList.add('active'); }
 
 // ── 漏斗 Session ID（每次打开发起弹窗生成新的） ──
 let _funnelSessionId = null;
@@ -3274,6 +3251,10 @@ let _selectedInitiateTypes = [];
 
 function openPublishEvent() {
   if (!currentUser) { showToast('请先登录后再发起召集'); return; }
+  requireCallerIdentity('event');
+}
+
+function _doOpenPublishEvent() {
   // 生成本次漏斗会话ID
   _funnelSessionId = 'f_' + Date.now() + '_' + Math.random().toString(36).slice(2, 6);
   _selectedInitiateTypes = [];
@@ -3291,7 +3272,6 @@ function openPublishEvent() {
   loadPublishJobOptions();
   // 埋点：漏斗 Step1 —— 打开发起弹窗
   trackEvent({ event_type: 'funnel_step', funnel_name: 'initiate_event', step: 1, step_name: 'click_initiate_btn', funnel_session_id: _funnelSessionId });
-  // 埋点："发起"按钮曝光（已在 tabBar 渲染时曝光，这里记点击）
   trackEvent({ event_type: 'click', element_id: 'tabbar_publish_btn', page: 'home', funnel_session_id: _funnelSessionId });
 }
 

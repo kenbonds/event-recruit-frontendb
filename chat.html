@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="theme-color" content="#667eea">
+  <title>聊天 - 召集吧</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    :root {
+      --primary: #667eea;
+      --primary2: #764ba2;
+      --orange: #ff6b35;
+      --blue: #2563eb;
+      --green: #19c37d;
+      --bg: #f5f6fa;
+      --card: #ffffff;
+      --text: #2c3e50;
+      --sub: #8492a6;
+      --border: #edf2f7;
+    }
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif; background: #f1f5f9; color: var(--text); max-width: 480px; margin: 0 auto; min-height: 100vh; padding-bottom: 70px; }
+    
+    /* ===== HEADER ===== */
+    .header { background: white; padding: 44px 16px 0; position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 10px rgba(0,0,0,0.05); }
+    .header .top { display: flex; justify-content: space-between; align-items: center; padding: 12px 0; border-bottom: 1px solid var(--border); }
+    .header .back { width: 36px; height: 36px; border-radius: 10px; border: none; background: #f1f5f9; color: var(--text); font-size: 18px; cursor: pointer; display: flex; align-items: center; justify-content: center; }
+    .header .more { width: 36px; height: 36px; border-radius: 10px; border: none; background: #f1f5f9; color: var(--text); font-size: 16px; cursor: pointer; }
+    
+    /* Quick Actions */
+    .quick-actions { display: flex; gap: 12px; padding: 12px 16px; overflow-x: auto; scrollbar-width: none; }
+    .quick-actions::-webkit-scrollbar { display: none; }
+    .quick-action { display: flex; flex-direction: column; align-items: center; gap: 6px; min-width: 64px; cursor: pointer; }
+    .quick-action .icon { width: 48px; height: 48px; border-radius: 12px; background: #f1f5f9; display: flex; align-items: center; justify-content: center; font-size: 22px; transition: all 0.2s; }
+    .quick-action .text { font-size: 12px; color: #64748b; font-weight: 500; }
+    .quick-action:active .icon { background: #e2e8f0; transform: scale(0.95); }
+
+    /* Contact Info Display */
+    .contact-info { display: none; background: linear-gradient(135deg, #f0fdf4, #dcfce7); padding: 12px 16px; margin: 12px 16px; border-radius: 12px; animation: slideDown 0.3s ease; }
+    .contact-info.active { display: block; }
+    @keyframes slideDown {
+      from { opacity: 0; transform: translateY(-10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .contact-info .header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
+    .contact-info .title { font-size: 13px; font-weight: 700; color: #16a34a; display: flex; align-items: center; gap: 6px; }
+    .contact-info .close { font-size: 20px; color: #94a3b8; cursor: pointer; padding: 4px; }
+    .contact-info .content { font-size: 14px; color: #1e293b; line-height: 1.8; }
+    .contact-info .content .item { display: flex; margin-bottom: 6px; }
+    .contact-info .content .label { color: #64748b; margin-right: 8px; min-width: 60px; }
+    .contact-info .tip { font-size: 11px; color: #94a3b8; margin-top: 8px; padding-top: 8px; border-top: 1px dashed rgba(22,163,74,0.3); }
+
+    /* Job Card (Floating) */
+    .job-card-floating { background: white; margin: 10px 16px; padding: 12px; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.06); cursor: pointer; }
+    .job-card-floating .top { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 8px; }
+    .job-card-floating .title { font-size: 15px; font-weight: 700; line-height: 1.3; flex: 1; }
+    .job-card-floating .salary { font-size: 17px; font-weight: 800; color: var(--blue); white-space: nowrap; margin-left: 8px; }
+    .job-card-floating .company { font-size: 12px; color: #64748b; margin-top: 4px; }
+    
+    /* ===== CHAT MESSAGES ===== */
+    .chat-container { padding: 12px 16px; min-height: calc(100vh - 320px); }
+    .time-divider { text-align: center; padding: 12px 0; }
+    .time-divider span { font-size: 11px; color: #94a3b8; background: #e2e8f0; padding: 4px 12px; border-radius: 12px; }
+    
+    /* System Message */
+    .system-msg { text-align: center; padding: 8px 0; }
+    .system-msg span { font-size: 11px; color: #94a3b8; background: #fef3c7; padding: 6px 12px; border-radius: 8px; }
+    
+    /* Message */
+    .message { display: flex; margin-bottom: 16px; }
+    .message.other { justify-content: flex-start; }
+    .message.self { justify-content: flex-end; }
+    
+    .message .avatar { width: 40px; height: 40px; border-radius: 10px; background: linear-gradient(135deg, var(--primary), var(--primary2)); display: flex; align-items: center; justify-content: center; color: white; font-size: 18px; font-weight: 700; flex-shrink: 0; }
+    .message.other .avatar { margin-right: 10px; }
+    .message.self .avatar { margin-left: 10px; order: 2; }
+    
+    .message .bubble { max-width: 240px; padding: 10px 14px; border-radius: 12px; font-size: 14px; line-height: 1.5; }
+    .message.other .bubble { background: white; color: #1e293b; border-top-left-radius: 4px; }
+    .message.self .bubble { background: linear-gradient(135deg, var(--blue), #1d4ed8); color: white; border-top-right-radius: 4px; }
+    
+    .message .time { font-size: 10px; color: #94a3b8; margin-top: 4px; }
+    .message.other .time { text-align: left; }
+    .message.self .time { text-align: right; }
+    
+    /* ===== BOTTOM INPUT ===== */
+    .bottom-input { position: fixed; bottom: 0; left: 0; right: 0; max-width: 480px; margin: 0 auto; background: white; padding: 8px 12px; box-shadow: 0 -2px 10px rgba(0,0,0,0.05); z-index: 100; }
+    .bottom-input .top { display: flex; gap: 8px; align-items: flex-end; }
+    .bottom-input .btn-icon { width: 36px; height: 36px; border-radius: 10px; border: none; background: #f1f5f9; color: #64748b; font-size: 18px; cursor: pointer; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    
+    .bottom-input .input-wrap { flex: 1; position: relative; }
+    .bottom-input input { width: 100%; padding: 10px 14px; border-radius: 20px; border: 1px solid #e2e8f0; font-size: 14px; outline: none; }
+    .bottom-input input:focus { border-color: var(--blue); }
+    
+    .bottom-input .btn-send { width: 40px; height: 40px; border-radius: 10px; border: none; background: linear-gradient(135deg, var(--blue), #1d4ed8); color: white; font-size: 18px; cursor: pointer; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    
+    .bottom-input .quick-phrases { display: flex; gap: 8px; padding: 8px 0; overflow-x: auto; scrollbar-width: none; }
+    .bottom-input .quick-phrases::-webkit-scrollbar { display: none; }
+    .quick-phrase { padding: 6px 12px; border-radius: 16px; font-size: 12px; background: #f1f5f9; color: #64748b; white-space: nowrap; cursor: pointer; }
+    .quick-phrase.add-new { background: #e0e7ff; color: var(--blue); border: 1px dashed var(--blue); }
+    
+    /* ===== MORE PANEL ===== */
+    .more-panel { display: none; position: fixed; bottom: 70px; left: 0; right: 0; max-width: 480px; margin: 0 auto; background: white; padding: 20px 16px; box-shadow: 0 -4px 20px rgba(0,0,0,0.1); z-index: 200; }
+    .more-panel.active { display: block; }
+    .more-panel .title { font-size: 13px; color: #94a3b8; margin-bottom: 16px; }
+    .more-panel .grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+    .more-item { display: flex; flex-direction: column; align-items: center; gap: 8px; cursor: pointer; }
+    .more-item .icon { width: 52px; height: 52px; border-radius: 14px; background: #f1f5f9; display: flex; align-items: center; justify-content: center; font-size: 24px; }
+    .more-item .text { font-size: 12px; color: #64748b; font-weight: 500; }
+    
+    /* Exchange Modal */
+    .modal-overlay { display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.5); z-index: 300; }
+    .modal-overlay.active { display: flex; align-items: center; justify-content: center; }
+    .modal { background: white; border-radius: 16px; padding: 24px; width: 90%; max-width: 340px; }
+    .modal .icon { width: 64px; height: 64px; border-radius: 16px; background: #fef3c7; display: flex; align-items: center; justify-content: center; margin: 0 auto 16px; font-size: 32px; }
+    .modal h3 { font-size: 18px; font-weight: 700; margin-bottom: 16px; text-align: center; }
+    .modal .info { font-size: 14px; color: #64748b; margin-bottom: 20px; text-align: center; line-height: 1.6; }
+    .modal .btn-group { display: flex; gap: 10px; }
+    .modal .btn { flex: 1; padding: 12px; border-radius: 12px; font-size: 14px; font-weight: 600; border: none; cursor: pointer; }
+    .modal .btn-primary { background: linear-gradient(135deg, var(--blue), #1d4ed8); color: white; }
+    .modal .btn-secondary { background: #f1f5f9; color: #64748b; }
+
+    /* Add Phrase Modal */
+    .add-phrase-modal .input-field { width: 100%; padding: 10px 14px; border-radius: 12px; border: 1px solid #e2e8f0; font-size: 14px; margin-bottom: 16px; }
+    .add-phrase-modal .input-field:focus { border-color: var(--blue); outline: none; }
+    .add-phrase-modal .label { font-size: 13px; color: #64748b; margin-bottom: 6px; }
+    .modal h3 { text-align: center; font-size: 18px; font-weight: 700; margin-bottom: 8px; }
+    .modal p { text-align: center; font-size: 14px; color: #64748b; margin-bottom: 8px; line-height: 1.6; }
+    .modal .info { background: #f1f5f9; padding: 12px; border-radius: 10px; margin-bottom: 20px; font-size: 13px; color: #475569; }
+    .modal .btn { width: 100%; padding: 12px; border-radius: 12px; font-size: 16px; font-weight: 600; border: none; cursor: pointer; background: linear-gradient(135deg, var(--blue), #1d4ed8); color: white; }
+    .modal .btn-close { margin-top: 8px; background: #f1f5f9; color: #64748b; }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <div class="header">
+    <div class="top">
+      <button class="back" onclick="goBack()">←</button>
+      <div class="more">⋯</div>
+    </div>
+    
+    <!-- Quick Actions -->
+    <div class="quick-actions">
+      <div class="quick-action" onclick="exchangePhone()">
+        <div class="icon">📱</div>
+        <div class="text">互换电话</div>
+      </div>
+      <div class="quick-action" onclick="exchangeWechat()">
+        <div class="icon">💬</div>
+        <div class="text">互换微信</div>
+      </div>
+      <div class="quick-action" onclick="sendResume()">
+        <div class="icon">📄</div>
+        <div class="text">发简历</div>
+      </div>
+      <div class="quick-action" onclick="notInterested()">
+        <div class="icon">👋</div>
+        <div class="text">不感兴趣</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Contact Info Display -->
+  <div class="contact-info" id="contactInfo">
+    <div class="header">
+      <div class="title" id="contactTitle">📱 互换电话</div>
+      <div class="close" onclick="closeContactInfo()">×</div>
+    </div>
+    <div class="content" id="contactContent">
+      <div class="item">
+        <span class="label">对方：</span>
+        <span id="contactOther">138****8888</span>
+      </div>
+      <div class="item">
+        <span class="label">您：</span>
+        <span id="contactSelf">139****9999</span>
+      </div>
+    </div>
+    <div class="tip">已自动发送联系方式给对方</div>
+  </div>
+
+  <!-- Job Card Floating -->
+  <div class="job-card-floating" onclick="viewJob()">
+    <div class="top">
+      <div class="title">Java开发工程师（初级）</div>
+      <div class="salary">8-12K</div>
+    </div>
+    <div class="company">某某科技有限公司 · 今日活跃</div>
+  </div>
+
+  <!-- Chat Messages -->
+  <div class="chat-container" id="chatContainer">
+    <div class="time-divider">
+      <span>今天 14:30</span>
+    </div>
+    
+    <div class="system-msg">
+      <span>🔒 建议在平台内沟通，安全可靠</span>
+    </div>
+    
+    <div class="message other">
+      <div class="avatar">科</div>
+      <div>
+        <div class="bubble">你好！我是某某科技HR，看到你投递了Java开发工程师岗位</div>
+        <div class="time">14:30</div>
+      </div>
+    </div>
+    
+    <div class="message self">
+      <div>
+        <div class="bubble">您好，是的，我对这个岗位很感兴趣</div>
+        <div class="time">14:31</div>
+      </div>
+      <div class="avatar">我</div>
+    </div>
+    
+    <div class="message other">
+      <div class="avatar">科</div>
+      <div>
+        <div class="bubble">方便介绍一下你的技术背景吗？</div>
+        <div class="time">14:32</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bottom Input -->
+  <div class="bottom-input">
+    <div class="quick-phrases" id="quickPhrases">
+      <div class="quick-phrase">你好，请问还在招吗？</div>
+      <div class="quick-phrase">我可以发简历给您吗？</div>
+      <div class="quick-phrase">请问工作时间是怎样的？</div>
+      <div class="quick-phrase">方便加微信聊吗？</div>
+      <div class="quick-phrase add-new" onclick="openAddPhraseModal()">+ 添加</div>
+    </div>
+    <div class="top">
+      <button class="btn-icon" onclick="toggleMorePanel()">+</button>
+      <div class="input-wrap">
+        <input type="text" id="chatInput" placeholder="输入消息..." onkeypress="handleEnter(event)">
+      </div>
+      <button class="btn-icon">🎤</button>
+      <button class="btn-send">➤</button>
+    </div>
+  </div>
+
+  <!-- More Panel -->
+  <div class="more-panel" id="morePanel">
+    <div class="title">更多功能</div>
+    <div class="grid">
+      <div class="more-item" onclick="sendImage()">
+        <div class="icon">🖼️</div>
+        <div class="text">图片</div>
+      </div>
+      <div class="more-item" onclick="sendVoice()">
+        <div class="icon">🎙️</div>
+        <div class="text">语音通话</div>
+      </div>
+      <div class="more-item" onclick="sendVideo()">
+        <div class="icon">📹</div>
+        <div class="text">视频通话</div>
+      </div>
+      <div class="more-item" onclick="sendLocation()">
+        <div class="icon">📍</div>
+        <div class="text">位置</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Exchange Phone Modal -->
+  <div class="modal-overlay" id="phoneModal">
+    <div class="modal">
+      <div class="icon">📱</div>
+      <h3>交换电话</h3>
+      <p>对方已通过实名认证</p>
+      <div class="info">
+        对方电话：138****8888<br>
+        已发送您的电话给对方
+      </div>
+      <button class="btn" onclick="closePhoneModal()">确定</button>
+      <button class="btn btn-close" onclick="closePhoneModal()">取消</button>
+    </div>
+  </div>
+
+  <!-- Exchange Wechat Modal -->
+  <div class="modal-overlay" id="wechatModal">
+    <div class="modal">
+      <div class="icon">💬</div>
+      <h3>交换微信</h3>
+      <p>对方已通过实名认证</p>
+      <div class="info">
+        对方微信：company_hr<br>
+        已发送您的微信给对方
+      </div>
+      <button class="btn" onclick="closeWechatModal()">确定</button>
+      <button class="btn btn-close" onclick="closeWechatModal()">取消</button>
+    </div>
+  </div>
+
+  <!-- Add Phrase Modal -->
+  <div class="modal-overlay" id="addPhraseModal">
+    <div class="modal add-phrase-modal">
+      <h3>添加常用消息</h3>
+      <p class="label">消息内容</p>
+      <input type="text" class="input-field" id="newPhraseInput" placeholder="输入常用消息..." maxlength="50">
+      <div class="btn-group">
+        <button class="btn btn-secondary" onclick="closeAddPhraseModal()">取消</button>
+        <button class="btn btn-primary" onclick="addNewPhrase()">添加</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // 交换电话
+    function exchangePhone() {
+      const contactInfo = document.getElementById('contactInfo');
+      const title = document.getElementById('contactTitle');
+      const other = document.getElementById('contactOther');
+      const self = document.getElementById('contactSelf');
+
+      title.textContent = '📱 互换电话';
+      other.textContent = '138****8888';
+      self.textContent = '139****9999';
+      contactInfo.classList.add('active');
+
+      // 关闭弹窗
+      document.getElementById('phoneModal').classList.remove('active');
+    }
+
+    function closePhoneModal() {
+      document.getElementById('phoneModal').classList.remove('active');
+    }
+
+    // 交换微信
+    function exchangeWechat() {
+      const contactInfo = document.getElementById('contactInfo');
+      const title = document.getElementById('contactTitle');
+      const other = document.getElementById('contactOther');
+      const self = document.getElementById('contactSelf');
+
+      title.textContent = '💬 互换微信';
+      other.textContent = 'company_hr';
+      self.textContent = 'my_wechat';
+      contactInfo.classList.add('active');
+
+      // 关闭弹窗
+      document.getElementById('wechatModal').classList.remove('active');
+    }
+
+    function closeWechatModal() {
+      document.getElementById('wechatModal').classList.remove('active');
+    }
+
+    // 关闭联系方式显示
+    function closeContactInfo() {
+      document.getElementById('contactInfo').classList.remove('active');
+    }
+    
+    // 发送简历
+    function sendResume() {
+      alert('发送简历成功！');
+    }
+    
+    // 不感兴趣
+    function notInterested() {
+      if (confirm('确定不再关注此岗位吗？')) {
+        alert('已标记为不感兴趣');
+      }
+    }
+    
+    // 查看职位
+    function viewJob() {
+      window.location.href = 'job_detail_with_chat.html';
+    }
+    
+    // 切换更多面板
+    function toggleMorePanel() {
+      document.getElementById('morePanel').classList.toggle('active');
+    }
+    
+    // 发送图片
+    function sendImage() {
+      alert('选择图片...');
+      toggleMorePanel();
+    }
+    
+    // 语音通话
+    function sendVoice() {
+      alert('发起语音通话...');
+      toggleMorePanel();
+    }
+    
+    // 视频通话
+    function sendVideo() {
+      alert('发起视频通话...');
+      toggleMorePanel();
+    }
+
+    // 发送位置
+    function sendLocation() {
+      alert('发送位置...');
+      toggleMorePanel();
+    }
+
+    // 打开添加预设消息弹窗
+    function openAddPhraseModal() {
+      document.getElementById('addPhraseModal').classList.add('active');
+      document.getElementById('newPhraseInput').focus();
+    }
+
+    // 关闭添加预设消息弹窗
+    function closeAddPhraseModal() {
+      document.getElementById('addPhraseModal').classList.remove('active');
+      document.getElementById('newPhraseInput').value = '';
+    }
+
+    // 添加新预设消息
+    function addNewPhrase() {
+      const input = document.getElementById('newPhraseInput');
+      const text = input.value.trim();
+
+      if (!text) {
+        alert('请输入消息内容');
+        return;
+      }
+
+      const quickPhrases = document.getElementById('quickPhrases');
+      const addBtn = quickPhrases.querySelector('.add-new');
+      const newPhrase = document.createElement('div');
+      newPhrase.className = 'quick-phrase';
+      newPhrase.textContent = text;
+      newPhrase.onclick = function() {
+        document.getElementById('chatInput').value = text;
+      };
+
+      quickPhrases.insertBefore(newPhrase, addBtn);
+      closeAddPhraseModal();
+      alert('添加成功！');
+    }
+    
+    // 处理回车
+    function handleEnter(event) {
+      if (event.key === 'Enter') {
+        sendMessage();
+      }
+    }
+    
+    // 发送消息
+    function sendMessage() {
+      const input = document.getElementById('chatInput');
+      const text = input.value.trim();
+      if (!text) return;
+      
+      const container = document.getElementById('chatContainer');
+      const msgHtml = `
+        <div class="message self">
+          <div>
+            <div class="bubble">${text}</div>
+            <div class="time">刚刚</div>
+          </div>
+          <div class="avatar">我</div>
+        </div>
+      `;
+      container.insertAdjacentHTML('beforeend', msgHtml);
+      input.value = '';
+      
+      // 滚动到底部
+      container.scrollTop = container.scrollHeight;
+    }
+    
+    // 返回
+    function goBack() {
+      window.history.back();
+    }
+  </script>
+</body>
+</html>

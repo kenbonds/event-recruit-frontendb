@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="theme-color" content="#667eea">
+  <title>岗位列表 - 召集吧</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    :root {
+      --primary: #667eea;
+      --primary2: #764ba2;
+      --orange: #ff6b35;
+      --green: #19c37d;
+      --bg: #f5f6fa;
+      --card: #ffffff;
+      --text: #2c3e50;
+      --sub: #8492a6;
+      --border: #edf2f7;
+    }
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif; background: var(--bg); color: var(--text); max-width: 480px; margin: 0 auto; min-height: 100vh; padding-bottom: 80px; }
+    
+    /* ===== HEADER ===== */
+    .header { background: linear-gradient(135deg, var(--primary) 0%, var(--primary2) 100%); padding: 44px 16px 12px; color: white; position: sticky; top: 0; z-index: 100; box-shadow: 0 4px 20px rgba(102,126,234,0.2); }
+    .header .top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
+    .header .logo { font-size: 22px; font-weight: 800; letter-spacing: 1px; }
+    .header .more-btn { width: 36px; height: 36px; border-radius: 10px; background: rgba(255,255,255,0.2); border: none; color: white; font-size: 18px; cursor: pointer; display: flex; align-items: center; justify-content: center; }
+    
+    /* Search Bar */
+    .search-bar { display: flex; gap: 8px; margin-bottom: 12px; }
+    .search-bar input { flex: 1; padding: 12px 16px; border-radius: 24px; border: none; font-size: 14px; outline: none; background: rgba(255,255,255,0.95); box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
+    .search-bar input::placeholder { color: #94a3b8; }
+    
+    /* ===== QUICK CATEGORIES (鱼泡风格) ===== */
+    .quick-cats { display: flex; gap: 12px; padding: 12px 16px; overflow-x: auto; background: white; scrollbar-width: none; }
+    .quick-cats::-webkit-scrollbar { display: none; }
+    .cat-item { display: flex; flex-direction: column; align-items: center; gap: 4px; min-width: 52px; cursor: pointer; }
+    .cat-icon { width: 44px; height: 44px; border-radius: 12px; background: #f1f5f9; display: flex; align-items: center; justify-content: center; font-size: 20px; transition: all 0.2s; }
+    .cat-text { font-size: 12px; color: #64748b; font-weight: 500; }
+    .cat-item.active .cat-icon { background: linear-gradient(135deg, var(--primary), var(--primary2)); }
+    .cat-item.active .cat-text { color: var(--primary); }
+
+    /* ===== FILTER BAR (鱼泡风格) ===== */
+    .filter-bar { display: flex; gap: 8px; padding: 10px 16px; overflow-x: auto; background: white; border-bottom: 1px solid var(--border); scrollbar-width: none; }
+    .filter-bar::-webkit-scrollbar { display: none; }
+    .filter-item { padding: 6px 16px; border-radius: 20px; font-size: 13px; white-space: nowrap; border: none; background: #f0f4f8; color: var(--sub); cursor: pointer; transition: all 0.2s; font-weight: 500; }
+    .filter-item.active { background: linear-gradient(135deg, var(--primary), var(--primary2)); color: white; box-shadow: 0 2px 8px rgba(102,126,234,0.3); }
+    
+    /* ===== JOB LIST ===== */
+    .job-list { padding: 12px; }
+    
+    /* Job Card - Optimized (鱼泡风格) */
+    .job-card { background: white; border-radius: 12px; padding: 14px 16px; margin-bottom: 10px; box-shadow: 0 1px 8px rgba(0,0,0,0.04); cursor: pointer; transition: all 0.2s; border: 1px solid #f0f2f5; }
+    .job-card:active { transform: scale(0.98); background: #f8fafc; }
+    
+    .job-card .top { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 8px; }
+    .job-card .title-wrap { flex: 1; min-width: 0; }
+    .job-card .title { font-size: 16px; font-weight: 700; color: #1e293b; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; line-height: 1.4; }
+    .job-card .salary { font-size: 18px; font-weight: 800; color: #2563eb; white-space: nowrap; margin-left: 10px; flex-shrink: 0; }
+    
+    .job-card .tags-row { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 8px; }
+    .tag-sm { padding: 4px 10px; border-radius: 4px; font-size: 12px; background: #f1f5f9; color: #64748b; font-weight: 500; }
+    .tag-sm.highlight { background: #fff7ed; color: #ea580c; }
+    .tag-sm.green { background: #f0fdf4; color: #16a34a; }
+    
+    .job-card .bottom { display: flex; justify-content: space-between; align-items: center; padding-top: 8px; border-top: 1px dashed #e2e8f0; }
+    .job-card .bottom .location { display: flex; align-items: center; gap: 4px; font-size: 12px; color: #64748b; flex: 1; min-width: 0; }
+    .job-card .bottom .location-text { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .job-card .bottom .distance { font-size: 12px; font-weight: 600; color: #16a34a; background: #f0fdf4; padding: 3px 8px; border-radius: 12px; white-space: nowrap; margin-left: 6px; }
+    .job-card .bottom .reply { font-size: 11px; color: #94a3b8; display: flex; align-items: center; gap: 2px; }
+
+    .job-card .company-row { display: flex; align-items: center; gap: 8px; margin-bottom: 8px; }
+    .job-card .company-logo { width: 20px; height: 20px; border-radius: 4px; background: linear-gradient(135deg, var(--primary), var(--primary2)); display: flex; align-items: center; justify-content: center; color: white; font-size: 10px; font-weight: 700; flex-shrink: 0; }
+    .job-card .company-name { font-size: 12px; color: #64748b; flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .job-card .verified-badge { font-size: 10px; color: #16a34a; background: #f0fdf4; padding: 2px 6px; border-radius: 4px; flex-shrink: 0; }
+    
+    /* ===== JOB DETAIL ===== */
+    .job-detail { display: none; position: fixed; top: 0; left: 50%; transform: translateX(-50%); width: 100%; max-width: 480px; height: 100vh; background: var(--bg); z-index: 200; overflow-y: auto; }
+    .job-detail.active { display: block; }
+    
+    /* Detail Header */
+    .detail-header { background: linear-gradient(135deg, var(--primary) 0%, var(--primary2) 100%); padding: 44px 16px 20px; color: white; position: sticky; top: 0; z-index: 10; box-shadow: 0 4px 20px rgba(102,126,234,0.25); }
+    .detail-header .back { width: 36px; height: 36px; border-radius: 10px; border: none; background: rgba(255,255,255,0.2); color: white; font-size: 18px; cursor: pointer; display: flex; align-items: center; justify-content: center; margin-bottom: 16px; }
+    .detail-header .top-row { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 10px; }
+    .detail-header .title { font-size: 22px; font-weight: 800; line-height: 1.3; flex: 1; }
+    .detail-header .salary-large { font-size: 24px; font-weight: 800; color: #fff4ef; white-space: nowrap; margin-left: 12px; }
+    
+    /* Caller Info Card */
+    .caller-card { background: white; border-radius: 14px; padding: 16px; margin: 12px 12px 0; box-shadow: 0 4px 16px rgba(0,0,0,0.06); }
+    .caller-card .top { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; }
+    .caller-card .avatar { width: 56px; height: 56px; border-radius: 14px; background: linear-gradient(135deg, var(--primary), var(--primary2)); display: flex; align-items: center; justify-content: center; color: white; font-size: 24px; }
+    .caller-card .info { flex: 1; }
+    .caller-card .info h3 { font-size: 16px; font-weight: 700; }
+    .caller-card .info p { font-size: 12px; color: var(--sub); margin-top: 2px; }
+    .caller-card .verified { display: inline-flex; align-items: center; gap: 4px; font-size: 11px; color: var(--green); background: #edfbf5; padding: 3px 10px; border-radius: 12px; }
+    
+    .caller-card .stats { display: flex; gap: 16px; padding-top: 12px; border-top: 1px solid var(--border); }
+    .caller-card .stat { display: flex; align-items: center; gap: 4px; font-size: 12px; color: var(--sub); }
+    .caller-card .stat .n { font-weight: 700; color: var(--primary); }
+    
+    /* Benefit Section */
+    .benefit-section { background: white; border-radius: 14px; padding: 16px; margin: 12px; box-shadow: 0 4px 16px rgba(0,0,0,0.06); }
+    .benefit-section h3 { font-size: 15px; font-weight: 700; margin-bottom: 12px; display: flex; align-items: center; gap: 6px; }
+    .benefit-section h3::before { content: '🎁'; }
+    .benefit-list { display: flex; gap: 8px; flex-wrap: wrap; }
+    .benefit-item { display: flex; align-items: center; gap: 4px; padding: 6px 12px; background: #fff4ef; color: var(--orange); border-radius: 18px; font-size: 13px; font-weight: 500; }
+    
+    /* Location Section with Map */
+    .location-section { background: white; border-radius: 14px; padding: 16px; margin: 12px; box-shadow: 0 4px 16px rgba(0,0,0,0.06); }
+    .location-section h3 { font-size: 15px; font-weight: 700; margin-bottom: 12px; display: flex; align-items: center; gap: 6px; }
+    .location-section h3::before { content: '📍'; }
+    .location-section .address { font-size: 14px; color: var(--text); margin-bottom: 12px; line-height: 1.5; }
+    .location-section .distance-badge { display: inline-flex; align-items: center; gap: 4px; font-size: 13px; font-weight: 600; color: var(--green); background: #edfbf5; padding: 5px 12px; border-radius: 12px; margin-bottom: 12px; }
+    .location-section .map-placeholder { height: 160px; background: linear-gradient(135deg, #e0e7ff 0%, #c7d2fe 100%); border-radius: 12px; display: flex; align-items: center; justify-content: center; color: var(--primary); font-size: 14px; }
+    
+    /* Requirement Section */
+    .requirement-section { background: white; border-radius: 14px; padding: 16px; margin: 12px; box-shadow: 0 4px 16px rgba(0,0,0,0.06); }
+    .requirement-section h3 { font-size: 15px; font-weight: 700; margin-bottom: 12px; display: flex; align-items: center; gap: 6px; }
+    .requirement-section h3::before { content: '📋'; }
+    .requirement-section .content { font-size: 14px; line-height: 1.6; color: var(--text); }
+    
+    /* Bottom Action Bar */
+    .action-bar { position: fixed; bottom: 0; left: 50%; transform: translateX(-50%); width: 100%; max-width: 480px; background: white; padding: 12px 16px; box-shadow: 0 -4px 20px rgba(0,0,0,0.1); display: flex; gap: 10px; z-index: 100; }
+    .action-bar .btn { flex: 1; padding: 14px; border-radius: 12px; border: none; font-size: 15px; font-weight: 700; cursor: pointer; transition: all 0.2s; }
+    .action-bar .btn:active { transform: scale(0.97); }
+    .btn-secondary { background: #f0f4f8; color: var(--sub); }
+    .btn-primary { background: linear-gradient(135deg, var(--primary), var(--primary2)); color: white; box-shadow: 0 4px 14px rgba(102,126,234,0.4); }
+    
+    /* ===== LOADING & EMPTY ===== */
+    .loading { text-align: center; padding: 40px 20px; color: var(--sub); font-size: 14px; }
+    .loading::after { content: '...'; animation: dots 1.5s infinite; }
+    @keyframes dots { 0%, 20% { content: ''; } 40% { content: '.'; } 60% { content: '..'; } 80%, 100% { content: '...'; } }
+    
+    .empty { text-align: center; padding: 60px 20px; color: var(--sub); }
+    .empty-icon { font-size: 48px; margin-bottom: 12px; }
+    .empty-text { font-size: 14px; }
+  </style>
+</head>
+<body>
+
+  <!-- Header (鱼泡风格) -->
+  <header class="header">
+    <div class="top">
+      <div class="logo">召集吧</div>
+      <button class="more-btn">☰</button>
+    </div>
+    <div class="search-bar">
+      <input type="text" id="searchInput" placeholder="搜索岗位、公司、标签..." oninput="handleSearch()">
+    </div>
+  </header>
+
+  <!-- Quick Categories -->
+  <div class="quick-cats">
+    <div class="cat-item active">
+      <div class="cat-icon">🔥</div>
+      <div class="cat-text">急聘</div>
+    </div>
+    <div class="cat-item">
+      <div class="cat-icon">💼</div>
+      <div class="cat-text">全职</div>
+    </div>
+    <div class="cat-item">
+      <div class="cat-icon">🎓</div>
+      <div class="cat-text">实习</div>
+    </div>
+    <div class="cat-item">
+      <div class="cat-icon">⏰</div>
+      <div class="cat-text">兼职</div>
+    </div>
+    <div class="cat-item">
+      <div class="cat-icon">🤝</div>
+      <div class="cat-text">志愿</div>
+    </div>
+  </div>
+
+  <!-- Filter Bar (鱼泡风格) -->
+  <div class="filter-bar">
+    <div class="filter-item active" onclick="setFilter('all', this)">综合</div>
+    <div class="filter-item" onclick="setFilter('latest', this)">最新</div>
+    <div class="filter-item" onclick="setFilter('nearby', this)">附近</div>
+    <div class="filter-item" onclick="setFilter('high-salary', this)">薪资</div>
+    <div class="filter-item">筛选</div>
+  </div>
+
+  <!-- Job List -->
+  <div class="job-list" id="jobList">
+    <div class="loading">加载中</div>
+  </div>
+
+  <!-- Job Detail -->
+  <div class="job-detail" id="jobDetail">
+    <div class="detail-header">
+      <button class="back" onclick="closeDetail()">←</button>
+      <div class="top-row">
+        <div class="title" id="detailTitle">Java开发工程师</div>
+        <div class="salary-large" id="detailSalary">15-25K</div>
+      </div>
+      <div class="tags-row" id="detailTags"></div>
+    </div>
+
+    <!-- Caller Info -->
+    <div class="caller-card">
+      <div class="top">
+        <div class="avatar" id="detailAvatar">召</div>
+        <div class="info">
+          <h3 id="detailCaller">某某科技有限公司</h3>
+          <p id="detailCallerSub">企业认证</p>
+        </div>
+        <div class="verified">✓ 已认证</div>
+      </div>
+      <div class="stats">
+        <div class="stat"><span class="n">12</span> 在招岗位</div>
+        <div class="stat"><span class="n">86</span> 已投递</div>
+        <div class="stat"><span class="n">4.8</span> 评分</div>
+      </div>
+    </div>
+
+    <!-- Benefits -->
+    <div class="benefit-section">
+      <h3>岗位待遇</h3>
+      <div class="benefit-list" id="detailBenefits"></div>
+    </div>
+
+    <!-- Location -->
+    <div class="location-section">
+      <h3>工作地点</h3>
+      <div class="address" id="detailAddress">北京市海淀区中关村软件园二期A座</div>
+      <div class="distance-badge" id="detailDistance">
+        <span>📍</span> 距离您 3.2km
+      </div>
+      <div class="map-placeholder">
+        🗺️ 地图加载中...
+      </div>
+    </div>
+
+    <!-- Requirements -->
+    <div class="requirement-section">
+      <h3>岗位要求</h3>
+      <div class="content" id="detailRequirements">
+        1. 本科及以上学历，计算机相关专业<br>
+        2. 熟练掌握Java语言，有Spring Boot项目经验<br>
+        3. 熟悉MySQL数据库，有性能优化经验优先<br>
+        4. 良好的编程习惯和团队协作能力
+      </div>
+    </div>
+
+    <div style="height: 100px;"></div>
+  </div>
+
+  <!-- Action Bar -->
+  <div class="action-bar" id="actionBar" style="display: none;">
+    <button class="btn btn-secondary" onclick="shareJob()">📤 分享</button>
+    <button class="btn btn-primary" onclick="applyJob()">立即投递</button>
+  </div>
+
+  <script>
+    // 模拟数据
+    const mockJobs = [
+      {
+        id: 1,
+        title: 'Java开发工程师',
+        salary: '15-25K',
+        type: 'fulltime',
+        company: '某某科技有限公司',
+        logo: '科',
+        tags: ['Java', 'Spring', 'MySQL', '后端'],
+        benefits: ['五险一金', '年终奖', '带薪年假', '餐补', '交通补', '周末双休'],
+        address: '北京市海淀区中关村软件园二期A座',
+        distance: 3.2,
+        requirements: '1. 本科及以上学历，计算机相关专业\n2. 熟练掌握Java语言，有Spring Boot项目经验\n3. 熟悉MySQL数据库，有性能优化经验优先\n4. 良好的编程习惯和团队协作能力',
+        time: '2小时前',
+        reply: '今日回复10次+',
+        caller: '企业',
+        verified: true
+      },
+      {
+        id: 2,
+        title: '前端开发实习生',
+        salary: '200-300/天',
+        type: 'intern',
+        company: '创新互联网公司',
+        logo: '创',
+        tags: ['前端', 'Vue', 'React', '实习'],
+        benefits: ['实习证明', '导师带教', '转正机会', '下午茶', '团建'],
+        address: '北京市朝阳区望京SOHO T1',
+        distance: 5.8,
+        requirements: '1. 本科在读学生，计算机相关专业\n2. 熟悉Vue或React框架\n3. 熟悉HTML/CSS/JavaScript\n4. 每周至少实习3天',
+        time: '5小时前',
+        reply: '今日回复8次+',
+        caller: '企业',
+        verified: true
+      },
+      {
+        id: 3,
+        title: '周末兼职客服',
+        salary: '200-300/天',
+        type: 'parttime',
+        company: '某教育机构',
+        logo: '教',
+        tags: ['兼职', '客服', '周末', '无需经验'],
+        benefits: ['日结', '工作轻松', '提供培训'],
+        address: '北京市海淀区学院路30号',
+        distance: 1.2,
+        requirements: '1. 普通话标准\n2. 有耐心，善于沟通\n3. 周末可到岗',
+        time: '1天前',
+        reply: '今日回复5次+',
+        caller: '个人',
+        verified: false
+      },
+      {
+        id: 4,
+        title: '义卖活动志愿者',
+        salary: '公益',
+        type: 'volunteer',
+        company: '爱心公益协会',
+        logo: '爱',
+        tags: ['志愿', '公益', '义卖', '周末'],
+        benefits: ['志愿服务证书', '公益时长', '免费午餐', '团队氛围好'],
+        address: '北京市朝阳区三里屯太古里',
+        distance: 8.5,
+        requirements: '1. 年满18岁\n2. 热心公益，有责任心\n3. 周末有充足时间',
+        time: '2天前',
+        caller: '组织',
+        verified: true
+      },
+      {
+        id: 5,
+        title: 'Python算法工程师',
+        salary: '20-35K',
+        type: 'fulltime',
+        company: 'AI创新公司',
+        logo: 'AI',
+        tags: ['Python', '机器学习', '深度学习', '算法'],
+        benefits: ['五险一金', '股票期权', '弹性工作', '健身房', '零食饮料'],
+        address: '北京市海淀区中关村大街1号',
+        distance: 4.1,
+        requirements: '1. 硕士及以上学历，计算机/数学相关专业\n2. 熟悉Python，有机器学习项目经验\n3. 熟悉PyTorch或TensorFlow\n4. 有NLP或计算机视觉经验优先',
+        time: '3天前',
+        reply: '今日回复15次+',
+        caller: '企业',
+        verified: true
+      }
+    ];
+
+    let currentFilter = 'all';
+    let jobs = [...mockJobs];
+
+    // 渲染岗位列表
+    function renderJobs() {
+      const list = document.getElementById('jobList');
+      list.innerHTML = '';
+
+      if (jobs.length === 0) {
+        list.innerHTML = `
+          <div class="empty">
+            <div class="empty-icon">📭</div>
+            <div class="empty-text">暂无岗位</div>
+          </div>
+        `;
+        return;
+      }
+
+      jobs.forEach(job => {
+        const typeBadge = getTypeBadge(job.type);
+        const card = document.createElement('div');
+        card.className = 'job-card';
+        card.onclick = () => showDetail(job);
+        card.innerHTML = `
+          <div class="top">
+            <div class="title-wrap">
+              <div class="title">${job.title}</div>
+            </div>
+            <div class="salary">${job.salary}</div>
+          </div>
+          <div class="company-row">
+            <div class="company-logo">${job.logo}</div>
+            <div class="company-name">${job.company}</div>
+            ${job.verified ? '<div class="verified-badge">已认证</div>' : ''}
+          </div>
+          <div class="tags-row">
+            ${job.tags.slice(0, 4).map(tag => `<div class="tag-sm highlight">${tag}</div>`).join('')}
+          </div>
+          <div class="bottom">
+            <div class="location">
+              <span class="location-icon">📍</span>
+              <span class="location-text">${job.address.split('区')[0]}区</span>
+            </div>
+            <div class="distance">${job.distance}km</div>
+            <div class="reply">💬 ${job.reply || '今日回复'}</div>
+          </div>
+        `;
+        list.appendChild(card);
+      });
+    }
+
+    // 获取类型徽章
+    function getTypeBadge(type) {
+      const map = {
+        fulltime: '全职',
+        intern: '实习',
+        parttime: '兼职',
+        volunteer: '志愿'
+      };
+      return map[type] || '';
+    }
+
+    // 设置筛选（鱼泡风格）
+    function setFilter(type, el) {
+      currentFilter = type;
+      document.querySelectorAll('.filter-item').forEach(item => item.classList.remove('active'));
+      el.classList.add('active');
+
+      if (type === 'all') {
+        jobs = [...mockJobs];
+      } else if (type === 'latest') {
+        jobs = [...mockJobs];
+      } else if (type === 'nearby') {
+        jobs = mockJobs.filter(j => j.distance <= 5);
+      } else if (type === 'high-salary') {
+        jobs = [...mockJobs].sort((a, b) => {
+          const salaryA = parseInt(a.salary.replace(/\D/g, '')) || 0;
+          const salaryB = parseInt(b.salary.replace(/\D/g, '')) || 0;
+          return salaryB - salaryA;
+        });
+      } else {
+        jobs = mockJobs.filter(j => j.type === type);
+      }
+      renderJobs();
+    }
+
+    // 搜索
+    function handleSearch() {
+      const keyword = document.getElementById('searchInput').value.toLowerCase();
+      jobs = mockJobs.filter(j => 
+        j.title.toLowerCase().includes(keyword) || 
+        j.company.toLowerCase().includes(keyword) ||
+        j.tags.some(tag => tag.toLowerCase().includes(keyword))
+      );
+      renderJobs();
+    }
+
+    // 显示详情
+    function showDetail(job) {
+      document.getElementById('detailTitle').textContent = job.title;
+      document.getElementById('detailSalary').textContent = job.salary;
+      document.getElementById('detailAvatar').textContent = job.logo;
+      document.getElementById('detailCaller').textContent = job.company;
+      document.getElementById('detailCallerSub').textContent = job.caller === '企业' ? '企业认证' : '个人发布';
+      document.getElementById('detailAddress').textContent = job.address;
+      document.getElementById('detailDistance').innerHTML = `<span>📍</span> 距离您 ${job.distance}km`;
+      document.getElementById('detailRequirements').innerHTML = job.requirements.replace(/\n/g, '<br>');
+
+      // Tags
+      const tagsHtml = job.tags.map(tag => `<div class="tag-sm highlight">${tag}</div>`).join('');
+      document.getElementById('detailTags').innerHTML = tagsHtml;
+
+      // Benefits
+      const benefitsHtml = job.benefits.map(b => `<div class="benefit-item"><span>✓</span> ${b}</div>`).join('');
+      document.getElementById('detailBenefits').innerHTML = benefitsHtml;
+
+      document.getElementById('jobDetail').classList.add('active');
+      document.getElementById('actionBar').style.display = 'flex';
+      document.body.style.overflow = 'hidden';
+    }
+
+    // 关闭详情
+    function closeDetail() {
+      document.getElementById('jobDetail').classList.remove('active');
+      document.getElementById('actionBar').style.display = 'none';
+      document.body.style.overflow = '';
+    }
+
+    // 分享岗位
+    function shareJob() {
+      alert('分享功能开发中...');
+    }
+
+    // 投递岗位
+    function applyJob() {
+      alert('投递成功！召集方会尽快联系你。');
+      closeDetail();
+    }
+
+    // 筛选切换
+    function toggleFilter() {
+      alert('筛选功能开发中...');
+    }
+
+    // 初始化
+    renderJobs();
+  </script>
+</body>
+</html>

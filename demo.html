@@ -1994,9 +1994,9 @@ const MESSAGES = [
 ];
 
 const APPLICANTS = [
-  { id:1, name:'李明', school:'清华大学', major:'计算机科学', tags:['Java','Spring','MySQL'], score:0.88, status:'viewed' },
-  { id:2, name:'王芳', school:'北京大学', major:'软件工程', tags:['前端','Vue','React'], score:0.92, status:'passed' },
-  { id:3, name:'张三', school:'北京理工大学', major:'计算机科学与技术', tags:['Java','Python','前端'], score:0.85, status:'pending' },
+  { id:1, name:'李明', school:'清华大学', major:'计算机科学', tags:['Java','Spring','MySQL'], score:0.88, status:'viewed', phone:'13812345678', wechat:'liming_dev' },
+  { id:2, name:'王芳', school:'北京大学', major:'软件工程', tags:['前端','Vue','React'], score:0.92, status:'passed', phone:'13987654321', wechat:'wangfang_fe' },
+  { id:3, name:'张三', school:'北京理工大学', major:'计算机科学与技术', tags:['Java','Python','前端'], score:0.85, status:'pending', phone:'13611112222', wechat:'zhangsan_bit' },
   { id:4, name:'赵雷', school:'中国人民大学', major:'信息管理', tags:['产品','运营','数据分析'], score:0.70, status:'pending' },
   { id:5, name:'陈思', school:'北京航空航天大学', major:'人工智能', tags:['Python','机器学习','深度学习'], score:0.79, status:'viewed' },
 ];
@@ -3568,6 +3568,15 @@ function showResume(id) {
     <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:16px">${a.tags.map(t=>`<span class="mini-tag">${t}</span>`).join('')}</div>
     <h3 style="font-size:15px;font-weight:700;margin-bottom:8px">教育经历</h3>
     <p style="font-size:14px;color:#475569">${a.school} · 本科 · 2022-2026</p>
+    <h3 style="font-size:15px;font-weight:700;margin:16px 0 10px">联系方式</h3>
+    <div style="display:flex;flex-direction:column;gap:10px">
+      ${a.phone ? `<a href="tel:${a.phone}" style="display:flex;align-items:center;gap:10px;padding:12px 14px;background:#f0fdf4;border-radius:10px;text-decoration:none;color:#166534;font-size:14px;font-weight:600">
+        <span style="font-size:18px">📞</span> ${a.phone}
+      </a>` : ''}
+      ${a.wechat ? `<div onclick="copyWechat('${a.wechat}')" style="display:flex;align-items:center;gap:10px;padding:12px 14px;background:#f0f9ff;border-radius:10px;cursor:pointer;color:#0369a1;font-size:14px;font-weight:600">
+        <span style="font-size:18px">💬</span> 微信：${a.wechat} <span style="margin-left:auto;font-size:12px;color:#64748b">点击复制</span>
+      </div>` : ''}
+    </div>
   `;
   document.getElementById('resumeModal').classList.add('active');
 }
@@ -3575,6 +3584,14 @@ function showResume(id) {
 function contactCandidate() {
   closeModal('resumeModal');
   showToast('📞 面试邀请已发送！');
+}
+
+function copyWechat(id) {
+  navigator.clipboard.writeText(id).then(() => {
+    showToast('✅ 微信号已复制：' + id);
+  }).catch(() => {
+    showToast('微信号：' + id);
+  });
 }
 
 // ── 召集方身份确认 ──

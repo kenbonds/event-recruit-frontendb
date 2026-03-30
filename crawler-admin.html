@@ -148,68 +148,22 @@
 <div style="padding:12px 16px 0">
   <div class="api-config-bar">
     <span style="color:var(--sub);white-space:nowrap">后端地址：</span>
-    <input id="apiBase" value="http://localhost:8766" placeholder="http://localhost:8766" onchange="saveApiBase()">
+    <input id="apiBase" value="http://localhost:3000" placeholder="http://localhost:3000" onchange="saveApiBase()">
     <button class="btn btn-primary btn-sm" onclick="testConnection()">测试连接</button>
   </div>
 </div>
 
 <!-- Tabs -->
 <div class="tabs">
-  <div class="tab active" onclick="switchTab('dashboard')">📊 数据监控台</div>
-  <div class="tab" onclick="switchTab('sites')">🌐 网站列表</div>
+  <div class="tab active" onclick="switchTab('sites')">🌐 网站列表</div>
   <div class="tab" onclick="switchTab('paste')">✂️ 粘贴文案</div>
-  <div class="tab" onclick="switchTab('logs')">📋 采集日志</div>
+  <div class="tab" onclick="switchTab('logs')">📊 采集日志</div>
   <div class="tab" onclick="switchTab('guide')">📖 使用指南</div>
 </div>
 
-<!-- ═══════════════════════════════════════ 数据监控台 ═══ -->
-<div class="content">
-<div id="pane-dashboard" class="pane active">
-
-  <!-- 总览统计 -->
-  <div class="stats-row" id="dashboardStats">
-    <div class="stat-card"><div class="stat-n" id="dashTotal">-</div><div class="stat-l">总采集</div></div>
-    <div class="stat-card"><div class="stat-n" id="dashToday">-</div><div class="stat-l">今日采集</div></div>
-    <div class="stat-card"><div class="stat-n" id="dashPublished">-</div><div class="stat-l">已发布</div></div>
-    <div class="stat-card"><div class="stat-n" id="dashPending">-</div><div class="stat-l">待审核</div></div>
-  </div>
-
-  <!-- 引擎统计 -->
-  <div class="card" style="margin-top:16px">
-    <div class="card-header">
-      <div class="card-title">🔌 各引擎采集统计</div>
-      <button class="btn btn-ghost btn-sm" onclick="loadDashboard()">↻ 刷新</button>
-    </div>
-    <div id="engineStats" style="font-size:13px;color:var(--sub)">加载中...</div>
-  </div>
-
-  <!-- 最近采集日志 -->
-  <div class="card" style="margin-top:12px">
-    <div class="card-header">
-      <div class="card-title">📋 最近采集日志</div>
-    </div>
-    <div id="recentLogs" style="font-size:13px;color:var(--sub)">加载中...</div>
-  </div>
-
-  <!-- 快速操作 -->
-  <div class="card" style="margin-top:12px">
-    <div class="card-title" style="margin-bottom:10px">⚡ 快速操作</div>
-    <div style="display:flex;gap:8px;flex-wrap:wrap">
-      <button class="btn btn-primary" onclick="triggerCrawl('full')">🚀 全量采集</button>
-      <button class="btn btn-ghost" onclick="triggerCrawl('yupao')">🐟 鱼泡网</button>
-      <button class="btn btn-ghost" onclick="triggerCrawl('rss')">📡 RSS订阅</button>
-      <button class="btn btn-ghost" onclick="triggerCrawl('search')">🔍 搜索引擎</button>
-      <button class="btn btn-ghost" onclick="triggerCrawl('public')">🏛️ 政府平台</button>
-      <button class="btn btn-ghost" onclick="triggerCrawl('jianzhi')">😺 兼职猫</button>
-      <button class="btn btn-ghost" onclick="triggerCrawl('huodong')">🎪 活动行</button>
-      <button class="btn btn-ghost" onclick="triggerCrawl('58')">🏘️ 58同城</button>
-      <button class="btn btn-ghost btn-info" onclick="triggerCrawl('dynamic')" title="Puppeteer无头浏览器采集：拉勾网/实习僧/大街网">🤖 动态页</button>
-    </div>
-  </div>
-</div>
-
 <!-- ═══════════════════════════════════════ 网站列表 ═══ -->
-<div id="pane-sites" class="pane">
+<div class="content">
+<div id="pane-sites" class="pane active">
 
   <!-- 统计 -->
   <div class="stats-row" id="statsRow">
@@ -453,7 +407,7 @@
 // ════════════════════════════════════════════════════════
 // 配置 & 状态
 // ════════════════════════════════════════════════════════
-let API_BASE = localStorage.getItem('crawlerApiBase') || 'http://localhost:8766';
+let API_BASE = localStorage.getItem('crawlerApiBase') || 'http://localhost:3000';
 let currentSites = [];
 let activeSiteId = null;
 let currentCity = '';
@@ -506,7 +460,7 @@ function timeAgo(iso) {
 // Tabs
 // ════════════════════════════════════════════════════════
 function switchTab(tab) {
-  const ids = ['dashboard', 'sites', 'paste', 'logs', 'guide'];
+  const ids = ['sites', 'paste', 'logs', 'guide'];
   document.querySelectorAll('.tab').forEach((t, i) => {
     t.classList.toggle('active', ids[i] === tab);
   });
@@ -516,89 +470,7 @@ function switchTab(tab) {
   });
   const pane = document.getElementById(`pane-${tab}`);
   if (pane) { pane.style.display = 'block'; pane.classList.add('active'); }
-  if (tab === 'dashboard') loadDashboard();
   if (tab === 'logs') loadLogs();
-}
-
-// ════════════════════════════════════════════════════════
-// 数据监控台
-// ════════════════════════════════════════════════════════
-async function loadDashboard() {
-  try {
-    const r = await api('GET', '/stats');
-    if (r.code !== 0) { showToast('加载失败: ' + r.message); return; }
-    const stats = r.data || {};
-
-    // 更新总览统计
-    document.getElementById('dashTotal').textContent = stats.total_crawled || 0;
-    document.getElementById('dashToday').textContent = stats.today_crawled || 0;
-    document.getElementById('dashPublished').textContent = stats.approved || 0;
-    document.getElementById('dashPending').textContent = stats.pending || 0;
-
-    // 按来源类型显示
-    const byType = stats.by_source_type || {};
-    let engineHtml = '<table style="width:100%;text-align:left">';
-    const engineNames = {
-      'yupao': '🐟 鱼泡网',
-      'rss': '📡 RSS订阅',
-      'search': '🔍 搜索引擎',
-      'public': '🏛️ 政府平台',
-      'custom': '🌐 自定义网站',
-      'localService': '🏠 本地生活',
-      'local_service': '🏠 本地生活',
-      'jianzhi': '😺 兼职猫',
-      'huodong': '🎪 活动行',
-      'e58': '🏘️ 58同城',
-      'dynamic': '🤖 动态页(Puppeteer)',
-      'puppeteer': '🤖 Puppeteer引擎',
-    };
-    for (const [type, count] of Object.entries(byType)) {
-      const name = engineNames[type] || type;
-      engineHtml += `<tr><td style="padding:4px 0">${name}</td><td style="text-align:right;font-weight:600">${count}</td></tr>`;
-    }
-    engineHtml += '</table>';
-    if (Object.keys(byType).length === 0) {
-      engineHtml = '<div style="color:var(--sub)">暂无采集数据</div>';
-    }
-    document.getElementById('engineStats').innerHTML = engineHtml;
-
-    // 最近日志
-    const logs = stats.recent_logs || [];
-    let logsHtml = '';
-    if (logs.length > 0) {
-      logsHtml = '<table style="width:100%;text-align:left">';
-      logs.slice(-5).reverse().forEach(log => {
-        const time = timeAgo(log.started_at);
-        const statusIcon = log.status === 'completed' ? '✅' : log.status === 'failed' ? '❌' : '⏳';
-        logsHtml += `<tr><td style="padding:4px 0">${statusIcon} ${log.type || 'manual'}</td><td style="text-align:right;color:var(--sub)">${time}</td></tr>`;
-      });
-      logsHtml += '</table>';
-    } else {
-      logsHtml = '<div style="color:var(--sub)">暂无采集日志</div>';
-    }
-    document.getElementById('recentLogs').innerHTML = logsHtml;
-
-  } catch (e) {
-    document.getElementById('engineStats').innerHTML = '<div style="color:var(--danger)">加载失败: ' + e.message + '</div>';
-  }
-}
-
-// 触发采集
-async function triggerCrawl(platform) {
-  showToast('🚀 开始采集 ' + platform + '...');
-  try {
-    const r = await api('POST', '/trigger', { platform, options: {} });
-    if (r.code === 0) {
-      const detail = r.data || {};
-      const saved = detail.total_saved || detail.saved || 0;
-      showToast(`✅ 采集完成，入库 ${saved} 条`);
-      loadDashboard();
-    } else {
-      showToast('❌ ' + r.message);
-    }
-  } catch (e) {
-    showToast('❌ 采集失败: ' + e.message);
-  }
 }
 
 // ════════════════════════════════════════════════════════

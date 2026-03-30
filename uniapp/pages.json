@@ -53,6 +53,54 @@
       "style": {
         "navigationBarTitleText": "投递简历"
       }
+    },
+    {
+      "path": "pages/events/detail",
+      "style": {
+        "navigationBarTitleText": "活动详情"
+      }
+    },
+    {
+      "path": "pages/events/list",
+      "style": {
+        "navigationBarTitleText": "活动列表"
+      }
+    },
+    {
+      "path": "pages/jobs/detail",
+      "style": {
+        "navigationBarTitleText": "职位详情"
+      }
+    },
+    {
+      "path": "pages/messages/list",
+      "style": {
+        "navigationBarTitleText": "消息"
+      }
+    },
+    {
+      "path": "pages/organizer/home/home",
+      "style": {
+        "navigationBarTitleText": "召集方"
+      }
+    },
+    {
+      "path": "pages/organizer/publish-event/index",
+      "style": {
+        "navigationBarTitleText": "发布活动"
+      }
+    },
+    {
+      "path": "pages/organizer/publish-job/index",
+      "style": {
+        "navigationBarTitleText": "发布岗位"
+      }
+    },
+    {
+      "path": "pages/organizer/my-posts/index",
+      "style": {
+        "navigationBarTitleText": "我的发布"
+      }
     }
   ],
   "globalStyle": {

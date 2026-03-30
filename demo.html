@@ -107,9 +107,25 @@ h1,h2,h3 { line-height: 1.3; }
 .page.active { display: block; }
 
 /* ===== LOGIN ===== */
-.login-page { padding: 20px; display: none; min-height: 100vh; background: white; }
-.login-page.active { display: flex; flex-direction: column; }
-.login-logo { text-align: center; padding: 60px 0 40px; }
+.login-page {
+  position: fixed; inset: 0; z-index: 1000;
+  display: none; align-items: flex-end;
+  background: rgba(0,0,0,.45);
+  backdrop-filter: blur(2px);
+}
+.login-page.active { display: flex; }
+.login-inner {
+  width: 100%; background: #fff;
+  border-radius: 24px 24px 0 0;
+  padding: 8px 24px 40px;
+  max-height: 92vh; overflow-y: auto;
+  animation: slideUp .28s cubic-bezier(.16,1,.3,1);
+}
+@keyframes slideUp {
+  from { transform: translateY(100%); }
+  to   { transform: translateY(0); }
+}
+.login-logo { text-align: center; padding: 24px 0 20px; }
 .login-logo .brand-icon { font-size: 64px; margin-bottom: 16px; display: block; }
 .login-logo h1 { font-size: 28px; background: linear-gradient(135deg, var(--primary), var(--primary2)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-weight: 800; }
 .login-logo p { color: var(--sub); margin-top: 8px; font-size: 14px; }
@@ -727,7 +743,9 @@ h1,h2,h3 { line-height: 1.3; }
 <div class="toast" id="toast"></div>
 
 <!-- ====== LOGIN PAGE ====== -->
-<div class="login-page" id="loginPage">
+<div class="login-page" id="loginPage" onclick="handleLoginOverlayClick(event)">
+<div class="login-inner">
+  <div style="width:36px;height:4px;background:#e2e8f0;border-radius:2px;margin:0 auto 16px"></div>
   <div class="login-logo">
     <span class="brand-icon">🎯</span>
     <h1>召集吧</h1>
@@ -778,7 +796,8 @@ h1,h2,h3 { line-height: 1.3; }
     <button class="login-btn" onclick="doRegister()">注 册</button>
     <p class="login-hint" style="margin-top:10px">注册后可在 <strong>发起活动 / 发布招募</strong> 功能中以召集方身份发布内容<br>演示版：验证码固定为 123456</p>
   </div>
-</div>
+</div><!-- /.login-inner -->
+</div><!-- /#loginPage -->
 
 <!-- ====== MAIN APP (USER) ====== -->
 <div id="mainApp" style="display:none;">
@@ -806,9 +825,9 @@ h1,h2,h3 { line-height: 1.3; }
     <!-- ===== 追随端内容（默认显示） ===== -->
     <div id="followContent">
       <div class="stats">
-        <div class="stat-item"><div class="num" id="statUsers">3,260</div><div class="label">活跃用户</div></div>
-        <div class="stat-item"><div class="num" id="statEvents">156</div><div class="label">进行中活动</div></div>
-        <div class="stat-item"><div class="num" id="statJobs">89</div><div class="label">招募岗位</div></div>
+        <div class="stat-item"><div class="num" id="statUsers">0</div><div class="label">活跃用户</div></div>
+        <div class="stat-item"><div class="num" id="statEvents">20</div><div class="label">进行中活动</div></div>
+        <div class="stat-item"><div class="num" id="statJobs">165</div><div class="label">招募岗位</div></div>
         <div class="stat-item"><div class="num">82%</div><div class="label">匹配准确率</div></div>
       </div>
 
@@ -846,19 +865,19 @@ h1,h2,h3 { line-height: 1.3; }
       <!-- 召集方统计 -->
       <div class="caller-stat-row">
         <div class="caller-stat-card" onclick="openCallerEvents()">
-          <div class="n" id="cStatEvent">2</div>
+          <div class="n" id="cStatEvent">-</div>
           <div class="l">我的活动</div>
         </div>
         <div class="caller-stat-card" onclick="openCallerJobs()">
-          <div class="n" id="cStatJobs">3</div>
+          <div class="n" id="cStatJobs">-</div>
           <div class="l">招募岗位</div>
         </div>
         <div class="caller-stat-card" onclick="openCallerApplicants()">
-          <div class="n" id="cStatApply">23</div>
+          <div class="n" id="cStatApply">-</div>
           <div class="l">收到投递</div>
         </div>
         <div class="caller-stat-card">
-          <div class="n" id="cStatView">204</div>
+          <div class="n" id="cStatView">-</div>
           <div class="l">浏览量</div>
         </div>
       </div>
@@ -950,10 +969,10 @@ h1,h2,h3 { line-height: 1.3; }
       <div id="myRoleBadge" style="position:absolute;right:16px;top:16px;background:rgba(255,255,255,0.2);border:1px solid rgba(255,255,255,0.35);padding:5px 12px;border-radius:20px;font-size:12px;font-weight:600">🙋 追随方</div>
     </div>
     <div class="my-stats" id="myStats">
-      <div class="my-stat"><div class="num">5</div><div class="label">参加活动</div></div>
-      <div class="my-stat"><div class="num" id="myApplyCount">0</div><div class="label">投递简历</div></div>
-      <div class="my-stat"><div class="num" id="myMsgCount">3</div><div class="label">未读消息</div></div>
-      <div class="my-stat"><div class="num">85%</div><div class="label">综合匹配</div></div>
+      <div class="my-stat"><div class="num" id="myJoinCount">-</div><div class="label">参加活动</div></div>
+      <div class="my-stat"><div class="num" id="myApplyCount">-</div><div class="label">投递简历</div></div>
+      <div class="my-stat"><div class="num" id="myMsgCount">-</div><div class="label">未读消息</div></div>
+      <div class="my-stat"><div class="num" id="myMatchScore">-</div><div class="label">综合匹配</div></div>
     </div>
     <div style="height:50px"></div>
     <!-- 积分卡片 -->
@@ -1796,25 +1815,35 @@ function activateCurrentTab() {
 }
 
 /** 渲染召集端首页内容 */
-function renderCallerContent() {
+async function renderCallerContent() {
   renderCallerEvents();
   renderCallerRecruits();
+  fetchCallerStats(); // 异步拉取真实统计数字
 }
 
-function renderCallerEvents() {
+async function renderCallerEvents() {
   const container = document.getElementById('callerEventList');
   if (!container) return;
-  const myEvents = EVENTS.slice(0, 3);
+  container.innerHTML = '<div style="padding:16px;text-align:center;color:var(--sub);font-size:13px">加载中…</div>';
+  const alive = await checkBackend();
+  let myEvents;
+  if (alive && _authToken) {
+    const r = await apiCall('/events/my-published');
+    if (r.code === 0 && Array.isArray(r.data)) {
+      myEvents = r.data.slice(0, 3);
+    }
+  }
+  if (!myEvents) myEvents = EVENTS.slice(0, 3); // 兜底演示数据
   container.innerHTML = myEvents.map(e => `
     <div class="my-event-manage">
       <div class="top">
-        <div class="cover-mini" style="background:${e.gradient||'linear-gradient(135deg,#667eea,#764ba2)'}">${e.emoji||'🎉'}</div>
+        <div class="cover-mini" style="background:${e.cover_gradient||e.gradient||'linear-gradient(135deg,#667eea,#764ba2)'}">${e.cover_emoji||e.emoji||'🎉'}</div>
         <div class="info" style="flex:1">
           <h4>${e.title}</h4>
           <p>📅 ${(e.start_time||'').slice(0,10)} · 📍 ${(e.location||'').slice(0,10)}</p>
-          <p style="color:var(--primary);font-size:12px;margin-top:2px">👥 ${e.current||0}/${e.max||100} 人报名</p>
+          <p style="color:var(--primary);font-size:12px;margin-top:2px">👥 ${e.current_participants||e.current||0}/${e.max_participants||e.max||100} 人报名</p>
         </div>
-        <span class="mini-tag green" style="align-self:flex-start">${e.status||'报名中'}</span>
+        <span class="mini-tag green" style="align-self:flex-start">${typeof e.status === 'string' ? e.status : '报名中'}</span>
       </div>
       <div class="actions">
         <div class="action-tag" style="border-color:var(--primary);color:var(--primary);background:#ede9ff" onclick="showEventDetail(${e.id})">查看详情</div>
@@ -1825,21 +1854,41 @@ function renderCallerEvents() {
   `).join('') || `<div class="empty"><div class="icon">🎉</div><p>还没有发起任何活动</p></div>`;
 }
 
-function renderCallerRecruits() {
+async function renderCallerRecruits() {
   const container = document.getElementById('callerRecruitList');
   if (!container) return;
-  container.innerHTML = APPLICANTS.slice(0, 4).map(a => `
+  container.innerHTML = '<div style="padding:16px;text-align:center;color:var(--sub);font-size:13px">加载中…</div>';
+  const alive = await checkBackend();
+  let applicants;
+  if (alive && _authToken) {
+    // 拉取我发布岗位的投递记录
+    const r = await apiCall('/jobs?my=1&pageSize=5');
+    if (r.code === 0 && Array.isArray(r.data?.list)) {
+      applicants = r.data.list.map(j => ({
+        id: j.id,
+        name: j.contact_name || '应聘者',
+        school: j.title || '未知岗位',
+        major: j.type_label || '',
+        tags: (j.tags || []).slice(0, 3),
+        score: (j.apply_count > 0 ? 0.75 : 0.5),
+        status: 'pending',
+      }));
+    }
+  }
+  // 兜底用本地演示数据
+  if (!applicants || !applicants.length) applicants = APPLICANTS.slice(0, 4);
+  container.innerHTML = applicants.slice(0, 4).map(a => `
     <div class="recruit-card" onclick="openChatWithUser(${a.id}, '${a.name}', '求职者')">
       <div class="role-icon" style="background:#ede9ff">👤</div>
       <div class="detail">
         <h4>${a.name}</h4>
-        <p>${a.school} · ${a.major}</p>
+        <p>${a.school} · ${a.major||''}</p>
         <div style="display:flex;gap:4px;margin-top:4px;flex-wrap:wrap">
-          ${a.tags.slice(0,3).map(t=>`<span class="mini-tag">${t}</span>`).join('')}
+          ${(a.tags||[]).slice(0,3).map(t=>`<span class="mini-tag">${t}</span>`).join('')}
         </div>
       </div>
       <div class="recruit-count">
-        <div style="font-size:22px;font-weight:800;color:var(--primary)">${Math.round(a.score*100)}%</div>
+        <div style="font-size:22px;font-weight:800;color:var(--primary)">${Math.round((a.score||0.5)*100)}%</div>
         <div style="font-size:10px;color:var(--sub)">匹配度</div>
         <div style="margin-top:4px;font-size:11px;background:#edfbf5;color:#11998e;padding:2px 6px;border-radius:6px;cursor:pointer">💬 沟通</div>
       </div>
@@ -2000,11 +2049,21 @@ function switchAuthMode(mode) {
 }
 
 // 注册页发送验证码
-function sendRegCode() {
-  const phone = document.getElementById('regPhone').value;
+async function sendRegCode() {
+  const phone = document.getElementById('regPhone').value.trim();
   if (!phone || phone.length < 11) { showToast('请输入正确的手机号'); return; }
   const btn = document.getElementById('regSendBtn');
   btn.disabled = true;
+
+  // 尝试调后端发验证码
+  const alive = await checkBackend();
+  if (alive) {
+    await apiCall('/auth/verify-code', {
+      method: 'POST',
+      body: JSON.stringify({ phone }),
+    });
+  }
+
   let sec = 60;
   btn.textContent = sec + 's';
   const timer = setInterval(() => {
@@ -2012,7 +2071,7 @@ function sendRegCode() {
     if (sec <= 0) { clearInterval(timer); btn.disabled = false; btn.textContent = '获取验证码'; }
     else btn.textContent = sec + 's';
   }, 1000);
-  showToast('验证码已发送（演示：123456）');
+  showToast(alive ? '验证码已发送，请查收短信' : '验证码已发送（演示：123456）');
 }
 
 // 统一注册（手机+验证码+昵称）
@@ -2021,20 +2080,30 @@ async function doRegister() {
   const code = document.getElementById('regCode').value.trim();
   const nickname = document.getElementById('regNickname').value.trim();
   if (!phone || phone.length < 11) return showToast('请输入正确的手机号');
-  if (code !== '123456') return showToast('验证码错误，演示码为 123456');
+  if (!code) return showToast('请输入验证码');
   if (!nickname) return showToast('请输入昵称');
 
   // 尝试真实后端注册
   const alive = await checkBackend();
   if (alive) {
-    const r = await apiCall('/auth/register', {
+    const r = await apiCall('/auth/register/user', {
       method: 'POST',
-      body: JSON.stringify({ phone, code, nickname, role: 'user' }),
+      body: JSON.stringify({
+        phone, code,
+        name: nickname, nickname,
+        school: '', major: '', degree: '', gradYear: '',
+      }),
     });
     if (r.code === 0 && r.data?.token) {
       setToken(r.data.token);
       currentUser = { ...r.data.user, type: 'user', nickname };
+    } else if (r.code !== 0) {
+      if (code !== '123456') {
+        return showToast(r.message || '注册失败');
+      }
     }
+  } else {
+    if (code !== '123456') return showToast('验证码错误，演示码为 123456');
   }
 
   // 本地演示兜底
@@ -2042,11 +2111,17 @@ async function doRegister() {
     currentUser = { phone, name: nickname, nickname, type: 'user', role: 'user' };
   }
 
-  document.getElementById('loginPage').style.display = 'none';
+  closeLoginModal();
   document.getElementById('mainApp').style.display = 'block';
+  _hideGuestBanner();
   renderApp();
   showToast('✅ 注册成功，欢迎加入召集吧！');
+  fetchUnreadCount();
+  setTimeout(fetchPlatformStats, 500);
+  setTimeout(fetchCallerStats, 600);
 }
+
+
 
 // ——以下旧函数保留空壳兼容（不再调用）——
 function sendUserRegCode() { sendRegCode(); }
@@ -2056,9 +2131,21 @@ function handleDiplomaUpload() {}
 function initGradYearOptions() {}
 
 let codeTimer = null;
-function sendCode() {
+async function sendCode() {
+  const phone = document.getElementById('phoneInput').value.trim();
+  if (!phone || phone.length < 11) { showToast('请输入正确的手机号'); return; }
   const btn = document.querySelector('.send-code-btn');
   btn.disabled = true;
+
+  // 尝试调后端发验证码
+  const alive = await checkBackend();
+  if (alive) {
+    await apiCall('/auth/verify-code', {
+      method: 'POST',
+      body: JSON.stringify({ phone }),
+    });
+  }
+
   let sec = 60;
   btn.textContent = sec + 's';
   codeTimer = setInterval(() => {
@@ -2066,14 +2153,14 @@ function sendCode() {
     if (sec <= 0) { clearInterval(codeTimer); btn.disabled = false; btn.textContent = '获取验证码'; }
     else btn.textContent = sec + 's';
   }, 1000);
-  showToast('验证码已发送（演示：123456）');
+  showToast(alive ? '验证码已发送，请查收短信' : '验证码已发送（演示：123456）');
 }
 
 async function doLogin() {
-  const phone = document.getElementById('phoneInput').value;
-  const code = document.getElementById('codeInput').value;
+  const phone = document.getElementById('phoneInput').value.trim();
+  const code = document.getElementById('codeInput').value.trim();
   if (!phone || phone.length < 11) return showToast('请输入正确的手机号');
-  if (code !== '123456') return showToast('验证码错误，演示码为 123456');
+  if (!code) return showToast('请输入验证码');
 
   // 尝试真实后端登录
   const alive = await checkBackend();
@@ -2085,7 +2172,21 @@ async function doLogin() {
     if (r.code === 0 && r.data?.token) {
       setToken(r.data.token);
       currentUser = { ...r.data.user, type: 'user' };
+      // 拉取完整用户资料
+      const profileR = await apiCall('/auth/profile');
+      if (profileR.code === 0 && profileR.data) {
+        currentUser = { ...currentUser, ...profileR.data };
+      }
+    } else if (r.code !== 0) {
+      // 后端明确返回错误（如验证码错误）
+      // 演示模式：123456 本地兜底
+      if (code !== '123456') {
+        return showToast(r.message || '验证码错误');
+      }
     }
+  } else {
+    // 后端不可用时，演示码兜底
+    if (code !== '123456') return showToast('验证码错误，演示码为 123456');
   }
 
   // 本地演示兜底
@@ -2093,20 +2194,27 @@ async function doLogin() {
     currentUser = { phone, name: '用户' + phone.slice(-4), nickname: '用户' + phone.slice(-4), type: 'user', role: 'user' };
   }
 
-  document.getElementById('loginPage').style.display = 'none';
+  closeLoginModal();
   document.getElementById('mainApp').style.display = 'block';
+  _hideGuestBanner();
   renderApp();
   showToast('✅ 登录成功，欢迎回来！');
+  // 登录后拉取一次未读消息数 & 平台统计 & 召集方统计
+  fetchUnreadCount();
+  setTimeout(fetchPlatformStats, 500);
+  setTimeout(fetchCallerStats, 600);
 }
 
 function doLogout() {
   currentUser = null;
   clearToken();
   _backendAlive = null;
-  document.getElementById('mainApp').style.display = 'none';
+  document.getElementById('mainApp').style.display = 'block';
   document.getElementById('companyApp').style.display = 'none';
-  document.getElementById('loginPage').style.display = 'flex';
-  document.getElementById('loginPage').className = 'login-page active';
+  // 退出后回到游客模式，弹出登录提示
+  renderApp();
+  _showGuestBanner();
+  openLoginModal();
 }
 
 // =================== NAVIGATION ===================
@@ -2245,16 +2353,34 @@ function openFeedbackChat() {
 let _myEventsFilter = 'all';
 
 // 演示用报名记录数据（含状态）
-const MY_EVENT_REGISTRATIONS = [
+let MY_EVENT_REGISTRATIONS = [
   { event_id: 1, event_title: '创业者见面会', event_emoji: '🚀', event_gradient: 'linear-gradient(135deg,#667eea,#764ba2)', date: '2026-04-05 14:00', status: 'approved', joined_at: '3天前' },
   { event_id: 2, event_title: '前端技术分享会', event_emoji: '💻', event_gradient: 'linear-gradient(135deg,#4facfe,#00f2fe)', date: '2026-04-12 14:00', status: 'pending', joined_at: '1天前' },
   { event_id: 3, event_title: '48小时编程马拉松', event_emoji: '⌨️', event_gradient: 'linear-gradient(135deg,#43e97b,#38f9d7)', date: '2026-03-15 09:00', status: 'completed', joined_at: '2周前' },
   { event_id: 4, event_title: 'UI设计工作坊', event_emoji: '🎨', event_gradient: 'linear-gradient(135deg,#f093fb,#f5576c)', date: '2026-03-01 10:00', status: 'rejected', joined_at: '1个月前' },
 ];
 
-function renderMyEventsList() {
+async function renderMyEventsList() {
   const container = document.getElementById('myEventsList');
   if (!container) return;
+
+  // 尝试从后端加载
+  const alive = await checkBackend();
+  if (alive && _authToken) {
+    const r = await apiCall('/events/my');
+    if (r.code === 0 && Array.isArray(r.data)) {
+      MY_EVENT_REGISTRATIONS = r.data.map(e => ({
+        event_id: e.id,
+        event_title: e.title,
+        event_emoji: e.cover_emoji || e.emoji || '🎉',
+        event_gradient: e.cover_gradient || e.gradient || 'linear-gradient(135deg,#667eea,#764ba2)',
+        date: e.start_time ? e.start_time.slice(0, 10) : '',
+        status: e.reg_status || 'pending',
+        joined_at: e.register_time ? new Date(e.register_time).toLocaleDateString('zh-CN') : '',
+      }));
+    }
+  }
+
   const list = _myEventsFilter === 'all'
     ? MY_EVENT_REGISTRATIONS
     : MY_EVENT_REGISTRATIONS.filter(r => r.status === _myEventsFilter);
@@ -2362,7 +2488,7 @@ function renderEventTags() {
 }
 
 function renderJobFilterTags() {
-  const types = ['全部','全职','兼职','实习'];
+  const types = ['全部','普工','保安','护工','建筑工','外卖骑手','快递员','网约车','家政','餐饮服务','搬运装卸','仓储物流','工厂技工','新业态','全职','兼职','日结'];
   document.getElementById('jobFilterTags').innerHTML = types.map((t,i) =>
     `<div class="tag ${i===0?'active':''}" onclick="filterJobTag(this,'${t}')">${t}</div>`
   ).join('');
@@ -2419,10 +2545,49 @@ async function renderHotEvents() {
   }).join('') || '<div style="padding:20px;text-align:center;color:var(--sub)">快来发起第一个召集！</div>';
 }
 
-function renderRecommendJobs() {
-  let jobs = currentJobFilter === '全部' ? JOBS : JOBS.filter(j => j.type === currentJobFilter);
-  jobs = [...jobs].sort((a,b) => b.match_score - a.match_score);
-  document.getElementById('recommendJobs').innerHTML = jobs.map(j => renderJobCardHTML(j)).join('');
+async function renderRecommendJobs() {
+  const container = document.getElementById('recommendJobs');
+  if (!container) return;
+  const alive = await checkBackend();
+  let jobs;
+  if (alive && _authToken) {
+    // 登录后用智能匹配
+    const r = await apiCall('/match/recommend');
+    if (r.code === 0 && Array.isArray(r.data)) {
+      jobs = r.data.slice(0, 6).map(j => ({
+        ...j,
+        company: j.company_name || j.company || j.organizer_name || '招聘方',
+        emoji: j.cover_emoji || j.emoji || '🏢',
+        salary: j.salary_min && j.salary_max ? `${j.salary_min}-${j.salary_max}` : (j.salary || '面议'),
+        tags: j.tags || [],
+        match_score: j.match_score || 0.7,
+        company_verified: j.certify_status === 1,
+      }));
+    }
+  }
+  if (!jobs || !jobs.length) {
+    // 未登录或无推荐结果，从后端获取普通列表
+    const alive2 = await checkBackend();
+    if (alive2) {
+      const r2 = await apiCall('/jobs?pageSize=6');
+      if (r2.code === 0 && r2.data?.list?.length) {
+        jobs = r2.data.list.map(j => ({
+          ...j,
+          company: j.company_name || j.company || j.organizer_name || '招聘方',
+          emoji: j.cover_emoji || j.emoji || '🏢',
+          salary: j.salary_min && j.salary_max ? `${j.salary_min}-${j.salary_max}` : (j.salary || '面议'),
+          tags: j.tags || [],
+          match_score: j.match_score || 0.7,
+          company_verified: j.certify_status === 1,
+        }));
+      }
+    }
+  }
+  if (!jobs || !jobs.length) {
+    let fallback = currentJobFilter === '全部' ? JOBS : JOBS.filter(j => j.type === currentJobFilter);
+    jobs = [...fallback].sort((a, b) => b.match_score - a.match_score);
+  }
+  container.innerHTML = jobs.map(j => renderJobCardHTML(j)).join('');
 }
 
 /** 氛围标签 HTML（供卡片和详情页复用） */
@@ -2493,20 +2658,64 @@ function filterLocalEvents(events, category) {
   return category === '全部' ? events : events.filter(e => e.category === category);
 }
 
-function renderJobList() {
-  const list = currentJobFilter === '全部' ? JOBS : JOBS.filter(j => j.type === currentJobFilter);
-  document.getElementById('jobsList').innerHTML = list.map(j => renderJobCardHTML(j)).join('');
+async function renderJobList() {
+  const container = document.getElementById('jobsList');
+  if (!container) return;
+  container.innerHTML = '<div style="padding:20px;text-align:center;color:var(--sub)">加载中…</div>';
+  const alive = await checkBackend();
+  let list;
+  if (alive) {
+    const typeParam = currentJobFilter !== '全部' ? `&type=${encodeURIComponent(currentJobFilter)}` : '';
+    const r = await apiCall(`/jobs?pageSize=30${typeParam}`);
+    if (r.code === 0 && r.data?.list?.length) {
+      list = r.data.list.map(j => ({
+        ...j,
+        company: j.company_name || j.company || j.organizer_name || '招聘方',
+        emoji: j.cover_emoji || j.emoji || '🏢',
+        salary: j.salary_min && j.salary_max ? `${j.salary_min}-${j.salary_max}` : (j.salary || '面议'),
+        tags: j.tags || [],
+        match_score: j.match_score || 0.7,
+        company_verified: j.certify_status === 1,
+      }));
+    }
+  }
+  if (!list || !list.length) {
+    list = currentJobFilter === '全部' ? JOBS : JOBS.filter(j => j.type === currentJobFilter);
+  }
+  container.innerHTML = list.map(j => renderJobCardHTML(j)).join('')
+    || '<div style="padding:40px;text-align:center"><div style="font-size:40px;margin-bottom:12px">💼</div><p style="color:var(--sub)">暂无岗位</p></div>';
 }
 
 // =================== MATCH PAGE ===================
-function renderMatchPage() {
-  const userTags = [...mySelectedSkills];
-  const matchedJobs = JOBS.map(j => {
-    const hits = j.tags.filter(t => userTags.some(u => u===t || j.tags.includes(u)));
-    return { ...j, hitTags: hits };
-  }).sort((a,b) => b.match_score - a.match_score).slice(0, 4);
+async function renderMatchPage() {
+  const alive = await checkBackend();
+  let matchedJobs;
+  if (alive && _authToken) {
+    const r = await apiCall('/match/recommend');
+    if (r.code === 0 && Array.isArray(r.data) && r.data.length) {
+      matchedJobs = r.data.slice(0, 4).map(j => ({
+        ...j,
+        company: j.company_name || j.company || '招聘方',
+        emoji: j.cover_emoji || j.emoji || '🏢',
+        salary: j.salary_min && j.salary_max ? `${j.salary_min}-${j.salary_max}` : (j.salary || '面议'),
+        tags: j.tags || [],
+        match_score: j.match_score || 0.7,
+        hitTags: (j.tags || []).filter(t => mySelectedSkills.has(t)),
+      }));
+    }
+  }
+  // 本地兜底
+  if (!matchedJobs || !matchedJobs.length) {
+    const userTags = [...mySelectedSkills];
+    matchedJobs = JOBS.map(j => {
+      const hits = j.tags.filter(t => userTags.some(u => u===t || j.tags.includes(u)));
+      return { ...j, hitTags: hits };
+    }).sort((a,b) => b.match_score - a.match_score).slice(0, 4);
+  }
 
-  document.getElementById('matchCards').innerHTML = matchedJobs.map(j => `
+  document.getElementById('matchCards').innerHTML = matchedJobs.map(j => {
+    const userTags = [...mySelectedSkills];
+    return `
     <div class="match-container" onclick="showMatchDetail(${j.id})">
       <div class="match-title">
         <span>${j.emoji||'🏢'} ${j.title}</span>
@@ -2516,24 +2725,25 @@ function renderMatchPage() {
         <div class="match-side">
           <h4>我的技能</h4>
           <div class="match-tags-box">
-            ${userTags.slice(0,5).map(t => `<span class="match-tag ${j.tags.includes(t)?'hit':''}">${t}</span>`).join('')}
+            ${userTags.slice(0,5).map(t => `<span class="match-tag ${(j.tags||[]).includes(t)?'hit':''}">${t}</span>`).join('')}
           </div>
         </div>
         <div class="match-arrow">→</div>
         <div class="match-side">
           <h4>岗位需求</h4>
           <div class="match-tags-box">
-            ${j.tags.map(t => `<span class="match-tag ${userTags.includes(t)?'hit':''}">${t}</span>`).join('')}
+            ${(j.tags||[]).map(t => `<span class="match-tag ${userTags.includes(t)?'hit':''}">${t}</span>`).join('')}
           </div>
         </div>
       </div>
       <div style="display:flex;align-items:center;justify-content:space-between;margin-top:8px">
-        <span style="font-size:13px;color:var(--sub)">薪资：${j.salary} · ${j.city}</span>
-        <span style="font-size:14px;font-weight:700;color:var(--primary)">匹配度 ${Math.round(j.match_score*100)}%</span>
+        <span style="font-size:13px;color:var(--sub)">薪资：${j.salary} · ${j.city||''}</span>
+        <span style="font-size:14px;font-weight:700;color:var(--primary)">匹配度 ${Math.round((j.match_score||0.7)*100)}%</span>
       </div>
-      <div class="progress-bar" style="margin-top:6px"><div class="progress-bar-fill" style="width:${Math.round(j.match_score*100)}%"></div></div>
+      <div class="progress-bar" style="margin-top:6px"><div class="progress-bar-fill" style="width:${Math.round((j.match_score||0.7)*100)}%"></div></div>
     </div>
-  `).join('');
+  `;
+  }).join('');
 
   document.getElementById('aiInsights').innerHTML = `
     <div class="insight-item"><div class="dot" style="background:#667eea"></div><div><b>优势领域</b>：你的技能标签「Java」「前端」在招募市场热度高，匹配到 ${JOBS.filter(j=>j.tags.some(t=>mySelectedSkills.has(t))).length} 个岗位</div></div>
@@ -2544,10 +2754,11 @@ function renderMatchPage() {
 }
 
 // =================== MY PAGE ===================
-function renderMyPage() {
-  const count = appliedJobs.size;
+async function renderMyPage() {
+  // 先渲染本地已知数据（不阻塞UI）
+  const localApply = appliedJobs.size;
   const unread = myMessages.filter(m => !m.read).length;
-  document.getElementById('myApplyCount').textContent = count;
+  document.getElementById('myApplyCount').textContent = localApply;
   document.getElementById('myMsgCount').textContent = unread;
   document.getElementById('myTabDot').style.display = unread > 0 ? 'block' : 'none';
   document.getElementById('msgBadge').textContent = unread;
@@ -2568,6 +2779,59 @@ function renderMyPage() {
   document.getElementById('mySkillTags').innerHTML = skills.map(s =>
     `<span class="skill-tag">${s}</span>`
   ).join('');
+
+  // 从后端拉取真实统计数据
+  const alive = await checkBackend();
+  if (alive && _authToken) {
+    // 拉取参加活动数
+    const evR = await apiCall('/events/my');
+    if (evR.code === 0 && Array.isArray(evR.data)) {
+      const joinEl = document.getElementById('myJoinCount');
+      if (joinEl) joinEl.textContent = evR.data.length;
+    }
+
+    // 拉取投递记录数
+    const jobR = await apiCall('/jobs?my=1&pageSize=1');
+    if (jobR.code === 0 && jobR.data?.total != null) {
+      const applyEl = document.getElementById('myApplyCount');
+      if (applyEl) applyEl.textContent = jobR.data.total;
+    }
+
+    // 拉取未读消息数（刷新一下）
+    const msgR = await apiCall('/messages/unread-count');
+    if (msgR.code === 0 && msgR.data?.count != null) {
+      const msgEl = document.getElementById('myMsgCount');
+      if (msgEl) msgEl.textContent = msgR.data.count;
+      document.getElementById('myTabDot').style.display = msgR.data.count > 0 ? 'block' : 'none';
+      document.getElementById('msgBadge').textContent = msgR.data.count;
+      document.getElementById('msgBadge').style.display = msgR.data.count > 0 ? 'inline' : 'none';
+    }
+
+    // 拉取个人资料（积分/匹配分）
+    const profR = await apiCall('/auth/profile');
+    if (profR.code === 0 && profR.data) {
+      const u = profR.data;
+      // 积分
+      if (u.points != null) {
+        myPoints = u.points;
+        const ptsEl = document.getElementById('myPointsNum');
+        if (ptsEl) ptsEl.textContent = u.points;
+      }
+      // 综合匹配分
+      if (u.match_score != null) {
+        const scoreEl = document.getElementById('myMatchScore');
+        if (scoreEl) scoreEl.textContent = Math.round(u.match_score * 100) + '%';
+      }
+      // 更新技能标签
+      if (u.skill_tags && Array.isArray(u.skill_tags) && u.skill_tags.length) {
+        mySelectedSkills = new Set(u.skill_tags);
+        const skills2 = u.skill_tags.slice(0,4);
+        document.getElementById('mySkillTags').innerHTML = skills2.map(s =>
+          `<span class="skill-tag">${s}</span>`
+        ).join('');
+      }
+    }
+  }
 }
 
 function updateMyTab() {
@@ -2611,41 +2875,80 @@ function saveResume() {
 }
 
 // =================== MY EVENTS ===================
-function renderMyEvents() {
-  const list = EVENTS.filter(e => registeredEvents.has(e.id));
+async function renderMyEvents() {
+  const container = document.getElementById('myEventsList');
+  if (!container) return;
+  container.innerHTML = '<div style="padding:16px;text-align:center;color:var(--sub);font-size:13px">加载中…</div>';
+  const alive = await checkBackend();
+  let list;
+  if (alive && _authToken) {
+    const r = await apiCall('/events/my');
+    if (r.code === 0 && Array.isArray(r.data) && r.data.length) {
+      list = r.data;
+    }
+  }
+  // 兜底：本地报名记录
+  if (!list) list = EVENTS.filter(e => registeredEvents.has(e.id));
   if (list.length === 0) {
-    document.getElementById('myEventsList').innerHTML = `<div class="empty"><div class="icon">🎉</div><p>还没有参加任何活动<br>去发现精彩活动吧</p></div>`;
+    container.innerHTML = `<div class="empty"><div class="icon">🎉</div><p>还没有参加任何活动<br>去发现精彩活动吧</p></div>`;
     return;
   }
-  document.getElementById('myEventsList').innerHTML = list.map(e => `
-    <div class="event-list-card">
-      <div class="cover-sm-ph" style="background:${e.gradient}">${e.emoji}</div>
+  container.innerHTML = list.map(e => `
+    <div class="event-list-card" onclick="showEventDetail(${e.id})">
+      <div class="cover-sm-ph" style="background:${e.cover_gradient||e.gradient||'linear-gradient(135deg,#667eea,#764ba2)'}">
+        ${e.cover_emoji||e.emoji||'🎉'}
+      </div>
       <div class="info">
         <h3>${e.title}</h3>
-        <div class="meta">📅 ${e.start_time}</div>
-        <div class="participants" style="color:var(--green)">✅ 已报名</div>
+        <div class="meta">📅 ${(e.start_time||'').slice(0,10)} · 📍 ${(e.location||'').slice(0,12)}</div>
+        <div class="participants" style="color:var(--green)">✅ 已报名 · 👥 ${e.current_participants??e.current??0}人</div>
       </div>
     </div>
   `).join('');
 }
 
 // =================== MY APPLY ===================
-function renderMyApply() {
+async function renderMyApply() {
+  const container = document.getElementById('myApplyList');
+
+  // 尝试从后端加载已投递职位
+  const alive = await checkBackend();
+  if (alive && _authToken) {
+    const r = await apiCall('/jobs?my=1&limit=50');
+    if (r.code === 0 && r.data?.list?.length) {
+      const statusLabels = { pending:'待查看', viewed:'已查看', passed:'通过', reject:'不合适' };
+      container.innerHTML = r.data.list.map(j => {
+        const st = j.apply_status || 'pending';
+        return `<div class="apply-record">
+          <div class="logo-box">${j.emoji || '🏢'}</div>
+          <div class="detail">
+            <h4>${j.title}</h4>
+            <p>${j.company_name || j.company || ''} · ${j.city || ''}</p>
+            ${j.match_score ? `<p style="margin-top:3px;color:var(--primary);font-size:12px">匹配度 ${j.match_score}%</p>` : ''}
+          </div>
+          <div class="status-badge ${st}">${statusLabels[st] || st}</div>
+        </div>`;
+      }).join('');
+      return;
+    }
+  }
+
+  // 本地演示兜底
   const list = [...appliedJobs].map(id => JOBS.find(j => j.id === id)).filter(Boolean);
   if (list.length === 0) {
-    document.getElementById('myApplyList').innerHTML = `<div class="empty"><div class="icon">📝</div><p>还没有投递任何职位<br>快去发现心仪职位吧</p></div>`;
+    container.innerHTML = `<div class="empty"><div class="icon">📝</div><p>还没有投递任何职位<br>快去发现心仪职位吧</p></div>`;
     return;
   }
   const statuses = ['pending','viewed','passed','reject'];
-  const statusLabels = {pending:'待查看',viewed:'已查看',passed:'通过',reject:'不合适'};
-  document.getElementById('myApplyList').innerHTML = list.map((j,i) => {
+  const statusLabels = { pending:'待查看', viewed:'已查看', passed:'通过', reject:'不合适' };
+  container.innerHTML = list.map((j, i) => {
     const st = statuses[i % 3];
     return `<div class="apply-record">
-      <div class="logo-box">${j.emoji||'🏢'}</div>
+      <div class="logo-box">${j.emoji || '🏢'}</div>
       <div class="detail">
         <h4>${j.title}</h4>
         <p>${j.company} · ${j.city}</p>
-        <p style="margin-top:3px;color:var(--primary);font-size:12px">匹配度 ${Math.round(j.match_score*100)}%</p>
+        <p style="margin-top:3px;color:var(--primary);font-size:12px">匹配度 ${Math.round((j.match_score||0)*100)}%</p>
       </div>
       <div class="status-badge ${st}">${statusLabels[st]}</div>
     </div>`;
@@ -2653,29 +2956,82 @@ function renderMyApply() {
 }
 
 // =================== MESSAGES ===================
-function renderMessages() {
-  document.getElementById('messagesList').innerHTML = myMessages.map(m => `
-    <div class="msg-card" onclick="readMessage(${m.id})">
-      <div class="icon-box" style="background:${m.color}">${m.icon}</div>
-      <div class="msg-body">
-        <h4>${m.title}</h4>
-        <p>${m.content}</p>
-        <div class="time">${m.time}</div>
+async function renderMessages() {
+  const container = document.getElementById('messagesList');
+  // 尝试从后端加载
+  const alive = await checkBackend();
+  if (alive && _authToken) {
+    const r = await apiCall('/messages?pageSize=50');
+    if (r.code === 0 && r.data?.list) {
+      myMessages = r.data.list.map(m => ({
+        id: m.id,
+        type: m.type || 'notification',
+        icon: m.icon || '🔔',
+        color: m.color || '#ede9ff',
+        title: m.title || '系统通知',
+        content: m.content || m.body || '',
+        time: m.created_at ? new Date(m.created_at).toLocaleString('zh-CN', { month:'numeric', day:'numeric', hour:'2-digit', minute:'2-digit' }) : '',
+        read: m.is_read === 1,
+      }));
+      // 同步未读数
+      const unreadCount = myMessages.filter(m => !m.read).length;
+      document.getElementById('myMsgCount').textContent = unreadCount;
+      document.getElementById('msgBadge').textContent = unreadCount;
+      document.getElementById('msgBadge').style.display = unreadCount > 0 ? 'inline' : 'none';
+    }
+  }
+  container.innerHTML = myMessages.length === 0
+    ? `<div class="empty"><div style="font-size:36px">🔔</div><p style="color:var(--sub);margin-top:8px">暂无消息</p></div>`
+    : myMessages.map(m => `
+      <div class="msg-card" onclick="readMessage(${m.id})">
+        <div class="icon-box" style="background:${m.color}">${m.icon}</div>
+        <div class="msg-body">
+          <h4>${m.title}</h4>
+          <p>${m.content}</p>
+          <div class="time">${m.time}</div>
+        </div>
+        <div class="${m.read?'msg-read':'msg-unread'}"></div>
       </div>
-      <div class="${m.read?'msg-read':'msg-unread'}"></div>
-    </div>
-  `).join('');
+    `).join('');
 }
 
-function readMessage(id) {
+async function readMessage(id) {
   const msg = myMessages.find(m => m.id === id);
-  if (msg) { msg.read = true; renderMessages(); updateMyTab(); renderMyPage(); }
+  if (!msg) return;
+  msg.read = true;
+  renderMessages(); updateMyTab(); renderMyPage();
+  // 同步后端
+  const alive = await checkBackend();
+  if (alive && _authToken) {
+    apiCall(`/messages/${id}/read`, { method: 'POST' }).catch(() => {});
+  }
 }
 
-function markAllRead() {
+async function markAllRead() {
   myMessages.forEach(m => m.read = true);
   renderMessages(); updateMyTab(); renderMyPage();
   showToast('✅ 已全部标记为已读');
+  // 逐条同步后端（未读的）
+  const alive = await checkBackend();
+  if (alive && _authToken) {
+    myMessages.forEach(m => {
+      apiCall(`/messages/${m.id}/read`, { method: 'POST' }).catch(() => {});
+    });
+  }
+}
+
+// 拉取未读消息数并更新角标
+async function fetchUnreadCount() {
+  const alive = await checkBackend();
+  if (!alive || !_authToken) return;
+  const r = await apiCall('/messages/unread-count');
+  if (r.code === 0) {
+    const count = r.data?.count || 0;
+    document.getElementById('myMsgCount').textContent = count;
+    document.getElementById('msgBadge').textContent = count;
+    document.getElementById('msgBadge').style.display = count > 0 ? 'inline' : 'none';
+    document.getElementById('myTabDot').style.display = count > 0 ? 'block' : 'none';
+  }
 }
 
 // =================== EVENT DETAIL ===================
@@ -3136,15 +3492,31 @@ async function cancelRegistration() {
   showToast('已取消报名');
 }
 
-function applyJob() {
+async function applyJob() {
   if (!currentUser) return showToast('请先登录');
   if (appliedJobs.has(currentJobId)) return;
-  appliedJobs.add(currentJobId);
   const j = JOBS.find(x => x.id === currentJobId);
-  if (j) j.applicants++;
-  const pct = j ? Math.round(j.match_score*100) : 0;
   const btn = document.getElementById('jobApplyBtn');
-  btn.textContent = '✅ 已投递'; btn.className = 'apply-btn applied';
+  btn.disabled = true; btn.textContent = '投递中…';
+
+  // 尝试后端申请
+  const alive = await checkBackend();
+  if (alive && _authToken) {
+    const r = await apiCall(`/jobs/${currentJobId}/apply`, {
+      method: 'POST',
+      body: JSON.stringify({ message: '' }),
+    });
+    if (r.code !== 0) {
+      btn.disabled = false; btn.textContent = '投递简历';
+      showToast(r.message || '投递失败，请重试');
+      return;
+    }
+  }
+
+  appliedJobs.add(currentJobId);
+  if (j) j.applicants = (j.applicants || 0) + 1;
+  const pct = j ? Math.round((j.match_score || 0) * 100) : 0;
+  btn.disabled = false; btn.textContent = '✅ 已投递'; btn.className = 'apply-btn applied';
   renderRecommendJobs(); renderJobList();
   renderMyPage();
   showToast(`🎉 投递成功！匹配度 ${pct}%，HR将在3个工作日内回复`);
@@ -3727,12 +4099,49 @@ function handleSearch(val) {
   if (!val) return;
 }
 
-function doSearch() {
-  const kw = document.getElementById('searchInput').value.trim().toLowerCase();
+async function doSearch() {
+  const kw = document.getElementById('searchInput').value.trim();
   if (!kw) return showToast('请输入搜索词');
-  // Filter jobs
-  const matchJobs = JOBS.filter(j => j.title.toLowerCase().includes(kw) || j.tags.some(t=>t.toLowerCase().includes(kw)) || j.company.toLowerCase().includes(kw));
-  const matchEvents = EVENTS.filter(e => e.title.toLowerCase().includes(kw) || e.tags.some(t=>t.toLowerCase().includes(kw)));
+  const kwLower = kw.toLowerCase();
+  const alive = await checkBackend();
+
+  if (alive) {
+    const [jobR, evR] = await Promise.all([
+      apiCall(`/jobs?keyword=${encodeURIComponent(kw)}&pageSize=20`),
+      apiCall(`/events?keyword=${encodeURIComponent(kw)}&pageSize=20`),
+    ]);
+    const matchJobs = (jobR.code === 0 && jobR.data?.list) ? jobR.data.list : [];
+    const matchEvents = (evR.code === 0 && evR.data?.list) ? evR.data.list : [];
+
+    if (matchJobs.length > 0) {
+      switchPage('jobsPage');
+      document.getElementById('jobsList').innerHTML = matchJobs.map(j => renderJobCardHTML({
+        ...j,
+        company: j.company_name || j.company || '招聘方',
+        emoji: j.cover_emoji || j.emoji || '🏢',
+        salary: j.salary_min && j.salary_max ? `${j.salary_min}-${j.salary_max}` : (j.salary || '面议'),
+        tags: j.tags || [],
+        match_score: j.match_score || 0.7,
+      })).join('');
+      showToast(`找到 ${matchJobs.length} 个相关岗位`);
+    } else if (matchEvents.length > 0) {
+      switchPage('eventsPage');
+      document.getElementById('eventsList').innerHTML = matchEvents.map(e => `
+        <div class="event-list-card" onclick="showEventDetail(${e.id})">
+          <div class="cover-sm-ph" style="background:${e.cover_gradient||e.gradient||'linear-gradient(135deg,#667eea,#764ba2)'}">${e.cover_emoji||e.emoji||'🎉'}</div>
+          <div class="info"><h3>${e.title}</h3><div class="meta">📅 ${(e.start_time||'').slice(0,10)}</div></div>
+        </div>
+      `).join('');
+      showToast(`找到 ${matchEvents.length} 个相关活动`);
+    } else {
+      showToast('没有找到相关内容，换个关键词试试');
+    }
+    return;
+  }
+
+  // 后端不通时本地兜底
+  const matchJobs = JOBS.filter(j => j.title.toLowerCase().includes(kwLower) || j.tags.some(t=>t.toLowerCase().includes(kwLower)) || j.company.toLowerCase().includes(kwLower));
+  const matchEvents = EVENTS.filter(e => e.title.toLowerCase().includes(kwLower) || e.tags.some(t=>t.toLowerCase().includes(kwLower)));
   if (matchJobs.length > 0) {
     switchPage('jobsPage');
     document.getElementById('jobsList').innerHTML = matchJobs.map(j => renderJobCardHTML(j)).join('');
@@ -4257,29 +4666,74 @@ function animateNumber(el, target) {
 
 // =================== INIT ===================
 window.addEventListener('load', () => {
-  // Auto show login
-  document.getElementById('loginPage').className = 'login-page active';
+  // 直接进入游客模式（可浏览首页内容，无需登录）
+  document.getElementById('loginPage').style.display = 'none';
+  document.getElementById('mainApp').style.display = 'block';
+  renderApp();
+
+  // 游客模式下首页顶部显示登录引导
+  _showGuestBanner();
+
   // Initialize grad year options
   initGradYearOptions();
-  // Animate stats after login
 });
 
-// Animate platform stats on login
-(function() {
-  const origDoLogin = window.doLogin;
-  window.doLogin = function() {
-    origDoLogin();
-    // Animate stat numbers after login
-    setTimeout(() => {
-      const statUsers = document.getElementById('statUsers');
-      const statEvents = document.getElementById('statEvents');
-      const statJobs = document.getElementById('statJobs');
-      if (statUsers) animateNumber(statUsers, 3260);
-      if (statEvents) animateNumber(statEvents, 156);
-      if (statJobs) animateNumber(statJobs, 89);
-    }, 300);
-  };
-})();
+// =================== 平台统计数据 ===================
+async function fetchPlatformStats() {
+  const alive = await checkBackend();
+  if (!alive) return; // 后端不通则保持占位硬编码值
+
+  const r = await apiCall('/analytics/overview');
+  if (r.code !== 0 || !r.data) return;
+
+  const s = r.data.stats || {};
+
+  const elUsers  = document.getElementById('statUsers');
+  const elEvents = document.getElementById('statEvents');
+  const elJobs   = document.getElementById('statJobs');
+
+  // 活跃用户 = 总注册用户
+  if (elUsers  && s.total_users  != null) animateNumber(elUsers,  s.total_users);
+  // 进行中活动：优先用 active_events，降级 total_events
+  if (elEvents && (s.active_events != null || s.total_events != null))
+    animateNumber(elEvents, s.active_events ?? s.total_events);
+  // 招募岗位
+  if (elJobs   && s.total_jobs   != null) animateNumber(elJobs,   s.total_jobs);
+}
+
+// =================== 召集方统计数据 ===================
+async function fetchCallerStats() {
+  const alive = await checkBackend();
+  if (!alive || !_authToken) return;
+
+  // 我发布的活动
+  const evR = await apiCall('/events/my-published');
+  if (evR.code === 0 && Array.isArray(evR.data)) {
+    const el = document.getElementById('cStatEvent');
+    if (el) el.textContent = evR.data.length;
+    // 统计浏览量之和
+    const totalViews = evR.data.reduce((s, e) => s + (e.view_count || 0), 0);
+    const viewEl = document.getElementById('cStatView');
+    if (viewEl) viewEl.textContent = totalViews;
+  }
+
+  // 我发布的岗位 & 收到的投递
+  const jobR = await apiCall('/jobs?my=1&pageSize=50');
+  if (jobR.code === 0 && jobR.data) {
+    const jobList = jobR.data.list || [];
+    const el = document.getElementById('cStatJobs');
+    if (el) el.textContent = jobR.data.total || jobList.length;
+    // 收到投递 = 各岗位 apply_count 之和
+    const totalApply = jobList.reduce((s, j) => s + (j.apply_count || 0), 0);
+    const applyEl = document.getElementById('cStatApply');
+    if (applyEl) applyEl.textContent = totalApply;
+  }
+}
+
+// 页面加载后尝试拉取平台统计（无需登录，公开接口）
+window.addEventListener('load', () => {
+  setTimeout(fetchPlatformStats, 800);
+});
 
 // ===== PWA: Service Worker Registration =====
 if ('serviceWorker' in navigator) {
@@ -4353,6 +4807,64 @@ function dismissInstallBanner() {
   const banner = document.getElementById('pwa-install-banner');
   if (banner) banner.remove();
 }
+
+// =================== 登录浮层控制 ===================
+function openLoginModal(mode) {
+  if (mode) switchAuthMode(mode);
+  const lp = document.getElementById('loginPage');
+  lp.style.display = 'flex';
+  // 触发动画
+  const inner = lp.querySelector('.login-inner');
+  if (inner) { inner.style.animation = 'none'; void inner.offsetWidth; inner.style.animation = ''; }
+}
+
+function closeLoginModal() {
+  document.getElementById('loginPage').style.display = 'none';
+}
+
+function handleLoginOverlayClick(e) {
+  // 点击遮罩（非内层）且是游客状态时关闭
+  if (e.target === document.getElementById('loginPage') && !currentUser) {
+    closeLoginModal();
+  }
+}
+
+/** 游客模式下在首页顶部显示引导 banner */
+function _showGuestBanner() {
+  if (document.getElementById('guest-login-banner')) return;
+  const homePage = document.getElementById('homePage');
+  if (!homePage) return;
+  const banner = document.createElement('div');
+  banner.id = 'guest-login-banner';
+  banner.style.cssText = `
+    background: linear-gradient(135deg,#667eea,#764ba2);
+    color: white; padding: 12px 16px;
+    display: flex; align-items: center; justify-content: space-between;
+    font-size: 13px; gap: 10px;
+  `;
+  banner.innerHTML = `
+    <span>👋 登录后可报名活动 / 投递岗位</span>
+    <button onclick="openLoginModal('login')" style="
+      background:white;color:#667eea;border:none;
+      padding:6px 14px;border-radius:20px;font-size:12px;
+      font-weight:600;cursor:pointer;white-space:nowrap
+    ">登录 / 注册</button>
+  `;
+  homePage.insertBefore(banner, homePage.firstChild);
+}
+
+function _hideGuestBanner() {
+  const b = document.getElementById('guest-login-banner');
+  if (b) b.remove();
+}
+
+/** 需要登录时调用（报名、投递等操作） */
+function requireLogin(action) {
+  if (currentUser) { if (action) action(); return; }
+  openLoginModal('login');
+  showToast('请先登录后操作');
+}
+
 </script>
 </body>
 </html>

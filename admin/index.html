@@ -2,843 +2,1557 @@
 <html lang="zh-CN">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>召集吧 - 管理系统</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>招聘网站采集管理 · 召集吧后台</title>
 <style>
-* { margin: 0; padding: 0; box-sizing: border-box; }
-:root {
-  --primary: #667eea;
-  --primary2: #764ba2;
-  --success: #19c37d;
-  --warning: #f59e0b;
-  --danger: #ef4444;
-  --bg: #f5f6fa;
-  --card: #ffffff;
-  --text: #2c3e50;
-  --sub: #8492a6;
-  --border: #edf2f7;
-}
-body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', sans-serif; background: var(--bg); color: var(--text); }
+  :root {
+    --primary: #667eea;
+    --primary2: #764ba2;
+    --success: #11998e;
+    --danger: #f5576c;
+    --warn: #f97316;
+    --bg: #f4f6fb;
+    --card: #fff;
+    --border: #e8ecf4;
+    --text: #1a1a2e;
+    --sub: #8892a4;
+    --radius: 14px;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--bg); color: var(--text); font-family: -apple-system, 'PingFang SC', sans-serif; min-height: 100vh; }
 
-/* 登录页 */
-.login-page { min-height: 100vh; display: flex; align-items: center; justify-content: center; background: linear-gradient(135deg, var(--primary) 0%, var(--primary2) 100%); }
-.login-box { background: white; padding: 40px; border-radius: 16px; width: 100%; max-width: 400px; box-shadow: 0 20px 60px rgba(0,0,0,0.3); }
-.login-box h1 { font-size: 24px; margin-bottom: 8px; text-align: center; }
-.login-box p { color: var(--sub); text-align: center; margin-bottom: 30px; }
-.form-group { margin-bottom: 20px; }
-.form-group label { display: block; font-size: 14px; margin-bottom: 6px; color: var(--sub); }
-.form-group input { width: 100%; padding: 12px 16px; border: 1px solid var(--border); border-radius: 8px; font-size: 14px; outline: none; transition: border-color 0.2s; }
-.form-group input:focus { border-color: var(--primary); }
-.btn { width: 100%; padding: 14px; border: none; border-radius: 8px; font-size: 16px; font-weight: 600; cursor: pointer; transition: all 0.2s; }
-.btn-primary { background: linear-gradient(135deg, var(--primary), var(--primary2)); color: white; }
-.btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(102,126,234,0.4); }
+  /* ── Header ── */
+  .header {
+    background: linear-gradient(135deg, var(--primary), var(--primary2));
+    padding: 20px 16px 16px;
+    color: white;
+    position: sticky; top: 0; z-index: 100;
+    box-shadow: 0 4px 20px rgba(102,126,234,.35);
+  }
+  .header h1 { font-size: 18px; font-weight: 800; }
+  .header p  { font-size: 12px; opacity: .8; margin-top: 2px; }
+  .header-actions { display: flex; gap: 8px; margin-top: 12px; }
 
-/* 管理后台布局 */
-.admin-layout { display: none; min-height: 100vh; }
-.sidebar { position: fixed; left: 0; top: 0; width: 240px; height: 100vh; background: white; border-right: 1px solid var(--border); padding: 20px 0; }
-.logo { padding: 0 20px 20px; border-bottom: 1px solid var(--border); margin-bottom: 20px; }
-.logo h2 { font-size: 20px; color: var(--primary); }
-.logo p { font-size: 12px; color: var(--sub); }
-.nav-item { display: flex; align-items: center; padding: 14px 20px; cursor: pointer; transition: all 0.2s; color: var(--sub); text-decoration: none; }
-.nav-item:hover, .nav-item.active { background: #f8f9ff; color: var(--primary); }
-.nav-item i { width: 24px; margin-right: 12px; font-size: 18px; }
-.main-content { margin-left: 240px; padding: 30px; }
-.header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; }
-.header h1 { font-size: 24px; }
-.user-info { display: flex; align-items: center; gap: 12px; }
-.user-avatar { width: 40px; height: 40px; border-radius: 50%; background: linear-gradient(135deg, var(--primary), var(--primary2)); color: white; display: flex; align-items: center; justify-content: center; font-weight: 600; }
+  /* ── Tabs ── */
+  .tabs { display: flex; background: white; border-bottom: 1px solid var(--border); position: sticky; top: 82px; z-index: 99; }
+  .tab  { flex: 1; padding: 12px 0; text-align: center; font-size: 13px; font-weight: 600; color: var(--sub); cursor: pointer; border-bottom: 2px solid transparent; transition: all .2s; }
+  .tab.active { color: var(--primary); border-bottom-color: var(--primary); }
 
-/* 统计卡片 */
-.stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; margin-bottom: 30px; }
-.stat-card { background: white; padding: 24px; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.04); }
-.stat-card .label { font-size: 14px; color: var(--sub); margin-bottom: 8px; }
-.stat-card .value { font-size: 32px; font-weight: 700; color: var(--text); }
-.stat-card .trend { font-size: 13px; margin-top: 8px; }
-.stat-card .trend.up { color: var(--success); }
-.stat-card .trend.down { color: var(--danger); }
+  /* ── Content ── */
+  .content { padding: 16px; }
+  .pane { display: none; }
+  .pane.active { display: block; }
 
-/* 内容区域 */
-.content-card { background: white; border-radius: 12px; padding: 24px; box-shadow: 0 2px 8px rgba(0,0,0,0.04); }
-.card-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
-.card-header h3 { font-size: 18px; }
-.search-box { display: flex; gap: 12px; }
-.search-box input { padding: 10px 16px; border: 1px solid var(--border); border-radius: 8px; font-size: 14px; outline: none; width: 240px; }
-.btn-sm { padding: 10px 20px; font-size: 14px; width: auto; }
+  /* ── Cards ── */
+  .card { background: var(--card); border-radius: var(--radius); padding: 14px; margin-bottom: 12px; box-shadow: 0 2px 12px rgba(0,0,0,.06); }
+  .card-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px; }
+  .card-title { font-size: 15px; font-weight: 700; display: flex; align-items: center; gap: 6px; }
+  .card-meta { font-size: 11px; color: var(--sub); margin-top: 4px; }
 
-/* 表格 */
-table { width: 100%; border-collapse: collapse; }
-th, td { padding: 14px; text-align: left; border-bottom: 1px solid var(--border); }
-th { font-weight: 600; color: var(--sub); font-size: 13px; text-transform: uppercase; }
-tr:hover { background: #f8f9ff; }
-.status { display: inline-block; padding: 4px 12px; border-radius: 20px; font-size: 12px; font-weight: 500; }
-.status.pending { background: #fff8e6; color: var(--warning); }
-.status.active { background: #edfbf5; color: var(--success); }
-.status.rejected { background: #fef2f2; color: var(--danger); }
-.actions { display: flex; gap: 8px; }
-.action-btn { padding: 6px 12px; border: none; border-radius: 6px; font-size: 12px; cursor: pointer; transition: all 0.2s; }
-.action-btn.view { background: #e0e7ff; color: var(--primary); }
-.action-btn.approve { background: #edfbf5; color: var(--success); }
-.action-btn.reject { background: #fef2f2; color: var(--danger); }
+  /* ── Status Badge ── */
+  .badge { display: inline-flex; align-items: center; gap: 3px; padding: 2px 8px; border-radius: 20px; font-size: 11px; font-weight: 600; }
+  .badge-idle    { background: #f0f4ff; color: var(--primary); }
+  .badge-done    { background: #edfaf5; color: var(--success); }
+  .badge-crawling{ background: #fff8e1; color: var(--warn); }
+  .badge-error   { background: #fff0f0; color: var(--danger); }
+  .badge-off     { background: #f5f5f5; color: var(--sub); }
 
-/* 标签页 */
-.tabs { display: flex; gap: 8px; margin-bottom: 20px; border-bottom: 1px solid var(--border); }
-.tab { padding: 12px 20px; cursor: pointer; border-bottom: 2px solid transparent; transition: all 0.2s; }
-.tab.active { color: var(--primary); border-bottom-color: var(--primary); font-weight: 600; }
-.tab:hover { color: var(--primary); }
+  /* ── Buttons ── */
+  .btn { border: none; cursor: pointer; border-radius: 8px; font-size: 13px; font-weight: 600; padding: 7px 14px; transition: all .18s; display: inline-flex; align-items: center; gap: 4px; }
+  .btn:active { transform: scale(.96); }
+  .btn-primary { background: linear-gradient(135deg, var(--primary), var(--primary2)); color: white; box-shadow: 0 3px 10px rgba(102,126,234,.35); }
+  .btn-success { background: linear-gradient(135deg, #11998e, #38ef7d); color: white; box-shadow: 0 3px 10px rgba(17,153,142,.3); }
+  .btn-danger  { background: linear-gradient(135deg, #f5576c, #f093fb); color: white; box-shadow: 0 3px 10px rgba(245,87,108,.3); }
+  .btn-ghost   { background: var(--bg); color: var(--text); border: 1px solid var(--border); }
+  .btn-warn    { background: linear-gradient(135deg, #f97316, #fbbf24); color: white; }
+  .btn-sm      { padding: 5px 10px; font-size: 12px; }
+  .btn-full    { width: 100%; justify-content: center; }
 
-/* 分页 */
-.pagination { display: flex; justify-content: center; gap: 8px; margin-top: 20px; }
-.page-btn { padding: 8px 14px; border: 1px solid var(--border); background: white; border-radius: 6px; cursor: pointer; transition: all 0.2s; }
-.page-btn:hover, .page-btn.active { background: var(--primary); color: white; border-color: var(--primary); }
+  /* ── Form ── */
+  .form-group { margin-bottom: 12px; }
+  .form-label { font-size: 12px; font-weight: 600; color: var(--sub); margin-bottom: 4px; display: block; }
+  .form-input  { width: 100%; border: 1.5px solid var(--border); border-radius: 8px; padding: 9px 12px; font-size: 14px; background: var(--bg); color: var(--text); outline: none; transition: border-color .2s; }
+  .form-input:focus { border-color: var(--primary); background: white; }
+  .form-select { width: 100%; border: 1.5px solid var(--border); border-radius: 8px; padding: 9px 12px; font-size: 14px; background: var(--bg); color: var(--text); outline: none; }
+  .form-textarea { resize: vertical; min-height: 80px; }
 
-/* 隐藏/显示 */
-.page-section { display: none; }
-.page-section.active { display: block; }
+  /* ── Action Row ── */
+  .action-row { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 10px; }
 
-/* 来源管理样式 */
-.source-stats { margin-top: 20px; }
-.source-type { margin-bottom: 30px; }
-.source-type h4 { font-size: 16px; margin-bottom: 16px; display: flex; align-items: center; gap: 8px; color: var(--text); }
-.type-icon { font-size: 18px; }
-.source-list { display: flex; flex-wrap: wrap; gap: 12px; }
-.source-tag { 
-  display: inline-flex; 
-  align-items: center; 
-  gap: 8px; 
-  padding: 10px 16px; 
-  background: #f8f9ff; 
-  border: 1px solid #e0e7ff; 
-  border-radius: 8px; 
-  font-size: 14px;
-  transition: all 0.2s;
-}
-.source-tag:hover { background: #e0e7ff; border-color: var(--primary); }
-.source-tag .name { font-weight: 500; }
-.source-tag .count { 
-  background: var(--primary); 
-  color: white; 
-  padding: 2px 8px; 
-  border-radius: 10px; 
-  font-size: 12px;
-}
-.source-tag .actions { display: flex; gap: 4px; margin-left: 8px; }
-.source-tag .actions button {
-  background: none; border: none; cursor: pointer; padding: 2px 6px; border-radius: 4px; font-size: 12px;
-}
-.source-tag .actions button:hover { background: rgba(0,0,0,0.1); }
-.source-tag .actions .edit { color: var(--primary); }
-.source-tag .actions .delete { color: var(--danger); }
+  /* ── Toggle ── */
+  .toggle-wrap { display: flex; align-items: center; gap: 8px; }
+  .toggle { width: 40px; height: 22px; background: #dde; border-radius: 11px; cursor: pointer; position: relative; transition: background .2s; }
+  .toggle.on { background: var(--success); }
+  .toggle::after { content:''; width: 18px; height: 18px; background: white; border-radius: 50%; position: absolute; top: 2px; left: 2px; transition: left .2s; box-shadow: 0 1px 4px rgba(0,0,0,.2); }
+  .toggle.on::after { left: 20px; }
 
-/* 弹窗样式 */
-.modal-overlay {
-  display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0;
-  background: rgba(0,0,0,0.5); z-index: 1000; align-items: center; justify-content: center;
-}
-.modal-overlay.active { display: flex; }
-.modal {
-  background: white; border-radius: 12px; width: 100%; max-width: 480px; padding: 24px;
-  animation: modalIn 0.2s ease;
-}
-@keyframes modalIn {
-  from { transform: translateY(-20px); opacity: 0; }
-  to { transform: translateY(0); opacity: 1; }
-}
-.modal h3 { font-size: 18px; margin-bottom: 20px; }
-.modal .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px; }
-.modal .form-group { margin-bottom: 16px; }
-.modal .form-group label { display: block; font-size: 14px; margin-bottom: 6px; color: var(--sub); }
-.modal .form-group input, .modal .form-group select {
-  width: 100%; padding: 10px 14px; border: 1px solid var(--border); border-radius: 8px; font-size: 14px;
-}
-.modal .form-group input:focus, .modal .form-group select:focus { border-color: var(--primary); outline: none; }
-.modal-btns { display: flex; gap: 12px; justify-content: flex-end; margin-top: 20px; }
-.modal-btns button { padding: 10px 20px; border-radius: 8px; font-size: 14px; cursor: pointer; border: none; }
-.modal-btns .btn-cancel { background: var(--bg); color: var(--text); }
-.modal-btns .btn-confirm { background: var(--primary); color: white; }
-.modal-btns .btn-confirm:hover { background: var(--primary2); }
+  /* ── Detect Result ── */
+  .detect-list { margin-top: 8px; }
+  .detect-item { font-size: 12px; color: var(--primary); background: #f0f4ff; padding: 4px 8px; border-radius: 6px; margin-bottom: 4px; word-break: break-all; }
+
+  /* ── Log ── */
+  .log-box { background: #1a1a2e; color: #a8f0c6; border-radius: 8px; padding: 12px; font-size: 12px; font-family: 'Courier New', monospace; max-height: 200px; overflow-y: auto; white-space: pre-wrap; word-break: break-all; margin-top: 8px; }
+
+  /* ── Empty ── */
+  .empty { text-align: center; padding: 40px 20px; color: var(--sub); }
+  .empty-icon { font-size: 40px; margin-bottom: 10px; }
+  .empty-text { font-size: 14px; }
+
+  /* ── Modal ── */
+  .modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,.45); z-index: 200; display: none; align-items: flex-end; justify-content: center; }
+  .modal-overlay.open { display: flex; }
+  .modal { background: white; border-radius: 20px 20px 0 0; padding: 20px; width: 100%; max-width: 500px; max-height: 92vh; overflow-y: auto; animation: slideUp .25s ease; }
+  @keyframes slideUp { from { transform: translateY(100%); } to { transform: translateY(0); } }
+  .modal-title { font-size: 16px; font-weight: 800; margin-bottom: 16px; display: flex; justify-content: space-between; align-items: center; }
+  .modal-close { font-size: 22px; cursor: pointer; color: var(--sub); background: none; border: none; }
+
+  /* ── Toast ── */
+  #toast { position: fixed; bottom: 80px; left: 50%; transform: translateX(-50%); background: rgba(26,26,46,.88); color: white; padding: 10px 20px; border-radius: 20px; font-size: 13px; z-index: 999; pointer-events: none; opacity: 0; transition: opacity .3s; white-space: nowrap; }
+  #toast.show { opacity: 1; }
+
+  /* ── API base config ── */
+  .api-config-bar { background: white; border-radius: 10px; padding: 10px 14px; margin-bottom: 14px; display: flex; align-items: center; gap: 8px; border: 1.5px solid var(--border); font-size: 12px; }
+  .api-config-bar input { flex: 1; border: none; outline: none; font-size: 12px; color: var(--text); background: transparent; }
+
+  /* ── Stats Row ── */
+  .stats-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-bottom: 14px; }
+  .stat-card { background: white; border-radius: 10px; padding: 12px; text-align: center; box-shadow: 0 2px 8px rgba(0,0,0,.05); }
+  .stat-n { font-size: 22px; font-weight: 800; color: var(--primary); }
+  .stat-l { font-size: 11px; color: var(--sub); margin-top: 2px; }
+
+  /* ── City Tag ── */
+  .city-tag { display: inline-block; font-size: 11px; background: linear-gradient(135deg, #667eea22, #764ba222); color: var(--primary); border-radius: 4px; padding: 1px 6px; }
+
+  /* ── Login panel ── */
+  .login-tabs { display: flex; border: 1.5px solid var(--border); border-radius: 8px; overflow: hidden; margin-bottom: 12px; }
+  .login-tab  { flex: 1; padding: 8px; text-align: center; font-size: 13px; cursor: pointer; background: var(--bg); color: var(--sub); font-weight: 600; transition: all .15s; }
+  .login-tab.active { background: var(--primary); color: white; }
 </style>
 </head>
 <body>
 
-<!-- 登录页面 -->
-<div class="login-page" id="loginPage">
-  <div class="login-box">
-    <h1>「召集」管理平台</h1>
-    <p>后台管理系统</p>
-    <form id="loginForm">
-      <div class="form-group">
-        <label>管理员账号</label>
-        <input type="text" id="username" placeholder="请输入账号" required>
-      </div>
-      <div class="form-group">
-        <label>密码</label>
-        <input type="password" id="password" placeholder="请输入密码" required>
-      </div>
-      <button type="submit" class="btn btn-primary">登录</button>
-    </form>
+<!-- Header -->
+<div class="header">
+  <h1>🕷️ 招聘网站采集管理</h1>
+  <p>召集吧 · 数据采集后台</p>
+  <div class="header-actions">
+    <button class="btn btn-success btn-sm" onclick="openAddSiteModal()">＋ 添加招聘网站</button>
+    <button class="btn btn-primary btn-sm" onclick="openRecommendedModal()">⭐ 导入推荐站点</button>
+    <button class="btn btn-ghost btn-sm" onclick="crawlAll()">⚡ 一键采集全部</button>
+    <button class="btn btn-ghost btn-sm" onclick="discoverSites()">🔍 自动发现新站点</button>
+    <button class="btn btn-ghost btn-sm" onclick="loadSites()">↻ 刷新</button>
   </div>
 </div>
 
-<!-- 管理后台 -->
-<div class="admin-layout" id="adminLayout">
-  <!-- 侧边栏 -->
-  <aside class="sidebar">
-    <div class="logo">
-      <h2>召集吧</h2>
-      <p>后台管理系统</p>
-    </div>
-    <nav>
-      <a class="nav-item active" data-page="dashboard">
-        <i>📊</i> 数据概览
-      </a>
-      <a class="nav-item" data-page="companies">
-        <i>🏢</i> 召集方管理
-      </a>
-      <a class="nav-item" data-page="users">
-        <i>👥</i> 响应者管理
-      </a>
-      <a class="nav-item" data-page="events">
-        <i>📅</i> 活动管理
-      </a>
-      <a class="nav-item" data-page="jobs">
-        <i>💼</i> 岗位管理
-      </a>
-      <a class="nav-item" data-page="content">
-        <i>📝</i> 内容审核
-      </a>
-      <a class="nav-item" data-page="sources">
-        <i>🔗</i> 来源管理
-      </a>
-      <a class="nav-item" data-page="settings">
-        <i>⚙️</i> 系统设置
-      </a>
-    </nav>
-  </aside>
-
-  <!-- 主内容区 -->
-  <main class="main-content">
-    <!-- 顶部栏 -->
-    <div class="header">
-      <h1 id="pageTitle">数据概览</h1>
-      <div class="user-info">
-        <span>管理员</span>
-        <div class="user-avatar">管</div>
-        <button class="action-btn" onclick="logout()">退出</button>
-      </div>
-    </div>
-
-    <!-- Dashboard 页面 -->
-    <div class="page-section active" id="dashboardPage">
-      <div class="stats-grid">
-        <div class="stat-card">
-          <div class="label">今日新增召集方</div>
-          <div class="value" id="newCompaniesToday">0</div>
-          <div class="trend up">↑ 12%</div>
-        </div>
-        <div class="stat-card">
-          <div class="label">今日新增响应者</div>
-          <div class="value" id="newUsersToday">0</div>
-          <div class="trend up">↑ 8%</div>
-        </div>
-        <div class="stat-card">
-          <div class="label">待审核召集方</div>
-          <div class="value" id="pendingCompanies">0</div>
-          <div class="trend down">需处理</div>
-        </div>
-        <div class="stat-card">
-          <div class="label">总活动数</div>
-          <div class="value" id="totalEvents">0</div>
-          <div class="trend up">↑ 5%</div>
-        </div>
-      </div>
-
-      <div class="content-card">
-        <div class="card-header">
-          <h3>待审核召集方</h3>
-          <a href="#" onclick="showPage('companies')">查看全部 →</a>
-        </div>
-        <table>
-          <thead>
-            <tr>
-              <th>企业名称</th>
-              <th>联系人</th>
-              <th>联系电话</th>
-              <th>注册时间</th>
-              <th>状态</th>
-              <th>操作</th>
-            </tr>
-          </thead>
-          <tbody id="pendingCompaniesTable">
-            <!-- 动态填充 -->
-          </tbody>
-        </table>
-      </div>
-    </div>
-
-    <!-- 召集方管理页面 -->
-    <div class="page-section" id="companiesPage">
-      <div class="content-card">
-        <div class="card-header">
-          <h3>召集方列表</h3>
-          <div class="search-box">
-            <input type="text" placeholder="搜索企业名称/联系人" id="companySearch">
-            <button class="btn btn-primary btn-sm">搜索</button>
-          </div>
-        </div>
-        <div class="tabs">
-          <div class="tab active" data-filter="all">全部</div>
-          <div class="tab" data-filter="pending">待审核</div>
-          <div class="tab" data-filter="active">已通过</div>
-          <div class="tab" data-filter="rejected">已拒绝</div>
-        </div>
-        <table>
-          <thead>
-            <tr>
-              <th>ID</th>
-              <th>企业名称</th>
-              <th>联系人</th>
-              <th>联系电话</th>
-              <th>微信号</th>
-              <th>注册时间</th>
-              <th>状态</th>
-              <th>操作</th>
-            </tr>
-          </thead>
-          <tbody id="companiesTable">
-            <!-- 动态填充 -->
-          </tbody>
-        </table>
-        <div class="pagination">
-          <button class="page-btn">上一页</button>
-          <button class="page-btn active">1</button>
-          <button class="page-btn">2</button>
-          <button class="page-btn">3</button>
-          <button class="page-btn">下一页</button>
-        </div>
-      </div>
-    </div>
-
-    <!-- 响应者管理页面 -->
-    <div class="page-section" id="usersPage">
-      <div class="content-card">
-        <div class="card-header">
-          <h3>响应者列表</h3>
-          <div class="search-box">
-            <input type="text" placeholder="搜索姓名/学校/手机号" id="userSearch">
-            <button class="btn btn-primary btn-sm">搜索</button>
-          </div>
-        </div>
-        <table>
-          <thead>
-            <tr>
-              <th>ID</th>
-              <th>姓名</th>
-              <th>手机号</th>
-              <th>学校</th>
-              <th>专业</th>
-              <th>学历</th>
-              <th>注册时间</th>
-              <th>操作</th>
-            </tr>
-          </thead>
-          <tbody id="usersTable">
-            <!-- 动态填充 -->
-          </tbody>
-        </table>
-      </div>
-    </div>
-
-    <!-- 活动管理页面 -->
-    <div class="page-section" id="eventsPage">
-      <div class="content-card">
-        <div class="card-header">
-          <h3>活动列表</h3>
-          <div class="search-box">
-            <input type="text" placeholder="搜索活动标题" id="eventSearch">
-            <button class="btn btn-primary btn-sm">搜索</button>
-          </div>
-        </div>
-        <table>
-          <thead>
-            <tr>
-              <th>ID</th>
-              <th>活动标题</th>
-              <th>类型</th>
-              <th>开始时间</th>
-              <th>地点</th>
-              <th>报名人数</th>
-              <th>状态</th>
-              <th>操作</th>
-            </tr>
-          </thead>
-          <tbody id="eventsTable">
-            <!-- 动态填充 -->
-          </tbody>
-        </table>
-      </div>
-    </div>
-
-    <!-- 岗位管理页面 -->
-    <div class="page-section" id="jobsPage">
-      <div class="content-card">
-        <div class="card-header">
-          <h3>岗位列表</h3>
-          <div class="search-box">
-            <input type="text" placeholder="搜索岗位名称" id="jobSearch">
-            <button class="btn btn-primary btn-sm">搜索</button>
-          </div>
-        </div>
-        <table>
-          <thead>
-            <tr>
-              <th>ID</th>
-              <th>岗位名称</th>
-              <th>企业</th>
-              <th>类型</th>
-              <th>薪资范围</th>
-              <th>城市</th>
-              <th>投递数</th>
-              <th>状态</th>
-              <th>操作</th>
-            </tr>
-          </thead>
-          <tbody id="jobsTable">
-            <!-- 动态填充 -->
-          </tbody>
-        </table>
-      </div>
-    </div>
-
-    <!-- 内容审核页面 -->
-    <div class="page-section" id="contentPage">
-      <div class="content-card">
-        <div class="card-header">
-          <h3>内容审核</h3>
-        </div>
-        <div class="tabs">
-          <div class="tab active">待审核活动</div>
-          <div class="tab">待审核岗位</div>
-          <div class="tab">举报处理</div>
-        </div>
-        <p style="padding: 40px; text-align: center; color: var(--sub);">
-          暂无待审核内容
-        </p>
-      </div>
-    </div>
-
-    <!-- 来源管理页面 -->
-    <div class="page-section" id="sourcesPage">
-      <div class="content-card">
-        <div class="card-header">
-          <h3>来源渠道管理</h3>
-          <div style="display: flex; gap: 12px;">
-            <button class="btn btn-primary btn-sm" onclick="runCrawlNow()" style="background: linear-gradient(135deg, #f97316, #ea580c);">🕷️ 立即抓取</button>
-            <button class="btn btn-primary btn-sm" onclick="showAddSourceModal()">+ 添加来源</button>
-          </div>
-        </div>
-        
-        <div class="tabs" id="sourceTabs">
-          <div class="tab active" data-filter="all">全部</div>
-          <div class="tab" data-filter="online">线上渠道</div>
-          <div class="tab" data-filter="offline">线下渠道</div>
-          <div class="tab" data-filter="partner">合作渠道</div>
-          <div class="tab" data-filter="crawl">人工抓取源</div>
-        </div>
-
-        <div class="source-stats">
-          <div class="source-type">
-            <h4><span class="type-icon">🌐</span> 线上渠道</h4>
-            <div class="source-list" id="onlineSources"></div>
-          </div>
-          <div class="source-type">
-            <h4><span class="type-icon">📍</span> 线下渠道</h4>
-            <div class="source-list" id="offlineSources"></div>
-          </div>
-          <div class="source-type">
-            <h4><span class="type-icon">🤝</span> 合作渠道</h4>
-            <div class="source-list" id="partnerSources"></div>
-          </div>
-          <div class="source-type">
-            <h4><span class="type-icon">🕷️</span> 人工抓取源</h4>
-            <div class="source-list" id="crawlSources"></div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- 系统设置页面 -->
-    <div class="page-section" id="settingsPage">
-      <div class="content-card">
-        <div class="card-header">
-          <h3>系统设置</h3>
-        </div>
-        <p style="padding: 40px; text-align: center; color: var(--sub);">
-          系统设置功能开发中...
-        </p>
-      </div>
-    </div>
-  </main>
+<!-- API 地址配置栏 -->
+<div style="padding:12px 16px 0">
+  <div class="api-config-bar">
+    <span style="color:var(--sub);white-space:nowrap">后端地址：</span>
+    <input id="apiBase" value="http://localhost:3000" placeholder="http://localhost:3000" onchange="saveApiBase()">
+    <button class="btn btn-primary btn-sm" onclick="testConnection()">测试连接</button>
+  </div>
 </div>
 
-<script>
-// 页面切换
-function showPage(pageName) {
-  // 隐藏所有页面
-  document.querySelectorAll('.page-section').forEach(p => p.classList.remove('active'));
-  document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
-  
-  // 显示目标页面
-  document.getElementById(pageName + 'Page').classList.add('active');
-  document.querySelector(`[data-page="${pageName}"]`).classList.add('active');
-  
-  // 更新标题
-  const titles = {
-    dashboard: '数据概览',
-    companies: '召集方管理',
-    users: '响应者管理',
-    events: '活动管理',
-    jobs: '岗位管理',
-    content: '内容审核',
-    sources: '来源管理',
-    settings: '系统设置'
-  };
-  document.getElementById('pageTitle').textContent = titles[pageName];
-}
+<!-- Tabs -->
+<div class="tabs">
+  <div class="tab active" onclick="switchTab('dashboard')">📊 数据监控台</div>
+  <div class="tab" onclick="switchTab('sites')">🌐 网站列表</div>
+  <div class="tab" onclick="switchTab('paste')">✂️ 粘贴文案</div>
+  <div class="tab" onclick="switchTab('logs')">📋 采集日志</div>
+  <div class="tab" onclick="switchTab('guide')">📖 使用指南</div>
+  <div class="tab" onclick="switchTab('promo')">📢 外宣资料</div>
+</div>
 
-// 导航点击事件
-document.querySelectorAll('.nav-item').forEach(item => {
-  item.addEventListener('click', (e) => {
-    e.preventDefault();
-    showPage(item.dataset.page);
-  });
-});
+<!-- ═══════════════════════════════════════ 数据监控台 ═══ -->
+<div class="content">
+<div id="pane-dashboard" class="pane active">
 
-// 标签切换
-document.querySelectorAll('.tabs').forEach(tabs => {
-  tabs.querySelectorAll('.tab').forEach(tab => {
-    tab.addEventListener('click', () => {
-      tabs.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
-      tab.classList.add('active');
-    });
-  });
-});
+  <!-- 总览统计 -->
+  <div class="stats-row" id="dashboardStats">
+    <div class="stat-card"><div class="stat-n" id="dashTotal">-</div><div class="stat-l">总采集</div></div>
+    <div class="stat-card"><div class="stat-n" id="dashToday">-</div><div class="stat-l">今日采集</div></div>
+    <div class="stat-card"><div class="stat-n" id="dashPublished">-</div><div class="stat-l">已发布</div></div>
+    <div class="stat-card"><div class="stat-n" id="dashPending">-</div><div class="stat-l">待审核</div></div>
+  </div>
 
-// 登录处理
-document.getElementById('loginForm').addEventListener('submit', (e) => {
-  e.preventDefault();
-  const username = document.getElementById('username').value;
-  const password = document.getElementById('password').value;
-  
-  // 简单验证（实际应调用后端 API）
-  if (username === 'admin' && password === 'admin123') {
-    localStorage.setItem('adminToken', 'demo_token');
-    document.getElementById('loginPage').style.display = 'none';
-    document.getElementById('adminLayout').style.display = 'block';
-    loadDashboardData();
-  } else {
-    alert('账号或密码错误');
-  }
-});
+  <!-- 引擎统计 -->
+  <div class="card" style="margin-top:16px">
+    <div class="card-header">
+      <div class="card-title">🔌 各引擎采集统计</div>
+      <button class="btn btn-ghost btn-sm" onclick="loadDashboard()">↻ 刷新</button>
+    </div>
+    <div id="engineStats" style="font-size:13px;color:var(--sub)">加载中...</div>
+  </div>
 
-// 退出登录
-function logout() {
-  localStorage.removeItem('adminToken');
-  document.getElementById('loginPage').style.display = 'flex';
-  document.getElementById('adminLayout').style.display = 'none';
-}
+  <!-- 最近采集日志 -->
+  <div class="card" style="margin-top:12px">
+    <div class="card-header">
+      <div class="card-title">📋 最近采集日志</div>
+    </div>
+    <div id="recentLogs" style="font-size:13px;color:var(--sub)">加载中...</div>
+  </div>
 
-// 加载 Dashboard 数据
-async function loadDashboardData() {
-  // 模拟数据，实际应从后端 API 获取
-  const mockData = {
-    newCompaniesToday: 5,
-    newUsersToday: 23,
-    pendingCompanies: 8,
-    totalEvents: 156
-  };
-  
-  document.getElementById('newCompaniesToday').textContent = mockData.newCompaniesToday;
-  document.getElementById('newUsersToday').textContent = mockData.newUsersToday;
-  document.getElementById('pendingCompanies').textContent = mockData.pendingCompanies;
-  document.getElementById('totalEvents').textContent = mockData.totalEvents;
-  
-  // 填充待审核列表
-  const pendingTable = document.getElementById('pendingCompaniesTable');
-  pendingTable.innerHTML = `
-    <tr>
-      <td>腾讯科技</td>
-      <td>张三</td>
-      <td>138****8888</td>
-      <td>2026-03-21</td>
-      <td><span class="status pending">待审核</span></td>
-      <td class="actions">
-        <button class="action-btn view">查看</button>
-        <button class="action-btn approve">通过</button>
-        <button class="action-btn reject">拒绝</button>
-      </td>
-    </tr>
-  `;
-}
+  <!-- 快速操作 -->
+  <div class="card" style="margin-top:12px">
+    <div class="card-title" style="margin-bottom:10px">⚡ 快速操作</div>
+    <div style="display:flex;gap:8px;flex-wrap:wrap">
+      <button class="btn btn-primary" onclick="triggerCrawl('full')">🚀 全量采集</button>
+      <button class="btn btn-ghost" onclick="triggerCrawl('yupao')">🐟 鱼泡网</button>
+      <button class="btn btn-ghost" onclick="triggerCrawl('rss')">📡 RSS订阅</button>
+      <button class="btn btn-ghost" onclick="triggerCrawl('search')">🔍 搜索引擎</button>
+      <button class="btn btn-ghost" onclick="triggerCrawl('public')">🏛️ 政府平台</button>
+      <button class="btn btn-ghost" onclick="triggerCrawl('jianzhi')">😺 兼职猫</button>
+      <button class="btn btn-ghost" onclick="triggerCrawl('huodong')">🎪 活动行</button>
+      <button class="btn btn-ghost" onclick="triggerCrawl('58')">🏘️ 58同城</button>
+      <button class="btn btn-ghost btn-info" onclick="triggerCrawl('dynamic')" title="Puppeteer无头浏览器采集：拉勾网/实习僧/大街网">🤖 动态页</button>
+    </div>
+  </div>
+</div>
 
-// 检查登录状态
-if (localStorage.getItem('adminToken')) {
-  document.getElementById('loginPage').style.display = 'none';
-  document.getElementById('adminLayout').style.display = 'block';
-  loadDashboardData();
-}
+<!-- ═══════════════════════════════════════ 网站列表 ═══ -->
+<div id="pane-sites" class="pane">
 
-// ========== 来源管理 ==========
-// 默认来源数据
-let sourcesData = JSON.parse(localStorage.getItem('sourcesData')) || [
-  // 线上渠道
-  { id: 1, name: '小程序', type: 'online', count: 1250 },
-  { id: 2, name: 'APP', type: 'online', count: 890 },
-  { id: 3, name: '官网', type: 'online', count: 456 },
-  { id: 4, name: '微信推广', type: 'online', count: 780 },
-  // 线下渠道
-  { id: 5, name: '线下活动', type: 'offline', count: 320 },
-  { id: 6, name: '门店推广', type: 'offline', count: 210 },
-  { id: 7, name: '朋友介绍', type: 'offline', count: 540 },
-  // 合作渠道
-  { id: 8, name: '合作伙伴', type: 'partner', count: 180 },
-  { id: 9, name: '广告投放', type: 'partner', count: 420 },
-  { id: 10, name: '社交媒体', type: 'partner', count: 650 },
-  // 人工抓取源
-  { id: 11, name: '高校就业网', type: 'crawl', count: 890 },
-  { id: 12, name: '企业招聘官网', type: 'crawl', count: 1200 },
-  { id: 13, name: '招聘平台', type: 'crawl', count: 560 },
-];
+  <!-- 统计 -->
+  <div class="stats-row" id="statsRow">
+    <div class="stat-card"><div class="stat-n" id="statTotal">-</div><div class="stat-l">站点总数</div></div>
+    <div class="stat-card"><div class="stat-n" id="statEnabled">-</div><div class="stat-l">已启用</div></div>
+    <div class="stat-card"><div class="stat-n" id="statTotal24h">-</div><div class="stat-l">今日入库</div></div>
+  </div>
 
-let currentFilter = 'all';
-let editingSourceId = null;
+  <!-- 城市筛选 -->
+  <div style="display:flex;gap:6px;overflow-x:auto;margin-bottom:12px;padding-bottom:4px" id="cityFilters">
+    <button class="btn btn-primary btn-sm" data-city="" onclick="filterByCity('')">全部</button>
+  </div>
 
-// 保存到 localStorage
-function saveSources() {
-  localStorage.setItem('sourcesData', JSON.stringify(sourcesData));
-}
+  <div id="siteList">
+    <div class="empty"><div class="empty-icon">🌐</div><div class="empty-text">加载中...</div></div>
+  </div>
+</div>
 
-// 渲染来源列表
-function renderSources() {
-  const filters = {
-    all: sourcesData,
-    online: sourcesData.filter(s => s.type === 'online'),
-    offline: sourcesData.filter(s => s.type === 'offline'),
-    partner: sourcesData.filter(s => s.type === 'partner'),
-    crawl: sourcesData.filter(s => s.type === 'crawl')
-  };
-  
-  const filtered = filters[currentFilter] || sourcesData;
-  
-  // 按类型分组渲染
-  const typeMap = { online: 'onlineSources', offline: 'offlineSources', partner: 'partnerSources', crawl: 'crawlSources' };
-  const typeNames = { online: '线上渠道', offline: '线下渠道', partner: '合作渠道', crawl: '人工抓取源' };
-  
-  Object.keys(typeMap).forEach(type => {
-    const container = document.getElementById(typeMap[type]);
-    const sources = sourcesData.filter(s => s.type === type);
-    
-    if (sources.length === 0) {
-      container.innerHTML = '<p style="color: var(--sub); font-size: 14px; padding: 10px 0;">暂无来源</p>';
-      return;
-    }
-    
-    container.innerHTML = sources.map(s => `
-      <div class="source-tag" data-id="${s.id}">
-        <span class="name">${s.name}</span>
-        <span class="count">${s.count}</span>
-        <div class="actions">
-          <button class="edit" onclick="editSource(${s.id})" title="编辑">✏️</button>
-          <button class="delete" onclick="deleteSource(${s.id})" title="删除">🗑️</button>
+<!-- ═══════════════════════════════════════ 粘贴文案 ═══ -->
+<div id="pane-paste" class="pane" style="display:none">
+
+  <!-- 输入区 -->
+  <div class="card">
+    <div class="card-header">
+      <div class="card-title">✂️ 粘贴招募文案</div>
+      <div style="font-size:13px;color:var(--text-muted)">将朋友圈/微信群看到的招募信息粘贴进来，AI自动整理成结构化岗位</div>
+    </div>
+    <div style="margin-bottom:12px">
+      <textarea id="pasteInput" placeholder="在这里粘贴招募文案…
+
+例如：
+【暑期实习 | 运营方向】
+某互联网公司寻找暑期实习生！
+岗位：新媒体运营实习生
+地点：北京 望京 SOHO
+薪资：200元/天
+时间：每周3天以上，至少2个月
+要求：新闻/传播/中文专业优先，有公众号运营经验更佳
+联系微信：recruit2024，备注「运营实习」
+截止：6月30日" style="width:100%;height:220px;padding:14px;border:1.5px solid var(--border);border-radius:10px;background:var(--bg-secondary);color:var(--text-primary);font-size:14px;line-height:1.7;resize:vertical;font-family:inherit;box-sizing:border-box;transition:border-color .2s" onfocus="this.style.borderColor='var(--accent)'" onblur="this.style.borderColor='var(--border)'"></textarea>
+    </div>
+    <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap">
+      <button class="btn btn-primary" onclick="parseText()">
+        <span id="parseSpinner" style="display:none">⏳</span>
+        <span id="parseBtnText">🔍 解析文案</span>
+      </button>
+      <button class="btn btn-ghost" onclick="document.getElementById('pasteInput').value='';document.getElementById('parseResults').innerHTML='';document.getElementById('parseSummary').style.display='none'">🗑 清空</button>
+      <button class="btn btn-ghost" onclick="fillExample()">📝 填入示例</button>
+      <span style="font-size:12px;color:var(--text-muted);margin-left:4px">支持一次粘贴多条（用空行分隔）</span>
+    </div>
+  </div>
+
+  <!-- 解析概要 -->
+  <div id="parseSummary" style="display:none;margin-bottom:16px">
+    <div style="display:flex;align-items:center;gap:12px;padding:12px 16px;background:var(--bg-secondary);border-radius:10px;border:1px solid var(--border)">
+      <span id="parseSummaryText" style="flex:1;font-size:14px"></span>
+      <button class="btn btn-primary btn-sm" id="saveAllBtn" onclick="saveAllConfirmed()">✅ 全部保存入库</button>
+    </div>
+  </div>
+
+  <!-- 解析结果卡片列表 -->
+  <div id="parseResults"></div>
+</div>
+
+<!-- ═══════════════════════════════════════ 采集日志 ═══ -->
+<div id="pane-logs" class="pane" style="display:none">
+  <div class="card">
+    <div class="card-header">
+      <div class="card-title">📋 最近采集记录</div>
+      <button class="btn btn-ghost btn-sm" onclick="loadLogs()">↻ 刷新</button>
+    </div>
+    <div id="logList"><div class="empty"><div class="empty-icon">📋</div><div class="empty-text">点击刷新查看日志</div></div></div>
+  </div>
+  <div class="card">
+    <div class="card-header">
+      <div class="card-title">📊 质检报告</div>
+      <button class="btn btn-ghost btn-sm" onclick="loadQualityReport()">查看</button>
+    </div>
+    <div id="qualityReport"></div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════ 使用指南 ═══ -->
+<div id="pane-guide" class="pane">
+  <div class="card">
+    <div class="card-title" style="margin-bottom:12px">🚀 快速上手</div>
+    <div style="font-size:13px;line-height:1.8;color:var(--sub)">
+      <p><b style="color:var(--text)">第一步：添加网站</b><br>点击顶部「添加招聘网站」，填入网站名称和URL（支持全国大平台、地方人才网、企业官网）</p>
+      <br>
+      <p><b style="color:var(--text)">第二步：探测职位入口</b><br>点击站点卡片上的「🔍 探测入口」，系统自动找到职位列表页URL（支持50+常见路径模式，覆盖地方政务/人才网路径）</p>
+      <br>
+      <p><b style="color:var(--text)">第三步（可选）：处理登录</b><br>
+      · <b>无需登录</b>：直接跳过<br>
+      · <b>Cookie方式（推荐）</b>：浏览器登录网站后，F12 → Application → Cookies，复制粘贴<br>
+      · <b>账号密码</b>：自动尝试常见登录路径
+      </p>
+      <br>
+      <p><b style="color:var(--text)">第四步：采集</b><br>点击「▶ 立即采集」，或等待每天晚上21:00自动全量采集（每6小时增量采集）</p>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-title" style="margin-bottom:10px">🏙️ 推荐地方招聘网站</div>
+    <div style="font-size:12px;color:var(--sub);line-height:2">
+      成都人才网 cdrc.gov.cn · 武汉英才网 whrcsc.com · 广州人才网 gzrc.com<br>
+      上海人才网 sh-talent.com · 深圳招才引智 szrc.com · 杭州人才网 hzrc.com<br>
+      南京人才网 njrc.com · 西安人才网 xarc.cn · 重庆人才网 cqrc.cn<br>
+      青岛人才网 qdrc.com · 大连英才网 dlrc.com.cn · 苏州人才网 szrcsc.com
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-title" style="margin-bottom:10px">⏰ 自动采集计划</div>
+    <div style="font-size:13px;color:var(--sub);line-height:2">
+      🌙 全量采集：每天 <b style="color:var(--text)">21:00</b>（自动发布）<br>
+      🔄 增量采集：每天 <b style="color:var(--text)">0/6/12/18 点</b>（抓最新内容）
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════ 外宣资料 Pane ═══ -->
+<div id="pane-promo" class="pane">
+
+  <!-- 顶部说明 -->
+  <div class="card" style="background:linear-gradient(135deg,#667eea18,#764ba218);border:1px solid #667eea33">
+    <div style="display:flex;align-items:center;gap:10px">
+      <span style="font-size:28px">📢</span>
+      <div>
+        <div style="font-size:15px;font-weight:800;color:var(--primary)">外宣资料库</div>
+        <div style="font-size:12px;color:var(--sub);margin-top:2px">推广文案、海报模板、合作介绍——一键复制，即用即走</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 快速访问资料 -->
+  <div class="card">
+    <div class="card-title" style="margin-bottom:12px">🗂️ 推广包文件</div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+      <a href="/docs/高校合作推广包/01_合作介绍.html" target="_blank"
+         style="display:flex;flex-direction:column;align-items:center;padding:14px 8px;background:#f0f4ff;border-radius:12px;text-decoration:none;border:1px solid #dde6ff">
+        <span style="font-size:24px">🤝</span>
+        <span style="font-size:13px;font-weight:700;color:var(--primary);margin-top:6px">合作介绍</span>
+        <span style="font-size:11px;color:var(--sub);margin-top:2px">高校合作一页纸</span>
+      </a>
+      <a href="/docs/高校合作推广包/03_海报模板.html" target="_blank"
+         style="display:flex;flex-direction:column;align-items:center;padding:14px 8px;background:#f0faf4;border-radius:12px;text-decoration:none;border:1px solid #c8ecd8">
+        <span style="font-size:24px">🖼️</span>
+        <span style="font-size:13px;font-weight:700;color:var(--success);margin-top:6px">海报模板</span>
+        <span style="font-size:11px;color:var(--sub);margin-top:2px">可打印/转发海报</span>
+      </a>
+      <a href="https://zhaojiba.com" target="_blank"
+         style="display:flex;flex-direction:column;align-items:center;padding:14px 8px;background:#fff8f0;border-radius:12px;text-decoration:none;border:1px solid #fcd9b0">
+        <span style="font-size:24px">🌐</span>
+        <span style="font-size:13px;font-weight:700;color:var(--warn);margin-top:6px">平台地址</span>
+        <span style="font-size:11px;color:var(--sub);margin-top:2px">zhaojiba.com</span>
+      </a>
+      <div onclick="copyText('hi@zhaojiba.com','已复制合作邮箱')"
+         style="display:flex;flex-direction:column;align-items:center;padding:14px 8px;background:#fdf0f5;border-radius:12px;cursor:pointer;border:1px solid #f8c8d8">
+        <span style="font-size:24px">📧</span>
+        <span style="font-size:13px;font-weight:700;color:var(--danger);margin-top:6px">合作邮箱</span>
+        <span style="font-size:11px;color:var(--sub);margin-top:2px">hi@zhaojiba.com</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- 公众号推文 -->
+  <div class="card">
+    <div class="card-header">
+      <div class="card-title">📰 公众号推文（长图文版）</div>
+      <button class="btn btn-sm" onclick="copyPromo('wechat-article')">复制正文</button>
+    </div>
+    <div style="font-size:12px;color:var(--sub);margin-bottom:10px">适用：就业公众号、学生会公众号、院系公众号</div>
+    <div style="background:#f8f9fc;border-radius:8px;padding:10px;margin-bottom:10px">
+      <div style="font-size:12px;font-weight:700;color:var(--text);margin-bottom:6px">标题（三选一）：</div>
+      <div style="display:flex;flex-direction:column;gap:6px">
+        <div style="display:flex;align-items:center;justify-content:space-between;background:white;border-radius:6px;padding:8px 10px;border:1px solid var(--border)">
+          <span style="font-size:12px;color:var(--text)">找兼职/实习/志愿活动？这个免费平台帮你搞定</span>
+          <button class="btn btn-sm" style="font-size:10px;padding:3px 8px;white-space:nowrap" onclick="copyText('找兼职/实习/志愿活动？这个免费平台帮你搞定','已复制标题1')">复制</button>
+        </div>
+        <div style="display:flex;align-items:center;justify-content:space-between;background:white;border-radius:6px;padding:8px 10px;border:1px solid var(--border)">
+          <span style="font-size:12px;color:var(--text)">好消息！学校为同学们带来了一个免费的机会聚合平台</span>
+          <button class="btn btn-sm" style="font-size:10px;padding:3px 8px;white-space:nowrap" onclick="copyText('好消息！学校为同学们带来了一个免费的机会聚合平台','已复制标题2')">复制</button>
+        </div>
+        <div style="display:flex;align-items:center;justify-content:space-between;background:white;border-radius:6px;padding:8px 10px;border:1px solid var(--border)">
+          <span style="font-size:12px;color:var(--text)">不用再刷手机找兼职了，这里全有</span>
+          <button class="btn btn-sm" style="font-size:10px;padding:3px 8px;white-space:nowrap" onclick="copyText('不用再刷手机找兼职了，这里全有','已复制标题3')">复制</button>
         </div>
       </div>
-    `).join('');
-  });
-}
+    </div>
+    <textarea id="wechat-article" readonly style="width:100%;height:200px;border:1px solid var(--border);border-radius:8px;padding:10px;font-size:12px;line-height:1.8;resize:vertical;font-family:inherit;background:#fafbff">各位同学好！
 
-// 显示添加弹窗
-function showAddSourceModal() {
-  editingSourceId = null;
-  document.getElementById('modalTitle').textContent = '添加来源';
-  document.getElementById('sourceName').value = '';
-  document.getElementById('sourceType').value = 'online';
-  document.getElementById('sourceCount').value = '0';
-  document.getElementById('sourceUrl').value = '';
-  document.getElementById('sourceDesc').value = '';
-  document.getElementById('sourceModal').classList.add('active');
-}
+学校就业指导中心为大家带来一个福利：
 
-// 编辑来源
-function editSource(id) {
-  const source = sourcesData.find(s => s.id === id);
-  if (!source) return;
-  
-  editingSourceId = id;
-  document.getElementById('modalTitle').textContent = '编辑来源';
-  document.getElementById('sourceName').value = source.name;
-  document.getElementById('sourceType').value = source.type;
-  document.getElementById('sourceCount').value = source.count || 0;
-  document.getElementById('sourceUrl').value = source.url || '';
-  document.getElementById('sourceDesc').value = source.description || '';
-  document.getElementById('sourceModal').classList.add('active');
-}
+「召集吧」——专为在校生打造的免费招募平台
 
-// 删除来源
-function deleteSource(id) {
-  if (!confirm('确定要删除这个来源吗？')) return;
-  
-  sourcesData = sourcesData.filter(s => s.id !== id);
-  saveSources();
-  renderSources();
-}
+🎯 平台能帮你干什么？
 
-// 保存来源
-function saveSource() {
-  const name = document.getElementById('sourceName').value.trim();
-  const type = document.getElementById('sourceType').value;
-  const count = parseInt(document.getElementById('sourceCount').value) || 0;
-  const url = document.getElementById('sourceUrl').value.trim();
-  const description = document.getElementById('sourceDesc').value.trim();
-  
-  if (!name) {
-    alert('请输入来源名称');
-    return;
-  }
-  
-  if (editingSourceId) {
-    // 编辑
-    const idx = sourcesData.findIndex(s => s.id === editingSourceId);
-    if (idx >= 0) {
-      sourcesData[idx] = { ...sourcesData[idx], name, type, count, url, description };
-    }
-  } else {
-    // 添加
-    const newId = Math.max(0, ...sourcesData.map(s => s.id)) + 1;
-    sourcesData.push({ id: newId, name, type, count, url, description });
-  }
-  
-  saveSources();
-  renderSources();
-  document.getElementById('sourceModal').classList.remove('active');
-}
+✅ 兼职 | 真实兼职信息，可直接联系，不绕中间商
+✅ 实习 | 覆盖多行业实习机会，含正规公司和创业团队
+✅ 志愿活动 | 公益项目、社区服务、高校活动一键查看
+✅ 创业/比赛 | 组队招募、创业项目、竞赛招募全都有
 
-// 关闭弹窗
-function closeSourceModal() {
-  document.getElementById('sourceModal').classList.remove('active');
-}
+💡 完全免费，不收任何费用，不推销课程
 
-// 来源标签页切换
-document.getElementById('sourceTabs').addEventListener('click', (e) => {
-  const tab = e.target.closest('.tab');
-  if (!tab) return;
-  
-  document.querySelectorAll('#sourceTabs .tab').forEach(t => t.classList.remove('active'));
-  tab.classList.add('active');
-  currentFilter = tab.dataset.filter;
-  renderSources();
-});
+👉 使用专属邀请码注册，享受优先推荐：
 
-// ========== 手动触发爬虫 ==========
-let isCrawling = false;
+邀请码：【XXXXXX】（学校专属）
 
-async function runCrawlNow() {
-  if (isCrawling) {
-    alert('抓取任务正在进行中，请稍候...');
-    return;
-  }
-  
-  if (!confirm('确定要立即开始抓取数据吗？这将触发所有已配置来源的爬虫。')) {
-    return;
-  }
-  
-  isCrawling = true;
-  
-  // 按钮显示加载状态
-  const btn = event.target;
-  const originalText = btn.innerHTML;
-  btn.innerHTML = '⏳ 抓取中...';
-  btn.disabled = true;
-  
-  try {
-    // 调用云函数触发爬虫
-    // 注意：这里需要配置云函数的调用地址
-    const cloudFuncUrl = 'https://zhaojiba1-0gqnm5h075fc5ccf-1300229407.ap-shanghai.app.tcloudbase.com/api/crawler';
-    
-    const response = await fetch(cloudFuncUrl, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        action: 'crawl'
-      })
-    });
-    
-    const result = await response.json();
-    
-    if (result.code === 200) {
-      alert(`抓取完成！\n总抓取岗位: ${result.data.totalJobs}\n发布成功: ${result.data.publishedJobs}\n总抓取活动: ${result.data.totalActivities}\n发布成功: ${result.data.publishedActivities}`);
-    } else {
-      alert('抓取失败: ' + (result.message || '未知错误'));
-    }
-  } catch (err) {
-    console.error('调用爬虫失败:', err);
-    alert('调用爬虫失败，请检查网络连接或稍后重试');
-  } finally {
-    isCrawling = false;
-    btn.innerHTML = originalText;
-    btn.disabled = false;
-  }
-}
+注册地址：zhaojiba.com
 
-// 加载抓取日志
-async function loadCrawlLogs() {
-  // 可选：加载最近的抓取日志
-  console.log('加载抓取日志...');
-}
-</script>
+或微信扫描下方二维码 ↓
 
-<!-- 来源管理弹窗 -->
-<div class="modal-overlay" id="sourceModal">
+（附二维码图片）
+
+有任何问题，欢迎在评论区留言 🙌</textarea>
+  </div>
+
+  <!-- 班级群发 -->
+  <div class="card">
+    <div class="card-title" style="margin-bottom:12px">💬 班级群发文案</div>
+    <div style="font-size:12px;color:var(--sub);margin-bottom:10px">适用：辅导员发班级群、学生会骨干转发</div>
+    <div style="display:flex;flex-direction:column;gap:10px">
+
+      <div style="background:#f8f9fc;border-radius:8px;padding:12px">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px">
+          <span style="font-size:12px;font-weight:700;color:var(--text)">版本1 · 轻松风</span>
+          <button class="btn btn-sm" onclick="copyPromo('msg-casual')">复制</button>
+        </div>
+        <textarea id="msg-casual" readonly style="width:100%;height:80px;border:1px solid var(--border);border-radius:6px;padding:8px;font-size:12px;line-height:1.8;resize:none;font-family:inherit;background:white">有个免费找兼职/实习/志愿活动的平台「召集吧」，不收费不推销，我们学校有专属邀请码，注册的时候填 【XXXXXX】 可以优先推荐。
+
+地址：zhaojiba.com 有需要的同学可以看看~</textarea>
+      </div>
+
+      <div style="background:#f8f9fc;border-radius:8px;padding:12px">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px">
+          <span style="font-size:12px;font-weight:700;color:var(--text)">版本2 · 正式风（辅导员适用）</span>
+          <button class="btn btn-sm" onclick="copyPromo('msg-formal')">复制</button>
+        </div>
+        <textarea id="msg-formal" readonly style="width:100%;height:95px;border:1px solid var(--border);border-radius:6px;padding:8px;font-size:12px;line-height:1.8;resize:none;font-family:inherit;background:white">同学们好，就业指导中心推荐一个免费的招募信息平台「召集吧」，聚合兼职、实习、志愿活动等信息，经学校审核推荐，完全免费。
+
+注册时填写我校专属邀请码【XXXXXX】，可优先展示本地机会。
+
+平台地址：zhaojiba.com</textarea>
+      </div>
+
+      <div style="background:#f8f9fc;border-radius:8px;padding:12px">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px">
+          <span style="font-size:12px;font-weight:700;color:var(--text)">版本3 · 朋友圈风</span>
+          <button class="btn btn-sm" onclick="copyPromo('msg-moments')">复制</button>
+        </div>
+        <textarea id="msg-moments" readonly style="width:100%;height:80px;border:1px solid var(--border);border-radius:6px;padding:8px;font-size:12px;line-height:1.8;resize:none;font-family:inherit;background:white">发现一个真的挺好用的平台，「召集吧」，找兼职实习志愿活动都能用，免费的，不骗人😂
+
+我们学校有专属码：【XXXXXX】
+
+zhaojiba.com</textarea>
+      </div>
+    </div>
+  </div>
+
+  <!-- 小红书/抖音 -->
+  <div class="card">
+    <div class="card-header">
+      <div class="card-title">📱 小红书 / 抖音文案</div>
+      <button class="btn btn-sm" onclick="copyPromo('xhs-content')">复制正文</button>
+    </div>
+    <div style="font-size:12px;color:var(--sub);margin-bottom:10px">适用：校园KOL、学生自媒体账号</div>
+    <div style="background:#f8f9fc;border-radius:8px;padding:10px;margin-bottom:10px">
+      <div style="font-size:12px;font-weight:700;color:var(--text);margin-bottom:6px">标题（三选一）：</div>
+      <div style="display:flex;flex-direction:column;gap:6px">
+        <div style="display:flex;align-items:center;justify-content:space-between;background:white;border-radius:6px;padding:8px 10px;border:1px solid var(--border)">
+          <span style="font-size:12px;color:var(--text)">大学生必备！免费找兼职实习的神器🔥</span>
+          <button class="btn btn-sm" style="font-size:10px;padding:3px 8px;white-space:nowrap" onclick="copyText('大学生必备！免费找兼职实习的神器🔥','已复制')">复制</button>
+        </div>
+        <div style="display:flex;align-items:center;justify-content:space-between;background:white;border-radius:6px;padding:8px 10px;border:1px solid var(--border)">
+          <span style="font-size:12px;color:var(--text)">发现一个宝藏平台，兼职/实习/志愿活动都有</span>
+          <button class="btn btn-sm" style="font-size:10px;padding:3px 8px;white-space:nowrap" onclick="copyText('发现一个宝藏平台，兼职/实习/志愿活动都有','已复制')">复制</button>
+        </div>
+        <div style="display:flex;align-items:center;justify-content:space-between;background:white;border-radius:6px;padding:8px 10px;border:1px solid var(--border)">
+          <span style="font-size:12px;color:var(--text)">学校就业中心推荐的平台，我用了之后真香</span>
+          <button class="btn btn-sm" style="font-size:10px;padding:3px 8px;white-space:nowrap" onclick="copyText('学校就业中心推荐的平台，我用了之后真香','已复制')">复制</button>
+        </div>
+      </div>
+    </div>
+    <textarea id="xhs-content" readonly style="width:100%;height:240px;border:1px solid var(--border);border-radius:8px;padding:10px;font-size:12px;line-height:1.8;resize:vertical;font-family:inherit;background:#fafbff">最近发现一个超级好用的平台「召集吧」！！！
+
+作为一个找兼职找到怀疑人生的大学生，真的太需要这个了😭
+
+📌 它能干嘛：
+- 兼职（校内校外都有）
+- 实习（含正规公司和创业团队）
+- 志愿活动、公益项目
+- 赛事招募、组队需求
+
+✨ 最重要的是——完全免费！不推销，不收费！
+
+而且是直接跟招募方联系，不绕中间商，省去了很多麻烦。
+
+我们学校有专属邀请码，注册填 【XXXXXX】 可以优先推荐本地机会~
+
+地址：zhaojiba.com
+
+你们有在用什么好用的招募平台吗？评论区分享一下！
+
+#大学生兼职 #实习推荐 #志愿活动 #大学生必备 #找兼职</textarea>
+  </div>
+
+  <!-- 邀请码管理说明 -->
+  <div class="card">
+    <div class="card-title" style="margin-bottom:12px">🎫 邀请码使用说明</div>
+    <div style="font-size:13px;color:var(--sub);line-height:2;background:#f8f9fc;border-radius:8px;padding:12px">
+      <div style="display:grid;grid-template-columns:auto 1fr;gap:4px 12px;font-size:12px">
+        <span style="font-weight:700;color:var(--text)">申请新码</span><span>微信联系创始人，告知学校名称，当天生成</span>
+        <span style="font-weight:700;color:var(--text)">查看数据</span><span>联系我们获取本校注册数据报告</span>
+        <span style="font-weight:700;color:var(--text)">更换邀请码</span><span>如码外泄可随时申请更换</span>
+        <span style="font-weight:700;color:var(--text)">多渠道码</span><span>可申请多个码，区分公众号/群/海报渠道来源</span>
+        <span style="font-weight:700;color:var(--text)">码的格式</span><span>示例：BJDX2026（城市缩写+校名缩写+年份）</span>
+      </div>
+    </div>
+    <div style="margin-top:10px;padding:10px;background:#fff8e1;border-radius:8px;border-left:3px solid var(--warn)">
+      <div style="font-size:12px;color:#92670a;font-weight:600">⚠️ 注意事项</div>
+      <div style="font-size:11px;color:var(--sub);margin-top:4px;line-height:1.7">发布文案时，请将【XXXXXX】替换为该校专属邀请码。<br>前往「管理后台 → 邀请码管理」可查看所有已分配邀请码及注册情况。</div>
+    </div>
+  </div>
+
+</div><!-- end pane-promo -->
+
+</div><!-- end .content -->
+
+<!-- ═══════════════════════════════════════ 推荐站点 Modal ═══ -->
+<div class="modal-overlay" id="recommendedModal">
+  <div class="modal" style="max-width:700px;width:95vw">
+    <div class="modal-title">
+      <span>⭐ 导入推荐站点</span>
+      <button class="modal-close" onclick="closeModal('recommendedModal')">×</button>
+    </div>
+
+    <!-- 操作栏 -->
+    <div style="display:flex;gap:8px;align-items:center;margin-bottom:14px;flex-wrap:wrap">
+      <select id="recCategoryFilter" onchange="filterRecommended()" style="flex:1;min-width:120px;padding:6px 10px;border-radius:8px;border:1px solid var(--border);background:var(--surface);color:var(--text);font-size:13px">
+        <option value="">全部分类</option>
+      </select>
+      <label style="font-size:13px;color:var(--sub);cursor:pointer;display:flex;align-items:center;gap:4px">
+        <input type="checkbox" id="recHideImported" onchange="filterRecommended()"> 隐藏已入库
+      </label>
+      <button class="btn btn-ghost btn-sm" onclick="toggleSelectAll()">全选/取消</button>
+      <button class="btn btn-primary btn-sm" id="recImportBtn" onclick="doImportSelected()">导入选中</button>
+    </div>
+
+    <!-- 站点列表 -->
+    <div id="recList" style="max-height:420px;overflow-y:auto;border:1px solid var(--border);border-radius:10px;padding:4px"></div>
+
+    <!-- 底部统计 -->
+    <div id="recFooter" style="margin-top:10px;font-size:12px;color:var(--sub);text-align:right"></div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════ 添加站点 Modal ═══ -->
+<div class="modal-overlay" id="addSiteModal">
   <div class="modal">
-    <h3 id="modalTitle">添加来源</h3>
-    <div class="form-group">
-      <label>来源名称 *</label>
-      <input type="text" id="sourceName" placeholder="如：小程序、APP、线下活动等">
-    </div>
-    <div class="form-row">
-      <div class="form-group">
-        <label>来源类型 *</label>
-        <select id="sourceType">
-          <option value="online">🌐 线上渠道</option>
-          <option value="offline">📍 线下渠道</option>
-          <option value="partner">🤝 合作渠道</option>
-          <option value="crawl">🕷️ 人工抓取源</option>
-        </select>
-      </div>
-      <div class="form-group">
-        <label>初始数量</label>
-        <input type="number" id="sourceCount" value="0" min="0">
-      </div>
+    <div class="modal-title">
+      <span>添加招聘网站</span>
+      <button class="modal-close" onclick="closeModal('addSiteModal')">×</button>
     </div>
     <div class="form-group">
-      <label>来源URL（可选）</label>
-      <input type="url" id="sourceUrl" placeholder="https://...">
+      <label class="form-label">网站名称 *</label>
+      <input class="form-input" id="addName" placeholder="例：成都人才网、武汉英才网">
     </div>
     <div class="form-group">
-      <label>描述说明（可选）</label>
-      <input type="text" id="sourceDesc" placeholder="简短描述">
+      <label class="form-label">网站 URL *</label>
+      <input class="form-input" id="addUrl" placeholder="https://www.cdrc.gov.cn" type="url">
     </div>
-    <div class="modal-btns">
-      <button class="btn-cancel" onclick="closeSourceModal()">取消</button>
-      <button class="btn-confirm" onclick="saveSource()">保存</button>
+    <div class="form-group">
+      <label class="form-label">城市（可选，系统会自动推断）</label>
+      <input class="form-input" id="addCity" placeholder="例：成都（不填会自动识别）">
     </div>
+    <div class="form-group">
+      <label class="form-label">登录方式</label>
+      <select class="form-select" id="addLoginType">
+        <option value="none">无需登录（公开信息）</option>
+        <option value="cookie">Cookie注入（浏览器登录后复制）</option>
+        <option value="account">账号密码（自动登录尝试）</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label class="form-label">备注</label>
+      <input class="form-input" id="addNote" placeholder="选填，备忘用途">
+    </div>
+    <button class="btn btn-primary btn-full" onclick="doAddSite()">✓ 添加站点</button>
   </div>
 </div>
 
-<script>
-  // 初始化来源管理
-  renderSources();
-</script>
+<!-- ═══════════════════════════════════════ 登录 Modal ═══ -->
+<div class="modal-overlay" id="loginModal">
+  <div class="modal">
+    <div class="modal-title">
+      <span id="loginModalTitle">🔐 站点登录</span>
+      <button class="modal-close" onclick="closeModal('loginModal')">×</button>
+    </div>
+    <div class="login-tabs">
+      <div class="login-tab active" id="ltabCookie" onclick="switchLoginTab('cookie')">📋 粘贴 Cookie</div>
+      <div class="login-tab" id="ltabAccount" onclick="switchLoginTab('account')">🔑 账号密码</div>
+    </div>
+    <!-- Cookie Panel -->
+    <div id="loginPanelCookie">
+      <div style="font-size:12px;color:var(--sub);margin-bottom:8px;line-height:1.7">
+        1. 在浏览器中打开目标招聘网站并登录<br>
+        2. 按 F12 → Application → Cookies → 选择对应域名<br>
+        3. 复制全部 Cookie 值（格式：key=val; key2=val2）
+      </div>
+      <div class="form-group">
+        <label class="form-label">Cookie 字符串</label>
+        <textarea class="form-input form-textarea" id="cookieInput" placeholder="sessionid=xxx; token=yyy; userid=zzz; ..."></textarea>
+      </div>
+      <button class="btn btn-primary btn-full" onclick="doInjectCookie()">✓ 注入 Cookie</button>
+    </div>
+    <!-- Account Panel -->
+    <div id="loginPanelAccount" style="display:none">
+      <div style="font-size:12px;color:#f97316;background:#fff8f0;padding:8px;border-radius:6px;margin-bottom:10px">
+        ⚠️ 账号密码登录成功率因网站而异，建议优先使用 Cookie 方式
+      </div>
+      <div class="form-group">
+        <label class="form-label">账号（手机 / 邮箱 / 用户名）</label>
+        <input class="form-input" id="loginUsername" placeholder="请输入账号">
+      </div>
+      <div class="form-group">
+        <label class="form-label">密码</label>
+        <input class="form-input" id="loginPassword" type="password" placeholder="请输入密码">
+      </div>
+      <button class="btn btn-warn btn-full" onclick="doAccountLogin()">▶ 尝试自动登录</button>
+    </div>
+    <div id="loginResult" style="margin-top:10px"></div>
+  </div>
+</div>
 
+<!-- ═══════════════════════════════════════ 探测详情 Modal ═══ -->
+<div class="modal-overlay" id="detectModal">
+  <div class="modal">
+    <div class="modal-title">
+      <span>🔍 职位入口探测</span>
+      <button class="modal-close" onclick="closeModal('detectModal')">×</button>
+    </div>
+    <div id="detectContent" style="font-size:13px;color:var(--sub)">探测中，请稍候...</div>
+  </div>
+</div>
+
+<!-- Toast -->
+<div id="toast"></div>
+
+<script>
+// ════════════════════════════════════════════════════════
+// 配置 & 状态
+// ════════════════════════════════════════════════════════
+let API_BASE = localStorage.getItem('crawlerApiBase') || 'http://localhost:3000';
+let currentSites = [];
+let activeSiteId = null;
+let currentCity = '';
+
+document.getElementById('apiBase').value = API_BASE;
+
+// ════════════════════════════════════════════════════════
+// 工具
+// ════════════════════════════════════════════════════════
+function saveApiBase() {
+  API_BASE = document.getElementById('apiBase').value.replace(/\/$/, '');
+  localStorage.setItem('crawlerApiBase', API_BASE);
+  showToast('后端地址已更新');
+}
+
+async function api(method, path, body) {
+  const opts = {
+    method,
+    headers: { 'Content-Type': 'application/json' },
+  };
+  if (body) opts.body = JSON.stringify(body);
+  const r = await fetch(`${API_BASE}/api/v1/crawler${path}`, opts);
+  return r.json();
+}
+
+function showToast(msg, duration = 2500) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), duration);
+}
+
+function statusBadge(site) {
+  if (!site.enabled) return `<span class="badge badge-off">已禁用</span>`;
+  const map = { idle: ['badge-idle','空闲'], done: ['badge-done','✓ 完成'], crawling: ['badge-crawling','⏳ 采集中'], error: ['badge-error','✗ 出错'], detecting: ['badge-crawling','🔍 探测中'] };
+  const [cls, label] = map[site.status] || ['badge-idle', site.status];
+  return `<span class="badge ${cls}">${label}</span>`;
+}
+
+function timeAgo(iso) {
+  if (!iso) return '从未';
+  const diff = Date.now() - new Date(iso).getTime();
+  if (diff < 60000) return '刚刚';
+  if (diff < 3600000) return Math.floor(diff / 60000) + '分钟前';
+  if (diff < 86400000) return Math.floor(diff / 3600000) + '小时前';
+  return Math.floor(diff / 86400000) + '天前';
+}
+
+// ════════════════════════════════════════════════════════
+// Tabs
+// ════════════════════════════════════════════════════════
+function switchTab(tab) {
+  const ids = ['dashboard', 'sites', 'paste', 'logs', 'guide', 'promo'];
+  document.querySelectorAll('.tab').forEach((t, i) => {
+    t.classList.toggle('active', ids[i] === tab);
+  });
+  document.querySelectorAll('.pane').forEach(p => {
+    p.style.display = 'none';
+    p.classList.remove('active');
+  });
+  const pane = document.getElementById(`pane-${tab}`);
+  if (pane) { pane.style.display = 'block'; pane.classList.add('active'); }
+  if (tab === 'dashboard') loadDashboard();
+  if (tab === 'logs') loadLogs();
+}
+
+// ════════════════════════════════════════════════════════
+// 数据监控台
+// ════════════════════════════════════════════════════════
+async function loadDashboard() {
+  try {
+    const r = await api('GET', '/stats');
+    if (r.code !== 0) { showToast('加载失败: ' + r.message); return; }
+    const stats = r.data || {};
+
+    // 更新总览统计
+    document.getElementById('dashTotal').textContent = stats.total_crawled || 0;
+    document.getElementById('dashToday').textContent = stats.today_crawled || 0;
+    document.getElementById('dashPublished').textContent = stats.approved || 0;
+    document.getElementById('dashPending').textContent = stats.pending || 0;
+
+    // 按来源类型显示
+    const byType = stats.by_source_type || {};
+    let engineHtml = '<table style="width:100%;text-align:left">';
+    const engineNames = {
+      'yupao': '🐟 鱼泡网',
+      'rss': '📡 RSS订阅',
+      'search': '🔍 搜索引擎',
+      'public': '🏛️ 政府平台',
+      'custom': '🌐 自定义网站',
+      'localService': '🏠 本地生活',
+      'local_service': '🏠 本地生活',
+      'jianzhi': '😺 兼职猫',
+      'huodong': '🎪 活动行',
+      'e58': '🏘️ 58同城',
+      'dynamic': '🤖 动态页(Puppeteer)',
+      'puppeteer': '🤖 Puppeteer引擎',
+    };
+    for (const [type, count] of Object.entries(byType)) {
+      const name = engineNames[type] || type;
+      engineHtml += `<tr><td style="padding:4px 0">${name}</td><td style="text-align:right;font-weight:600">${count}</td></tr>`;
+    }
+    engineHtml += '</table>';
+    if (Object.keys(byType).length === 0) {
+      engineHtml = '<div style="color:var(--sub)">暂无采集数据</div>';
+    }
+    document.getElementById('engineStats').innerHTML = engineHtml;
+
+    // 最近日志
+    const logs = stats.recent_logs || [];
+    let logsHtml = '';
+    if (logs.length > 0) {
+      logsHtml = '<table style="width:100%;text-align:left">';
+      logs.slice(-5).reverse().forEach(log => {
+        const time = timeAgo(log.started_at);
+        const statusIcon = log.status === 'completed' ? '✅' : log.status === 'failed' ? '❌' : '⏳';
+        logsHtml += `<tr><td style="padding:4px 0">${statusIcon} ${log.type || 'manual'}</td><td style="text-align:right;color:var(--sub)">${time}</td></tr>`;
+      });
+      logsHtml += '</table>';
+    } else {
+      logsHtml = '<div style="color:var(--sub)">暂无采集日志</div>';
+    }
+    document.getElementById('recentLogs').innerHTML = logsHtml;
+
+  } catch (e) {
+    document.getElementById('engineStats').innerHTML = '<div style="color:var(--danger)">加载失败: ' + e.message + '</div>';
+  }
+}
+
+// 触发采集
+async function triggerCrawl(platform) {
+  showToast('🚀 开始采集 ' + platform + '...');
+  try {
+    const r = await api('POST', '/trigger', { platform, options: {} });
+    if (r.code === 0) {
+      const detail = r.data || {};
+      const saved = detail.total_saved || detail.saved || 0;
+      showToast(`✅ 采集完成，入库 ${saved} 条`);
+      loadDashboard();
+    } else {
+      showToast('❌ ' + r.message);
+    }
+  } catch (e) {
+    showToast('❌ 采集失败: ' + e.message);
+  }
+}
+
+// ════════════════════════════════════════════════════════
+// 测试连接
+// ════════════════════════════════════════════════════════
+async function testConnection() {
+  try {
+    const r = await fetch(`${API_BASE}/api/v1/crawler/custom-sites`);
+    if (r.ok) {
+      showToast('✅ 连接成功！后端正常运行');
+      loadSites();
+    } else {
+      showToast(`❌ 连接失败：HTTP ${r.status}`);
+    }
+  } catch (e) {
+    showToast('❌ 无法连接后端，请检查后端是否启动');
+  }
+}
+
+// ════════════════════════════════════════════════════════
+// 加载站点列表
+// ════════════════════════════════════════════════════════
+async function loadSites() {
+  try {
+    const cityParam = currentCity ? `?city=${encodeURIComponent(currentCity)}` : '';
+    const r = await api('GET', `/custom-sites${cityParam}`);
+    if (r.code !== 0) { showToast('加载失败: ' + r.message); return; }
+    currentSites = r.data || [];
+    renderStats();
+    renderCityFilters();
+    renderSiteList();
+  } catch (e) {
+    document.getElementById('siteList').innerHTML = `<div class="empty"><div class="empty-icon">⚠️</div><div class="empty-text">后端未连接<br><small>请先启动后端服务，或检查地址配置</small></div></div>`;
+  }
+}
+
+function renderStats() {
+  document.getElementById('statTotal').textContent = currentSites.length;
+  document.getElementById('statEnabled').textContent = currentSites.filter(s => s.enabled).length;
+  document.getElementById('statTotal24h').textContent = currentSites.reduce((s, c) => s + (c.last_count || 0), 0);
+}
+
+function renderCityFilters() {
+  const cities = [...new Set(currentSites.map(s => s.city).filter(Boolean))];
+  const container = document.getElementById('cityFilters');
+  const active = currentCity;
+  container.innerHTML = `<button class="btn ${!active ? 'btn-primary' : 'btn-ghost'} btn-sm" onclick="filterByCity('')">全部</button>`;
+  for (const city of cities) {
+    container.innerHTML += `<button class="btn ${active === city ? 'btn-primary' : 'btn-ghost'} btn-sm" onclick="filterByCity('${city}')">${city}</button>`;
+  }
+}
+
+function filterByCity(city) {
+  currentCity = city;
+  loadSites();
+}
+
+function renderSiteList() {
+  const el = document.getElementById('siteList');
+  if (!currentSites.length) {
+    el.innerHTML = `<div class="empty"><div class="empty-icon">🌐</div><div class="empty-text">还没有添加招聘网站<br><small>点击顶部「添加招聘网站」开始</small></div></div>`;
+    return;
+  }
+  el.innerHTML = currentSites.map(site => `
+    <div class="card" id="site-${site.id}">
+      <div class="card-header">
+        <div>
+          <div class="card-title">
+            ${site.name}
+            ${site.city ? `<span class="city-tag">📍${site.city}</span>` : ''}
+            ${statusBadge(site)}
+          </div>
+          <div class="card-meta">
+            <a href="${site.url}" target="_blank" style="color:var(--primary)">${site.url}</a>
+          </div>
+          <div class="card-meta" style="margin-top:3px">
+            登录方式：${{none:'无需登录',cookie:'Cookie',account:'账号密码'}[site.login_type]||'未知'}
+            ${site.has_cookie ? ' · <span style="color:var(--success)">✓ Cookie有效</span>' : ''}
+            · 上次采集：${timeAgo(site.last_crawled_at)}
+            ${site.last_count ? `· 入库 ${site.last_count} 条` : ''}
+          </div>
+          ${site.detect_result && site.detect_result.length ? `
+          <div class="detect-list">
+            ${site.detect_result.slice(0,3).map(u => `<div class="detect-item">🔗 ${u}</div>`).join('')}
+            ${site.detect_result.length > 3 ? `<div style="font-size:11px;color:var(--sub)">+${site.detect_result.length-3} 个入口</div>` : ''}
+          </div>` : ''}
+        </div>
+        <div>
+          <div class="toggle ${site.enabled ? 'on' : ''}" onclick="toggleSite(${site.id}, ${site.enabled})"></div>
+        </div>
+      </div>
+      <div class="action-row">
+        <button class="btn btn-ghost btn-sm" onclick="detectSite(${site.id})">🔍 探测入口</button>
+        <button class="btn btn-ghost btn-sm" onclick="openLoginModal(${site.id}, '${site.name}')">🔐 登录</button>
+        <button class="btn btn-primary btn-sm" onclick="crawlSite(${site.id}, '${site.name}')">▶ 立即采集</button>
+        <button class="btn btn-danger btn-sm" onclick="deleteSite(${site.id}, '${site.name}')">🗑</button>
+      </div>
+    </div>
+  `).join('');
+}
+
+// ════════════════════════════════════════════════════════
+// 添加站点
+// ════════════════════════════════════════════════════════
+function openAddSiteModal() {
+  document.getElementById('addName').value = '';
+  document.getElementById('addUrl').value = '';
+  document.getElementById('addCity').value = '';
+  document.getElementById('addNote').value = '';
+  document.getElementById('addLoginType').value = 'none';
+  openModal('addSiteModal');
+}
+
+async function doAddSite() {
+  const name = document.getElementById('addName').value.trim();
+  const url  = document.getElementById('addUrl').value.trim();
+  const city = document.getElementById('addCity').value.trim();
+  const note = document.getElementById('addNote').value.trim();
+  const login_type = document.getElementById('addLoginType').value;
+  if (!name || !url) { showToast('名称和URL不能为空'); return; }
+  try {
+    const r = await api('POST', '/custom-sites', { name, url, city, note, login_type });
+    if (r.code === 0) {
+      showToast(`✅ 站点「${name}」添加成功${r.data.city ? '，城市：'+r.data.city : ''}`);
+      closeModal('addSiteModal');
+      loadSites();
+    } else {
+      showToast('添加失败：' + r.message);
+    }
+  } catch (e) { showToast('网络错误：' + e.message); }
+}
+
+// ════════════════════════════════════════════════════════
+// 探测入口
+// ════════════════════════════════════════════════════════
+async function detectSite(siteId) {
+  const site = currentSites.find(s => s.id === siteId);
+  document.getElementById('detectContent').innerHTML = `
+    <div style="text-align:center;padding:20px">
+      <div style="font-size:28px;animation:spin 1.2s linear infinite;display:inline-block">🔍</div>
+      <div style="margin-top:12px;font-weight:600;color:var(--text)">正在探测「${site?.name}」的职位入口</div>
+      <div style="margin-top:6px;font-size:12px;color:var(--sub)">多策略探测中：路径探测 → 链接扫描 → sitemap → 搜索引擎反查，约需 15–40 秒</div>
+      <div style="margin-top:14px;display:flex;justify-content:center;gap:6px;flex-wrap:wrap" id="detectProgress">
+        <span style="padding:3px 8px;border-radius:12px;background:var(--border);font-size:11px">①直接命中</span>
+        <span style="padding:3px 8px;border-radius:12px;background:var(--border);font-size:11px">②路径探测</span>
+        <span style="padding:3px 8px;border-radius:12px;background:var(--border);font-size:11px">③链接扫描</span>
+        <span style="padding:3px 8px;border-radius:12px;background:var(--border);font-size:11px">④Sitemap</span>
+        <span style="padding:3px 8px;border-radius:12px;background:var(--border);font-size:11px">⑤搜索引擎</span>
+      </div>
+    </div>`;
+  openModal('detectModal');
+
+  const METHOD_LABELS = {
+    direct:          '① 直接命中（URL本身即职位页）',
+    common_path:     '② 路径探测（50+常见路径）',
+    link_scan:       '③ 首页链接扫描',
+    sitemap:         '④ sitemap.xml 解析',
+    sitemap_robots:  '④ robots.txt → sitemap 解析',
+    search_engine:   '⑤ Bing 搜索引擎反查',
+    failed:          '全部策略未命中',
+  };
+
+  try {
+    const r = await api('POST', `/custom-sites/${siteId}/detect`);
+    if (r.code === 0 && r.data) {
+      const d = r.data;
+      if (d.found) {
+        document.getElementById('detectContent').innerHTML = `
+          <div style="display:flex;align-items:center;gap:8px;margin-bottom:10px">
+            <span style="font-size:20px">✅</span>
+            <span style="font-weight:700;color:var(--success)">探测成功！找到 ${d.urls.length} 个职位入口</span>
+          </div>
+          <div style="font-size:11px;padding:4px 10px;background:var(--border);border-radius:10px;display:inline-block;margin-bottom:12px;color:var(--sub)">
+            命中策略：${METHOD_LABELS[d.method] || d.method}
+          </div>
+          <div style="max-height:200px;overflow-y:auto;display:flex;flex-direction:column;gap:6px">
+            ${d.urls.map(u => `
+              <div class="detect-item" style="display:flex;align-items:center;gap:6px">
+                <span>🔗</span>
+                <a href="${u}" target="_blank" style="color:var(--primary);word-break:break-all;flex:1;font-size:12px">${u}</a>
+              </div>`).join('')}
+          </div>
+          <button class="btn btn-primary btn-full" style="margin-top:14px" onclick="closeModal('detectModal');loadSites()">✔ 完成</button>`;
+      } else {
+        // 失败但有智能建议URL
+        const suggestions = d.suggestions || [];
+        const suggestHtml = suggestions.length > 0
+          ? `<div style="margin:12px 0 6px;font-weight:600;color:var(--text);font-size:13px">🧠 智能候选URL（根据网站类型推断）</div>
+             <div style="font-size:12px;color:var(--sub);margin-bottom:8px">点击「使用」将该URL设为采集入口并立即重新探测</div>
+             <div style="display:flex;flex-direction:column;gap:6px;max-height:220px;overflow-y:auto">
+               ${suggestions.map(u => `
+                 <div style="display:flex;align-items:center;gap:8px;padding:6px 10px;border:1px solid var(--border);border-radius:8px;background:var(--bg2)">
+                   <span style="flex:1;font-size:12px;word-break:break-all;color:var(--text)">${u}</span>
+                   <a href="${u}" target="_blank" style="font-size:11px;color:var(--sub);white-space:nowrap">预览</a>
+                   <button class="btn btn-primary" style="font-size:11px;padding:3px 10px;white-space:nowrap"
+                     onclick="confirmSuggestion(${siteId},'${u.replace(/'/g,"\\'")}')">使用</button>
+                 </div>`).join('')}
+             </div>`
+          : `<div style="margin-top:10px;font-size:13px;color:var(--sub)">请手动将职位列表页完整URL填入「网站URL」字段后重新探测。</div>`;
+
+        document.getElementById('detectContent').innerHTML = `
+          <div style="display:flex;align-items:center;gap:8px;margin-bottom:10px">
+            <span style="font-size:20px">❌</span>
+            <span style="font-weight:700;color:var(--danger)">6策略全部未命中</span>
+          </div>
+          <div style="font-size:12px;color:var(--sub);padding:8px 10px;background:rgba(255,70,70,.08);border-radius:8px;border-left:3px solid var(--danger)">
+            ${d.hint || '该网站可能使用动态渲染（SPA）或需要登录才能访问职位页'}
+          </div>
+          <div style="margin-top:10px;font-size:12px;color:var(--sub)">
+            <b style="color:var(--text)">常见原因：</b><br>
+            · 网站是SPA（React/Vue），内容由JS渲染<br>
+            · 职位页需要登录才能访问<br>
+            · 域名不含招聘关键词路径（如纯序号路由 /list/123）
+          </div>
+          ${suggestHtml}
+          <div style="margin-top:12px;display:flex;gap:8px">
+            <button class="btn btn-ghost" style="flex:1" onclick="closeModal('detectModal')">关闭</button>
+            <button class="btn btn-primary" style="flex:1" onclick="closeModal('detectModal');openLoginModal(${siteId},'${(site?.name||'').replace(/'/g,"\\'")}')">🔐 先登录再探测</button>
+          </div>`;
+      }
+    } else {
+      document.getElementById('detectContent').innerHTML = `
+        <div style="color:var(--danger);margin-bottom:12px">探测请求失败：${r.message}</div>
+        <button class="btn btn-ghost btn-full" onclick="closeModal('detectModal')">关闭</button>`;
+    }
+    loadSites();
+  } catch (e) {
+    document.getElementById('detectContent').innerHTML = `
+      <div style="color:var(--danger);margin-bottom:12px">网络错误：${e.message}</div>
+      <button class="btn btn-ghost btn-full" onclick="closeModal('detectModal')">关闭</button>`;
+  }
+}
+
+// 用户确认使用某个候选URL
+async function confirmSuggestion(siteId, url) {
+  try {
+    // 更新站点URL为用户选择的候选URL
+    await api('PUT', `/custom-sites/${siteId}`, { url });
+    showToast('已更新URL，正在重新探测...');
+    closeModal('detectModal');
+    await loadSites();
+    // 短暂延迟后重新探测
+    setTimeout(() => detectSite(siteId), 800);
+  } catch (e) {
+    showToast('更新失败：' + e.message);
+  }
+}
+
+// ════════════════════════════════════════════════════════
+// 登录
+// ════════════════════════════════════════════════════════
+function openLoginModal(siteId, siteName) {
+  activeSiteId = siteId;
+  document.getElementById('loginModalTitle').textContent = `🔐 ${siteName} · 登录`;
+  document.getElementById('cookieInput').value = '';
+  document.getElementById('loginUsername').value = '';
+  document.getElementById('loginPassword').value = '';
+  document.getElementById('loginResult').innerHTML = '';
+  switchLoginTab('cookie');
+  openModal('loginModal');
+}
+
+function switchLoginTab(tab) {
+  document.getElementById('ltabCookie').classList.toggle('active', tab === 'cookie');
+  document.getElementById('ltabAccount').classList.toggle('active', tab === 'account');
+  document.getElementById('loginPanelCookie').style.display   = tab === 'cookie'  ? '' : 'none';
+  document.getElementById('loginPanelAccount').style.display  = tab === 'account' ? '' : 'none';
+}
+
+async function doInjectCookie() {
+  const cookie = document.getElementById('cookieInput').value.trim();
+  if (!cookie) { showToast('Cookie 不能为空'); return; }
+  try {
+    const r = await api('POST', `/custom-sites/${activeSiteId}/inject-cookie`, { cookie });
+    document.getElementById('loginResult').innerHTML = r.code === 0
+      ? `<div style="color:var(--success);padding:8px;background:#edfaf5;border-radius:6px">✅ ${r.message}</div>`
+      : `<div style="color:var(--danger);padding:8px;background:#fff0f0;border-radius:6px">❌ ${r.message}</div>`;
+    if (r.code === 0) { setTimeout(() => { closeModal('loginModal'); loadSites(); }, 1500); }
+  } catch (e) { showToast('网络错误：' + e.message); }
+}
+
+async function doAccountLogin() {
+  const username = document.getElementById('loginUsername').value.trim();
+  const password = document.getElementById('loginPassword').value.trim();
+  if (!username || !password) { showToast('账号和密码不能为空'); return; }
+  document.getElementById('loginResult').innerHTML = `<div style="color:var(--warn)">⏳ 正在尝试登录...</div>`;
+  try {
+    const r = await api('POST', `/custom-sites/${activeSiteId}/login`, { username, password });
+    document.getElementById('loginResult').innerHTML = r.code === 0
+      ? `<div style="color:var(--success);padding:8px;background:#edfaf5;border-radius:6px">✅ ${r.message}</div>`
+      : `<div style="color:var(--danger);padding:8px;background:#fff0f0;border-radius:6px">❌ ${r.message}</div>`;
+    if (r.code === 0) { setTimeout(() => { closeModal('loginModal'); loadSites(); }, 1500); }
+  } catch (e) { showToast('网络错误：' + e.message); }
+}
+
+// ════════════════════════════════════════════════════════
+// 采集
+// ════════════════════════════════════════════════════════
+async function crawlSite(siteId, siteName) {
+  showToast(`⏳ 正在启动「${siteName}」采集...`);
+  // 立即更新UI状态
+  const site = currentSites.find(s => s.id === siteId);
+  if (site) { site.status = 'crawling'; renderSiteList(); }
+  try {
+    const r = await api('POST', `/custom-sites/${siteId}/crawl`, { pages: 3, autoApprove: true });
+    showToast(r.message || '采集任务已启动');
+    // 5秒后刷新状态
+    setTimeout(loadSites, 5000);
+  } catch (e) { showToast('启动失败：' + e.message); }
+}
+
+// ════════════════════════════════════════════════════════
+// 推荐站点导入
+// ════════════════════════════════════════════════════════
+let recAllSites = [];
+
+async function openRecommendedModal() {
+  openModal('recommendedModal');
+  document.getElementById('recList').innerHTML = '<div style="padding:20px;text-align:center;color:var(--sub)">加载中...</div>';
+  try {
+    const r = await api('GET', '/recommended-sites');
+    if (r.code !== 0) { showToast('加载失败：' + r.message); return; }
+    recAllSites = r.data.list;
+
+    // 填充分类下拉
+    const cats = [...new Set(recAllSites.map(s => s.category))];
+    const sel = document.getElementById('recCategoryFilter');
+    sel.innerHTML = '<option value="">全部分类</option>' + cats.map(c => `<option value="${c}">${c}</option>`).join('');
+
+    document.getElementById('recFooter').textContent = `共 ${r.data.total} 个推荐站点，已入库 ${r.data.imported} 个`;
+    filterRecommended();
+  } catch (e) { showToast('网络错误：' + e.message); }
+}
+
+function filterRecommended() {
+  const cat = document.getElementById('recCategoryFilter').value;
+  const hideImported = document.getElementById('recHideImported').checked;
+  let list = recAllSites;
+  if (cat) list = list.filter(s => s.category === cat);
+  if (hideImported) list = list.filter(s => !s.imported);
+  renderRecList(list);
+}
+
+function renderRecList(list) {
+  const el = document.getElementById('recList');
+  if (!list.length) {
+    el.innerHTML = '<div style="padding:20px;text-align:center;color:var(--sub)">暂无数据</div>';
+    return;
+  }
+  // 按分类分组显示
+  const groups = {};
+  list.forEach(s => { if (!groups[s.category]) groups[s.category] = []; groups[s.category].push(s); });
+
+  el.innerHTML = Object.entries(groups).map(([cat, sites]) => `
+    <div style="padding:8px 12px 4px;font-size:12px;font-weight:700;color:var(--primary);letter-spacing:.05em;background:var(--bg);position:sticky;top:0">${cat}</div>
+    ${sites.map(s => `
+      <label style="display:flex;align-items:center;gap:10px;padding:9px 14px;cursor:${s.imported ? 'default' : 'pointer'};border-bottom:1px solid var(--border);opacity:${s.imported ? .45 : 1}">
+        <input type="checkbox" class="rec-check" value="${encodeURIComponent(s.name)}" ${s.imported ? 'disabled checked' : ''} style="width:15px;height:15px;flex-shrink:0">
+        <div style="flex:1;min-width:0">
+          <div style="font-size:13px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${s.name} ${s.imported ? '<span style="color:var(--success);font-size:11px;font-weight:400">✓ 已入库</span>' : ''}</div>
+          <div style="font-size:11px;color:var(--sub);white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${s.description || s.url}</div>
+        </div>
+        <span style="font-size:11px;color:var(--sub);flex-shrink:0">${s.login_type === 'none' ? '无需登录' : s.login_type}</span>
+      </label>
+    `).join('')}
+  `).join('');
+}
+
+function toggleSelectAll() {
+  const boxes = document.querySelectorAll('.rec-check:not(:disabled)');
+  const allChecked = [...boxes].every(b => b.checked);
+  boxes.forEach(b => b.checked = !allChecked);
+}
+
+async function doImportSelected() {
+  const checked = [...document.querySelectorAll('.rec-check:not(:disabled):checked')];
+  if (!checked.length) { showToast('请先勾选要导入的站点'); return; }
+  const names = checked.map(b => decodeURIComponent(b.value));
+  const btn = document.getElementById('recImportBtn');
+  btn.disabled = true; btn.textContent = '导入中...';
+  try {
+    const r = await api('POST', '/import-recommended', { sites: names });
+    if (r.code === 0) {
+      showToast(`✅ ${r.message}`);
+      closeModal('recommendedModal');
+      loadSites();
+    } else {
+      showToast('导入失败：' + r.message);
+    }
+  } catch (e) { showToast('网络错误：' + e.message); }
+  finally { btn.disabled = false; btn.textContent = '导入选中'; }
+}
+
+async function discoverSites() {
+  if (!confirm('系统将通过搜索引擎自动寻找招聘相关网站并添加，后台执行约 1-2 分钟。\n\n点确认开始，发现完毕后刷新站点列表查看结果。')) return;
+  showToast('🔍 站点发现任务已启动，后台执行中...');
+  try {
+    const r = await api('POST', '/discover-sites', { maxNew: 15, queryCount: 5 });
+    if (r.code === 0) {
+      showToast('✅ 发现任务已在后台运行，约 1-2 分钟后点「↻ 刷新」查看新增站点');
+    } else {
+      showToast('启动失败：' + r.message);
+    }
+  } catch (e) { showToast('网络错误：' + e.message); }
+}
+
+async function crawlAll() {
+  showToast('⏳ 启动批量采集...');
+  try {
+    const r = await api('POST', '/custom-sites/crawl-all', { autoApprove: true });
+    showToast(r.message || '批量采集已启动');
+    setTimeout(loadSites, 5000);
+  } catch (e) { showToast('启动失败：' + e.message); }
+}
+
+// ════════════════════════════════════════════════════════
+// 启用/禁用/删除
+// ════════════════════════════════════════════════════════
+async function toggleSite(siteId, currentEnabled) {
+  try {
+    const r = await api('PATCH', `/custom-sites/${siteId}/toggle`, { enabled: !currentEnabled });
+    showToast(r.message);
+    loadSites();
+  } catch (e) { showToast('操作失败：' + e.message); }
+}
+
+async function deleteSite(siteId, siteName) {
+  if (!confirm(`确认删除站点「${siteName}」？`)) return;
+  try {
+    const r = await api('DELETE', `/custom-sites/${siteId}`);
+    showToast(r.message);
+    loadSites();
+  } catch (e) { showToast('删除失败：' + e.message); }
+}
+
+// ════════════════════════════════════════════════════════
+// 日志
+// ════════════════════════════════════════════════════════
+async function loadLogs() {
+  try {
+    const r = await api('GET', '/logs?limit=20');
+    const el = document.getElementById('logList');
+    if (r.code === 0 && r.data?.length) {
+      el.innerHTML = r.data.map(log => `
+        <div style="border-bottom:1px solid var(--border);padding:10px 0;font-size:13px">
+          <div style="font-weight:600">${log.type === 'daily' ? '🌙 全量' : '🔄 增量'} · ${new Date(log.started_at).toLocaleString('zh-CN')}</div>
+          <div style="color:var(--sub);font-size:12px;margin-top:3px">
+            采集 ${log.total_crawled||0} 条 · 入库 ${log.total_saved||0} 条 · 耗时 ${log.duration_ms ? (log.duration_ms/1000).toFixed(1)+'s' : '-'}
+          </div>
+        </div>
+      `).join('');
+    } else {
+      el.innerHTML = '<div style="color:var(--sub);text-align:center;padding:20px">暂无日志</div>';
+    }
+  } catch (e) {
+    document.getElementById('logList').innerHTML = '<div style="color:var(--danger)">加载失败，后端未连接</div>';
+  }
+}
+
+async function loadQualityReport() {
+  try {
+    const r = await api('GET', '/quality-report');
+    const el = document.getElementById('qualityReport');
+    if (r.code === 0 && r.data) {
+      const d = r.data;
+      el.innerHTML = `
+        <div style="font-size:13px;line-height:2">
+          总数据：<b>${d.total||0}</b> 条 ·
+          已发布：<b style="color:var(--success)">${d.approved||0}</b> 条 ·
+          待审核：<b style="color:var(--warn)">${d.pending||0}</b> 条 ·
+          质检通过率：<b style="color:var(--primary)">${d.passRate || '-'}</b>
+        </div>
+      `;
+    }
+  } catch {}
+}
+
+// ════════════════════════════════════════════════════════
+// Modal
+// ════════════════════════════════════════════════════════
+function openModal(id)  { document.getElementById(id).classList.add('open'); }
+function closeModal(id) { document.getElementById(id).classList.remove('open'); }
+document.querySelectorAll('.modal-overlay').forEach(el => {
+  el.addEventListener('click', e => { if (e.target === el) el.classList.remove('open'); });
+});
+
+// ════════════════════════════════════════════════════════
+// 初始化
+// ════════════════════════════════════════════════════════
+window.addEventListener('DOMContentLoaded', () => {
+  loadSites();
+});
+
+// 旋转动画（探测loading用）
+const style = document.createElement('style');
+style.textContent = `@keyframes spin { from { transform: rotate(0); } to { transform: rotate(360deg); } }`;
+document.head.appendChild(style);
+
+// ════════════════════════════════════════════════════════
+// 粘贴文案解析
+// ════════════════════════════════════════════════════════
+let parsedResults = [];
+
+function fillExample() {
+  document.getElementById('pasteInput').value = `【暑期实习 | 新媒体运营】
+某头部互联网公司寻找暑期实习生！
+
+岗位：新媒体运营实习生
+地点：北京 望京 SOHO B座
+薪资：200元/天，交通补贴另算
+时间：每周3天以上，至少实习2个月
+截止：6月30日
+
+任职要求：
+- 新闻/传播/中文专业优先
+- 有公众号、小红书等运营经验
+- 文字功底扎实，思维活跃
+
+我们提供：实习证明、大厂名企背景背书、优秀者转正机会
+联系微信：recruit2024，备注「运营实习」
+
+---
+
+【活动策划兼职】诚招！
+某文化传媒公司正在招募活动策划兼职人员
+地址：上海 静安区
+薪资：面议，项目制结算
+工作时间：每周2-3天，弹性上班
+联系电话：13812345678
+邮箱：hr@example.com`;
+}
+
+async function parseText() {
+  const text = document.getElementById('pasteInput').value.trim();
+  if (!text) { showToast('请先粘贴招募文案', 'warn'); return; }
+
+  document.getElementById('parseSpinner').style.display = 'inline';
+  document.getElementById('parseBtnText').textContent = '解析中…';
+  document.getElementById('parseResults').innerHTML = '';
+  document.getElementById('parseSummary').style.display = 'none';
+
+  try {
+    const r = await api('POST', '/parse-text', { text, save: false });
+    if (r.code !== 0) { showToast('解析失败：' + r.message, 'error'); return; }
+
+    parsedResults = r.data.results;
+    renderParseResults(parsedResults);
+
+    document.getElementById('parseSummaryText').textContent =
+      `解析完成，共找到 ${parsedResults.length} 条招募信息。确认无误后可保存入库（状态：待审核）。`;
+    document.getElementById('parseSummary').style.display = 'block';
+  } catch(e) {
+    showToast('请求失败，请检查后端是否运行', 'error');
+  } finally {
+    document.getElementById('parseSpinner').style.display = 'none';
+    document.getElementById('parseBtnText').textContent = '🔍 解析文案';
+  }
+}
+
+function renderParseResults(results) {
+  const container = document.getElementById('parseResults');
+  if (!results.length) { container.innerHTML = '<div style="text-align:center;padding:40px;color:var(--text-muted)">未提取到有效招募信息</div>'; return; }
+
+  container.innerHTML = results.map((item, idx) => `
+    <div class="card" id="result-card-${idx}" style="margin-bottom:16px;border-left:4px solid ${item.confidence >= 60 ? 'var(--success)' : item.confidence >= 30 ? '#f59e0b' : 'var(--danger)'}">
+      <div class="card-header" style="margin-bottom:12px">
+        <div class="card-title" style="flex:1">
+          <span style="font-size:16px">📋 第 ${idx+1} 条</span>
+          <span style="margin-left:10px;font-size:12px;padding:2px 8px;border-radius:12px;background:${item.confidence >= 60 ? '#d1fae5' : item.confidence >= 30 ? '#fef3c7' : '#fee2e2'};color:${item.confidence >= 60 ? '#065f46' : item.confidence >= 30 ? '#92400e' : '#991b1b'}">
+            置信度 ${item.confidence}%
+          </span>
+          ${item.missing_fields.length ? `<span style="margin-left:6px;font-size:11px;color:var(--text-muted)">缺少: ${item.missing_fields.map(f=>({title:'标题',salary:'薪资',work_location:'地点',contact_phone:'电话',contact_email:'邮箱',contact_wechat:'微信'}[f]||f)).join('、')}</span>` : ''}
+        </div>
+        <div style="display:flex;gap:8px">
+          <button class="btn btn-primary btn-sm" onclick="confirmSingle(${idx})">✅ 保存入库</button>
+          <button class="btn btn-ghost btn-sm" onclick="toggleEdit(${idx})">✏️ 编辑</button>
+          <button class="btn btn-ghost btn-sm" style="color:var(--danger)" onclick="removeResult(${idx})">✕</button>
+        </div>
+      </div>
+
+      <!-- 字段展示（只读） -->
+      <div id="view-${idx}">
+        ${fieldRow('岗位名称', item.title, '🏷️')}
+        ${fieldRow('岗位类型', {internship:'实习',volunteer:'志愿者',part_time:'兼职',full_time:'全职',unknown:'未知'}[item.job_type]||item.job_type, '📌')}
+        ${item.salary ? fieldRow('薪资待遇', item.salary, '💰') : ''}
+        ${item.work_location ? fieldRow('工作地点', item.work_location, '📍') : ''}
+        ${item.work_time ? fieldRow('工作时间', item.work_time, '⏰') : ''}
+        ${item.deadline ? fieldRow('截止日期', item.deadline, '📅') : ''}
+        ${item.organization ? fieldRow('发布方', item.organization, '🏢') : ''}
+        ${item.requirements ? fieldRow('岗位要求', item.requirements, '📋') : ''}
+        ${item.benefits ? fieldRow('福利待遇', item.benefits, '🎁') : ''}
+        ${item.contact_phone ? fieldRow('联系电话', item.contact_phone, '📞') : ''}
+        ${item.contact_email ? fieldRow('联系邮箱', item.contact_email, '✉️') : ''}
+        ${item.contact_wechat ? fieldRow('联系微信', item.contact_wechat, '💬') : ''}
+        ${item.contact_qq ? fieldRow('联系QQ', item.contact_qq, '🐧') : ''}
+        <details style="margin-top:8px">
+          <summary style="cursor:pointer;font-size:12px;color:var(--text-muted);user-select:none">📄 原始文案</summary>
+          <pre style="margin-top:8px;padding:10px;background:var(--bg-secondary);border-radius:6px;font-size:12px;white-space:pre-wrap;word-break:break-all;max-height:120px;overflow:auto">${escHtml(item.raw_text||'')}</pre>
+        </details>
+      </div>
+
+      <!-- 编辑表单（隐藏） -->
+      <div id="edit-${idx}" style="display:none">
+        ${editField(idx,'title','岗位名称',item.title)}
+        ${editSelect(idx,'job_type','岗位类型',['internship','volunteer','part_time','full_time','unknown'],['实习','志愿者','兼职','全职','未知'],item.job_type)}
+        ${editField(idx,'salary','薪资',item.salary)}
+        ${editField(idx,'work_location','地点',item.work_location)}
+        ${editField(idx,'work_time','工作时间',item.work_time)}
+        ${editField(idx,'deadline','截止日期',item.deadline)}
+        ${editField(idx,'organization','发布方',item.organization)}
+        ${editTextarea(idx,'requirements','岗位要求',item.requirements)}
+        ${editField(idx,'benefits','福利',item.benefits)}
+        ${editField(idx,'contact_phone','联系电话',item.contact_phone)}
+        ${editField(idx,'contact_email','联系邮箱',item.contact_email)}
+        ${editField(idx,'contact_wechat','联系微信',item.contact_wechat)}
+        <button class="btn btn-primary btn-sm" style="margin-top:8px" onclick="applyEdit(${idx})">✔ 应用修改</button>
+        <button class="btn btn-ghost btn-sm" style="margin-top:8px;margin-left:8px" onclick="toggleEdit(${idx})">取消</button>
+      </div>
+    </div>
+  `).join('');
+}
+
+function fieldRow(label, val, icon) {
+  if (!val) return '';
+  return `<div style="display:flex;gap:8px;padding:5px 0;font-size:13px;border-bottom:1px solid var(--border)">
+    <span style="width:80px;color:var(--text-muted);flex-shrink:0">${icon} ${label}</span>
+    <span style="flex:1;word-break:break-all">${escHtml(String(val))}</span>
+  </div>`;
+}
+
+function editField(idx, key, label, val) {
+  return `<div style="margin-bottom:8px">
+    <label style="font-size:12px;color:var(--text-muted);display:block;margin-bottom:3px">${label}</label>
+    <input id="ef-${idx}-${key}" value="${escHtml(String(val||''))}" style="width:100%;padding:6px 10px;border:1px solid var(--border);border-radius:6px;background:var(--bg-secondary);color:var(--text-primary);font-size:13px;box-sizing:border-box">
+  </div>`;
+}
+function editTextarea(idx, key, label, val) {
+  return `<div style="margin-bottom:8px">
+    <label style="font-size:12px;color:var(--text-muted);display:block;margin-bottom:3px">${label}</label>
+    <textarea id="ef-${idx}-${key}" style="width:100%;padding:6px 10px;border:1px solid var(--border);border-radius:6px;background:var(--bg-secondary);color:var(--text-primary);font-size:13px;box-sizing:border-box;height:70px;resize:vertical">${escHtml(String(val||''))}</textarea>
+  </div>`;
+}
+function editSelect(idx, key, label, vals, labels, cur) {
+  return `<div style="margin-bottom:8px">
+    <label style="font-size:12px;color:var(--text-muted);display:block;margin-bottom:3px">${label}</label>
+    <select id="ef-${idx}-${key}" style="width:100%;padding:6px 10px;border:1px solid var(--border);border-radius:6px;background:var(--bg-secondary);color:var(--text-primary);font-size:13px">
+      ${vals.map((v,i)=>`<option value="${v}"${v===cur?' selected':''}>${labels[i]}</option>`).join('')}
+    </select>
+  </div>`;
+}
+
+function escHtml(str) {
+  return String(str).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+function toggleEdit(idx) {
+  const v = document.getElementById(`view-${idx}`);
+  const e = document.getElementById(`edit-${idx}`);
+  const isEditing = e.style.display !== 'none';
+  v.style.display = isEditing ? '' : 'none';
+  e.style.display = isEditing ? 'none' : '';
+}
+
+function applyEdit(idx) {
+  const keys = ['title','job_type','salary','work_location','work_time','deadline','organization','requirements','benefits','contact_phone','contact_email','contact_wechat'];
+  for (const key of keys) {
+    const el = document.getElementById(`ef-${idx}-${key}`);
+    if (el) parsedResults[idx][key] = el.value;
+  }
+  // 重建联系字段
+  const r = parsedResults[idx];
+  r.contact = [
+    r.contact_phone  ? `电话: ${r.contact_phone}` : '',
+    r.contact_email  ? `邮箱: ${r.contact_email}` : '',
+    r.contact_wechat ? `微信: ${r.contact_wechat}` : '',
+  ].filter(Boolean).join('  ');
+
+  renderParseResults(parsedResults);
+  showToast('✅ 修改已应用');
+}
+
+function removeResult(idx) {
+  parsedResults.splice(idx, 1);
+  renderParseResults(parsedResults);
+  if (!parsedResults.length) document.getElementById('parseSummary').style.display = 'none';
+}
+
+async function confirmSingle(idx) {
+  const item = parsedResults[idx];
+  try {
+    const r = await api('POST', '/parse-text/confirm', item);
+    if (r.code === 0) {
+      showToast(`✅ 第 ${idx+1} 条已保存（ID: ${r.data.id}）`);
+      document.getElementById(`result-card-${idx}`).style.opacity = '0.4';
+      parsedResults[idx]._saved = true;
+    } else {
+      showToast('保存失败：' + r.message, 'error');
+    }
+  } catch(e) { showToast('请求失败', 'error'); }
+}
+
+async function saveAllConfirmed() {
+  const unsaved = parsedResults.filter(r => !r._saved);
+  if (!unsaved.length) { showToast('没有待保存的条目'); return; }
+  document.getElementById('saveAllBtn').textContent = '⏳ 保存中…';
+  document.getElementById('saveAllBtn').disabled = true;
+
+  let ok = 0, fail = 0;
+  for (let i = 0; i < parsedResults.length; i++) {
+    if (parsedResults[i]._saved) continue;
+    try {
+      const r = await api('POST', '/parse-text/confirm', parsedResults[i]);
+      if (r.code === 0) { ok++; parsedResults[i]._saved = true; document.getElementById(`result-card-${i}`).style.opacity = '0.4'; }
+      else fail++;
+    } catch { fail++; }
+  }
+
+  document.getElementById('saveAllBtn').textContent = '✅ 全部保存入库';
+  document.getElementById('saveAllBtn').disabled = false;
+  showToast(`保存完成：${ok} 条成功${fail ? '，' + fail + ' 条失败' : ''}`);
+  document.getElementById('parseSummaryText').textContent = `已保存 ${ok} 条到「采集数据库」（状态：待审核）`;
+}
+// ── 外宣资料：复制工具函数 ──────────────────────────────────────
+function copyPromo(id) {
+  const el = document.getElementById(id);
+  if (!el) return;
+  navigator.clipboard.writeText(el.value || el.textContent || '').then(() => {
+    showToast('✅ 已复制到剪贴板');
+  }).catch(() => {
+    el.select && el.select();
+    try { document.execCommand('copy'); showToast('✅ 已复制到剪贴板'); } catch(e) { showToast('复制失败，请手动选中后复制'); }
+  });
+}
+
+function copyText(text, msg) {
+  navigator.clipboard.writeText(text).then(() => {
+    showToast('✅ ' + (msg || '已复制'));
+  }).catch(() => {
+    const ta = document.createElement('textarea');
+    ta.value = text; ta.style.position = 'fixed'; ta.style.opacity = '0';
+    document.body.appendChild(ta); ta.select();
+    try { document.execCommand('copy'); showToast('✅ ' + (msg || '已复制')); } catch(e) { showToast('复制失败'); }
+    document.body.removeChild(ta);
+  });
+}
+
+</script>
 </body>
 </html>

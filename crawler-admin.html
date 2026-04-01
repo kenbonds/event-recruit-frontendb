@@ -664,15 +664,21 @@ zhaojiba.com</textarea>
 // 自动判断后端地址
 let API_BASE;
 const hostname = window.location.hostname;
-if (hostname.includes('zhaojiba.com') || hostname.includes('vercel.app') || hostname.includes('tcloudbaseapp.com')) {
-  // 线上环境
-  API_BASE = localStorage.getItem('crawlerApiBase') || 'https://zhaojiba.com/api';
-} else if (hostname === 'localhost' || hostname === '127.0.0.1') {
-  // 本地开发
+const isLocal = hostname === 'localhost' || hostname === '127.0.0.1';
+const isLAN = /^192\.168\./.test(hostname) || /^10\./.test(hostname) || /^172\.(1[6-9]|2\d|3[01])\./.test(hostname);
+
+if (isLocal) {
   API_BASE = localStorage.getItem('crawlerApiBase') || 'http://localhost:3000';
+} else if (isLAN) {
+  API_BASE = localStorage.getItem('crawlerApiBase') || 'http://192.168.1.245:3000';
 } else {
-  // 其他环境（局域网等）
-  API_BASE = localStorage.getItem('crawlerApiBase') || 'http://' + hostname + ':3000';
+  // 线上环境 — 显示提示
+  API_BASE = localStorage.getItem('crawlerApiBase') || '';
+  if (!API_BASE) {
+    setTimeout(() => {
+      showToast('⚠️ 请在「后端地址」栏填写本地后端地址（如 http://192.168.1.245:3000）', 8000);
+    }, 500);
+  }
 }
 let currentSites = [];
 let activeSiteId = null;

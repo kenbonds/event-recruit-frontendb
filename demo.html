@@ -1931,6 +1931,23 @@ async function checkBackend() {
   return _backendAlive;
 }
 
+// 加载静态爬虫数据（从 data/crawled-jobs.json）
+let _cachedCrawledJobs = null;
+async function _loadCrawledJobs() {
+  if (_cachedCrawledJobs) return _cachedCrawledJobs;
+  try {
+    const r = await fetch('/data/crawled-jobs.json', { signal: AbortSignal.timeout(5000) });
+    if (!r.ok) return null;
+    const json = await r.json();
+    _cachedCrawledJobs = json.data || [];
+    console.log(`[数据] 加载爬虫数据 ${_cachedCrawledJobs.length} 条 (${json.synced_at || '未知时间'})`);
+    return _cachedCrawledJobs;
+  } catch (e) {
+    console.warn('[数据] 爬虫数据加载失败:', e.message);
+    return null;
+  }
+}
+
 // =================== DATA（本地演示兜底）===================
 const EVENTS = [
   { id:1, title:'校园义卖活动', emoji:'🎪', gradient:'linear-gradient(135deg,#f093fb,#f5576c)', category:'义卖',
@@ -2585,6 +2602,21 @@ async function renderRecommendJobs() {
     }
   }
   if (!jobs || !jobs.length) {
+    // 尝试加载静态爬虫数据
+    const crawledData = await _loadCrawledJobs();
+    if (crawledData && crawledData.length) {
+      jobs = crawledData.slice(0, 6).map(j => ({
+        ...j,
+        company: j.company_name || j.company || '招聘方',
+        emoji: '🏢',
+        salary: j.salary_text || '面议',
+        tags: j.tags || [],
+        match_score: 0.7,
+        company_verified: false,
+      }));
+    }
+  }
+  if (!jobs || !jobs.length) {
     let fallback = currentJobFilter === '全部' ? JOBS : JOBS.filter(j => j.type === currentJobFilter);
     jobs = [...fallback].sort((a, b) => b.match_score - a.match_score);
   }
@@ -2677,6 +2709,21 @@ async function renderJobList() {
         tags: j.tags || [],
         match_score: j.match_score || 0.7,
         company_verified: j.certify_status === 1,
+      }));
+    }
+  }
+  if (!list || !list.length) {
+    // 尝试加载静态爬虫数据
+    const crawledData = await _loadCrawledJobs();
+    if (crawledData && crawledData.length) {
+      list = crawledData.map(j => ({
+        ...j,
+        company: j.company_name || j.company || '招聘方',
+        emoji: '🏢',
+        salary: j.salary_text || '面议',
+        tags: j.tags || [],
+        match_score: 0.7,
+        company_verified: false,
       }));
     }
   }

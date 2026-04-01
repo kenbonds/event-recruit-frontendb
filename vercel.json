@@ -22,12 +22,8 @@
       "destination": "/crawler-admin.html"
     },
     {
-      "source": "/api/(.*)",
-      "destination": "https://zhaojiba1-0gqnm5h075fc5ccf-1300229407.ap-shanghai.app.tcloudbase.com/api/:1"
-    },
-    {
-      "source": "/(.*).html",
-      "destination": "/:1.html"
+      "source": "/api/:path*",
+      "destination": "https://zhaojiba1-0gqnm5h075fc5ccf-1300229407.ap-shanghai.app.tcloudbase.com/api/:path*"
     },
     {
       "source": "/(.*)",
@@ -62,7 +58,7 @@
       ]
     },
     {
-      "source": "/icons/(.*)",
+      "source": "/icons/:path*",
       "headers": [
         {
           "key": "Cache-Control",

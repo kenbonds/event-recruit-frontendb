@@ -133,8 +133,8 @@
 
 <!-- Header -->
 <div class="header">
-  <h1>🕷️ 招聘网站采集管理</h1>
-  <p>召集吧 · 数据采集后台</p>
+  <h1>召集吧</h1>
+  <p>数据采集后台 · 招聘信息管理</p>
   <div class="header-actions">
     <button class="btn btn-success btn-sm" onclick="openAddSiteModal()">＋ 添加招聘网站</button>
     <button class="btn btn-primary btn-sm" onclick="openRecommendedModal()">⭐ 导入推荐站点</button>
@@ -155,15 +155,62 @@
 
 <!-- Tabs -->
 <div class="tabs">
-  <div class="tab active" onclick="switchTab('sites')">🌐 网站列表</div>
+  <div class="tab active" onclick="switchTab('dashboard')">📊 数据监控台</div>
+  <div class="tab" onclick="switchTab('sites')">🌐 网站列表</div>
   <div class="tab" onclick="switchTab('paste')">✂️ 粘贴文案</div>
-  <div class="tab" onclick="switchTab('logs')">📊 采集日志</div>
+  <div class="tab" onclick="switchTab('logs')">📋 采集日志</div>
   <div class="tab" onclick="switchTab('guide')">📖 使用指南</div>
+  <div class="tab" onclick="switchTab('promo')">📢 外宣资料</div>
+</div>
+
+<!-- ═══════════════════════════════════════ 数据监控台 ═══ -->
+<div class="content">
+<div id="pane-dashboard" class="pane active">
+
+  <!-- 总览统计 -->
+  <div class="stats-row" id="dashboardStats">
+    <div class="stat-card"><div class="stat-n" id="dashTotal">-</div><div class="stat-l">总采集</div></div>
+    <div class="stat-card"><div class="stat-n" id="dashToday">-</div><div class="stat-l">今日采集</div></div>
+    <div class="stat-card"><div class="stat-n" id="dashPublished">-</div><div class="stat-l">已发布</div></div>
+    <div class="stat-card"><div class="stat-n" id="dashPending">-</div><div class="stat-l">待审核</div></div>
+  </div>
+
+  <!-- 引擎统计 -->
+  <div class="card" style="margin-top:16px">
+    <div class="card-header">
+      <div class="card-title">🔌 各引擎采集统计</div>
+      <button class="btn btn-ghost btn-sm" onclick="loadDashboard()">↻ 刷新</button>
+    </div>
+    <div id="engineStats" style="font-size:13px;color:var(--sub)">加载中...</div>
+  </div>
+
+  <!-- 最近采集日志 -->
+  <div class="card" style="margin-top:12px">
+    <div class="card-header">
+      <div class="card-title">📋 最近采集日志</div>
+    </div>
+    <div id="recentLogs" style="font-size:13px;color:var(--sub)">加载中...</div>
+  </div>
+
+  <!-- 快速操作 -->
+  <div class="card" style="margin-top:12px">
+    <div class="card-title" style="margin-bottom:10px">⚡ 快速操作</div>
+    <div style="display:flex;gap:8px;flex-wrap:wrap">
+      <button class="btn btn-primary" onclick="triggerCrawl('full')">🚀 全量采集</button>
+      <button class="btn btn-ghost" onclick="triggerCrawl('yupao')">🐟 鱼泡网</button>
+      <button class="btn btn-ghost" onclick="triggerCrawl('rss')">📡 RSS订阅</button>
+      <button class="btn btn-ghost" onclick="triggerCrawl('search')">🔍 搜索引擎</button>
+      <button class="btn btn-ghost" onclick="triggerCrawl('public')">🏛️ 政府平台</button>
+      <button class="btn btn-ghost" onclick="triggerCrawl('jianzhi')">😺 兼职猫</button>
+      <button class="btn btn-ghost" onclick="triggerCrawl('huodong')">🎪 活动行</button>
+      <button class="btn btn-ghost" onclick="triggerCrawl('58')">🏘️ 58同城</button>
+      <button class="btn btn-ghost btn-info" onclick="triggerCrawl('dynamic')" title="Puppeteer无头浏览器采集：拉勾网/实习僧/大街网">🤖 动态页</button>
+    </div>
+  </div>
 </div>
 
 <!-- ═══════════════════════════════════════ 网站列表 ═══ -->
-<div class="content">
-<div id="pane-sites" class="pane active">
+<div id="pane-sites" class="pane">
 
   <!-- 统计 -->
   <div class="stats-row" id="statsRow">
@@ -281,6 +328,213 @@
     </div>
   </div>
 </div>
+
+<!-- ═══════════════════════════════════════ 外宣资料 Pane ═══ -->
+<div id="pane-promo" class="pane">
+
+  <!-- 顶部说明 -->
+  <div class="card" style="background:linear-gradient(135deg,#667eea18,#764ba218);border:1px solid #667eea33">
+    <div style="display:flex;align-items:center;gap:10px">
+      <span style="font-size:28px">📢</span>
+      <div>
+        <div style="font-size:15px;font-weight:800;color:var(--primary)">外宣资料库</div>
+        <div style="font-size:12px;color:var(--sub);margin-top:2px">推广文案、海报模板、合作介绍——一键复制，即用即走</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 快速访问资料 -->
+  <div class="card">
+    <div class="card-title" style="margin-bottom:12px">🗂️ 推广包文件</div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+      <a href="/docs/高校合作推广包/01_合作介绍.html" target="_blank"
+         style="display:flex;flex-direction:column;align-items:center;padding:14px 8px;background:#f0f4ff;border-radius:12px;text-decoration:none;border:1px solid #dde6ff">
+        <span style="font-size:24px">🤝</span>
+        <span style="font-size:13px;font-weight:700;color:var(--primary);margin-top:6px">合作介绍</span>
+        <span style="font-size:11px;color:var(--sub);margin-top:2px">高校合作一页纸</span>
+      </a>
+      <a href="/docs/高校合作推广包/03_海报模板.html" target="_blank"
+         style="display:flex;flex-direction:column;align-items:center;padding:14px 8px;background:#f0faf4;border-radius:12px;text-decoration:none;border:1px solid #c8ecd8">
+        <span style="font-size:24px">🖼️</span>
+        <span style="font-size:13px;font-weight:700;color:var(--success);margin-top:6px">海报模板</span>
+        <span style="font-size:11px;color:var(--sub);margin-top:2px">可打印/转发海报</span>
+      </a>
+      <a href="https://zhaojiba.com" target="_blank"
+         style="display:flex;flex-direction:column;align-items:center;padding:14px 8px;background:#fff8f0;border-radius:12px;text-decoration:none;border:1px solid #fcd9b0">
+        <span style="font-size:24px">🌐</span>
+        <span style="font-size:13px;font-weight:700;color:var(--warn);margin-top:6px">平台地址</span>
+        <span style="font-size:11px;color:var(--sub);margin-top:2px">zhaojiba.com</span>
+      </a>
+      <div onclick="copyText('hi@zhaojiba.com','已复制合作邮箱')"
+         style="display:flex;flex-direction:column;align-items:center;padding:14px 8px;background:#fdf0f5;border-radius:12px;cursor:pointer;border:1px solid #f8c8d8">
+        <span style="font-size:24px">📧</span>
+        <span style="font-size:13px;font-weight:700;color:var(--danger);margin-top:6px">合作邮箱</span>
+        <span style="font-size:11px;color:var(--sub);margin-top:2px">hi@zhaojiba.com</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- 公众号推文 -->
+  <div class="card">
+    <div class="card-header">
+      <div class="card-title">📰 公众号推文（长图文版）</div>
+      <button class="btn btn-sm" onclick="copyPromo('wechat-article')">复制正文</button>
+    </div>
+    <div style="font-size:12px;color:var(--sub);margin-bottom:10px">适用：就业公众号、学生会公众号、院系公众号</div>
+    <div style="background:#f8f9fc;border-radius:8px;padding:10px;margin-bottom:10px">
+      <div style="font-size:12px;font-weight:700;color:var(--text);margin-bottom:6px">标题（三选一）：</div>
+      <div style="display:flex;flex-direction:column;gap:6px">
+        <div style="display:flex;align-items:center;justify-content:space-between;background:white;border-radius:6px;padding:8px 10px;border:1px solid var(--border)">
+          <span style="font-size:12px;color:var(--text)">找兼职/实习/志愿活动？这个免费平台帮你搞定</span>
+          <button class="btn btn-sm" style="font-size:10px;padding:3px 8px;white-space:nowrap" onclick="copyText('找兼职/实习/志愿活动？这个免费平台帮你搞定','已复制标题1')">复制</button>
+        </div>
+        <div style="display:flex;align-items:center;justify-content:space-between;background:white;border-radius:6px;padding:8px 10px;border:1px solid var(--border)">
+          <span style="font-size:12px;color:var(--text)">好消息！学校为同学们带来了一个免费的机会聚合平台</span>
+          <button class="btn btn-sm" style="font-size:10px;padding:3px 8px;white-space:nowrap" onclick="copyText('好消息！学校为同学们带来了一个免费的机会聚合平台','已复制标题2')">复制</button>
+        </div>
+        <div style="display:flex;align-items:center;justify-content:space-between;background:white;border-radius:6px;padding:8px 10px;border:1px solid var(--border)">
+          <span style="font-size:12px;color:var(--text)">不用再刷手机找兼职了，这里全有</span>
+          <button class="btn btn-sm" style="font-size:10px;padding:3px 8px;white-space:nowrap" onclick="copyText('不用再刷手机找兼职了，这里全有','已复制标题3')">复制</button>
+        </div>
+      </div>
+    </div>
+    <textarea id="wechat-article" readonly style="width:100%;height:200px;border:1px solid var(--border);border-radius:8px;padding:10px;font-size:12px;line-height:1.8;resize:vertical;font-family:inherit;background:#fafbff">各位同学好！
+
+学校就业指导中心为大家带来一个福利：
+
+「召集吧」——专为在校生打造的免费招募平台
+
+🎯 平台能帮你干什么？
+
+✅ 兼职 | 真实兼职信息，可直接联系，不绕中间商
+✅ 实习 | 覆盖多行业实习机会，含正规公司和创业团队
+✅ 志愿活动 | 公益项目、社区服务、高校活动一键查看
+✅ 创业/比赛 | 组队招募、创业项目、竞赛招募全都有
+
+💡 完全免费，不收任何费用，不推销课程
+
+👉 使用专属邀请码注册，享受优先推荐：
+
+邀请码：【XXXXXX】（学校专属）
+
+注册地址：zhaojiba.com
+
+或微信扫描下方二维码 ↓
+
+（附二维码图片）
+
+有任何问题，欢迎在评论区留言 🙌</textarea>
+  </div>
+
+  <!-- 班级群发 -->
+  <div class="card">
+    <div class="card-title" style="margin-bottom:12px">💬 班级群发文案</div>
+    <div style="font-size:12px;color:var(--sub);margin-bottom:10px">适用：辅导员发班级群、学生会骨干转发</div>
+    <div style="display:flex;flex-direction:column;gap:10px">
+
+      <div style="background:#f8f9fc;border-radius:8px;padding:12px">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px">
+          <span style="font-size:12px;font-weight:700;color:var(--text)">版本1 · 轻松风</span>
+          <button class="btn btn-sm" onclick="copyPromo('msg-casual')">复制</button>
+        </div>
+        <textarea id="msg-casual" readonly style="width:100%;height:80px;border:1px solid var(--border);border-radius:6px;padding:8px;font-size:12px;line-height:1.8;resize:none;font-family:inherit;background:white">有个免费找兼职/实习/志愿活动的平台「召集吧」，不收费不推销，我们学校有专属邀请码，注册的时候填 【XXXXXX】 可以优先推荐。
+
+地址：zhaojiba.com 有需要的同学可以看看~</textarea>
+      </div>
+
+      <div style="background:#f8f9fc;border-radius:8px;padding:12px">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px">
+          <span style="font-size:12px;font-weight:700;color:var(--text)">版本2 · 正式风（辅导员适用）</span>
+          <button class="btn btn-sm" onclick="copyPromo('msg-formal')">复制</button>
+        </div>
+        <textarea id="msg-formal" readonly style="width:100%;height:95px;border:1px solid var(--border);border-radius:6px;padding:8px;font-size:12px;line-height:1.8;resize:none;font-family:inherit;background:white">同学们好，就业指导中心推荐一个免费的招募信息平台「召集吧」，聚合兼职、实习、志愿活动等信息，经学校审核推荐，完全免费。
+
+注册时填写我校专属邀请码【XXXXXX】，可优先展示本地机会。
+
+平台地址：zhaojiba.com</textarea>
+      </div>
+
+      <div style="background:#f8f9fc;border-radius:8px;padding:12px">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px">
+          <span style="font-size:12px;font-weight:700;color:var(--text)">版本3 · 朋友圈风</span>
+          <button class="btn btn-sm" onclick="copyPromo('msg-moments')">复制</button>
+        </div>
+        <textarea id="msg-moments" readonly style="width:100%;height:80px;border:1px solid var(--border);border-radius:6px;padding:8px;font-size:12px;line-height:1.8;resize:none;font-family:inherit;background:white">发现一个真的挺好用的平台，「召集吧」，找兼职实习志愿活动都能用，免费的，不骗人😂
+
+我们学校有专属码：【XXXXXX】
+
+zhaojiba.com</textarea>
+      </div>
+    </div>
+  </div>
+
+  <!-- 小红书/抖音 -->
+  <div class="card">
+    <div class="card-header">
+      <div class="card-title">📱 小红书 / 抖音文案</div>
+      <button class="btn btn-sm" onclick="copyPromo('xhs-content')">复制正文</button>
+    </div>
+    <div style="font-size:12px;color:var(--sub);margin-bottom:10px">适用：校园KOL、学生自媒体账号</div>
+    <div style="background:#f8f9fc;border-radius:8px;padding:10px;margin-bottom:10px">
+      <div style="font-size:12px;font-weight:700;color:var(--text);margin-bottom:6px">标题（三选一）：</div>
+      <div style="display:flex;flex-direction:column;gap:6px">
+        <div style="display:flex;align-items:center;justify-content:space-between;background:white;border-radius:6px;padding:8px 10px;border:1px solid var(--border)">
+          <span style="font-size:12px;color:var(--text)">大学生必备！免费找兼职实习的神器🔥</span>
+          <button class="btn btn-sm" style="font-size:10px;padding:3px 8px;white-space:nowrap" onclick="copyText('大学生必备！免费找兼职实习的神器🔥','已复制')">复制</button>
+        </div>
+        <div style="display:flex;align-items:center;justify-content:space-between;background:white;border-radius:6px;padding:8px 10px;border:1px solid var(--border)">
+          <span style="font-size:12px;color:var(--text)">发现一个宝藏平台，兼职/实习/志愿活动都有</span>
+          <button class="btn btn-sm" style="font-size:10px;padding:3px 8px;white-space:nowrap" onclick="copyText('发现一个宝藏平台，兼职/实习/志愿活动都有','已复制')">复制</button>
+        </div>
+        <div style="display:flex;align-items:center;justify-content:space-between;background:white;border-radius:6px;padding:8px 10px;border:1px solid var(--border)">
+          <span style="font-size:12px;color:var(--text)">学校就业中心推荐的平台，我用了之后真香</span>
+          <button class="btn btn-sm" style="font-size:10px;padding:3px 8px;white-space:nowrap" onclick="copyText('学校就业中心推荐的平台，我用了之后真香','已复制')">复制</button>
+        </div>
+      </div>
+    </div>
+    <textarea id="xhs-content" readonly style="width:100%;height:240px;border:1px solid var(--border);border-radius:8px;padding:10px;font-size:12px;line-height:1.8;resize:vertical;font-family:inherit;background:#fafbff">最近发现一个超级好用的平台「召集吧」！！！
+
+作为一个找兼职找到怀疑人生的大学生，真的太需要这个了😭
+
+📌 它能干嘛：
+- 兼职（校内校外都有）
+- 实习（含正规公司和创业团队）
+- 志愿活动、公益项目
+- 赛事招募、组队需求
+
+✨ 最重要的是——完全免费！不推销，不收费！
+
+而且是直接跟招募方联系，不绕中间商，省去了很多麻烦。
+
+我们学校有专属邀请码，注册填 【XXXXXX】 可以优先推荐本地机会~
+
+地址：zhaojiba.com
+
+你们有在用什么好用的招募平台吗？评论区分享一下！
+
+#大学生兼职 #实习推荐 #志愿活动 #大学生必备 #找兼职</textarea>
+  </div>
+
+  <!-- 邀请码管理说明 -->
+  <div class="card">
+    <div class="card-title" style="margin-bottom:12px">🎫 邀请码使用说明</div>
+    <div style="font-size:13px;color:var(--sub);line-height:2;background:#f8f9fc;border-radius:8px;padding:12px">
+      <div style="display:grid;grid-template-columns:auto 1fr;gap:4px 12px;font-size:12px">
+        <span style="font-weight:700;color:var(--text)">申请新码</span><span>微信联系创始人，告知学校名称，当天生成</span>
+        <span style="font-weight:700;color:var(--text)">查看数据</span><span>联系我们获取本校注册数据报告</span>
+        <span style="font-weight:700;color:var(--text)">更换邀请码</span><span>如码外泄可随时申请更换</span>
+        <span style="font-weight:700;color:var(--text)">多渠道码</span><span>可申请多个码，区分公众号/群/海报渠道来源</span>
+        <span style="font-weight:700;color:var(--text)">码的格式</span><span>示例：BJDX2026（城市缩写+校名缩写+年份）</span>
+      </div>
+    </div>
+    <div style="margin-top:10px;padding:10px;background:#fff8e1;border-radius:8px;border-left:3px solid var(--warn)">
+      <div style="font-size:12px;color:#92670a;font-weight:600">⚠️ 注意事项</div>
+      <div style="font-size:11px;color:var(--sub);margin-top:4px;line-height:1.7">发布文案时，请将【XXXXXX】替换为该校专属邀请码。<br>前往「管理后台 → 邀请码管理」可查看所有已分配邀请码及注册情况。</div>
+    </div>
+  </div>
+
+</div><!-- end pane-promo -->
+
 </div><!-- end .content -->
 
 <!-- ═══════════════════════════════════════ 推荐站点 Modal ═══ -->
@@ -460,7 +714,7 @@ function timeAgo(iso) {
 // Tabs
 // ════════════════════════════════════════════════════════
 function switchTab(tab) {
-  const ids = ['sites', 'paste', 'logs', 'guide'];
+  const ids = ['dashboard', 'sites', 'paste', 'logs', 'guide', 'promo'];
   document.querySelectorAll('.tab').forEach((t, i) => {
     t.classList.toggle('active', ids[i] === tab);
   });
@@ -470,7 +724,89 @@ function switchTab(tab) {
   });
   const pane = document.getElementById(`pane-${tab}`);
   if (pane) { pane.style.display = 'block'; pane.classList.add('active'); }
+  if (tab === 'dashboard') loadDashboard();
   if (tab === 'logs') loadLogs();
+}
+
+// ════════════════════════════════════════════════════════
+// 数据监控台
+// ════════════════════════════════════════════════════════
+async function loadDashboard() {
+  try {
+    const r = await api('GET', '/stats');
+    if (r.code !== 0) { showToast('加载失败: ' + r.message); return; }
+    const stats = r.data || {};
+
+    // 更新总览统计
+    document.getElementById('dashTotal').textContent = stats.total_crawled || 0;
+    document.getElementById('dashToday').textContent = stats.today_crawled || 0;
+    document.getElementById('dashPublished').textContent = stats.approved || 0;
+    document.getElementById('dashPending').textContent = stats.pending || 0;
+
+    // 按来源类型显示
+    const byType = stats.by_source_type || {};
+    let engineHtml = '<table style="width:100%;text-align:left">';
+    const engineNames = {
+      'yupao': '🐟 鱼泡网',
+      'rss': '📡 RSS订阅',
+      'search': '🔍 搜索引擎',
+      'public': '🏛️ 政府平台',
+      'custom': '🌐 自定义网站',
+      'localService': '🏠 本地生活',
+      'local_service': '🏠 本地生活',
+      'jianzhi': '😺 兼职猫',
+      'huodong': '🎪 活动行',
+      'e58': '🏘️ 58同城',
+      'dynamic': '🤖 动态页(Puppeteer)',
+      'puppeteer': '🤖 Puppeteer引擎',
+    };
+    for (const [type, count] of Object.entries(byType)) {
+      const name = engineNames[type] || type;
+      engineHtml += `<tr><td style="padding:4px 0">${name}</td><td style="text-align:right;font-weight:600">${count}</td></tr>`;
+    }
+    engineHtml += '</table>';
+    if (Object.keys(byType).length === 0) {
+      engineHtml = '<div style="color:var(--sub)">暂无采集数据</div>';
+    }
+    document.getElementById('engineStats').innerHTML = engineHtml;
+
+    // 最近日志
+    const logs = stats.recent_logs || [];
+    let logsHtml = '';
+    if (logs.length > 0) {
+      logsHtml = '<table style="width:100%;text-align:left">';
+      logs.slice(-5).reverse().forEach(log => {
+        const time = timeAgo(log.started_at);
+        const statusIcon = log.status === 'completed' ? '✅' : log.status === 'failed' ? '❌' : '⏳';
+        logsHtml += `<tr><td style="padding:4px 0">${statusIcon} ${log.type || 'manual'}</td><td style="text-align:right;color:var(--sub)">${time}</td></tr>`;
+      });
+      logsHtml += '</table>';
+    } else {
+      logsHtml = '<div style="color:var(--sub)">暂无采集日志</div>';
+    }
+    document.getElementById('recentLogs').innerHTML = logsHtml;
+
+  } catch (e) {
+    document.getElementById('engineStats').innerHTML = '<div style="color:var(--danger)">加载失败: ' + e.message + '</div>';
+  }
+}
+
+// 触发采集
+async function triggerCrawl(platform) {
+  showToast('🚀 开始采集 ' + platform + '...');
+  try {
+    const r = await api('POST', '/trigger', { platform, options: {} });
+    if (r.code === 0) {
+      const detail = r.data || {};
+      const saved = detail.total_saved || detail.saved || 0;
+      showToast(`✅ 采集完成，入库 ${saved} 条`);
+      loadDashboard();
+    } else {
+      showToast('❌ ' + r.message);
+    }
+  } catch (e) {
+    showToast('❌ 采集失败: ' + e.message);
+  }
 }
 
 // ════════════════════════════════════════════════════════
@@ -1193,6 +1529,30 @@ async function saveAllConfirmed() {
   showToast(`保存完成：${ok} 条成功${fail ? '，' + fail + ' 条失败' : ''}`);
   document.getElementById('parseSummaryText').textContent = `已保存 ${ok} 条到「采集数据库」（状态：待审核）`;
 }
+// ── 外宣资料：复制工具函数 ──────────────────────────────────────
+function copyPromo(id) {
+  const el = document.getElementById(id);
+  if (!el) return;
+  navigator.clipboard.writeText(el.value || el.textContent || '').then(() => {
+    showToast('✅ 已复制到剪贴板');
+  }).catch(() => {
+    el.select && el.select();
+    try { document.execCommand('copy'); showToast('✅ 已复制到剪贴板'); } catch(e) { showToast('复制失败，请手动选中后复制'); }
+  });
+}
+
+function copyText(text, msg) {
+  navigator.clipboard.writeText(text).then(() => {
+    showToast('✅ ' + (msg || '已复制'));
+  }).catch(() => {
+    const ta = document.createElement('textarea');
+    ta.value = text; ta.style.position = 'fixed'; ta.style.opacity = '0';
+    document.body.appendChild(ta); ta.select();
+    try { document.execCommand('copy'); showToast('✅ ' + (msg || '已复制')); } catch(e) { showToast('复制失败'); }
+    document.body.removeChild(ta);
+  });
+}
+
 </script>
 </body>
 </html>

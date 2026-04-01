@@ -191,6 +191,65 @@ h1,h2,h3 { line-height: 1.3; }
 .apply-btn.applied { background: #e2e8f0; color: var(--sub); box-shadow: none; }
 .apply-btn.danger { background: linear-gradient(135deg, #f093fb, #f5576c); box-shadow: 0 4px 12px rgba(245,87,108,0.3); }
 
+/* ===== JOB DETAIL PREMIUM ===== */
+#jobModal .modal { background: #0f1117; border-radius: 20px 20px 0 0; overflow: hidden; }
+.jd-hero { position: relative; padding: 24px 20px 20px; background: linear-gradient(135deg, #1a1d2e 0%, #252840 100%); overflow: hidden; }
+.jd-hero::before { content: ''; position: absolute; top: -40px; right: -40px; width: 140px; height: 140px; background: radial-gradient(circle, rgba(102,126,234,0.15) 0%, transparent 70%); border-radius: 50%; }
+.jd-hero::after { content: ''; position: absolute; bottom: -30px; left: -30px; width: 100px; height: 100px; background: radial-gradient(circle, rgba(118,75,162,0.12) 0%, transparent 70%); border-radius: 50%; }
+.jd-close { position: absolute; top: 12px; right: 12px; width: 32px; height: 32px; border-radius: 50%; background: rgba(255,255,255,0.08); border: none; color: rgba(255,255,255,0.6); font-size: 18px; cursor: pointer; display: flex; align-items: center; justify-content: center; z-index: 2; transition: all .2s; backdrop-filter: blur(4px); }
+.jd-close:hover { background: rgba(255,255,255,0.15); color: white; }
+.jd-report { position: absolute; top: 12px; right: 52px; width: 32px; height: 32px; border-radius: 50%; background: rgba(255,255,255,0.08); border: none; color: rgba(255,255,255,0.5); font-size: 16px; cursor: pointer; display: flex; align-items: center; justify-content: center; z-index: 2; }
+.jd-title { font-size: 20px; font-weight: 800; color: #ffffff; line-height: 1.4; margin-bottom: 10px; position: relative; z-index: 1; }
+.jd-salary { font-size: 26px; font-weight: 800; color: #f97316; line-height: 1.2; position: relative; z-index: 1; }
+.jd-salary-label { font-size: 12px; color: rgba(255,255,255,0.4); margin-bottom: 2px; position: relative; z-index: 1; }
+.jd-tags-row { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 12px; position: relative; z-index: 1; }
+.jd-info-tag { padding: 4px 10px; border-radius: 6px; font-size: 12px; color: rgba(255,255,255,0.7); background: rgba(255,255,255,0.08); backdrop-filter: blur(4px); }
+.jd-stats-row { display: flex; gap: 0; background: rgba(255,255,255,0.03); border-top: 1px solid rgba(255,255,255,0.06); }
+.jd-stat { flex: 1; text-align: center; padding: 14px 8px; }
+.jd-stat + .jd-stat { border-left: 1px solid rgba(255,255,255,0.06); }
+.jd-stat-val { font-size: 18px; font-weight: 700; color: #ffffff; }
+.jd-stat-label { font-size: 11px; color: rgba(255,255,255,0.4); margin-top: 3px; }
+.jd-body { padding: 20px; overflow-y: auto; flex: 1; }
+.jd-section { margin-bottom: 20px; }
+.jd-section-title { font-size: 15px; font-weight: 700; color: #e2e8f0; margin-bottom: 10px; display: flex; align-items: center; gap: 6px; }
+.jd-section-title .dot { width: 3px; height: 14px; border-radius: 2px; background: linear-gradient(135deg, var(--primary), var(--primary2)); }
+.jd-section p { font-size: 14px; line-height: 1.8; color: #94a3b8; white-space: pre-line; }
+.jd-publisher { display: flex; align-items: center; gap: 14px; padding: 16px; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); border-radius: 14px; }
+.jd-pub-avatar { width: 48px; height: 48px; border-radius: 14px; background: linear-gradient(135deg, var(--primary), var(--primary2)); display: flex; align-items: center; justify-content: center; font-size: 22px; flex-shrink: 0; }
+.jd-pub-info { flex: 1; min-width: 0; }
+.jd-pub-name { font-size: 15px; font-weight: 700; color: #ffffff; }
+.jd-pub-company { font-size: 13px; color: rgba(255,255,255,0.5); margin-top: 2px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.jd-pub-active { font-size: 12px; color: #22c55e; margin-top: 3px; display: flex; align-items: center; gap: 4px; }
+.jd-pub-active::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: #22c55e; animation: pulse 2s infinite; }
+@keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
+.jd-match-bar { display: flex; align-items: center; gap: 12px; padding: 14px 16px; background: linear-gradient(135deg, rgba(102,126,234,0.12), rgba(118,75,162,0.08)); border: 1px solid rgba(102,126,234,0.2); border-radius: 12px; }
+.jd-match-ring { width: 52px; height: 52px; position: relative; flex-shrink: 0; }
+.jd-match-ring svg { transform: rotate(-90deg); }
+.jd-match-ring .ring-bg { fill: none; stroke: rgba(102,126,234,0.15); stroke-width: 4; }
+.jd-match-ring .ring-fg { fill: none; stroke-width: 4; stroke-linecap: round; transition: stroke-dashoffset .6s ease; }
+.jd-match-text { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; font-size: 14px; font-weight: 800; color: #ffffff; }
+.jd-match-info { flex: 1; }
+.jd-match-label { font-size: 13px; font-weight: 600; color: #c4b5fd; }
+.jd-match-hint { font-size: 12px; color: rgba(255,255,255,0.4); margin-top: 2px; }
+.jd-contact-card { padding: 14px 16px; background: rgba(34,197,94,0.06); border: 1px solid rgba(34,197,94,0.15); border-radius: 12px; }
+.jd-contact-row { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+.jd-contact-name { font-size: 14px; font-weight: 600; color: #e2e8f0; }
+.jd-contact-phone { display: inline-flex; align-items: center; gap: 4px; padding: 6px 14px; background: linear-gradient(135deg,#19c37d,#0ea770); color: white; border-radius: 8px; font-size: 13px; font-weight: 600; text-decoration: none; border: none; cursor: pointer; }
+.jd-contact-wechat { font-size: 13px; color: #94a3b8; }
+.jd-footer { padding: 12px 20px; display: flex; gap: 10px; border-top: 1px solid rgba(255,255,255,0.06); background: #0f1117; }
+.jd-footer .jd-apply-btn { flex: 3; padding: 14px; border-radius: 12px; border: none; background: linear-gradient(135deg, var(--primary), var(--primary2)); color: white; font-size: 15px; font-weight: 700; cursor: pointer; box-shadow: 0 4px 16px rgba(102,126,234,0.35); transition: all .2s; }
+.jd-footer .jd-apply-btn:active { transform: scale(0.97); opacity: .9; }
+.jd-footer .jd-apply-btn.applied { background: rgba(255,255,255,0.08); color: rgba(255,255,255,0.4); box-shadow: none; }
+.jd-footer .jd-chat-btn { flex: 2; padding: 14px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.12); background: transparent; color: rgba(255,255,255,0.8); font-size: 14px; font-weight: 600; cursor: pointer; transition: all .2s; }
+.jd-footer .jd-chat-btn:active { background: rgba(255,255,255,0.06); }
+.jd-footer .jd-call-btn { flex: 1.5; padding: 14px 10px; border-radius: 12px; border: none; background: linear-gradient(135deg,#19c37d,#0ea770); color: white; font-size: 13px; font-weight: 700; cursor: pointer; transition: all .2s; }
+.jd-footer .jd-call-btn:active { opacity: .9; }
+.jd-tag { display: inline-block; padding: 4px 10px; border-radius: 6px; font-size: 12px; }
+.jd-tag-hit { background: rgba(102,126,234,0.12); color: #a5b4fc; }
+.jd-tag-miss { background: rgba(255,255,255,0.06); color: rgba(255,255,255,0.5); }
+
+
+
 /* ===== TOAST ===== */
 .toast { position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background: rgba(0,0,0,0.8); color: white; padding: 12px 24px; border-radius: 10px; font-size: 14px; z-index: 9999; display: none; white-space: nowrap; }
 .toast.show { display: block; animation: toastAnim 2.2s ease forwards; }
@@ -1325,23 +1384,10 @@ h1,h2,h3 { line-height: 1.3; }
   </div>
 </div>
 
-<!-- Job Detail Modal -->
+<!-- Job Detail Modal - 全屏沉浸式 -->
 <div class="modal-overlay" id="jobModal">
-  <div class="modal">
-    <div class="modal-handle"></div>
-    <div class="modal-header">
-      <h3>职位详情</h3>
-      <div style="display:flex;gap:8px;align-items:center">
-        <button onclick="openReportModal('job')" style="background:none;border:none;font-size:18px;cursor:pointer;padding:4px;opacity:.6" title="举报">🚩</button>
-        <button class="modal-close" onclick="closeModal('jobModal')">✕</button>
-      </div>
-    </div>
-    <div class="modal-body" id="jobDetail"></div>
-    <div class="modal-footer" style="display:flex;gap:8px">
-      <button class="apply-btn" id="jobApplyBtn" onclick="applyJob()" style="flex:3">投递简历</button>
-      <button onclick="initiateChatFromJob()" class="initiate-chat-btn" style="flex:2;font-size:13px;padding:12px 10px">💬 发起沟通</button>
-      <button id="jobCallBtn" onclick="callJobContact()" style="flex:2;font-size:13px;padding:12px 10px;border-radius:12px;border:none;background:linear-gradient(135deg,#19c37d,#0ea770);color:white;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:4px">📞 电话</button>
-    </div>
+  <div class="modal" id="jobModalInner" style="max-width:520px;max-height:95vh;display:flex;flex-direction:column">
+    <div id="jobDetail"></div>
   </div>
 </div>
 
@@ -3359,49 +3405,132 @@ function showJobDetail(id) {
   const applied = appliedJobs.has(id);
   const pct = Math.round(j.match_score * 100);
   const userTags = [...mySelectedSkills];
+  const hitTags = (j.tags||[]).filter(t => userTags.includes(t));
+  const missTags = (j.tags||[]).filter(t => !userTags.includes(t));
+
+  // 匹配度颜色
+  const matchColor = pct >= 80 ? '#22c55e' : pct >= 60 ? '#f97316' : '#ef4444';
+  const matchHint = pct >= 80 ? '与你的技能高度匹配，强烈推荐投递！' : pct >= 60 ? '技能基本匹配，可以尝试投递。' : '建议先补充相关技能后再投递。';
+
+  // SVG 环形进度
+  const circumference = 2 * Math.PI * 20;
+  const offset = circumference - (pct / 100) * circumference;
+
+  // 生成首字/emoji作为头像
+  const avatarEmoji = j.emoji || j.company_name ? j.company_name.charAt(0) : '🏢';
+
   document.getElementById('jobDetail').innerHTML = `
-    <h2 style="font-size:20px;font-weight:800">${j.title}</h2>
-    <div style="font-size:24px;font-weight:700;color:var(--orange);margin:8px 0 14px">${j.salary}</div>
-    <div style="display:flex;flex-wrap:wrap;gap:10px;font-size:13px;color:var(--sub);margin-bottom:14px">
-      <span>🏢 ${j.company}</span><span>📍 ${j.city}</span>
-      <span>👁 ${j.views}浏览</span><span>📝 ${j.applicants}投递</span>
-    </div>
-    <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:16px">
-      ${j.tags.map(t=>`<span class="mini-tag ${userTags.includes(t)?'':'orange'}">${t}${userTags.includes(t)?'✓':''}</span>`).join('')}
-    </div>
-    <div style="background:linear-gradient(135deg,var(--primary),var(--primary2));border-radius:12px;padding:16px;color:white;text-align:center;margin-bottom:16px">
-      <div style="font-size:13px;opacity:.85">AI 匹配度</div>
-      <div style="font-size:40px;font-weight:800;line-height:1.2">${pct}%</div>
-      <div style="font-size:12px;opacity:.8;margin-top:4px">基于你的技能标签和活动经历</div>
-    </div>
-    <h3 style="font-size:15px;font-weight:700;margin-bottom:8px">职位描述</h3>
-    <p style="font-size:14px;line-height:1.8;color:#475569;margin-bottom:14px">${j.description}</p>
-    <h3 style="font-size:15px;font-weight:700;margin-bottom:8px">任职要求</h3>
-    <p style="font-size:14px;line-height:1.8;color:#475569;white-space:pre-line">${j.requirements}</p>
-    ${j.contact_name ? `
-    <div style="margin-top:16px;background:#f0fdf4;border:1px solid #bbf7d0;border-radius:12px;padding:14px">
-      <div style="font-size:13px;font-weight:700;color:#16a34a;margin-bottom:8px">📋 联系方式</div>
-      <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">
-        <span style="font-size:14px;color:#334155">👤 ${j.contact_name}</span>
-        <a href="tel:${j.contact_phone}" style="display:inline-flex;align-items:center;gap:4px;padding:6px 14px;background:#19c37d;color:white;border-radius:8px;font-size:13px;font-weight:600;text-decoration:none">📞 ${j.contact_phone}</a>
-        ${j.contact_wechat ? `<span style="font-size:13px;color:#64748b">微信: ${j.contact_wechat}</span>` : ''}
+    <!-- 深色英雄区 -->
+    <div class="jd-hero">
+      <button class="jd-report" onclick="openReportModal('job')" title="举报">🚩</button>
+      <button class="jd-close" onclick="closeModal('jobModal')">✕</button>
+      <div class="jd-title">${j.title}</div>
+      <div class="jd-salary-label">薪资范围</div>
+      <div class="jd-salary">${j.salary}</div>
+      <div class="jd-tags-row">
+        <span class="jd-info-tag">📍 ${j.city || '不限'}</span>
+        ${j.type ? `<span class="jd-info-tag">💼 ${j.type}</span>` : ''}
+        ${j.experience ? `<span class="jd-info-tag">⏱ ${j.experience}</span>` : ''}
+        ${j.education ? `<span class="jd-info-tag">🎓 ${j.education}</span>` : ''}
       </div>
-    </div>` : ''}
+    </div>
+
+    <!-- 数据统计条 -->
+    <div class="jd-stats-row">
+      <div class="jd-stat">
+        <div class="jd-stat-val">${j.views || 0}</div>
+        <div class="jd-stat-label">浏览</div>
+      </div>
+      <div class="jd-stat">
+        <div class="jd-stat-val">${j.applicants || 0}</div>
+        <div class="jd-stat-label">投递</div>
+      </div>
+      <div class="jd-stat">
+        <div class="jd-stat-val">${timeAgo(j.created_at)}</div>
+        <div class="jd-stat-label">发布时间</div>
+      </div>
+    </div>
+
+    <!-- 主体内容 -->
+    <div class="jd-body">
+      <!-- AI 匹配度 -->
+      ${currentUser ? `
+      <div class="jd-section">
+        <div class="jd-match-bar">
+          <div class="jd-match-ring">
+            <svg width="52" height="52" viewBox="0 0 52 52">
+              <circle class="ring-bg" cx="26" cy="26" r="20"/>
+              <circle class="ring-fg" cx="26" cy="26" r="20" stroke="${matchColor}" stroke-dasharray="${circumference}" stroke-dashoffset="${offset}"/>
+            </svg>
+            <div class="jd-match-text" style="color:${matchColor}">${pct}%</div>
+          </div>
+          <div class="jd-match-info">
+            <div class="jd-match-label">AI 智能匹配度</div>
+            <div class="jd-match-hint">${matchHint}</div>
+          </div>
+        </div>
+        ${hitTags.length > 0 ? `<div style="display:flex;flex-wrap:wrap;gap:6px;margin-top:10px">${hitTags.map(t=>`<span class="jd-tag jd-tag-hit">${t} ✓</span>`).join('')}</div>` : ''}
+        ${missTags.length > 0 ? `<div style="display:flex;flex-wrap:wrap;gap:6px;margin-top:6px">${missTags.map(t=>`<span class="jd-tag jd-tag-miss">${t}</span>`).join('')}</div>` : ''}
+      </div>
+      ` : ''}
+
+      <!-- 发布者信息 -->
+      <div class="jd-section">
+        <div class="jd-publisher">
+          <div class="jd-pub-avatar">${avatarEmoji}</div>
+          <div class="jd-pub-info">
+            <div class="jd-pub-name">${j.contact_name || j.company || '召集方'}</div>
+            <div class="jd-pub-company">${j.company}${j.company_verified ? ' <span style="color:#22c55e;font-size:11px">✓ 已认证</span>' : ''}</div>
+            <div class="jd-pub-active">在线活跃</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 岗位描述 -->
+      <div class="jd-section">
+        <div class="jd-section-title"><span class="dot"></span>岗位描述</div>
+        <p>${j.description || '暂无详细描述'}</p>
+      </div>
+
+      <!-- 任职要求 -->
+      ${j.requirements ? `
+      <div class="jd-section">
+        <div class="jd-section-title"><span class="dot"></span>任职要求</div>
+        <p>${j.requirements}</p>
+      </div>
+      ` : ''}
+
+      <!-- 福利待遇 (如果有) -->
+      ${j.benefits ? `
+      <div class="jd-section">
+        <div class="jd-section-title"><span class="dot"></span>福利待遇</div>
+        <div style="display:flex;flex-wrap:wrap;gap:8px">${j.benefits.split(/[,，、]/).filter(Boolean).map(b=>`<span style="padding:6px 12px;background:rgba(249,115,22,0.1);color:#fb923c;border-radius:8px;font-size:13px">${b.trim()}</span>`).join('')}</div>
+      </div>
+      ` : ''}
+
+      <!-- 联系方式 -->
+      ${j.contact_name || j.contact_phone || j.contact_wechat ? `
+      <div class="jd-section">
+        <div class="jd-section-title"><span class="dot"></span>联系方式</div>
+        <div class="jd-contact-card">
+          <div class="jd-contact-row">
+            <span class="jd-contact-name">👤 ${j.contact_name || '—'}</span>
+            ${j.contact_phone ? `<a href="tel:${j.contact_phone}" class="jd-contact-phone">📞 ${j.contact_phone}</a>` : ''}
+          </div>
+          ${j.contact_wechat ? `<div class="jd-contact-wechat" style="margin-top:8px">微信号：${j.contact_wechat}</div>` : ''}
+        </div>
+      </div>
+      ` : ''}
+    </div>
+
+    <!-- 底部操作栏 -->
+    <div class="jd-footer">
+      <button class="jd-apply-btn ${applied ? 'applied' : ''}" id="jobApplyBtn" onclick="applyJob()">${applied ? '✅ 已投递' : '投递简历'}</button>
+      <button class="jd-chat-btn" onclick="initiateChatFromJob()">💬 沟通</button>
+      ${j.contact_phone ? `<button class="jd-call-btn" id="jobCallBtn" data-phone="${j.contact_phone}" data-name="${j.contact_name || '招聘方'}" onclick="callJobContact()">📞</button>` : ''}
+    </div>
   `;
-  const btn = document.getElementById('jobApplyBtn');
-  if (applied) { btn.textContent = '✅ 已投递'; btn.className = 'apply-btn applied'; }
-  else { btn.textContent = '投递简历'; btn.className = 'apply-btn'; }
-  // 电话按钮
-  const callBtn = document.getElementById('jobCallBtn');
-  if (callBtn) {
-    if (j.contact_phone) {
-      callBtn.style.display = '';
-      callBtn.dataset.phone = j.contact_phone;
-      callBtn.dataset.name = j.contact_name || '招聘方';
-    } else {
-      callBtn.style.display = 'none';
-    }
-  }
+
   document.getElementById('jobModal').classList.add('active');
 }
 
@@ -3564,7 +3693,7 @@ async function applyJob() {
   appliedJobs.add(currentJobId);
   if (j) j.applicants = (j.applicants || 0) + 1;
   const pct = j ? Math.round((j.match_score || 0) * 100) : 0;
-  btn.disabled = false; btn.textContent = '✅ 已投递'; btn.className = 'apply-btn applied';
+  btn.disabled = false; btn.textContent = '✅ 已投递'; btn.className = 'jd-apply-btn applied';
   renderRecommendJobs(); renderJobList();
   renderMyPage();
   showToast(`🎉 投递成功！匹配度 ${pct}%，HR将在3个工作日内回复`);

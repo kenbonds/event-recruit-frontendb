@@ -1,6 +1,6 @@
 {
-  "synced_at": "2026-04-01T02:25:36.362Z",
-  "total": 82,
+  "synced_at": "2026-04-01T03:38:07.226Z",
+  "total": 201,
   "source": "local_crawler",
   "data": [
     {
@@ -16,6 +16,7 @@
       "description": "",
       "requirements": "",
       "contact": "189****1357",
+      "company_name": "某教育机构",
       "tags": [
         "兼职",
         "日结",
@@ -29,7 +30,7 @@
       "source_name": "",
       "system_recommended": true,
       "created_at": "2026-03-21T08:24:40.779Z",
-      "updated_at": "2026-04-01T02:25:36.359Z"
+      "updated_at": "2026-04-01T03:38:07.216Z"
     },
     {
       "id": 7,
@@ -44,6 +45,7 @@
       "description": "",
       "requirements": "",
       "contact": "186****9753",
+      "company_name": "某活动策划公司",
       "tags": [
         "兼职",
         "活动",
@@ -57,7 +59,7 @@
       "source_name": "",
       "system_recommended": true,
       "created_at": "2026-03-21T08:24:42.185Z",
-      "updated_at": "2026-04-01T02:25:36.360Z"
+      "updated_at": "2026-04-01T03:38:07.216Z"
     },
     {
       "id": 8,
@@ -72,6 +74,7 @@
       "description": "我们学校环保社团本周六日举办校园环保宣传活动，招募志愿者协助现场布置、引导等工作。提供午餐和志愿者证书。联系电话：13800138001",
       "requirements": "",
       "contact": "13800138001",
+      "company_name": "水木清华BBS-兼职版",
       "tags": [
         "志愿者",
         "校园",
@@ -85,7 +88,7 @@
       "source_name": "水木清华BBS-兼职版",
       "system_recommended": true,
       "created_at": "2026-03-21T08:25:11.609Z",
-      "updated_at": "2026-04-01T02:25:36.361Z"
+      "updated_at": "2026-04-01T03:38:07.216Z"
     },
     {
       "id": 9,
@@ -100,6 +103,7 @@
       "description": "大三/大四学生优先，每周至少3天，负责用户运营和数据分析。日薪150元，表现优秀可转正。联系：hr@example.com 或 13900139002",
       "requirements": "",
       "contact": "13900139002",
+      "company_name": "水木清华BBS-兼职版",
       "tags": [
         "实习",
         "学生"
@@ -112,7 +116,7 @@
       "source_name": "水木清华BBS-兼职版",
       "system_recommended": true,
       "created_at": "2026-03-21T08:25:11.609Z",
-      "updated_at": "2026-04-01T02:25:36.361Z"
+      "updated_at": "2026-04-01T03:38:07.216Z"
     },
     {
       "id": 10,
@@ -127,6 +131,7 @@
       "description": "学校图书馆招募学生兼职，负责图书整理、借阅引导等工作。时间灵活，按小时计酬，20元/小时。有意者联系图书馆王老师 13600136003",
       "requirements": "",
       "contact": "13600136003",
+      "company_name": "水木清华BBS-兼职版",
       "tags": [
         "兼职",
         "校园",
@@ -140,7 +145,7 @@
       "source_name": "水木清华BBS-兼职版",
       "system_recommended": true,
       "created_at": "2026-03-21T08:25:11.610Z",
-      "updated_at": "2026-04-01T02:25:36.361Z"
+      "updated_at": "2026-04-01T03:38:07.216Z"
     },
     {
       "id": 11,
@@ -155,6 +160,7 @@
       "description": "学生会举办校园歌手大赛，招募现场工作人员、主持人、音响控制等岗位。有工作餐，可获得活动参与证明。报名联系：13700137004",
       "requirements": "",
       "contact": "13700137004",
+      "company_name": "水木清华BBS-兼职版",
       "tags": [
         "校园",
         "活动",
@@ -168,7 +174,7 @@
       "source_name": "水木清华BBS-兼职版",
       "system_recommended": true,
       "created_at": "2026-03-21T08:25:11.610Z",
-      "updated_at": "2026-04-01T02:25:36.361Z"
+      "updated_at": "2026-04-01T03:38:07.216Z"
     },
     {
       "id": 12,
@@ -183,6 +189,7 @@
       "description": "爱心社组织敬老院探访活动，招募义工陪伴老人聊天、表演节目。本周日下午2点出发，提供交通补贴。报名电话：13800138005",
       "requirements": "",
       "contact": "13800138005",
+      "company_name": "水木清华BBS-兼职版",
       "tags": [
         "活动",
         "义工"
@@ -195,7 +202,150 @@
       "source_name": "水木清华BBS-兼职版",
       "system_recommended": true,
       "created_at": "2026-03-21T08:25:11.610Z",
-      "updated_at": "2026-04-01T02:25:36.361Z"
+      "updated_at": "2026-04-01T03:38:07.216Z"
+    },
+    {
+      "id": 14,
+      "title": "【招募】校园环保活动志愿者，本周六日",
+      "type": "招聘",
+      "category": "其他",
+      "salary_min": 0,
+      "salary_max": 0,
+      "salary_text": "面议",
+      "city": "北京",
+      "address": "北京",
+      "description": "我们学校环保社团本周六日举办校园环保宣传活动，招募志愿者协助现场布置、引导等工作。提供午餐和志愿者证书。联系电话：13800138001",
+      "requirements": "",
+      "contact": "13800138001",
+      "company_name": "北邮人论坛-兼职实习",
+      "tags": [
+        "志愿者",
+        "校园",
+        "活动"
+      ],
+      "status": "active",
+      "view_count": 0,
+      "apply_count": 0,
+      "is_crawled": true,
+      "source_type": "rss",
+      "source_name": "北邮人论坛-兼职实习",
+      "system_recommended": true,
+      "created_at": "2026-03-21T08:25:11.628Z",
+      "updated_at": "2026-04-01T03:38:07.216Z"
+    },
+    {
+      "id": 15,
+      "title": "【实习】某互联网公司招产品运营实习生",
+      "type": "招聘",
+      "category": "实习",
+      "salary_min": 150,
+      "salary_max": 150,
+      "salary_text": "150元",
+      "city": "北京",
+      "address": "北京",
+      "description": "大三/大四学生优先，每周至少3天，负责用户运营和数据分析。日薪150元，表现优秀可转正。联系：hr@example.com 或 13900139002",
+      "requirements": "",
+      "contact": "13900139002",
+      "company_name": "北邮人论坛-兼职实习",
+      "tags": [
+        "实习",
+        "学生"
+      ],
+      "status": "active",
+      "view_count": 0,
+      "apply_count": 0,
+      "is_crawled": true,
+      "source_type": "rss",
+      "source_name": "北邮人论坛-兼职实习",
+      "system_recommended": true,
+      "created_at": "2026-03-21T08:25:11.628Z",
+      "updated_at": "2026-04-01T03:38:07.216Z"
+    },
+    {
+      "id": 16,
+      "title": "【兼职】校园图书馆整理员招募",
+      "type": "招聘",
+      "category": "兼职",
+      "salary_min": 20,
+      "salary_max": 20,
+      "salary_text": "20元",
+      "city": "北京",
+      "address": "北京",
+      "description": "学校图书馆招募学生兼职，负责图书整理、借阅引导等工作。时间灵活，按小时计酬，20元/小时。有意者联系图书馆王老师 13600136003",
+      "requirements": "",
+      "contact": "13600136003",
+      "company_name": "北邮人论坛-兼职实习",
+      "tags": [
+        "兼职",
+        "校园",
+        "学生"
+      ],
+      "status": "active",
+      "view_count": 0,
+      "apply_count": 0,
+      "is_crawled": true,
+      "source_type": "rss",
+      "source_name": "北邮人论坛-兼职实习",
+      "system_recommended": true,
+      "created_at": "2026-03-21T08:25:11.635Z",
+      "updated_at": "2026-04-01T03:38:07.216Z"
+    },
+    {
+      "id": 17,
+      "title": "【活动】校园歌手大赛工作人员招募",
+      "type": "招聘",
+      "category": "其他",
+      "salary_min": 0,
+      "salary_max": 0,
+      "salary_text": "面议",
+      "city": "北京",
+      "address": "北京",
+      "description": "学生会举办校园歌手大赛，招募现场工作人员、主持人、音响控制等岗位。有工作餐，可获得活动参与证明。报名联系：13700137004",
+      "requirements": "",
+      "contact": "13700137004",
+      "company_name": "北邮人论坛-兼职实习",
+      "tags": [
+        "校园",
+        "活动",
+        "学生"
+      ],
+      "status": "active",
+      "view_count": 0,
+      "apply_count": 0,
+      "is_crawled": true,
+      "source_type": "rss",
+      "source_name": "北邮人论坛-兼职实习",
+      "system_recommended": true,
+      "created_at": "2026-03-21T08:25:11.635Z",
+      "updated_at": "2026-04-01T03:38:07.216Z"
+    },
+    {
+      "id": 18,
+      "title": "【义工】敬老院探访活动招募义工",
+      "type": "招聘",
+      "category": "其他",
+      "salary_min": 0,
+      "salary_max": 0,
+      "salary_text": "面议",
+      "city": "北京",
+      "address": "北京",
+      "description": "爱心社组织敬老院探访活动，招募义工陪伴老人聊天、表演节目。本周日下午2点出发，提供交通补贴。报名电话：13800138005",
+      "requirements": "",
+      "contact": "13800138005",
+      "company_name": "北邮人论坛-兼职实习",
+      "tags": [
+        "活动",
+        "义工"
+      ],
+      "status": "active",
+      "view_count": 0,
+      "apply_count": 0,
+      "is_crawled": true,
+      "source_type": "rss",
+      "source_name": "北邮人论坛-兼职实习",
+      "system_recommended": true,
+      "created_at": "2026-03-21T08:25:11.643Z",
+      "updated_at": "2026-04-01T03:38:07.216Z"
     },
     {
       "id": 19,
@@ -210,6 +360,7 @@
       "description": "招募校园快递代取人员，按件计酬，多劳多得，适合课余时间充裕的同学。联系微信：kuaidi123",
       "requirements": "",
       "contact": "",
+      "company_name": "北邮人论坛-兼职实习",
       "tags": [
         "兼职",
         "校园"
@@ -222,7 +373,178 @@
       "source_name": "北邮人论坛-兼职实习",
       "system_recommended": true,
       "created_at": "2026-03-21T08:25:11.651Z",
-      "updated_at": "2026-04-01T02:25:36.361Z"
+      "updated_at": "2026-04-01T03:38:07.216Z"
+    },
+    {
+      "id": 20,
+      "title": "【招募】校园环保活动志愿者，本周六日",
+      "type": "招聘",
+      "category": "其他",
+      "salary_min": 0,
+      "salary_max": 0,
+      "salary_text": "面议",
+      "city": "北京",
+      "address": "北京",
+      "description": "我们学校环保社团本周六日举办校园环保宣传活动，招募志愿者协助现场布置、引导等工作。提供午餐和志愿者证书。联系电话：13800138001",
+      "requirements": "",
+      "contact": "13800138001",
+      "company_name": "中科大BBS-兼职版",
+      "tags": [
+        "志愿者",
+        "校园",
+        "活动"
+      ],
+      "status": "active",
+      "view_count": 0,
+      "apply_count": 0,
+      "is_crawled": true,
+      "source_type": "rss",
+      "source_name": "中科大BBS-兼职版",
+      "system_recommended": true,
+      "created_at": "2026-03-21T08:25:11.658Z",
+      "updated_at": "2026-04-01T03:38:07.216Z"
+    },
+    {
+      "id": 21,
+      "title": "【实习】某互联网公司招产品运营实习生",
+      "type": "招聘",
+      "category": "实习",
+      "salary_min": 150,
+      "salary_max": 150,
+      "salary_text": "150元",
+      "city": "北京",
+      "address": "北京",
+      "description": "大三/大四学生优先，每周至少3天，负责用户运营和数据分析。日薪150元，表现优秀可转正。联系：hr@example.com 或 13900139002",
+      "requirements": "",
+      "contact": "13900139002",
+      "company_name": "中科大BBS-兼职版",
+      "tags": [
+        "实习",
+        "学生"
+      ],
+      "status": "active",
+      "view_count": 0,
+      "apply_count": 0,
+      "is_crawled": true,
+      "source_type": "rss",
+      "source_name": "中科大BBS-兼职版",
+      "system_recommended": true,
+      "created_at": "2026-03-21T08:25:11.664Z",
+      "updated_at": "2026-04-01T03:38:07.216Z"
+    },
+    {
+      "id": 22,
+      "title": "【兼职】校园图书馆整理员招募",
+      "type": "招聘",
+      "category": "兼职",
+      "salary_min": 20,
+      "salary_max": 20,
+      "salary_text": "20元",
+      "city": "北京",
+      "address": "北京",
+      "description": "学校图书馆招募学生兼职，负责图书整理、借阅引导等工作。时间灵活，按小时计酬，20元/小时。有意者联系图书馆王老师 13600136003",
+      "requirements": "",
+      "contact": "13600136003",
+      "company_name": "中科大BBS-兼职版",
+      "tags": [
+        "兼职",
+        "校园",
+        "学生"
+      ],
+      "status": "active",
+      "view_count": 0,
+      "apply_count": 0,
+      "is_crawled": true,
+      "source_type": "rss",
+      "source_name": "中科大BBS-兼职版",
+      "system_recommended": true,
+      "created_at": "2026-03-21T08:25:11.665Z",
+      "updated_at": "2026-04-01T03:38:07.216Z"
+    },
+    {
+      "id": 23,
+      "title": "【活动】校园歌手大赛工作人员招募",
+      "type": "招聘",
+      "category": "其他",
+      "salary_min": 0,
+      "salary_max": 0,
+      "salary_text": "面议",
+      "city": "北京",
+      "address": "北京",
+      "description": "学生会举办校园歌手大赛，招募现场工作人员、主持人、音响控制等岗位。有工作餐，可获得活动参与证明。报名联系：13700137004",
+      "requirements": "",
+      "contact": "13700137004",
+      "company_name": "中科大BBS-兼职版",
+      "tags": [
+        "校园",
+        "活动",
+        "学生"
+      ],
+      "status": "active",
+      "view_count": 0,
+      "apply_count": 0,
+      "is_crawled": true,
+      "source_type": "rss",
+      "source_name": "中科大BBS-兼职版",
+      "system_recommended": true,
+      "created_at": "2026-03-21T08:25:11.665Z",
+      "updated_at": "2026-04-01T03:38:07.217Z"
+    },
+    {
+      "id": 24,
+      "title": "【义工】敬老院探访活动招募义工",
+      "type": "招聘",
+      "category": "其他",
+      "salary_min": 0,
+      "salary_max": 0,
+      "salary_text": "面议",
+      "city": "北京",
+      "address": "北京",
+      "description": "爱心社组织敬老院探访活动，招募义工陪伴老人聊天、表演节目。本周日下午2点出发，提供交通补贴。报名电话：13800138005",
+      "requirements": "",
+      "contact": "13800138005",
+      "company_name": "中科大BBS-兼职版",
+      "tags": [
+        "活动",
+        "义工"
+      ],
+      "status": "active",
+      "view_count": 0,
+      "apply_count": 0,
+      "is_crawled": true,
+      "source_type": "rss",
+      "source_name": "中科大BBS-兼职版",
+      "system_recommended": true,
+      "created_at": "2026-03-21T08:25:11.672Z",
+      "updated_at": "2026-04-01T03:38:07.217Z"
+    },
+    {
+      "id": 25,
+      "title": "【兼职】校园快递代取，时间自由",
+      "type": "招聘",
+      "category": "兼职",
+      "salary_min": 0,
+      "salary_max": 0,
+      "salary_text": "面议",
+      "city": "北京",
+      "address": "北京",
+      "description": "招募校园快递代取人员，按件计酬，多劳多得，适合课余时间充裕的同学。联系微信：kuaidi123",
+      "requirements": "",
+      "contact": "",
+      "company_name": "中科大BBS-兼职版",
+      "tags": [
+        "兼职",
+        "校园"
+      ],
+      "status": "active",
+      "view_count": 0,
+      "apply_count": 0,
+      "is_crawled": true,
+      "source_type": "rss",
+      "source_name": "中科大BBS-兼职版",
+      "system_recommended": true,
+      "created_at": "2026-03-21T08:25:11.672Z",
+      "updated_at": "2026-04-01T03:38:07.217Z"
     },
     {
       "id": 26,
@@ -237,6 +559,7 @@
       "description": "北京大学学生会即将举办校园文化节，现招募志愿者协助活动策划、现场布置、秩序维护等工作。志愿者将获得志愿服务证书和精美礼品。",
       "requirements": "",
       "contact": "13800138001",
+      "company_name": "网络采集",
       "tags": [
         "志愿者",
         "校园",
@@ -251,7 +574,7 @@
       "source_name": "",
       "system_recommended": true,
       "created_at": "2026-03-21T08:25:11.673Z",
-      "updated_at": "2026-04-01T02:25:36.361Z"
+      "updated_at": "2026-04-01T03:38:07.217Z"
     },
     {
       "id": 27,
@@ -266,6 +589,7 @@
       "description": "青少年活动中心招募教育类实习生，协助组织青少年活动、课程管理等。要求本科在校生，每周至少3天，提供实习证明和补贴。",
       "requirements": "",
       "contact": "13900139002",
+      "company_name": "网络采集",
       "tags": [
         "实习",
         "活动"
@@ -278,7 +602,7 @@
       "source_name": "",
       "system_recommended": true,
       "created_at": "2026-03-21T08:25:12.193Z",
-      "updated_at": "2026-04-01T02:25:36.361Z"
+      "updated_at": "2026-04-01T03:38:07.217Z"
     },
     {
       "id": 28,
@@ -293,6 +617,7 @@
       "description": "爱心公益组织招募校园义工，参与环保宣传、社区服务、敬老助残等公益活动。提供义工时长认证和培训机会。",
       "requirements": "",
       "contact": "13700137003",
+      "company_name": "网络采集",
       "tags": [
         "校园",
         "活动",
@@ -306,7 +631,7 @@
       "source_name": "",
       "system_recommended": true,
       "created_at": "2026-03-21T08:25:12.706Z",
-      "updated_at": "2026-04-01T02:25:36.361Z"
+      "updated_at": "2026-04-01T03:38:07.217Z"
     },
     {
       "id": 29,
@@ -321,6 +646,7 @@
       "description": "高校社团联合会招募活动执行人员，负责社团活动审批、场地协调、活动宣传等工作。适合有组织能力的学生。",
       "requirements": "",
       "contact": "13600136004",
+      "company_name": "网络采集",
       "tags": [
         "活动",
         "学生"
@@ -333,7 +659,7 @@
       "source_name": "",
       "system_recommended": true,
       "created_at": "2026-03-21T08:25:13.215Z",
-      "updated_at": "2026-04-01T02:25:36.361Z"
+      "updated_at": "2026-04-01T03:38:07.217Z"
     },
     {
       "id": 30,
@@ -348,6 +674,7 @@
       "description": "春季校园招聘会即将举行，招募志愿者协助企业接待、现场引导、资料分发等工作。提供工作餐和实践证明。",
       "requirements": "",
       "contact": "13500135005",
+      "company_name": "网络采集",
       "tags": [
         "志愿者",
         "校园",
@@ -361,7 +688,7 @@
       "source_name": "",
       "system_recommended": true,
       "created_at": "2026-03-21T08:25:13.725Z",
-      "updated_at": "2026-04-01T02:25:36.361Z"
+      "updated_at": "2026-04-01T03:38:07.217Z"
     },
     {
       "id": 31,
@@ -376,6 +703,7 @@
       "description": "上海大学学生会即将举办校园文化节，现招募志愿者协助活动策划、现场布置、秩序维护等工作。志愿者将获得志愿服务证书和精美礼品。",
       "requirements": "",
       "contact": "13800138001",
+      "company_name": "网络采集",
       "tags": [
         "志愿者",
         "校园",
@@ -390,7 +718,7 @@
       "source_name": "",
       "system_recommended": true,
       "created_at": "2026-03-21T08:25:14.237Z",
-      "updated_at": "2026-04-01T02:25:36.361Z"
+      "updated_at": "2026-04-01T03:38:07.217Z"
     },
     {
       "id": 32,
@@ -405,6 +733,7 @@
       "description": "青少年活动中心招募教育类实习生，协助组织青少年活动、课程管理等。要求本科在校生，每周至少3天，提供实习证明和补贴。",
       "requirements": "",
       "contact": "13900139002",
+      "company_name": "网络采集",
       "tags": [
         "实习",
         "活动"
@@ -417,7 +746,7 @@
       "source_name": "",
       "system_recommended": true,
       "created_at": "2026-03-21T08:25:14.749Z",
-      "updated_at": "2026-04-01T02:25:36.361Z"
+      "updated_at": "2026-04-01T03:38:07.217Z"
     },
     {
       "id": 33,
@@ -432,6 +761,7 @@
       "description": "爱心公益组织招募校园义工，参与环保宣传、社区服务、敬老助残等公益活动。提供义工时长认证和培训机会。",
       "requirements": "",
       "contact": "13700137003",
+      "company_name": "网络采集",
       "tags": [
         "校园",
         "活动",
@@ -445,7 +775,7 @@
       "source_name": "",
       "system_recommended": true,
       "created_at": "2026-03-21T08:25:15.261Z",
-      "updated_at": "2026-04-01T02:25:36.361Z"
+      "updated_at": "2026-04-01T03:38:07.217Z"
     },
     {
       "id": 34,
@@ -460,6 +790,7 @@
       "description": "高校社团联合会招募活动执行人员，负责社团活动审批、场地协调、活动宣传等工作。适合有组织能力的学生。",
       "requirements": "",
       "contact": "13600136004",
+      "company_name": "网络采集",
       "tags": [
         "活动",
         "学生"
@@ -472,7 +803,7 @@
       "source_name": "",
       "system_recommended": true,
       "created_at": "2026-03-21T08:25:15.770Z",
-      "updated_at": "2026-04-01T02:25:36.361Z"
+      "updated_at": "2026-04-01T03:38:07.217Z"
     },
     {
       "id": 35,
@@ -487,6 +818,7 @@
       "description": "春季校园招聘会即将举行，招募志愿者协助企业接待、现场引导、资料分发等工作。提供工作餐和实践证明。",
       "requirements": "",
       "contact": "13500135005",
+      "company_name": "网络采集",
       "tags": [
         "志愿者",
         "校园",
@@ -500,7 +832,7 @@
       "source_name": "",
       "system_recommended": true,
       "created_at": "2026-03-21T08:25:16.279Z",
-      "updated_at": "2026-04-01T02:25:36.361Z"
+      "updated_at": "2026-04-01T03:38:07.217Z"
     },
     {
       "id": 36,
@@ -515,6 +847,7 @@
       "description": "广州大学学生会即将举办校园文化节，现招募志愿者协助活动策划、现场布置、秩序维护等工作。志愿者将获得志愿服务证书和精美礼品。",
       "requirements": "",
       "contact": "13800138001",
+      "company_name": "网络采集",
       "tags": [
         "志愿者",
         "校园",
@@ -529,7 +862,7 @@
       "source_name": "",
       "system_recommended": true,
       "created_at": "2026-03-21T08:25:16.787Z",
-      "updated_at": "2026-04-01T02:25:36.361Z"
+      "updated_at": "2026-04-01T03:38:07.217Z"
     },
     {
       "id": 37,
@@ -544,6 +877,7 @@
       "description": "青少年活动中心招募教育类实习生，协助组织青少年活动、课程管理等。要求本科在校生，每周至少3天，提供实习证明和补贴。",
       "requirements": "",
       "contact": "13900139002",
+      "company_name": "网络采集",
       "tags": [
         "实习",
         "活动"
@@ -556,7 +890,7 @@
       "source_name": "",
       "system_recommended": true,
       "created_at": "2026-03-21T08:25:17.298Z",
-      "updated_at": "2026-04-01T02:25:36.361Z"
+      "updated_at": "2026-04-01T03:38:07.217Z"
     },
     {
       "id": 38,
@@ -571,6 +905,7 @@
       "description": "爱心公益组织招募校园义工，参与环保宣传、社区服务、敬老助残等公益活动。提供义工时长认证和培训机会。",
       "requirements": "",
       "contact": "13700137003",
+      "company_name": "网络采集",
       "tags": [
         "校园",
         "活动",
@@ -584,7 +919,7 @@
       "source_name": "",
       "system_recommended": true,
       "created_at": "2026-03-21T08:25:17.807Z",
-      "updated_at": "2026-04-01T02:25:36.361Z"
+      "updated_at": "2026-04-01T03:38:07.217Z"
     },
     {
       "id": 39,
@@ -599,6 +934,7 @@
       "description": "高校社团联合会招募活动执行人员，负责社团活动审批、场地协调、活动宣传等工作。适合有组织能力的学生。",
       "requirements": "",
       "contact": "13600136004",
+      "company_name": "网络采集",
       "tags": [
         "活动",
         "学生"
@@ -611,7 +947,7 @@
       "source_name": "",
       "system_recommended": true,
       "created_at": "2026-03-21T08:25:18.317Z",
-      "updated_at": "2026-04-01T02:25:36.361Z"
+      "updated_at": "2026-04-01T03:38:07.217Z"
     },
     {
       "id": 40,
@@ -626,6 +962,7 @@
       "description": "春季校园招聘会即将举行，招募志愿者协助企业接待、现场引导、资料分发等工作。提供工作餐和实践证明。",
       "requirements": "",
       "contact": "13500135005",
+      "company_name": "网络采集",
       "tags": [
         "志愿者",
         "校园",
@@ -639,7 +976,7 @@
       "source_name": "",
       "system_recommended": true,
       "created_at": "2026-03-21T08:25:18.829Z",
-      "updated_at": "2026-04-01T02:25:36.361Z"
+      "updated_at": "2026-04-01T03:38:07.217Z"
     },
     {
       "id": 41,
@@ -654,6 +991,7 @@
       "description": "搜索 政策导航 就业创业政策 档案服务政策 人才政策 就业创业指导 就业创业典型 人力资源服务 人事代理服务 档案专审 咨询服务 招才引智 标准信息 首页 / 人社新闻 两部门出招！事关1270万高校毕业生就业 2037341420292960258 发布日期：2026-03-27 来源：人民日报经济社会微信公众号 临近毕业季，工作找得咋样？日前，人力资源社会保障部、财政部发布《关于做好2026年高校毕业生等青年就业工作的通知》（简称《通知》），全力促进高校毕业生等青年就业。近5年，我国每年高校毕业生规模都超过1000万，今年预计达1270万人，再创新高。未来一个时期，青年就业、农村劳动力转移就业、失业再就业等相互交织，稳就业任务艰巨繁重。对此，《通知》列明16条针对性举措，包括组织人社专员访企拓岗，汇聚更多适合高校毕业生等青年的就业岗位；启动实施第五轮“三支一扶”计划；全年不间断开展“职引未来”系列招聘，等等。与前两年相比，今年推出政策的时间明显更早。 贵州黔西南州兴义市梦乐城购物中心，求职者在专场招聘会上了解招聘信息。刘朝富 摄 细读《通知》，这也是一份青年求职指南。未来就业新路径",
       "requirements": "",
       "contact": "电话: 037341420292 / 003782024354",
+      "company_name": "中国人才网",
       "tags": [
         "高校"
       ],
@@ -665,7 +1003,7 @@
       "source_name": "中国人才网",
       "system_recommended": true,
       "created_at": "2026-03-28T04:26:57.739Z",
-      "updated_at": "2026-04-01T02:25:36.361Z"
+      "updated_at": "2026-04-01T03:38:07.217Z"
     },
     {
       "id": 42,
@@ -680,6 +1018,7 @@
       "description": "搜索 政策导航 就业创业政策 档案服务政策 人才政策 就业创业指导 就业创业典型 人力资源服务 人事代理服务 档案专审 咨询服务 招才引智 标准信息 首页 / 人社新闻 春风送岗 云端联动 “就业在线”开展春风行动暨就业援助季跨省劳务对接直播带岗粤黔专场 2036633132991524866 发布日期：2026-03-25 来源：人力资源社会保障部 “春风送岗促就业 真情相助暖民心”，2026年春风行动火热进行中，“就业在线”平台开展春风行动暨就业援助季跨省劳务对接系列直播带岗活动。3月26日19:00，“就业在线”平台携手广东省、贵州省人力资源社会保障厅开展春风行动暨就业援助季跨省劳务对接粤黔专场直播，为您带来权威政策解读，优质岗位推介，专业求职指导，助力广大求职者就业。本场活动11家企业参与直播，覆盖制造业、居民服务、修理和其他服务业等行业，为农民工等广大求职者提供汽车焊装工、叉车司机、钣金工、生产班长、组装工、普工等生产操作性岗位，研发工程师、软件工程师、项目工程师、电子工程师、维修技术员、机台技术员等专业技术类岗位，以及质量管控员、外贸业务员、生产管理储备干部、主播、保洁、保",
       "requirements": "",
       "contact": "电话: 036633132991 / 010102003576",
+      "company_name": "中国人才网",
       "tags": [
         "活动"
       ],
@@ -691,7 +1030,7 @@
       "source_name": "中国人才网",
       "system_recommended": true,
       "created_at": "2026-03-28T04:26:57.766Z",
-      "updated_at": "2026-04-01T02:25:36.361Z"
+      "updated_at": "2026-04-01T03:38:07.217Z"
     },
     {
       "id": 43,
@@ -706,6 +1045,7 @@
       "description": "搜索 政策导航 就业创业政策 档案服务政策 人才政策 就业创业指导 就业创业典型 人力资源服务 人事代理服务 档案专审 咨询服务 招才引智 标准信息 首页 / 人社新闻 人力资源社会保障部副部长俞家栋率团赴澳门、香港交流人才工作并出席国际人才论坛等活动 2035904135689154562 发布日期：2026-03-23 来源：人力资源社会保障部 2026年3月16日至3月19日，人力资源社会保障部副部长俞家栋率团赴澳门、香港，出席香港全球人才高峰会周、共建国家高水平人才高地交流会等活动，并就深化拓展人才合作交流进行调研。 关于我们 联系我们 中心职能 内设处室 联系电话 单位预决算 人力资源和社会保障部全国人才流动中心 版权所有 Copyright 1999-2025 CNCHR. All rights reserved. 京ICP备05067281号-1 京公网安备 11010102003576号 用户注册 / 登录 政策导航 就业创业政策 档案服务政策 人才政策 就业创业指导 就业创业典型 人力资源服务 人事代理服务 档案专审 咨询服务 招才引智 标准信息 // 页面加载时检查",
       "requirements": "",
       "contact": "电话: 035904135689 / 010102003576",
+      "company_name": "中国人才网",
       "tags": [
         "活动"
       ],
@@ -717,7 +1057,7 @@
       "source_name": "中国人才网",
       "system_recommended": true,
       "created_at": "2026-03-28T04:26:57.784Z",
-      "updated_at": "2026-04-01T02:25:36.361Z"
+      "updated_at": "2026-04-01T03:38:07.217Z"
     },
     {
       "id": 44,
@@ -732,6 +1072,7 @@
       "description": "搜索 政策导航 就业创业政策 档案服务政策 人才政策 就业创业指导 就业创业典型 人力资源服务 人事代理服务 档案专审 咨询服务 招才引智 标准信息 首页 / 信息之窗 / 工作动态 四川：支持稳岗促就业！细化“投资于人”11条就业政策措施 2037071638138204161 发布日期：2026-03-26 来源：川观新闻 如何支持平台企业稳岗，如何增强灵活就业人员从业保障？近日，四川省人力资源和社会保障厅出台相关经办细则，对省政府办公厅“投资于人”20条措施中涉及就业方面的政策，逐一细化经办流程与标准，推动政策红利精准直达。为推动投资于物和投资于人紧密结合，为全省经济社会持续健康发展注入动力，省政府办公厅近日印发“投资于人”20条措施。“经办细则把政策内容拆解得更细，企业和群众关心的补贴对象、申请条件，还有办理时间、补贴标准、该找哪个部门办、怎么申请、要注意什么，都一一说清楚了。”四川省就业局相关负责人介绍，细化的11条政策措施，涵盖了稳岗留工、扩岗拓岗、转岗提能、就业援助四个方面，每条政策措施都明确了具体操作规范，确保企业和群众看得懂、能申请、快受益。在稳岗留工方面，政策措施重",
       "requirements": "",
       "contact": "电话: 037071638138 / 093907416981",
+      "company_name": "中国人才网",
       "tags": [
         "政府"
       ],
@@ -743,7 +1084,7 @@
       "source_name": "中国人才网",
       "system_recommended": true,
       "created_at": "2026-03-28T04:26:57.807Z",
-      "updated_at": "2026-04-01T02:25:36.361Z"
+      "updated_at": "2026-04-01T03:38:07.217Z"
     },
     {
       "id": 45,
@@ -758,6 +1099,7 @@
       "description": "搜索 政策导航 就业创业政策 档案服务政策 人才政策 就业创业指导 就业创业典型 人力资源服务 人事代理服务 档案专审 咨询服务 招才引智 标准信息 首页 / 信息之窗 / 工作动态 湖北荆门：23项举措聚力稳就业惠民生 2036631959911804929 发布日期：2026-03-25 来源：湖北省人力资源社会保障厅 近日，湖北省荆门市人社局印发《荆门市惠企惠民人社政策服务清单（2026年第1版）》。清单聚焦就业创业、社会保险、人事人才、劳动关系四大板块，推出23项精准举措，逐一明确享受条件、办理流程及经办窗口，推动政策红利直达快享、落地见效。清单以就业创业为核心，推出多项硬核扶持举措。个人创业担保贷款最高30万元，小微企业最高可申请500万元，符合条件的贷款可享受50%财政贴息；毕业5年内的高校毕业生、就业困难人员可申领5000元一次性创业补贴，优质大学生创业项目经评审可获5万至50万元资金扶持。同时，针对高校毕业生、脱贫人口、退役军人等重点群体，配套推出社保补贴、一次性吸纳就业补贴、求职补贴等扶持政策，公益性岗位为就业困难人员提供兜底保障。惠企减负与人才培育同步发力，切实为企",
       "requirements": "",
       "contact": "电话: 036631959911 / 010102003576",
+      "company_name": "中国人才网",
       "tags": [
         "高校",
         "公益"
@@ -770,7 +1112,7 @@
       "source_name": "中国人才网",
       "system_recommended": true,
       "created_at": "2026-03-28T04:26:57.836Z",
-      "updated_at": "2026-04-01T02:25:36.361Z"
+      "updated_at": "2026-04-01T03:38:07.217Z"
     },
     {
       "id": 46,
@@ -785,6 +1127,7 @@
       "description": "搜索 政策导航 就业创业政策 档案服务政策 人才政策 就业创业指导 就业创业典型 人力资源服务 人事代理服务 档案专审 咨询服务 招才引智 标准信息 首页 > 人才政策 【全国】国务院就业促进和劳动保护工作领导小组关于开展大规模职业技能提升培训行动的指导意见（国就劳发〔2025〕4号） 2025-07-16 【全国】人力资源社会保障部办公厅关于开展专业技术人才管理服务改革试点工作的通知（人社厅函〔2025〕76号） 2025-06-16 【全国】人力资源社会保障部 财政部 国务院国资委关于加大国有企业技能人才薪酬分配激励的通知（人社部发〔2025〕28号） 2025-06-03 【全国】人力资源社会保障部 财政部关于实施“技能照亮前程”培训行动的通知（人社部发〔2025〕10号） 2025-03-27 【全国】人力资源社会保障部等8部门关于推动技能强企工作的指导意见（人社部发〔2025〕3号） 2025-01-16 【全国】人力资源社会保障部办公厅关于进一步加强专家人才服务基层工作的通知（人社厅发〔2025〕2号） 2025-01-14 【山西】关于加强新时代高技能人才队伍建设的行动计",
       "requirements": "",
       "contact": "电话: 08750125057 / 014269388185",
+      "company_name": "中国人才网",
       "tags": [],
       "status": "active",
       "view_count": 0,
@@ -794,7 +1137,7 @@
       "source_name": "中国人才网",
       "system_recommended": true,
       "created_at": "2026-03-28T04:26:57.881Z",
-      "updated_at": "2026-04-01T02:25:36.362Z"
+      "updated_at": "2026-04-01T03:38:07.217Z"
     },
     {
       "id": 47,
@@ -809,6 +1152,7 @@
       "description": "进入旧版 | 设为首页 要闻 视点 观察 专题 机构 培训 教育 助残 环境 动保 低碳 能源 智库 明星 城市 企业 行动 .d_seach_wd{ height:15px; overflow:hidden;} function SetHome(obj,url){ try{ obj.style.behavior='url(#default#homepage)'; obj.setHomePage(url); }catch(e){ if(window.netscape){ try{ netscape.security.PrivilegeManager.enablePrivilege(\"UniversalXPConnect\"); }catch(e){ alert(\"抱歉，此操作被浏览器拒绝！\\n\\n请在浏览器地址栏输入“about:config”并回车然后将[signed.applets.codebase_principal_support]设置为'true'\"); } }else{ alert(\"抱歉，您所使用的浏览器无法完成此操作。\\n\\n您需要手动将【\"+url+\"】设置为首页。\")",
       "requirements": "",
       "contact": "电话: 13988367611 / 0102000421",
+      "company_name": "公益中国",
       "tags": [
         "志愿者",
         "协会",
@@ -824,7 +1168,7 @@
       "source_name": "公益中国",
       "system_recommended": true,
       "created_at": "2026-03-28T04:26:57.903Z",
-      "updated_at": "2026-04-01T02:25:36.362Z"
+      "updated_at": "2026-04-01T03:38:07.217Z"
     },
     {
       "id": 48,
@@ -839,6 +1183,7 @@
       "description": "进入旧版 | 设为首页 要闻 视点 观察 专题 机构 培训 教育 助残 环境 动保 低碳 能源 智库 明星 城市 企业 行动 .d_seach_wd{ height:15px; overflow:hidden;} function SetHome(obj,url){ try{ obj.style.behavior='url(#default#homepage)'; obj.setHomePage(url); }catch(e){ if(window.netscape){ try{ netscape.security.PrivilegeManager.enablePrivilege(\"UniversalXPConnect\"); }catch(e){ alert(\"抱歉，此操作被浏览器拒绝！\\n\\n请在浏览器地址栏输入“about:config”并回车然后将[signed.applets.codebase_principal_support]设置为'true'\"); } }else{ alert(\"抱歉，您所使用的浏览器无法完成此操作。\\n\\n您需要手动将【\"+url+\"】设置为首页。\")",
       "requirements": "",
       "contact": "电话: 13076015018 / 18201617925 / 0102000421",
+      "company_name": "公益中国",
       "tags": [
         "志愿者",
         "公益",
@@ -852,7 +1197,7 @@
       "source_name": "公益中国",
       "system_recommended": true,
       "created_at": "2026-03-28T04:26:57.908Z",
-      "updated_at": "2026-04-01T02:25:36.362Z"
+      "updated_at": "2026-04-01T03:38:07.217Z"
     },
     {
       "id": 49,
@@ -867,6 +1212,7 @@
       "description": "进入旧版 | 设为首页 要闻 视点 观察 专题 机构 培训 教育 助残 环境 动保 低碳 能源 智库 明星 城市 企业 行动 .d_seach_wd{ height:15px; overflow:hidden;} function SetHome(obj,url){ try{ obj.style.behavior='url(#default#homepage)'; obj.setHomePage(url); }catch(e){ if(window.netscape){ try{ netscape.security.PrivilegeManager.enablePrivilege(\"UniversalXPConnect\"); }catch(e){ alert(\"抱歉，此操作被浏览器拒绝！\\n\\n请在浏览器地址栏输入“about:config”并回车然后将[signed.applets.codebase_principal_support]设置为'true'\"); } }else{ alert(\"抱歉，您所使用的浏览器无法完成此操作。\\n\\n您需要手动将【\"+url+\"】设置为首页。\")",
       "requirements": "",
       "contact": "电话: 18381491347 / 0102000421",
+      "company_name": "公益中国",
       "tags": [
         "志愿者",
         "公益",
@@ -881,7 +1227,7 @@
       "source_name": "公益中国",
       "system_recommended": true,
       "created_at": "2026-03-28T04:26:57.913Z",
-      "updated_at": "2026-04-01T02:25:36.362Z"
+      "updated_at": "2026-04-01T03:38:07.217Z"
     },
     {
       "id": 50,
@@ -896,6 +1242,7 @@
       "description": "进入旧版 | 设为首页 要闻 视点 观察 专题 机构 培训 教育 助残 环境 动保 低碳 能源 智库 明星 城市 企业 行动 .d_seach_wd{ height:15px; overflow:hidden;} function SetHome(obj,url){ try{ obj.style.behavior='url(#default#homepage)'; obj.setHomePage(url); }catch(e){ if(window.netscape){ try{ netscape.security.PrivilegeManager.enablePrivilege(\"UniversalXPConnect\"); }catch(e){ alert(\"抱歉，此操作被浏览器拒绝！\\n\\n请在浏览器地址栏输入“about:config”并回车然后将[signed.applets.codebase_principal_support]设置为'true'\"); } }else{ alert(\"抱歉，您所使用的浏览器无法完成此操作。\\n\\n您需要手动将【\"+url+\"】设置为首页。\")",
       "requirements": "",
       "contact": "电话: 18090684217 / 000032228373 / 0102000421",
+      "company_name": "公益中国",
       "tags": [
         "志愿者",
         "公益",
@@ -909,7 +1256,7 @@
       "source_name": "公益中国",
       "system_recommended": true,
       "created_at": "2026-03-28T04:26:57.919Z",
-      "updated_at": "2026-04-01T02:25:36.362Z"
+      "updated_at": "2026-04-01T03:38:07.217Z"
     },
     {
       "id": 51,
@@ -924,6 +1271,7 @@
       "description": "进入旧版 | 设为首页 要闻 视点 观察 专题 机构 培训 教育 助残 环境 动保 低碳 能源 智库 明星 城市 企业 行动 .d_seach_wd{ height:15px; overflow:hidden;} function SetHome(obj,url){ try{ obj.style.behavior='url(#default#homepage)'; obj.setHomePage(url); }catch(e){ if(window.netscape){ try{ netscape.security.PrivilegeManager.enablePrivilege(\"UniversalXPConnect\"); }catch(e){ alert(\"抱歉，此操作被浏览器拒绝！\\n\\n请在浏览器地址栏输入“about:config”并回车然后将[signed.applets.codebase_principal_support]设置为'true'\"); } }else{ alert(\"抱歉，您所使用的浏览器无法完成此操作。\\n\\n您需要手动将【\"+url+\"】设置为首页。\")",
       "requirements": "",
       "contact": "电话: 18210044903 / 0102000421",
+      "company_name": "公益中国",
       "tags": [
         "志愿者",
         "公益",
@@ -937,7 +1285,7 @@
       "source_name": "公益中国",
       "system_recommended": true,
       "created_at": "2026-03-28T04:26:57.925Z",
-      "updated_at": "2026-04-01T02:25:36.362Z"
+      "updated_at": "2026-04-01T03:38:07.217Z"
     },
     {
       "id": 52,
@@ -952,6 +1300,7 @@
       "description": "当前位置：首页 > 志愿快讯 > 志联动态 > 专业赋能 “博”采众长——2025 年北京市专业志愿服务发展培训班举办 专业赋能 “博”采众长——2025 年北京市专业志愿服务发展培训班举办 日期：2025-09-28 来源：志愿北京 为进一步贯彻落实《北京市关于健全新时代志愿服务体系的若干措施》要求，促进专业志愿服务发展，推进文化遗产保护等领域的专业志愿服务队伍建设，9月24日至26日，北京市志愿服务指导中心和北京市团校联合举办“2025 年北京市专业志愿服务发展培训班”，来自首都博物馆、北京天文馆、首都图书馆等33家单位的近百名文博领域志愿者及志愿服务管理人员参加培训。 专家授课 本次培训聚焦文博领域志愿服务主题，开展《文化之魂、爱国之心、实践之路，爱国主义的多维透视与当代践行》专题授课，引导学员厚植家国情怀，把思想引领贯穿于志愿服务的全过程;邀请北京中轴线申遗保护工作办公室相关负责同志，围绕北京中轴线申遗工作开展专题教学，扩大首都文化遗产保护的社会参与，坚定文化自信;《文化志愿与服务管理》课上，9位来自“魅力北京”分享团的文博领域志愿者讲述自己的志愿故事，以鲜活的案例彰显志愿服务",
       "requirements": "",
       "contact": "电话: 013577362797 / 000075820374",
+      "company_name": "志愿北京",
       "tags": [
         "志愿者"
       ],
@@ -963,7 +1312,7 @@
       "source_name": "志愿北京",
       "system_recommended": true,
       "created_at": "2026-03-28T04:26:57.931Z",
-      "updated_at": "2026-04-01T02:25:36.362Z"
+      "updated_at": "2026-04-01T03:38:07.217Z"
     },
     {
       "id": 53,
@@ -978,6 +1327,7 @@
       "description": "",
       "requirements": "",
       "contact": "电话: 0752-5766306",
+      "company_name": "招聘方",
       "tags": [
         "自定义来源"
       ],
@@ -989,7 +1339,7 @@
       "source_name": "?????",
       "system_recommended": false,
       "created_at": "2026-03-29T08:11:33.890Z",
-      "updated_at": "2026-04-01T02:25:36.362Z"
+      "updated_at": "2026-04-01T03:38:07.217Z"
     },
     {
       "id": 55,
@@ -1004,6 +1354,7 @@
       "description": "",
       "requirements": "",
       "contact": "电话: 010-64098588",
+      "company_name": "招聘方",
       "tags": [
         "自定义来源"
       ],
@@ -1015,7 +1366,7 @@
       "source_name": "共青团中央官方网站",
       "system_recommended": false,
       "created_at": "2026-03-29T08:47:59.331Z",
-      "updated_at": "2026-04-01T02:25:36.362Z"
+      "updated_at": "2026-04-01T03:38:07.217Z"
     },
     {
       "id": 56,
@@ -1030,6 +1381,7 @@
       "description": "",
       "requirements": "",
       "contact": "电话: 0755-36654679  邮箱: service@huodongxing.com / tuiguang@huodongxing.com",
+      "company_name": "招聘方",
       "tags": [
         "自定义来源"
       ],
@@ -1041,7 +1393,7 @@
       "source_name": "活动行",
       "system_recommended": false,
       "created_at": "2026-03-29T08:48:05.067Z",
-      "updated_at": "2026-04-01T02:25:36.362Z"
+      "updated_at": "2026-04-01T03:38:07.217Z"
     },
     {
       "id": 57,
@@ -1056,6 +1408,7 @@
       "description": "",
       "requirements": "",
       "contact": "邮箱: YCjubao@58.com",
+      "company_name": "招聘方",
       "tags": [
         "自定义来源"
       ],
@@ -1067,7 +1420,7 @@
       "source_name": "中华英才网",
       "system_recommended": false,
       "created_at": "2026-03-29T09:24:20.796Z",
-      "updated_at": "2026-04-01T02:25:36.362Z"
+      "updated_at": "2026-04-01T03:38:07.217Z"
     },
     {
       "id": 58,
@@ -1082,6 +1435,7 @@
       "description": "",
       "requirements": "",
       "contact": "电话: 021-52365088",
+      "company_name": "招聘方",
       "tags": [
         "自定义来源"
       ],
@@ -1093,7 +1447,7 @@
       "source_name": "上海人才网",
       "system_recommended": false,
       "created_at": "2026-03-29T09:25:10.365Z",
-      "updated_at": "2026-04-01T02:25:36.362Z"
+      "updated_at": "2026-04-01T03:38:07.217Z"
     },
     {
       "id": 59,
@@ -1108,6 +1462,7 @@
       "description": "",
       "requirements": "",
       "contact": "电话: 021-61278686  邮箱: jubao@eastmoney.com",
+      "company_name": "招聘方",
       "tags": [
         "自定义来源"
       ],
@@ -1119,7 +1474,7 @@
       "source_name": "东方财富人才网",
       "system_recommended": false,
       "created_at": "2026-03-29T09:25:15.066Z",
-      "updated_at": "2026-04-01T02:25:36.362Z"
+      "updated_at": "2026-04-01T03:38:07.217Z"
     },
     {
       "id": 60,
@@ -1134,6 +1489,7 @@
       "description": "",
       "requirements": "",
       "contact": "电话: 020-85597575 / 020-85597251",
+      "company_name": "招聘方",
       "tags": [
         "自定义来源"
       ],
@@ -1145,7 +1501,7 @@
       "source_name": "深圳人才网",
       "system_recommended": false,
       "created_at": "2026-03-29T09:25:28.113Z",
-      "updated_at": "2026-04-01T02:25:36.362Z"
+      "updated_at": "2026-04-01T03:38:07.217Z"
     },
     {
       "id": 61,
@@ -1160,6 +1516,7 @@
       "description": "",
       "requirements": "",
       "contact": "电话: 022-28013611 / 022-88355238  邮箱: zhaopin@tjrc.com.cn / tjjubao@tj.gov.cn",
+      "company_name": "招聘方",
       "tags": [
         "自定义来源"
       ],
@@ -1171,7 +1528,7 @@
       "source_name": "天津人才网",
       "system_recommended": false,
       "created_at": "2026-03-29T09:26:25.693Z",
-      "updated_at": "2026-04-01T02:25:36.362Z"
+      "updated_at": "2026-04-01T03:38:07.217Z"
     },
     {
       "id": 62,
@@ -1186,6 +1543,7 @@
       "description": "",
       "requirements": "",
       "contact": "微信: WhatsApp",
+      "company_name": "招聘方",
       "tags": [
         "自定义来源"
       ],
@@ -1197,7 +1555,7 @@
       "source_name": "苏州人才网",
       "system_recommended": false,
       "created_at": "2026-03-29T09:26:32.457Z",
-      "updated_at": "2026-04-01T02:25:36.362Z"
+      "updated_at": "2026-04-01T03:38:07.217Z"
     },
     {
       "id": 63,
@@ -1212,6 +1570,7 @@
       "description": "",
       "requirements": "",
       "contact": "电话: 18126870759",
+      "company_name": "招聘方",
       "tags": [
         "自定义来源"
       ],
@@ -1223,7 +1582,7 @@
       "source_name": "苏州人才网",
       "system_recommended": false,
       "created_at": "2026-03-29T09:26:32.458Z",
-      "updated_at": "2026-04-01T02:25:36.362Z"
+      "updated_at": "2026-04-01T03:38:07.217Z"
     },
     {
       "id": 64,
@@ -1238,6 +1597,7 @@
       "description": "",
       "requirements": "",
       "contact": "电话: 18960160360 / 18960000505 / 0596-2288480  邮箱: zzrcw@qq.com  微信: zzrc005 / zzrcnet",
+      "company_name": "招聘方",
       "tags": [
         "自定义来源"
       ],
@@ -1249,7 +1609,7 @@
       "source_name": "郑州人才网",
       "system_recommended": false,
       "created_at": "2026-03-29T09:26:40.733Z",
-      "updated_at": "2026-04-01T02:25:36.362Z"
+      "updated_at": "2026-04-01T03:38:07.217Z"
     },
     {
       "id": 65,
@@ -1264,6 +1624,7 @@
       "description": "",
       "requirements": "",
       "contact": "电话: 0592-5396651 / 0592-5396657 / 0592-5396662  邮箱: webmaster@xmrc.com.cn",
+      "company_name": "招聘方",
       "tags": [
         "自定义来源"
       ],
@@ -1275,7 +1636,7 @@
       "source_name": "厦门人才网",
       "system_recommended": false,
       "created_at": "2026-03-29T09:26:50.966Z",
-      "updated_at": "2026-04-01T02:25:36.362Z"
+      "updated_at": "2026-04-01T03:38:07.217Z"
     },
     {
       "id": 66,
@@ -1290,6 +1651,7 @@
       "description": "",
       "requirements": "",
       "contact": "电话: 010-62796374 / 010-62773164 / 010-62796373 / 010-62796370",
+      "company_name": "招聘方",
       "tags": [
         "自定义来源"
       ],
@@ -1301,7 +1663,7 @@
       "source_name": "清华大学就业指导中心",
       "system_recommended": false,
       "created_at": "2026-03-29T09:27:04.651Z",
-      "updated_at": "2026-04-01T02:25:36.362Z"
+      "updated_at": "2026-04-01T03:38:07.217Z"
     },
     {
       "id": 67,
@@ -1316,6 +1678,7 @@
       "description": "",
       "requirements": "",
       "contact": "电话: 010-62783128",
+      "company_name": "招聘方",
       "tags": [
         "自定义来源"
       ],
@@ -1327,7 +1690,7 @@
       "source_name": "清华大学就业指导中心",
       "system_recommended": false,
       "created_at": "2026-03-29T09:27:04.652Z",
-      "updated_at": "2026-04-01T02:25:36.362Z"
+      "updated_at": "2026-04-01T03:38:07.217Z"
     },
     {
       "id": 68,
@@ -1342,6 +1705,7 @@
       "description": "",
       "requirements": "",
       "contact": "电话: 025-83260800",
+      "company_name": "招聘方",
       "tags": [
         "自定义来源"
       ],
@@ -1353,7 +1717,7 @@
       "source_name": "爱德基金会",
       "system_recommended": false,
       "created_at": "2026-03-29T09:27:44.524Z",
-      "updated_at": "2026-04-01T02:25:36.362Z"
+      "updated_at": "2026-04-01T03:38:07.217Z"
     },
     {
       "id": 69,
@@ -1368,6 +1732,7 @@
       "description": "",
       "requirements": "",
       "contact": "电话: 19951984030",
+      "company_name": "招聘方",
       "tags": [
         "自定义来源"
       ],
@@ -1379,7 +1744,7 @@
       "source_name": "Bagevent（百格活动）",
       "system_recommended": false,
       "created_at": "2026-03-29T09:27:58.134Z",
-      "updated_at": "2026-04-01T02:25:36.362Z"
+      "updated_at": "2026-04-01T03:38:07.217Z"
     },
     {
       "id": 70,
@@ -1394,6 +1759,7 @@
       "description": "活动执行、现场布置、观众引导，无需经验，统一培训，每日结算",
       "requirements": "",
       "contact": "13812345678",
+      "company_name": "某品牌推广公司",
       "tags": [
         "日结",
         "兼职",
@@ -1407,7 +1773,7 @@
       "source_name": "",
       "system_recommended": true,
       "created_at": "2026-03-30T18:08:59.485Z",
-      "updated_at": "2026-04-01T02:25:36.362Z"
+      "updated_at": "2026-04-01T03:38:07.217Z"
     },
     {
       "id": 71,
@@ -1422,6 +1788,7 @@
       "description": "校园地推，发传单/做活动，灵活时间，在校生优先",
       "requirements": "",
       "contact": "13987654321",
+      "company_name": "互联网教育公司",
       "tags": [
         "校园",
         "兼职",
@@ -1435,7 +1802,7 @@
       "source_name": "",
       "system_recommended": true,
       "created_at": "2026-03-30T18:09:00.000Z",
-      "updated_at": "2026-04-01T02:25:36.362Z"
+      "updated_at": "2026-04-01T03:38:07.217Z"
     },
     {
       "id": 72,
@@ -1450,6 +1817,7 @@
       "description": "展会现场礼仪接待，形象好，有气质，包食宿",
       "requirements": "",
       "contact": "13711112222",
+      "company_name": "会展服务公司",
       "tags": [
         "礼仪",
         "展会",
@@ -1463,7 +1831,7 @@
       "source_name": "",
       "system_recommended": true,
       "created_at": "2026-03-30T18:09:00.511Z",
-      "updated_at": "2026-04-01T02:25:36.362Z"
+      "updated_at": "2026-04-01T03:38:07.217Z"
     },
     {
       "id": 73,
@@ -1478,6 +1846,7 @@
       "description": "公益活动志愿者，无需经验，有爱心即可，享受活动福利",
       "requirements": "",
       "contact": "13633334444",
+      "company_name": "公益组织",
       "tags": [
         "志愿者",
         "公益",
@@ -1491,7 +1860,7 @@
       "source_name": "",
       "system_recommended": true,
       "created_at": "2026-03-30T18:09:01.021Z",
-      "updated_at": "2026-04-01T02:25:36.362Z"
+      "updated_at": "2026-04-01T03:38:07.217Z"
     },
     {
       "id": 74,
@@ -1506,6 +1875,7 @@
       "description": "超市/商场/学校地推，介绍产品，完成销售指标，按天结算",
       "requirements": "",
       "contact": "13555556666",
+      "company_name": "快消品牌",
       "tags": [
         "促销",
         "地推",
@@ -1519,7 +1889,3085 @@
       "source_name": "",
       "system_recommended": true,
       "created_at": "2026-03-30T18:09:01.527Z",
-      "updated_at": "2026-04-01T02:25:36.362Z"
+      "updated_at": "2026-04-01T03:38:07.217Z"
+    },
+    {
+      "id": 75,
+      "title": "【招募】校园环保活动志愿者，本周六日",
+      "type": "招聘",
+      "category": "其他",
+      "salary_min": 0,
+      "salary_max": 0,
+      "salary_text": "面议",
+      "city": "北京",
+      "address": "北京",
+      "description": "我们学校环保社团本周六日举办校园环保宣传活动，招募志愿者协助现场布置、引导等工作。提供午餐和志愿者证书。联系电话：13800138001",
+      "requirements": "",
+      "contact": "13800138001",
+      "company_name": "南京大学BBS-兼职",
+      "tags": [
+        "志愿者",
+        "校园",
+        "活动"
+      ],
+      "status": "active",
+      "view_count": 0,
+      "apply_count": 0,
+      "is_crawled": true,
+      "source_type": "rss",
+      "source_name": "南京大学BBS-兼职",
+      "system_recommended": true,
+      "created_at": "2026-03-30T18:32:39.372Z",
+      "updated_at": "2026-04-01T03:38:07.217Z"
+    },
+    {
+      "id": 76,
+      "title": "【实习】某互联网公司招产品运营实习生",
+      "type": "招聘",
+      "category": "实习",
+      "salary_min": 150,
+      "salary_max": 150,
+      "salary_text": "150元",
+      "city": "北京",
+      "address": "北京",
+      "description": "大三/大四学生优先，每周至少3天，负责用户运营和数据分析。日薪150元，表现优秀可转正。联系：hr@example.com 或 13900139002",
+      "requirements": "",
+      "contact": "13900139002",
+      "company_name": "南京大学BBS-兼职",
+      "tags": [
+        "实习",
+        "学生"
+      ],
+      "status": "active",
+      "view_count": 0,
+      "apply_count": 0,
+      "is_crawled": true,
+      "source_type": "rss",
+      "source_name": "南京大学BBS-兼职",
+      "system_recommended": true,
+      "created_at": "2026-03-30T18:32:39.372Z",
+      "updated_at": "2026-04-01T03:38:07.217Z"
+    },
+    {
+      "id": 77,
+      "title": "【兼职】校园图书馆整理员招募",
+      "type": "招聘",
+      "category": "兼职",
+      "salary_min": 20,
+      "salary_max": 20,
+      "salary_text": "20元",
+      "city": "北京",
+      "address": "北京",
+      "description": "学校图书馆招募学生兼职，负责图书整理、借阅引导等工作。时间灵活，按小时计酬，20元/小时。有意者联系图书馆王老师 13600136003",
+      "requirements": "",
+      "contact": "13600136003",
+      "company_name": "南京大学BBS-兼职",
+      "tags": [
+        "兼职",
+        "校园",
+        "学生"
+      ],
+      "status": "active",
+      "view_count": 0,
+      "apply_count": 0,
+      "is_crawled": true,
+      "source_type": "rss",
+      "source_name": "南京大学BBS-兼职",
+      "system_recommended": true,
+      "created_at": "2026-03-30T18:32:39.372Z",
+      "updated_at": "2026-04-01T03:38:07.217Z"
+    },
+    {
+      "id": 78,
+      "title": "【活动】校园歌手大赛工作人员招募",
+      "type": "招聘",
+      "category": "其他",
+      "salary_min": 0,
+      "salary_max": 0,
+      "salary_text": "面议",
+      "city": "北京",
+      "address": "北京",
+      "description": "学生会举办校园歌手大赛，招募现场工作人员、主持人、音响控制等岗位。有工作餐，可获得活动参与证明。报名联系：13700137004",
+      "requirements": "",
+      "contact": "13700137004",
+      "company_name": "南京大学BBS-兼职",
+      "tags": [
+        "校园",
+        "活动",
+        "学生"
+      ],
+      "status": "active",
+      "view_count": 0,
+      "apply_count": 0,
+      "is_crawled": true,
+      "source_type": "rss",
+      "source_name": "南京大学BBS-兼职",
+      "system_recommended": true,
+      "created_at": "2026-03-30T18:32:39.372Z",
+      "updated_at": "2026-04-01T03:38:07.217Z"
+    },
+    {
+      "id": 79,
+      "title": "【义工】敬老院探访活动招募义工",
+      "type": "招聘",
+      "category": "其他",
+      "salary_min": 0,
+      "salary_max": 0,
+      "salary_text": "面议",
+      "city": "北京",
+      "address": "北京",
+      "description": "爱心社组织敬老院探访活动，招募义工陪伴老人聊天、表演节目。本周日下午2点出发，提供交通补贴。报名电话：13800138005",
+      "requirements": "",
+      "contact": "13800138005",
+      "company_name": "南京大学BBS-兼职",
+      "tags": [
+        "活动",
+        "义工"
+      ],
+      "status": "active",
+      "view_count": 0,
+      "apply_count": 0,
+      "is_crawled": true,
+      "source_type": "rss",
+      "source_name": "南京大学BBS-兼职",
+      "system_recommended": true,
+      "created_at": "2026-03-30T18:32:39.373Z",
+      "updated_at": "2026-04-01T03:38:07.217Z"
+    },
+    {
+      "id": 80,
+      "title": "【兼职】校园快递代取，时间自由",
+      "type": "招聘",
+      "category": "兼职",
+      "salary_min": 0,
+      "salary_max": 0,
+      "salary_text": "面议",
+      "city": "北京",
+      "address": "北京",
+      "description": "招募校园快递代取人员，按件计酬，多劳多得，适合课余时间充裕的同学。联系微信：kuaidi123",
+      "requirements": "",
+      "contact": "",
+      "company_name": "南京大学BBS-兼职",
+      "tags": [
+        "兼职",
+        "校园"
+      ],
+      "status": "active",
+      "view_count": 0,
+      "apply_count": 0,
+      "is_crawled": true,
+      "source_type": "rss",
+      "source_name": "南京大学BBS-兼职",
+      "system_recommended": true,
+      "created_at": "2026-03-30T18:32:39.373Z",
+      "updated_at": "2026-04-01T03:38:07.217Z"
+    },
+    {
+      "id": 81,
+      "title": "【招募】校园环保活动志愿者，本周六日",
+      "type": "招聘",
+      "category": "其他",
+      "salary_min": 0,
+      "salary_max": 0,
+      "salary_text": "面议",
+      "city": "北京",
+      "address": "北京",
+      "description": "我们学校环保社团本周六日举办校园环保宣传活动，招募志愿者协助现场布置、引导等工作。提供午餐和志愿者证书。联系电话：13800138001",
+      "requirements": "",
+      "contact": "13800138001",
+      "company_name": "浙大BBS-实习兼职",
+      "tags": [
+        "志愿者",
+        "校园",
+        "活动"
+      ],
+      "status": "active",
+      "view_count": 0,
+      "apply_count": 0,
+      "is_crawled": true,
+      "source_type": "rss",
+      "source_name": "浙大BBS-实习兼职",
+      "system_recommended": true,
+      "created_at": "2026-03-30T18:32:39.373Z",
+      "updated_at": "2026-04-01T03:38:07.217Z"
+    },
+    {
+      "id": 82,
+      "title": "【实习】某互联网公司招产品运营实习生",
+      "type": "招聘",
+      "category": "实习",
+      "salary_min": 150,
+      "salary_max": 150,
+      "salary_text": "150元",
+      "city": "北京",
+      "address": "北京",
+      "description": "大三/大四学生优先，每周至少3天，负责用户运营和数据分析。日薪150元，表现优秀可转正。联系：hr@example.com 或 13900139002",
+      "requirements": "",
+      "contact": "13900139002",
+      "company_name": "浙大BBS-实习兼职",
+      "tags": [
+        "实习",
+        "学生"
+      ],
+      "status": "active",
+      "view_count": 0,
+      "apply_count": 0,
+      "is_crawled": true,
+      "source_type": "rss",
+      "source_name": "浙大BBS-实习兼职",
+      "system_recommended": true,
+      "created_at": "2026-03-30T18:32:39.373Z",
+      "updated_at": "2026-04-01T03:38:07.217Z"
+    },
+    {
+      "id": 83,
+      "title": "【兼职】校园图书馆整理员招募",
+      "type": "招聘",
+      "category": "兼职",
+      "salary_min": 20,
+      "salary_max": 20,
+      "salary_text": "20元",
+      "city": "北京",
+      "address": "北京",
+      "description": "学校图书馆招募学生兼职，负责图书整理、借阅引导等工作。时间灵活，按小时计酬，20元/小时。有意者联系图书馆王老师 13600136003",
+      "requirements": "",
+      "contact": "13600136003",
+      "company_name": "浙大BBS-实习兼职",
+      "tags": [
+        "兼职",
+        "校园",
+        "学生"
+      ],
+      "status": "active",
+      "view_count": 0,
+      "apply_count": 0,
+      "is_crawled": true,
+      "source_type": "rss",
+      "source_name": "浙大BBS-实习兼职",
+      "system_recommended": true,
+      "created_at": "2026-03-30T18:32:39.373Z",
+      "updated_at": "2026-04-01T03:38:07.217Z"
+    },
+    {
+      "id": 84,
+      "title": "【活动】校园歌手大赛工作人员招募",
+      "type": "招聘",
+      "category": "其他",
+      "salary_min": 0,
+      "salary_max": 0,
+      "salary_text": "面议",
+      "city": "北京",
+      "address": "北京",
+      "description": "学生会举办校园歌手大赛，招募现场工作人员、主持人、音响控制等岗位。有工作餐，可获得活动参与证明。报名联系：13700137004",
+      "requirements": "",
+      "contact": "13700137004",
+      "company_name": "浙大BBS-实习兼职",
+      "tags": [
+        "校园",
+        "活动",
+        "学生"
+      ],
+      "status": "active",
+      "view_count": 0,
+      "apply_count": 0,
+      "is_crawled": true,
+      "source_type": "rss",
+      "source_name": "浙大BBS-实习兼职",
+      "system_recommended": true,
+      "created_at": "2026-03-30T18:32:39.373Z",
+      "updated_at": "2026-04-01T03:38:07.217Z"
+    },
+    {
+      "id": 85,
+      "title": "【义工】敬老院探访活动招募义工",
+      "type": "招聘",
+      "category": "其他",
+      "salary_min": 0,
+      "salary_max": 0,
+      "salary_text": "面议",
+      "city": "北京",
+      "address": "北京",
+      "description": "爱心社组织敬老院探访活动，招募义工陪伴老人聊天、表演节目。本周日下午2点出发，提供交通补贴。报名电话：13800138005",
+      "requirements": "",
+      "contact": "13800138005",
+      "company_name": "浙大BBS-实习兼职",
+      "tags": [
+        "活动",
+        "义工"
+      ],
+      "status": "active",
+      "view_count": 0,
+      "apply_count": 0,
+      "is_crawled": true,
+      "source_type": "rss",
+      "source_name": "浙大BBS-实习兼职",
+      "system_recommended": true,
+      "created_at": "2026-03-30T18:32:39.373Z",
+      "updated_at": "2026-04-01T03:38:07.217Z"
+    },
+    {
+      "id": 86,
+      "title": "【兼职】校园快递代取，时间自由",
+      "type": "招聘",
+      "category": "兼职",
+      "salary_min": 0,
+      "salary_max": 0,
+      "salary_text": "面议",
+      "city": "北京",
+      "address": "北京",
+      "description": "招募校园快递代取人员，按件计酬，多劳多得，适合课余时间充裕的同学。联系微信：kuaidi123",
+      "requirements": "",
+      "contact": "",
+      "company_name": "浙大BBS-实习兼职",
+      "tags": [
+        "兼职",
+        "校园"
+      ],
+      "status": "active",
+      "view_count": 0,
+      "apply_count": 0,
+      "is_crawled": true,
+      "source_type": "rss",
+      "source_name": "浙大BBS-实习兼职",
+      "system_recommended": true,
+      "created_at": "2026-03-30T18:32:39.373Z",
+      "updated_at": "2026-04-01T03:38:07.217Z"
+    },
+    {
+      "id": 87,
+      "title": "【招募】校园环保活动志愿者，本周六日",
+      "type": "招聘",
+      "category": "其他",
+      "salary_min": 0,
+      "salary_max": 0,
+      "salary_text": "面议",
+      "city": "北京",
+      "address": "北京",
+      "description": "我们学校环保社团本周六日举办校园环保宣传活动，招募志愿者协助现场布置、引导等工作。提供午餐和志愿者证书。联系电话：13800138001",
+      "requirements": "",
+      "contact": "13800138001",
+      "company_name": "上交大BBS-实习",
+      "tags": [
+        "志愿者",
+        "校园",
+        "活动"
+      ],
+      "status": "active",
+      "view_count": 0,
+      "apply_count": 0,
+      "is_crawled": true,
+      "source_type": "rss",
+      "source_name": "上交大BBS-实习",
+      "system_recommended": true,
+      "created_at": "2026-03-30T18:32:39.373Z",
+      "updated_at": "2026-04-01T03:38:07.217Z"
+    },
+    {
+      "id": 88,
+      "title": "【实习】某互联网公司招产品运营实习生",
+      "type": "招聘",
+      "category": "实习",
+      "salary_min": 150,
+      "salary_max": 150,
+      "salary_text": "150元",
+      "city": "北京",
+      "address": "北京",
+      "description": "大三/大四学生优先，每周至少3天，负责用户运营和数据分析。日薪150元，表现优秀可转正。联系：hr@example.com 或 13900139002",
+      "requirements": "",
+      "contact": "13900139002",
+      "company_name": "上交大BBS-实习",
+      "tags": [
+        "实习",
+        "学生"
+      ],
+      "status": "active",
+      "view_count": 0,
+      "apply_count": 0,
+      "is_crawled": true,
+      "source_type": "rss",
+      "source_name": "上交大BBS-实习",
+      "system_recommended": true,
+      "created_at": "2026-03-30T18:32:39.373Z",
+      "updated_at": "2026-04-01T03:38:07.217Z"
+    },
+    {
+      "id": 89,
+      "title": "【兼职】校园图书馆整理员招募",
+      "type": "招聘",
+      "category": "兼职",
+      "salary_min": 20,
+      "salary_max": 20,
+      "salary_text": "20元",
+      "city": "北京",
+      "address": "北京",
+      "description": "学校图书馆招募学生兼职，负责图书整理、借阅引导等工作。时间灵活，按小时计酬，20元/小时。有意者联系图书馆王老师 13600136003",
+      "requirements": "",
+      "contact": "13600136003",
+      "company_name": "上交大BBS-实习",
+      "tags": [
+        "兼职",
+        "校园",
+        "学生"
+      ],
+      "status": "active",
+      "view_count": 0,
+      "apply_count": 0,
+      "is_crawled": true,
+      "source_type": "rss",
+      "source_name": "上交大BBS-实习",
+      "system_recommended": true,
+      "created_at": "2026-03-30T18:32:39.373Z",
+      "updated_at": "2026-04-01T03:38:07.217Z"
+    },
+    {
+      "id": 90,
+      "title": "【活动】校园歌手大赛工作人员招募",
+      "type": "招聘",
+      "category": "其他",
+      "salary_min": 0,
+      "salary_max": 0,
+      "salary_text": "面议",
+      "city": "北京",
+      "address": "北京",
+      "description": "学生会举办校园歌手大赛，招募现场工作人员、主持人、音响控制等岗位。有工作餐，可获得活动参与证明。报名联系：13700137004",
+      "requirements": "",
+      "contact": "13700137004",
+      "company_name": "上交大BBS-实习",
+      "tags": [
+        "校园",
+        "活动",
+        "学生"
+      ],
+      "status": "active",
+      "view_count": 0,
+      "apply_count": 0,
+      "is_crawled": true,
+      "source_type": "rss",
+      "source_name": "上交大BBS-实习",
+      "system_recommended": true,
+      "created_at": "2026-03-30T18:32:39.373Z",
+      "updated_at": "2026-04-01T03:38:07.217Z"
+    },
+    {
+      "id": 91,
+      "title": "【义工】敬老院探访活动招募义工",
+      "type": "招聘",
+      "category": "其他",
+      "salary_min": 0,
+      "salary_max": 0,
+      "salary_text": "面议",
+      "city": "北京",
+      "address": "北京",
+      "description": "爱心社组织敬老院探访活动，招募义工陪伴老人聊天、表演节目。本周日下午2点出发，提供交通补贴。报名电话：13800138005",
+      "requirements": "",
+      "contact": "13800138005",
+      "company_name": "上交大BBS-实习",
+      "tags": [
+        "活动",
+        "义工"
+      ],
+      "status": "active",
+      "view_count": 0,
+      "apply_count": 0,
+      "is_crawled": true,
+      "source_type": "rss",
+      "source_name": "上交大BBS-实习",
+      "system_recommended": true,
+      "created_at": "2026-03-30T18:32:39.373Z",
+      "updated_at": "2026-04-01T03:38:07.217Z"
+    },
+    {
+      "id": 92,
+      "title": "【兼职】校园快递代取，时间自由",
+      "type": "招聘",
+      "category": "兼职",
+      "salary_min": 0,
+      "salary_max": 0,
+      "salary_text": "面议",
+      "city": "北京",
+      "address": "北京",
+      "description": "招募校园快递代取人员，按件计酬，多劳多得，适合课余时间充裕的同学。联系微信：kuaidi123",
+      "requirements": "",
+      "contact": "",
+      "company_name": "上交大BBS-实习",
+      "tags": [
+        "兼职",
+        "校园"
+      ],
+      "status": "active",
+      "view_count": 0,
+      "apply_count": 0,
+      "is_crawled": true,
+      "source_type": "rss",
+      "source_name": "上交大BBS-实习",
+      "system_recommended": true,
+      "created_at": "2026-03-30T18:32:39.373Z",
+      "updated_at": "2026-04-01T03:38:07.217Z"
+    },
+    {
+      "id": 93,
+      "title": "【招募】校园环保活动志愿者，本周六日",
+      "type": "招聘",
+      "category": "其他",
+      "salary_min": 0,
+      "salary_max": 0,
+      "salary_text": "面议",
+      "city": "北京",
+      "address": "北京",
+      "description": "我们学校环保社团本周六日举办校园环保宣传活动，招募志愿者协助现场布置、引导等工作。提供午餐和志愿者证书。联系电话：13800138001",
+      "requirements": "",
+      "contact": "13800138001",
+      "company_name": "北京工业大学BBS",
+      "tags": [
+        "志愿者",
+        "校园",
+        "活动"
+      ],
+      "status": "active",
+      "view_count": 0,
+      "apply_count": 0,
+      "is_crawled": true,
+      "source_type": "rss",
+      "source_name": "北京工业大学BBS",
+      "system_recommended": true,
+      "created_at": "2026-03-30T18:32:39.373Z",
+      "updated_at": "2026-04-01T03:38:07.217Z"
+    },
+    {
+      "id": 94,
+      "title": "【实习】某互联网公司招产品运营实习生",
+      "type": "招聘",
+      "category": "实习",
+      "salary_min": 150,
+      "salary_max": 150,
+      "salary_text": "150元",
+      "city": "北京",
+      "address": "北京",
+      "description": "大三/大四学生优先，每周至少3天，负责用户运营和数据分析。日薪150元，表现优秀可转正。联系：hr@example.com 或 13900139002",
+      "requirements": "",
+      "contact": "13900139002",
+      "company_name": "北京工业大学BBS",
+      "tags": [
+        "实习",
+        "学生"
+      ],
+      "status": "active",
+      "view_count": 0,
+      "apply_count": 0,
+      "is_crawled": true,
+      "source_type": "rss",
+      "source_name": "北京工业大学BBS",
+      "system_recommended": true,
+      "created_at": "2026-03-30T18:32:39.373Z",
+      "updated_at": "2026-04-01T03:38:07.217Z"
+    },
+    {
+      "id": 95,
+      "title": "【兼职】校园图书馆整理员招募",
+      "type": "招聘",
+      "category": "兼职",
+      "salary_min": 20,
+      "salary_max": 20,
+      "salary_text": "20元",
+      "city": "北京",
+      "address": "北京",
+      "description": "学校图书馆招募学生兼职，负责图书整理、借阅引导等工作。时间灵活，按小时计酬，20元/小时。有意者联系图书馆王老师 13600136003",
+      "requirements": "",
+      "contact": "13600136003",
+      "company_name": "北京工业大学BBS",
+      "tags": [
+        "兼职",
+        "校园",
+        "学生"
+      ],
+      "status": "active",
+      "view_count": 0,
+      "apply_count": 0,
+      "is_crawled": true,
+      "source_type": "rss",
+      "source_name": "北京工业大学BBS",
+      "system_recommended": true,
+      "created_at": "2026-03-30T18:32:39.373Z",
+      "updated_at": "2026-04-01T03:38:07.217Z"
+    },
+    {
+      "id": 96,
+      "title": "【活动】校园歌手大赛工作人员招募",
+      "type": "招聘",
+      "category": "其他",
+      "salary_min": 0,
+      "salary_max": 0,
+      "salary_text": "面议",
+      "city": "北京",
+      "address": "北京",
+      "description": "学生会举办校园歌手大赛，招募现场工作人员、主持人、音响控制等岗位。有工作餐，可获得活动参与证明。报名联系：13700137004",
+      "requirements": "",
+      "contact": "13700137004",
+      "company_name": "北京工业大学BBS",
+      "tags": [
+        "校园",
+        "活动",
+        "学生"
+      ],
+      "status": "active",
+      "view_count": 0,
+      "apply_count": 0,
+      "is_crawled": true,
+      "source_type": "rss",
+      "source_name": "北京工业大学BBS",
+      "system_recommended": true,
+      "created_at": "2026-03-30T18:32:39.373Z",
+      "updated_at": "2026-04-01T03:38:07.217Z"
+    },
+    {
+      "id": 97,
+      "title": "【义工】敬老院探访活动招募义工",
+      "type": "招聘",
+      "category": "其他",
+      "salary_min": 0,
+      "salary_max": 0,
+      "salary_text": "面议",
+      "city": "北京",
+      "address": "北京",
+      "description": "爱心社组织敬老院探访活动，招募义工陪伴老人聊天、表演节目。本周日下午2点出发，提供交通补贴。报名电话：13800138005",
+      "requirements": "",
+      "contact": "13800138005",
+      "company_name": "北京工业大学BBS",
+      "tags": [
+        "活动",
+        "义工"
+      ],
+      "status": "active",
+      "view_count": 0,
+      "apply_count": 0,
+      "is_crawled": true,
+      "source_type": "rss",
+      "source_name": "北京工业大学BBS",
+      "system_recommended": true,
+      "created_at": "2026-03-30T18:32:39.373Z",
+      "updated_at": "2026-04-01T03:38:07.217Z"
+    },
+    {
+      "id": 98,
+      "title": "【兼职】校园快递代取，时间自由",
+      "type": "招聘",
+      "category": "兼职",
+      "salary_min": 0,
+      "salary_max": 0,
+      "salary_text": "面议",
+      "city": "北京",
+      "address": "北京",
+      "description": "招募校园快递代取人员，按件计酬，多劳多得，适合课余时间充裕的同学。联系微信：kuaidi123",
+      "requirements": "",
+      "contact": "",
+      "company_name": "北京工业大学BBS",
+      "tags": [
+        "兼职",
+        "校园"
+      ],
+      "status": "active",
+      "view_count": 0,
+      "apply_count": 0,
+      "is_crawled": true,
+      "source_type": "rss",
+      "source_name": "北京工业大学BBS",
+      "system_recommended": true,
+      "created_at": "2026-03-30T18:32:39.373Z",
+      "updated_at": "2026-04-01T03:38:07.217Z"
+    },
+    {
+      "id": 99,
+      "title": "【招募】校园环保活动志愿者，本周六日",
+      "type": "招聘",
+      "category": "其他",
+      "salary_min": 0,
+      "salary_max": 0,
+      "salary_text": "面议",
+      "city": "北京",
+      "address": "北京",
+      "description": "我们学校环保社团本周六日举办校园环保宣传活动，招募志愿者协助现场布置、引导等工作。提供午餐和志愿者证书。联系电话：13800138001",
+      "requirements": "",
+      "contact": "13800138001",
+      "company_name": "上海大学BBS-兼职",
+      "tags": [
+        "志愿者",
+        "校园",
+        "活动"
+      ],
+      "status": "active",
+      "view_count": 0,
+      "apply_count": 0,
+      "is_crawled": true,
+      "source_type": "rss",
+      "source_name": "上海大学BBS-兼职",
+      "system_recommended": true,
+      "created_at": "2026-03-30T18:32:39.373Z",
+      "updated_at": "2026-04-01T03:38:07.217Z"
+    },
+    {
+      "id": 100,
+      "title": "【实习】某互联网公司招产品运营实习生",
+      "type": "招聘",
+      "category": "实习",
+      "salary_min": 150,
+      "salary_max": 150,
+      "salary_text": "150元",
+      "city": "北京",
+      "address": "北京",
+      "description": "大三/大四学生优先，每周至少3天，负责用户运营和数据分析。日薪150元，表现优秀可转正。联系：hr@example.com 或 13900139002",
+      "requirements": "",
+      "contact": "13900139002",
+      "company_name": "上海大学BBS-兼职",
+      "tags": [
+        "实习",
+        "学生"
+      ],
+      "status": "active",
+      "view_count": 0,
+      "apply_count": 0,
+      "is_crawled": true,
+      "source_type": "rss",
+      "source_name": "上海大学BBS-兼职",
+      "system_recommended": true,
+      "created_at": "2026-03-30T18:32:39.373Z",
+      "updated_at": "2026-04-01T03:38:07.217Z"
+    },
+    {
+      "id": 101,
+      "title": "【兼职】校园图书馆整理员招募",
+      "type": "招聘",
+      "category": "兼职",
+      "salary_min": 20,
+      "salary_max": 20,
+      "salary_text": "20元",
+      "city": "北京",
+      "address": "北京",
+      "description": "学校图书馆招募学生兼职，负责图书整理、借阅引导等工作。时间灵活，按小时计酬，20元/小时。有意者联系图书馆王老师 13600136003",
+      "requirements": "",
+      "contact": "13600136003",
+      "company_name": "上海大学BBS-兼职",
+      "tags": [
+        "兼职",
+        "校园",
+        "学生"
+      ],
+      "status": "active",
+      "view_count": 0,
+      "apply_count": 0,
+      "is_crawled": true,
+      "source_type": "rss",
+      "source_name": "上海大学BBS-兼职",
+      "system_recommended": true,
+      "created_at": "2026-03-30T18:32:39.374Z",
+      "updated_at": "2026-04-01T03:38:07.217Z"
+    },
+    {
+      "id": 102,
+      "title": "【活动】校园歌手大赛工作人员招募",
+      "type": "招聘",
+      "category": "其他",
+      "salary_min": 0,
+      "salary_max": 0,
+      "salary_text": "面议",
+      "city": "北京",
+      "address": "北京",
+      "description": "学生会举办校园歌手大赛，招募现场工作人员、主持人、音响控制等岗位。有工作餐，可获得活动参与证明。报名联系：13700137004",
+      "requirements": "",
+      "contact": "13700137004",
+      "company_name": "上海大学BBS-兼职",
+      "tags": [
+        "校园",
+        "活动",
+        "学生"
+      ],
+      "status": "active",
+      "view_count": 0,
+      "apply_count": 0,
+      "is_crawled": true,
+      "source_type": "rss",
+      "source_name": "上海大学BBS-兼职",
+      "system_recommended": true,
+      "created_at": "2026-03-30T18:32:39.374Z",
+      "updated_at": "2026-04-01T03:38:07.217Z"
+    },
+    {
+      "id": 103,
+      "title": "【义工】敬老院探访活动招募义工",
+      "type": "招聘",
+      "category": "其他",
+      "salary_min": 0,
+      "salary_max": 0,
+      "salary_text": "面议",
+      "city": "北京",
+      "address": "北京",
+      "description": "爱心社组织敬老院探访活动，招募义工陪伴老人聊天、表演节目。本周日下午2点出发，提供交通补贴。报名电话：13800138005",
+      "requirements": "",
+      "contact": "13800138005",
+      "company_name": "上海大学BBS-兼职",
+      "tags": [
+        "活动",
+        "义工"
+      ],
+      "status": "active",
+      "view_count": 0,
+      "apply_count": 0,
+      "is_crawled": true,
+      "source_type": "rss",
+      "source_name": "上海大学BBS-兼职",
+      "system_recommended": true,
+      "created_at": "2026-03-30T18:32:39.374Z",
+      "updated_at": "2026-04-01T03:38:07.217Z"
+    },
+    {
+      "id": 104,
+      "title": "【兼职】校园快递代取，时间自由",
+      "type": "招聘",
+      "category": "兼职",
+      "salary_min": 0,
+      "salary_max": 0,
+      "salary_text": "面议",
+      "city": "北京",
+      "address": "北京",
+      "description": "招募校园快递代取人员，按件计酬，多劳多得，适合课余时间充裕的同学。联系微信：kuaidi123",
+      "requirements": "",
+      "contact": "",
+      "company_name": "上海大学BBS-兼职",
+      "tags": [
+        "兼职",
+        "校园"
+      ],
+      "status": "active",
+      "view_count": 0,
+      "apply_count": 0,
+      "is_crawled": true,
+      "source_type": "rss",
+      "source_name": "上海大学BBS-兼职",
+      "system_recommended": true,
+      "created_at": "2026-03-30T18:32:39.374Z",
+      "updated_at": "2026-04-01T03:38:07.217Z"
+    },
+    {
+      "id": 105,
+      "title": "【招募】校园环保活动志愿者，本周六日",
+      "type": "招聘",
+      "category": "其他",
+      "salary_min": 0,
+      "salary_max": 0,
+      "salary_text": "面议",
+      "city": "北京",
+      "address": "北京",
+      "description": "我们学校环保社团本周六日举办校园环保宣传活动，招募志愿者协助现场布置、引导等工作。提供午餐和志愿者证书。联系电话：13800138001",
+      "requirements": "",
+      "contact": "13800138001",
+      "company_name": "深圳大学BBS-实习",
+      "tags": [
+        "志愿者",
+        "校园",
+        "活动"
+      ],
+      "status": "active",
+      "view_count": 0,
+      "apply_count": 0,
+      "is_crawled": true,
+      "source_type": "rss",
+      "source_name": "深圳大学BBS-实习",
+      "system_recommended": true,
+      "created_at": "2026-03-30T18:32:39.374Z",
+      "updated_at": "2026-04-01T03:38:07.217Z"
+    },
+    {
+      "id": 106,
+      "title": "【实习】某互联网公司招产品运营实习生",
+      "type": "招聘",
+      "category": "实习",
+      "salary_min": 150,
+      "salary_max": 150,
+      "salary_text": "150元",
+      "city": "北京",
+      "address": "北京",
+      "description": "大三/大四学生优先，每周至少3天，负责用户运营和数据分析。日薪150元，表现优秀可转正。联系：hr@example.com 或 13900139002",
+      "requirements": "",
+      "contact": "13900139002",
+      "company_name": "深圳大学BBS-实习",
+      "tags": [
+        "实习",
+        "学生"
+      ],
+      "status": "active",
+      "view_count": 0,
+      "apply_count": 0,
+      "is_crawled": true,
+      "source_type": "rss",
+      "source_name": "深圳大学BBS-实习",
+      "system_recommended": true,
+      "created_at": "2026-03-30T18:32:39.374Z",
+      "updated_at": "2026-04-01T03:38:07.217Z"
+    },
+    {
+      "id": 107,
+      "title": "【兼职】校园图书馆整理员招募",
+      "type": "招聘",
+      "category": "兼职",
+      "salary_min": 20,
+      "salary_max": 20,
+      "salary_text": "20元",
+      "city": "北京",
+      "address": "北京",
+      "description": "学校图书馆招募学生兼职，负责图书整理、借阅引导等工作。时间灵活，按小时计酬，20元/小时。有意者联系图书馆王老师 13600136003",
+      "requirements": "",
+      "contact": "13600136003",
+      "company_name": "深圳大学BBS-实习",
+      "tags": [
+        "兼职",
+        "校园",
+        "学生"
+      ],
+      "status": "active",
+      "view_count": 0,
+      "apply_count": 0,
+      "is_crawled": true,
+      "source_type": "rss",
+      "source_name": "深圳大学BBS-实习",
+      "system_recommended": true,
+      "created_at": "2026-03-30T18:32:39.374Z",
+      "updated_at": "2026-04-01T03:38:07.217Z"
+    },
+    {
+      "id": 108,
+      "title": "【活动】校园歌手大赛工作人员招募",
+      "type": "招聘",
+      "category": "其他",
+      "salary_min": 0,
+      "salary_max": 0,
+      "salary_text": "面议",
+      "city": "北京",
+      "address": "北京",
+      "description": "学生会举办校园歌手大赛，招募现场工作人员、主持人、音响控制等岗位。有工作餐，可获得活动参与证明。报名联系：13700137004",
+      "requirements": "",
+      "contact": "13700137004",
+      "company_name": "深圳大学BBS-实习",
+      "tags": [
+        "校园",
+        "活动",
+        "学生"
+      ],
+      "status": "active",
+      "view_count": 0,
+      "apply_count": 0,
+      "is_crawled": true,
+      "source_type": "rss",
+      "source_name": "深圳大学BBS-实习",
+      "system_recommended": true,
+      "created_at": "2026-03-30T18:32:39.374Z",
+      "updated_at": "2026-04-01T03:38:07.217Z"
+    },
+    {
+      "id": 109,
+      "title": "【义工】敬老院探访活动招募义工",
+      "type": "招聘",
+      "category": "其他",
+      "salary_min": 0,
+      "salary_max": 0,
+      "salary_text": "面议",
+      "city": "北京",
+      "address": "北京",
+      "description": "爱心社组织敬老院探访活动，招募义工陪伴老人聊天、表演节目。本周日下午2点出发，提供交通补贴。报名电话：13800138005",
+      "requirements": "",
+      "contact": "13800138005",
+      "company_name": "深圳大学BBS-实习",
+      "tags": [
+        "活动",
+        "义工"
+      ],
+      "status": "active",
+      "view_count": 0,
+      "apply_count": 0,
+      "is_crawled": true,
+      "source_type": "rss",
+      "source_name": "深圳大学BBS-实习",
+      "system_recommended": true,
+      "created_at": "2026-03-30T18:32:39.374Z",
+      "updated_at": "2026-04-01T03:38:07.217Z"
+    },
+    {
+      "id": 110,
+      "title": "【兼职】校园快递代取，时间自由",
+      "type": "招聘",
+      "category": "兼职",
+      "salary_min": 0,
+      "salary_max": 0,
+      "salary_text": "面议",
+      "city": "北京",
+      "address": "北京",
+      "description": "招募校园快递代取人员，按件计酬，多劳多得，适合课余时间充裕的同学。联系微信：kuaidi123",
+      "requirements": "",
+      "contact": "",
+      "company_name": "深圳大学BBS-实习",
+      "tags": [
+        "兼职",
+        "校园"
+      ],
+      "status": "active",
+      "view_count": 0,
+      "apply_count": 0,
+      "is_crawled": true,
+      "source_type": "rss",
+      "source_name": "深圳大学BBS-实习",
+      "system_recommended": true,
+      "created_at": "2026-03-30T18:32:39.374Z",
+      "updated_at": "2026-04-01T03:38:07.217Z"
+    },
+    {
+      "id": 111,
+      "title": "【招募】校园环保活动志愿者，本周六日",
+      "type": "招聘",
+      "category": "其他",
+      "salary_min": 0,
+      "salary_max": 0,
+      "salary_text": "面议",
+      "city": "北京",
+      "address": "北京",
+      "description": "我们学校环保社团本周六日举办校园环保宣传活动，招募志愿者协助现场布置、引导等工作。提供午餐和志愿者证书。联系电话：13800138001",
+      "requirements": "",
+      "contact": "13800138001",
+      "company_name": "广州大学BBS-兼职",
+      "tags": [
+        "志愿者",
+        "校园",
+        "活动"
+      ],
+      "status": "active",
+      "view_count": 0,
+      "apply_count": 0,
+      "is_crawled": true,
+      "source_type": "rss",
+      "source_name": "广州大学BBS-兼职",
+      "system_recommended": true,
+      "created_at": "2026-03-30T18:32:39.374Z",
+      "updated_at": "2026-04-01T03:38:07.217Z"
+    },
+    {
+      "id": 112,
+      "title": "【实习】某互联网公司招产品运营实习生",
+      "type": "招聘",
+      "category": "实习",
+      "salary_min": 150,
+      "salary_max": 150,
+      "salary_text": "150元",
+      "city": "北京",
+      "address": "北京",
+      "description": "大三/大四学生优先，每周至少3天，负责用户运营和数据分析。日薪150元，表现优秀可转正。联系：hr@example.com 或 13900139002",
+      "requirements": "",
+      "contact": "13900139002",
+      "company_name": "广州大学BBS-兼职",
+      "tags": [
+        "实习",
+        "学生"
+      ],
+      "status": "active",
+      "view_count": 0,
+      "apply_count": 0,
+      "is_crawled": true,
+      "source_type": "rss",
+      "source_name": "广州大学BBS-兼职",
+      "system_recommended": true,
+      "created_at": "2026-03-30T18:32:39.374Z",
+      "updated_at": "2026-04-01T03:38:07.217Z"
+    },
+    {
+      "id": 113,
+      "title": "【兼职】校园图书馆整理员招募",
+      "type": "招聘",
+      "category": "兼职",
+      "salary_min": 20,
+      "salary_max": 20,
+      "salary_text": "20元",
+      "city": "北京",
+      "address": "北京",
+      "description": "学校图书馆招募学生兼职，负责图书整理、借阅引导等工作。时间灵活，按小时计酬，20元/小时。有意者联系图书馆王老师 13600136003",
+      "requirements": "",
+      "contact": "13600136003",
+      "company_name": "广州大学BBS-兼职",
+      "tags": [
+        "兼职",
+        "校园",
+        "学生"
+      ],
+      "status": "active",
+      "view_count": 0,
+      "apply_count": 0,
+      "is_crawled": true,
+      "source_type": "rss",
+      "source_name": "广州大学BBS-兼职",
+      "system_recommended": true,
+      "created_at": "2026-03-30T18:32:39.374Z",
+      "updated_at": "2026-04-01T03:38:07.217Z"
+    },
+    {
+      "id": 114,
+      "title": "【活动】校园歌手大赛工作人员招募",
+      "type": "招聘",
+      "category": "其他",
+      "salary_min": 0,
+      "salary_max": 0,
+      "salary_text": "面议",
+      "city": "北京",
+      "address": "北京",
+      "description": "学生会举办校园歌手大赛，招募现场工作人员、主持人、音响控制等岗位。有工作餐，可获得活动参与证明。报名联系：13700137004",
+      "requirements": "",
+      "contact": "13700137004",
+      "company_name": "广州大学BBS-兼职",
+      "tags": [
+        "校园",
+        "活动",
+        "学生"
+      ],
+      "status": "active",
+      "view_count": 0,
+      "apply_count": 0,
+      "is_crawled": true,
+      "source_type": "rss",
+      "source_name": "广州大学BBS-兼职",
+      "system_recommended": true,
+      "created_at": "2026-03-30T18:32:39.374Z",
+      "updated_at": "2026-04-01T03:38:07.217Z"
+    },
+    {
+      "id": 115,
+      "title": "【义工】敬老院探访活动招募义工",
+      "type": "招聘",
+      "category": "其他",
+      "salary_min": 0,
+      "salary_max": 0,
+      "salary_text": "面议",
+      "city": "北京",
+      "address": "北京",
+      "description": "爱心社组织敬老院探访活动，招募义工陪伴老人聊天、表演节目。本周日下午2点出发，提供交通补贴。报名电话：13800138005",
+      "requirements": "",
+      "contact": "13800138005",
+      "company_name": "广州大学BBS-兼职",
+      "tags": [
+        "活动",
+        "义工"
+      ],
+      "status": "active",
+      "view_count": 0,
+      "apply_count": 0,
+      "is_crawled": true,
+      "source_type": "rss",
+      "source_name": "广州大学BBS-兼职",
+      "system_recommended": true,
+      "created_at": "2026-03-30T18:32:39.374Z",
+      "updated_at": "2026-04-01T03:38:07.217Z"
+    },
+    {
+      "id": 116,
+      "title": "【兼职】校园快递代取，时间自由",
+      "type": "招聘",
+      "category": "兼职",
+      "salary_min": 0,
+      "salary_max": 0,
+      "salary_text": "面议",
+      "city": "北京",
+      "address": "北京",
+      "description": "招募校园快递代取人员，按件计酬，多劳多得，适合课余时间充裕的同学。联系微信：kuaidi123",
+      "requirements": "",
+      "contact": "",
+      "company_name": "广州大学BBS-兼职",
+      "tags": [
+        "兼职",
+        "校园"
+      ],
+      "status": "active",
+      "view_count": 0,
+      "apply_count": 0,
+      "is_crawled": true,
+      "source_type": "rss",
+      "source_name": "广州大学BBS-兼职",
+      "system_recommended": true,
+      "created_at": "2026-03-30T18:32:39.374Z",
+      "updated_at": "2026-04-01T03:38:07.217Z"
+    },
+    {
+      "id": 117,
+      "title": "【招募】校园环保活动志愿者，本周六日",
+      "type": "招聘",
+      "category": "其他",
+      "salary_min": 0,
+      "salary_max": 0,
+      "salary_text": "面议",
+      "city": "北京",
+      "address": "北京",
+      "description": "我们学校环保社团本周六日举办校园环保宣传活动，招募志愿者协助现场布置、引导等工作。提供午餐和志愿者证书。联系电话：13800138001",
+      "requirements": "",
+      "contact": "13800138001",
+      "company_name": "杭州电子科技大学-就业",
+      "tags": [
+        "志愿者",
+        "校园",
+        "活动"
+      ],
+      "status": "active",
+      "view_count": 0,
+      "apply_count": 0,
+      "is_crawled": true,
+      "source_type": "rss",
+      "source_name": "杭州电子科技大学-就业",
+      "system_recommended": true,
+      "created_at": "2026-03-30T18:32:39.374Z",
+      "updated_at": "2026-04-01T03:38:07.217Z"
+    },
+    {
+      "id": 118,
+      "title": "【实习】某互联网公司招产品运营实习生",
+      "type": "招聘",
+      "category": "实习",
+      "salary_min": 150,
+      "salary_max": 150,
+      "salary_text": "150元",
+      "city": "北京",
+      "address": "北京",
+      "description": "大三/大四学生优先，每周至少3天，负责用户运营和数据分析。日薪150元，表现优秀可转正。联系：hr@example.com 或 13900139002",
+      "requirements": "",
+      "contact": "13900139002",
+      "company_name": "杭州电子科技大学-就业",
+      "tags": [
+        "实习",
+        "学生"
+      ],
+      "status": "active",
+      "view_count": 0,
+      "apply_count": 0,
+      "is_crawled": true,
+      "source_type": "rss",
+      "source_name": "杭州电子科技大学-就业",
+      "system_recommended": true,
+      "created_at": "2026-03-30T18:32:39.374Z",
+      "updated_at": "2026-04-01T03:38:07.217Z"
+    },
+    {
+      "id": 119,
+      "title": "【兼职】校园图书馆整理员招募",
+      "type": "招聘",
+      "category": "兼职",
+      "salary_min": 20,
+      "salary_max": 20,
+      "salary_text": "20元",
+      "city": "北京",
+      "address": "北京",
+      "description": "学校图书馆招募学生兼职，负责图书整理、借阅引导等工作。时间灵活，按小时计酬，20元/小时。有意者联系图书馆王老师 13600136003",
+      "requirements": "",
+      "contact": "13600136003",
+      "company_name": "杭州电子科技大学-就业",
+      "tags": [
+        "兼职",
+        "校园",
+        "学生"
+      ],
+      "status": "active",
+      "view_count": 0,
+      "apply_count": 0,
+      "is_crawled": true,
+      "source_type": "rss",
+      "source_name": "杭州电子科技大学-就业",
+      "system_recommended": true,
+      "created_at": "2026-03-30T18:32:39.374Z",
+      "updated_at": "2026-04-01T03:38:07.217Z"
+    },
+    {
+      "id": 120,
+      "title": "【活动】校园歌手大赛工作人员招募",
+      "type": "招聘",
+      "category": "其他",
+      "salary_min": 0,
+      "salary_max": 0,
+      "salary_text": "面议",
+      "city": "北京",
+      "address": "北京",
+      "description": "学生会举办校园歌手大赛，招募现场工作人员、主持人、音响控制等岗位。有工作餐，可获得活动参与证明。报名联系：13700137004",
+      "requirements": "",
+      "contact": "13700137004",
+      "company_name": "杭州电子科技大学-就业",
+      "tags": [
+        "校园",
+        "活动",
+        "学生"
+      ],
+      "status": "active",
+      "view_count": 0,
+      "apply_count": 0,
+      "is_crawled": true,
+      "source_type": "rss",
+      "source_name": "杭州电子科技大学-就业",
+      "system_recommended": true,
+      "created_at": "2026-03-30T18:32:39.374Z",
+      "updated_at": "2026-04-01T03:38:07.217Z"
+    },
+    {
+      "id": 121,
+      "title": "【义工】敬老院探访活动招募义工",
+      "type": "招聘",
+      "category": "其他",
+      "salary_min": 0,
+      "salary_max": 0,
+      "salary_text": "面议",
+      "city": "北京",
+      "address": "北京",
+      "description": "爱心社组织敬老院探访活动，招募义工陪伴老人聊天、表演节目。本周日下午2点出发，提供交通补贴。报名电话：13800138005",
+      "requirements": "",
+      "contact": "13800138005",
+      "company_name": "杭州电子科技大学-就业",
+      "tags": [
+        "活动",
+        "义工"
+      ],
+      "status": "active",
+      "view_count": 0,
+      "apply_count": 0,
+      "is_crawled": true,
+      "source_type": "rss",
+      "source_name": "杭州电子科技大学-就业",
+      "system_recommended": true,
+      "created_at": "2026-03-30T18:32:39.374Z",
+      "updated_at": "2026-04-01T03:38:07.217Z"
+    },
+    {
+      "id": 122,
+      "title": "【兼职】校园快递代取，时间自由",
+      "type": "招聘",
+      "category": "兼职",
+      "salary_min": 0,
+      "salary_max": 0,
+      "salary_text": "面议",
+      "city": "北京",
+      "address": "北京",
+      "description": "招募校园快递代取人员，按件计酬，多劳多得，适合课余时间充裕的同学。联系微信：kuaidi123",
+      "requirements": "",
+      "contact": "",
+      "company_name": "杭州电子科技大学-就业",
+      "tags": [
+        "兼职",
+        "校园"
+      ],
+      "status": "active",
+      "view_count": 0,
+      "apply_count": 0,
+      "is_crawled": true,
+      "source_type": "rss",
+      "source_name": "杭州电子科技大学-就业",
+      "system_recommended": true,
+      "created_at": "2026-03-30T18:32:39.374Z",
+      "updated_at": "2026-04-01T03:38:07.217Z"
+    },
+    {
+      "id": 123,
+      "title": "【招募】校园环保活动志愿者，本周六日",
+      "type": "招聘",
+      "category": "其他",
+      "salary_min": 0,
+      "salary_max": 0,
+      "salary_text": "面议",
+      "city": "北京",
+      "address": "北京",
+      "description": "我们学校环保社团本周六日举办校园环保宣传活动，招募志愿者协助现场布置、引导等工作。提供午餐和志愿者证书。联系电话：13800138001",
+      "requirements": "",
+      "contact": "13800138001",
+      "company_name": "浙江工业大学-招聘信息",
+      "tags": [
+        "志愿者",
+        "校园",
+        "活动"
+      ],
+      "status": "active",
+      "view_count": 0,
+      "apply_count": 0,
+      "is_crawled": true,
+      "source_type": "rss",
+      "source_name": "浙江工业大学-招聘信息",
+      "system_recommended": true,
+      "created_at": "2026-03-30T18:32:39.374Z",
+      "updated_at": "2026-04-01T03:38:07.217Z"
+    },
+    {
+      "id": 124,
+      "title": "【实习】某互联网公司招产品运营实习生",
+      "type": "招聘",
+      "category": "实习",
+      "salary_min": 150,
+      "salary_max": 150,
+      "salary_text": "150元",
+      "city": "北京",
+      "address": "北京",
+      "description": "大三/大四学生优先，每周至少3天，负责用户运营和数据分析。日薪150元，表现优秀可转正。联系：hr@example.com 或 13900139002",
+      "requirements": "",
+      "contact": "13900139002",
+      "company_name": "浙江工业大学-招聘信息",
+      "tags": [
+        "实习",
+        "学生"
+      ],
+      "status": "active",
+      "view_count": 0,
+      "apply_count": 0,
+      "is_crawled": true,
+      "source_type": "rss",
+      "source_name": "浙江工业大学-招聘信息",
+      "system_recommended": true,
+      "created_at": "2026-03-30T18:32:39.374Z",
+      "updated_at": "2026-04-01T03:38:07.217Z"
+    },
+    {
+      "id": 125,
+      "title": "【兼职】校园图书馆整理员招募",
+      "type": "招聘",
+      "category": "兼职",
+      "salary_min": 20,
+      "salary_max": 20,
+      "salary_text": "20元",
+      "city": "北京",
+      "address": "北京",
+      "description": "学校图书馆招募学生兼职，负责图书整理、借阅引导等工作。时间灵活，按小时计酬，20元/小时。有意者联系图书馆王老师 13600136003",
+      "requirements": "",
+      "contact": "13600136003",
+      "company_name": "浙江工业大学-招聘信息",
+      "tags": [
+        "兼职",
+        "校园",
+        "学生"
+      ],
+      "status": "active",
+      "view_count": 0,
+      "apply_count": 0,
+      "is_crawled": true,
+      "source_type": "rss",
+      "source_name": "浙江工业大学-招聘信息",
+      "system_recommended": true,
+      "created_at": "2026-03-30T18:32:39.374Z",
+      "updated_at": "2026-04-01T03:38:07.217Z"
+    },
+    {
+      "id": 126,
+      "title": "【活动】校园歌手大赛工作人员招募",
+      "type": "招聘",
+      "category": "其他",
+      "salary_min": 0,
+      "salary_max": 0,
+      "salary_text": "面议",
+      "city": "北京",
+      "address": "北京",
+      "description": "学生会举办校园歌手大赛，招募现场工作人员、主持人、音响控制等岗位。有工作餐，可获得活动参与证明。报名联系：13700137004",
+      "requirements": "",
+      "contact": "13700137004",
+      "company_name": "浙江工业大学-招聘信息",
+      "tags": [
+        "校园",
+        "活动",
+        "学生"
+      ],
+      "status": "active",
+      "view_count": 0,
+      "apply_count": 0,
+      "is_crawled": true,
+      "source_type": "rss",
+      "source_name": "浙江工业大学-招聘信息",
+      "system_recommended": true,
+      "created_at": "2026-03-30T18:32:39.374Z",
+      "updated_at": "2026-04-01T03:38:07.217Z"
+    },
+    {
+      "id": 127,
+      "title": "【义工】敬老院探访活动招募义工",
+      "type": "招聘",
+      "category": "其他",
+      "salary_min": 0,
+      "salary_max": 0,
+      "salary_text": "面议",
+      "city": "北京",
+      "address": "北京",
+      "description": "爱心社组织敬老院探访活动，招募义工陪伴老人聊天、表演节目。本周日下午2点出发，提供交通补贴。报名电话：13800138005",
+      "requirements": "",
+      "contact": "13800138005",
+      "company_name": "浙江工业大学-招聘信息",
+      "tags": [
+        "活动",
+        "义工"
+      ],
+      "status": "active",
+      "view_count": 0,
+      "apply_count": 0,
+      "is_crawled": true,
+      "source_type": "rss",
+      "source_name": "浙江工业大学-招聘信息",
+      "system_recommended": true,
+      "created_at": "2026-03-30T18:32:39.374Z",
+      "updated_at": "2026-04-01T03:38:07.217Z"
+    },
+    {
+      "id": 128,
+      "title": "【兼职】校园快递代取，时间自由",
+      "type": "招聘",
+      "category": "兼职",
+      "salary_min": 0,
+      "salary_max": 0,
+      "salary_text": "面议",
+      "city": "北京",
+      "address": "北京",
+      "description": "招募校园快递代取人员，按件计酬，多劳多得，适合课余时间充裕的同学。联系微信：kuaidi123",
+      "requirements": "",
+      "contact": "",
+      "company_name": "浙江工业大学-招聘信息",
+      "tags": [
+        "兼职",
+        "校园"
+      ],
+      "status": "active",
+      "view_count": 0,
+      "apply_count": 0,
+      "is_crawled": true,
+      "source_type": "rss",
+      "source_name": "浙江工业大学-招聘信息",
+      "system_recommended": true,
+      "created_at": "2026-03-30T18:32:39.375Z",
+      "updated_at": "2026-04-01T03:38:07.217Z"
+    },
+    {
+      "id": 129,
+      "title": "【招募】校园环保活动志愿者，本周六日",
+      "type": "招聘",
+      "category": "其他",
+      "salary_min": 0,
+      "salary_max": 0,
+      "salary_text": "面议",
+      "city": "北京",
+      "address": "北京",
+      "description": "我们学校环保社团本周六日举办校园环保宣传活动，招募志愿者协助现场布置、引导等工作。提供午餐和志愿者证书。联系电话：13800138001",
+      "requirements": "",
+      "contact": "13800138001",
+      "company_name": "深圳职业技术学院-招聘",
+      "tags": [
+        "志愿者",
+        "校园",
+        "活动"
+      ],
+      "status": "active",
+      "view_count": 0,
+      "apply_count": 0,
+      "is_crawled": true,
+      "source_type": "rss",
+      "source_name": "深圳职业技术学院-招聘",
+      "system_recommended": true,
+      "created_at": "2026-03-30T18:32:39.375Z",
+      "updated_at": "2026-04-01T03:38:07.217Z"
+    },
+    {
+      "id": 130,
+      "title": "【实习】某互联网公司招产品运营实习生",
+      "type": "招聘",
+      "category": "实习",
+      "salary_min": 150,
+      "salary_max": 150,
+      "salary_text": "150元",
+      "city": "北京",
+      "address": "北京",
+      "description": "大三/大四学生优先，每周至少3天，负责用户运营和数据分析。日薪150元，表现优秀可转正。联系：hr@example.com 或 13900139002",
+      "requirements": "",
+      "contact": "13900139002",
+      "company_name": "深圳职业技术学院-招聘",
+      "tags": [
+        "实习",
+        "学生"
+      ],
+      "status": "active",
+      "view_count": 0,
+      "apply_count": 0,
+      "is_crawled": true,
+      "source_type": "rss",
+      "source_name": "深圳职业技术学院-招聘",
+      "system_recommended": true,
+      "created_at": "2026-03-30T18:32:39.375Z",
+      "updated_at": "2026-04-01T03:38:07.217Z"
+    },
+    {
+      "id": 131,
+      "title": "【兼职】校园图书馆整理员招募",
+      "type": "招聘",
+      "category": "兼职",
+      "salary_min": 20,
+      "salary_max": 20,
+      "salary_text": "20元",
+      "city": "北京",
+      "address": "北京",
+      "description": "学校图书馆招募学生兼职，负责图书整理、借阅引导等工作。时间灵活，按小时计酬，20元/小时。有意者联系图书馆王老师 13600136003",
+      "requirements": "",
+      "contact": "13600136003",
+      "company_name": "深圳职业技术学院-招聘",
+      "tags": [
+        "兼职",
+        "校园",
+        "学生"
+      ],
+      "status": "active",
+      "view_count": 0,
+      "apply_count": 0,
+      "is_crawled": true,
+      "source_type": "rss",
+      "source_name": "深圳职业技术学院-招聘",
+      "system_recommended": true,
+      "created_at": "2026-03-30T18:32:39.375Z",
+      "updated_at": "2026-04-01T03:38:07.217Z"
+    },
+    {
+      "id": 132,
+      "title": "【活动】校园歌手大赛工作人员招募",
+      "type": "招聘",
+      "category": "其他",
+      "salary_min": 0,
+      "salary_max": 0,
+      "salary_text": "面议",
+      "city": "北京",
+      "address": "北京",
+      "description": "学生会举办校园歌手大赛，招募现场工作人员、主持人、音响控制等岗位。有工作餐，可获得活动参与证明。报名联系：13700137004",
+      "requirements": "",
+      "contact": "13700137004",
+      "company_name": "深圳职业技术学院-招聘",
+      "tags": [
+        "校园",
+        "活动",
+        "学生"
+      ],
+      "status": "active",
+      "view_count": 0,
+      "apply_count": 0,
+      "is_crawled": true,
+      "source_type": "rss",
+      "source_name": "深圳职业技术学院-招聘",
+      "system_recommended": true,
+      "created_at": "2026-03-30T18:32:39.375Z",
+      "updated_at": "2026-04-01T03:38:07.217Z"
+    },
+    {
+      "id": 133,
+      "title": "【义工】敬老院探访活动招募义工",
+      "type": "招聘",
+      "category": "其他",
+      "salary_min": 0,
+      "salary_max": 0,
+      "salary_text": "面议",
+      "city": "北京",
+      "address": "北京",
+      "description": "爱心社组织敬老院探访活动，招募义工陪伴老人聊天、表演节目。本周日下午2点出发，提供交通补贴。报名电话：13800138005",
+      "requirements": "",
+      "contact": "13800138005",
+      "company_name": "深圳职业技术学院-招聘",
+      "tags": [
+        "活动",
+        "义工"
+      ],
+      "status": "active",
+      "view_count": 0,
+      "apply_count": 0,
+      "is_crawled": true,
+      "source_type": "rss",
+      "source_name": "深圳职业技术学院-招聘",
+      "system_recommended": true,
+      "created_at": "2026-03-30T18:32:39.375Z",
+      "updated_at": "2026-04-01T03:38:07.217Z"
+    },
+    {
+      "id": 134,
+      "title": "【兼职】校园快递代取，时间自由",
+      "type": "招聘",
+      "category": "兼职",
+      "salary_min": 0,
+      "salary_max": 0,
+      "salary_text": "面议",
+      "city": "北京",
+      "address": "北京",
+      "description": "招募校园快递代取人员，按件计酬，多劳多得，适合课余时间充裕的同学。联系微信：kuaidi123",
+      "requirements": "",
+      "contact": "",
+      "company_name": "深圳职业技术学院-招聘",
+      "tags": [
+        "兼职",
+        "校园"
+      ],
+      "status": "active",
+      "view_count": 0,
+      "apply_count": 0,
+      "is_crawled": true,
+      "source_type": "rss",
+      "source_name": "深圳职业技术学院-招聘",
+      "system_recommended": true,
+      "created_at": "2026-03-30T18:32:39.375Z",
+      "updated_at": "2026-04-01T03:38:07.217Z"
+    },
+    {
+      "id": 135,
+      "title": "【招募】校园环保活动志愿者，本周六日",
+      "type": "招聘",
+      "category": "其他",
+      "salary_min": 0,
+      "salary_max": 0,
+      "salary_text": "面议",
+      "city": "北京",
+      "address": "北京",
+      "description": "我们学校环保社团本周六日举办校园环保宣传活动，招募志愿者协助现场布置、引导等工作。提供午餐和志愿者证书。联系电话：13800138001",
+      "requirements": "",
+      "contact": "13800138001",
+      "company_name": "南京信息职业技术学院",
+      "tags": [
+        "志愿者",
+        "校园",
+        "活动"
+      ],
+      "status": "active",
+      "view_count": 0,
+      "apply_count": 0,
+      "is_crawled": true,
+      "source_type": "rss",
+      "source_name": "南京信息职业技术学院",
+      "system_recommended": true,
+      "created_at": "2026-03-30T18:32:39.375Z",
+      "updated_at": "2026-04-01T03:38:07.217Z"
+    },
+    {
+      "id": 136,
+      "title": "【实习】某互联网公司招产品运营实习生",
+      "type": "招聘",
+      "category": "实习",
+      "salary_min": 150,
+      "salary_max": 150,
+      "salary_text": "150元",
+      "city": "北京",
+      "address": "北京",
+      "description": "大三/大四学生优先，每周至少3天，负责用户运营和数据分析。日薪150元，表现优秀可转正。联系：hr@example.com 或 13900139002",
+      "requirements": "",
+      "contact": "13900139002",
+      "company_name": "南京信息职业技术学院",
+      "tags": [
+        "实习",
+        "学生"
+      ],
+      "status": "active",
+      "view_count": 0,
+      "apply_count": 0,
+      "is_crawled": true,
+      "source_type": "rss",
+      "source_name": "南京信息职业技术学院",
+      "system_recommended": true,
+      "created_at": "2026-03-30T18:32:39.375Z",
+      "updated_at": "2026-04-01T03:38:07.217Z"
+    },
+    {
+      "id": 137,
+      "title": "【兼职】校园图书馆整理员招募",
+      "type": "招聘",
+      "category": "兼职",
+      "salary_min": 20,
+      "salary_max": 20,
+      "salary_text": "20元",
+      "city": "北京",
+      "address": "北京",
+      "description": "学校图书馆招募学生兼职，负责图书整理、借阅引导等工作。时间灵活，按小时计酬，20元/小时。有意者联系图书馆王老师 13600136003",
+      "requirements": "",
+      "contact": "13600136003",
+      "company_name": "南京信息职业技术学院",
+      "tags": [
+        "兼职",
+        "校园",
+        "学生"
+      ],
+      "status": "active",
+      "view_count": 0,
+      "apply_count": 0,
+      "is_crawled": true,
+      "source_type": "rss",
+      "source_name": "南京信息职业技术学院",
+      "system_recommended": true,
+      "created_at": "2026-03-30T18:32:39.375Z",
+      "updated_at": "2026-04-01T03:38:07.217Z"
+    },
+    {
+      "id": 138,
+      "title": "【活动】校园歌手大赛工作人员招募",
+      "type": "招聘",
+      "category": "其他",
+      "salary_min": 0,
+      "salary_max": 0,
+      "salary_text": "面议",
+      "city": "北京",
+      "address": "北京",
+      "description": "学生会举办校园歌手大赛，招募现场工作人员、主持人、音响控制等岗位。有工作餐，可获得活动参与证明。报名联系：13700137004",
+      "requirements": "",
+      "contact": "13700137004",
+      "company_name": "南京信息职业技术学院",
+      "tags": [
+        "校园",
+        "活动",
+        "学生"
+      ],
+      "status": "active",
+      "view_count": 0,
+      "apply_count": 0,
+      "is_crawled": true,
+      "source_type": "rss",
+      "source_name": "南京信息职业技术学院",
+      "system_recommended": true,
+      "created_at": "2026-03-30T18:32:39.375Z",
+      "updated_at": "2026-04-01T03:38:07.217Z"
+    },
+    {
+      "id": 139,
+      "title": "【义工】敬老院探访活动招募义工",
+      "type": "招聘",
+      "category": "其他",
+      "salary_min": 0,
+      "salary_max": 0,
+      "salary_text": "面议",
+      "city": "北京",
+      "address": "北京",
+      "description": "爱心社组织敬老院探访活动，招募义工陪伴老人聊天、表演节目。本周日下午2点出发，提供交通补贴。报名电话：13800138005",
+      "requirements": "",
+      "contact": "13800138005",
+      "company_name": "南京信息职业技术学院",
+      "tags": [
+        "活动",
+        "义工"
+      ],
+      "status": "active",
+      "view_count": 0,
+      "apply_count": 0,
+      "is_crawled": true,
+      "source_type": "rss",
+      "source_name": "南京信息职业技术学院",
+      "system_recommended": true,
+      "created_at": "2026-03-30T18:32:39.375Z",
+      "updated_at": "2026-04-01T03:38:07.217Z"
+    },
+    {
+      "id": 140,
+      "title": "【兼职】校园快递代取，时间自由",
+      "type": "招聘",
+      "category": "兼职",
+      "salary_min": 0,
+      "salary_max": 0,
+      "salary_text": "面议",
+      "city": "北京",
+      "address": "北京",
+      "description": "招募校园快递代取人员，按件计酬，多劳多得，适合课余时间充裕的同学。联系微信：kuaidi123",
+      "requirements": "",
+      "contact": "",
+      "company_name": "南京信息职业技术学院",
+      "tags": [
+        "兼职",
+        "校园"
+      ],
+      "status": "active",
+      "view_count": 0,
+      "apply_count": 0,
+      "is_crawled": true,
+      "source_type": "rss",
+      "source_name": "南京信息职业技术学院",
+      "system_recommended": true,
+      "created_at": "2026-03-30T18:32:39.375Z",
+      "updated_at": "2026-04-01T03:38:07.217Z"
+    },
+    {
+      "id": 141,
+      "title": "【招募】校园环保活动志愿者，本周六日",
+      "type": "招聘",
+      "category": "其他",
+      "salary_min": 0,
+      "salary_max": 0,
+      "salary_text": "面议",
+      "city": "北京",
+      "address": "北京",
+      "description": "我们学校环保社团本周六日举办校园环保宣传活动，招募志愿者协助现场布置、引导等工作。提供午餐和志愿者证书。联系电话：13800138001",
+      "requirements": "",
+      "contact": "13800138001",
+      "company_name": "金华职业技术学院",
+      "tags": [
+        "志愿者",
+        "校园",
+        "活动"
+      ],
+      "status": "active",
+      "view_count": 0,
+      "apply_count": 0,
+      "is_crawled": true,
+      "source_type": "rss",
+      "source_name": "金华职业技术学院",
+      "system_recommended": true,
+      "created_at": "2026-03-30T18:32:39.375Z",
+      "updated_at": "2026-04-01T03:38:07.217Z"
+    },
+    {
+      "id": 142,
+      "title": "【实习】某互联网公司招产品运营实习生",
+      "type": "招聘",
+      "category": "实习",
+      "salary_min": 150,
+      "salary_max": 150,
+      "salary_text": "150元",
+      "city": "北京",
+      "address": "北京",
+      "description": "大三/大四学生优先，每周至少3天，负责用户运营和数据分析。日薪150元，表现优秀可转正。联系：hr@example.com 或 13900139002",
+      "requirements": "",
+      "contact": "13900139002",
+      "company_name": "金华职业技术学院",
+      "tags": [
+        "实习",
+        "学生"
+      ],
+      "status": "active",
+      "view_count": 0,
+      "apply_count": 0,
+      "is_crawled": true,
+      "source_type": "rss",
+      "source_name": "金华职业技术学院",
+      "system_recommended": true,
+      "created_at": "2026-03-30T18:32:39.375Z",
+      "updated_at": "2026-04-01T03:38:07.217Z"
+    },
+    {
+      "id": 143,
+      "title": "【兼职】校园图书馆整理员招募",
+      "type": "招聘",
+      "category": "兼职",
+      "salary_min": 20,
+      "salary_max": 20,
+      "salary_text": "20元",
+      "city": "北京",
+      "address": "北京",
+      "description": "学校图书馆招募学生兼职，负责图书整理、借阅引导等工作。时间灵活，按小时计酬，20元/小时。有意者联系图书馆王老师 13600136003",
+      "requirements": "",
+      "contact": "13600136003",
+      "company_name": "金华职业技术学院",
+      "tags": [
+        "兼职",
+        "校园",
+        "学生"
+      ],
+      "status": "active",
+      "view_count": 0,
+      "apply_count": 0,
+      "is_crawled": true,
+      "source_type": "rss",
+      "source_name": "金华职业技术学院",
+      "system_recommended": true,
+      "created_at": "2026-03-30T18:32:39.375Z",
+      "updated_at": "2026-04-01T03:38:07.217Z"
+    },
+    {
+      "id": 144,
+      "title": "【活动】校园歌手大赛工作人员招募",
+      "type": "招聘",
+      "category": "其他",
+      "salary_min": 0,
+      "salary_max": 0,
+      "salary_text": "面议",
+      "city": "北京",
+      "address": "北京",
+      "description": "学生会举办校园歌手大赛，招募现场工作人员、主持人、音响控制等岗位。有工作餐，可获得活动参与证明。报名联系：13700137004",
+      "requirements": "",
+      "contact": "13700137004",
+      "company_name": "金华职业技术学院",
+      "tags": [
+        "校园",
+        "活动",
+        "学生"
+      ],
+      "status": "active",
+      "view_count": 0,
+      "apply_count": 0,
+      "is_crawled": true,
+      "source_type": "rss",
+      "source_name": "金华职业技术学院",
+      "system_recommended": true,
+      "created_at": "2026-03-30T18:32:39.375Z",
+      "updated_at": "2026-04-01T03:38:07.217Z"
+    },
+    {
+      "id": 145,
+      "title": "【义工】敬老院探访活动招募义工",
+      "type": "招聘",
+      "category": "其他",
+      "salary_min": 0,
+      "salary_max": 0,
+      "salary_text": "面议",
+      "city": "北京",
+      "address": "北京",
+      "description": "爱心社组织敬老院探访活动，招募义工陪伴老人聊天、表演节目。本周日下午2点出发，提供交通补贴。报名电话：13800138005",
+      "requirements": "",
+      "contact": "13800138005",
+      "company_name": "金华职业技术学院",
+      "tags": [
+        "活动",
+        "义工"
+      ],
+      "status": "active",
+      "view_count": 0,
+      "apply_count": 0,
+      "is_crawled": true,
+      "source_type": "rss",
+      "source_name": "金华职业技术学院",
+      "system_recommended": true,
+      "created_at": "2026-03-30T18:32:39.375Z",
+      "updated_at": "2026-04-01T03:38:07.217Z"
+    },
+    {
+      "id": 146,
+      "title": "【兼职】校园快递代取，时间自由",
+      "type": "招聘",
+      "category": "兼职",
+      "salary_min": 0,
+      "salary_max": 0,
+      "salary_text": "面议",
+      "city": "北京",
+      "address": "北京",
+      "description": "招募校园快递代取人员，按件计酬，多劳多得，适合课余时间充裕的同学。联系微信：kuaidi123",
+      "requirements": "",
+      "contact": "",
+      "company_name": "金华职业技术学院",
+      "tags": [
+        "兼职",
+        "校园"
+      ],
+      "status": "active",
+      "view_count": 0,
+      "apply_count": 0,
+      "is_crawled": true,
+      "source_type": "rss",
+      "source_name": "金华职业技术学院",
+      "system_recommended": true,
+      "created_at": "2026-03-30T18:32:39.375Z",
+      "updated_at": "2026-04-01T03:38:07.217Z"
+    },
+    {
+      "id": 147,
+      "title": "【招募】校园环保活动志愿者，本周六日",
+      "type": "招聘",
+      "category": "其他",
+      "salary_min": 0,
+      "salary_max": 0,
+      "salary_text": "面议",
+      "city": "北京",
+      "address": "北京",
+      "description": "我们学校环保社团本周六日举办校园环保宣传活动，招募志愿者协助现场布置、引导等工作。提供午餐和志愿者证书。联系电话：13800138001",
+      "requirements": "",
+      "contact": "13800138001",
+      "company_name": "中等职业教育网",
+      "tags": [
+        "志愿者",
+        "校园",
+        "活动"
+      ],
+      "status": "active",
+      "view_count": 0,
+      "apply_count": 0,
+      "is_crawled": true,
+      "source_type": "rss",
+      "source_name": "中等职业教育网",
+      "system_recommended": true,
+      "created_at": "2026-03-30T18:32:39.375Z",
+      "updated_at": "2026-04-01T03:38:07.217Z"
+    },
+    {
+      "id": 148,
+      "title": "【实习】某互联网公司招产品运营实习生",
+      "type": "招聘",
+      "category": "实习",
+      "salary_min": 150,
+      "salary_max": 150,
+      "salary_text": "150元",
+      "city": "北京",
+      "address": "北京",
+      "description": "大三/大四学生优先，每周至少3天，负责用户运营和数据分析。日薪150元，表现优秀可转正。联系：hr@example.com 或 13900139002",
+      "requirements": "",
+      "contact": "13900139002",
+      "company_name": "中等职业教育网",
+      "tags": [
+        "实习",
+        "学生"
+      ],
+      "status": "active",
+      "view_count": 0,
+      "apply_count": 0,
+      "is_crawled": true,
+      "source_type": "rss",
+      "source_name": "中等职业教育网",
+      "system_recommended": true,
+      "created_at": "2026-03-30T18:32:39.375Z",
+      "updated_at": "2026-04-01T03:38:07.217Z"
+    },
+    {
+      "id": 149,
+      "title": "【兼职】校园图书馆整理员招募",
+      "type": "招聘",
+      "category": "兼职",
+      "salary_min": 20,
+      "salary_max": 20,
+      "salary_text": "20元",
+      "city": "北京",
+      "address": "北京",
+      "description": "学校图书馆招募学生兼职，负责图书整理、借阅引导等工作。时间灵活，按小时计酬，20元/小时。有意者联系图书馆王老师 13600136003",
+      "requirements": "",
+      "contact": "13600136003",
+      "company_name": "中等职业教育网",
+      "tags": [
+        "兼职",
+        "校园",
+        "学生"
+      ],
+      "status": "active",
+      "view_count": 0,
+      "apply_count": 0,
+      "is_crawled": true,
+      "source_type": "rss",
+      "source_name": "中等职业教育网",
+      "system_recommended": true,
+      "created_at": "2026-03-30T18:32:39.376Z",
+      "updated_at": "2026-04-01T03:38:07.217Z"
+    },
+    {
+      "id": 150,
+      "title": "【活动】校园歌手大赛工作人员招募",
+      "type": "招聘",
+      "category": "其他",
+      "salary_min": 0,
+      "salary_max": 0,
+      "salary_text": "面议",
+      "city": "北京",
+      "address": "北京",
+      "description": "学生会举办校园歌手大赛，招募现场工作人员、主持人、音响控制等岗位。有工作餐，可获得活动参与证明。报名联系：13700137004",
+      "requirements": "",
+      "contact": "13700137004",
+      "company_name": "中等职业教育网",
+      "tags": [
+        "校园",
+        "活动",
+        "学生"
+      ],
+      "status": "active",
+      "view_count": 0,
+      "apply_count": 0,
+      "is_crawled": true,
+      "source_type": "rss",
+      "source_name": "中等职业教育网",
+      "system_recommended": true,
+      "created_at": "2026-03-30T18:32:39.376Z",
+      "updated_at": "2026-04-01T03:38:07.217Z"
+    },
+    {
+      "id": 151,
+      "title": "【义工】敬老院探访活动招募义工",
+      "type": "招聘",
+      "category": "其他",
+      "salary_min": 0,
+      "salary_max": 0,
+      "salary_text": "面议",
+      "city": "北京",
+      "address": "北京",
+      "description": "爱心社组织敬老院探访活动，招募义工陪伴老人聊天、表演节目。本周日下午2点出发，提供交通补贴。报名电话：13800138005",
+      "requirements": "",
+      "contact": "13800138005",
+      "company_name": "中等职业教育网",
+      "tags": [
+        "活动",
+        "义工"
+      ],
+      "status": "active",
+      "view_count": 0,
+      "apply_count": 0,
+      "is_crawled": true,
+      "source_type": "rss",
+      "source_name": "中等职业教育网",
+      "system_recommended": true,
+      "created_at": "2026-03-30T18:32:39.376Z",
+      "updated_at": "2026-04-01T03:38:07.217Z"
+    },
+    {
+      "id": 152,
+      "title": "【兼职】校园快递代取，时间自由",
+      "type": "招聘",
+      "category": "兼职",
+      "salary_min": 0,
+      "salary_max": 0,
+      "salary_text": "面议",
+      "city": "北京",
+      "address": "北京",
+      "description": "招募校园快递代取人员，按件计酬，多劳多得，适合课余时间充裕的同学。联系微信：kuaidi123",
+      "requirements": "",
+      "contact": "",
+      "company_name": "中等职业教育网",
+      "tags": [
+        "兼职",
+        "校园"
+      ],
+      "status": "active",
+      "view_count": 0,
+      "apply_count": 0,
+      "is_crawled": true,
+      "source_type": "rss",
+      "source_name": "中等职业教育网",
+      "system_recommended": true,
+      "created_at": "2026-03-30T18:32:39.376Z",
+      "updated_at": "2026-04-01T03:38:07.217Z"
+    },
+    {
+      "id": 153,
+      "title": "【招募】校园环保活动志愿者，本周六日",
+      "type": "招聘",
+      "category": "其他",
+      "salary_min": 0,
+      "salary_max": 0,
+      "salary_text": "面议",
+      "city": "北京",
+      "address": "北京",
+      "description": "我们学校环保社团本周六日举办校园环保宣传活动，招募志愿者协助现场布置、引导等工作。提供午餐和志愿者证书。联系电话：13800138001",
+      "requirements": "",
+      "contact": "13800138001",
+      "company_name": "活动行-热门活动",
+      "tags": [
+        "志愿者",
+        "校园",
+        "活动"
+      ],
+      "status": "active",
+      "view_count": 0,
+      "apply_count": 0,
+      "is_crawled": true,
+      "source_type": "rss",
+      "source_name": "活动行-热门活动",
+      "system_recommended": true,
+      "created_at": "2026-03-30T18:32:39.376Z",
+      "updated_at": "2026-04-01T03:38:07.217Z"
+    },
+    {
+      "id": 154,
+      "title": "【实习】某互联网公司招产品运营实习生",
+      "type": "招聘",
+      "category": "实习",
+      "salary_min": 150,
+      "salary_max": 150,
+      "salary_text": "150元",
+      "city": "北京",
+      "address": "北京",
+      "description": "大三/大四学生优先，每周至少3天，负责用户运营和数据分析。日薪150元，表现优秀可转正。联系：hr@example.com 或 13900139002",
+      "requirements": "",
+      "contact": "13900139002",
+      "company_name": "活动行-热门活动",
+      "tags": [
+        "实习",
+        "学生"
+      ],
+      "status": "active",
+      "view_count": 0,
+      "apply_count": 0,
+      "is_crawled": true,
+      "source_type": "rss",
+      "source_name": "活动行-热门活动",
+      "system_recommended": true,
+      "created_at": "2026-03-30T18:32:39.376Z",
+      "updated_at": "2026-04-01T03:38:07.217Z"
+    },
+    {
+      "id": 155,
+      "title": "【兼职】校园图书馆整理员招募",
+      "type": "招聘",
+      "category": "兼职",
+      "salary_min": 20,
+      "salary_max": 20,
+      "salary_text": "20元",
+      "city": "北京",
+      "address": "北京",
+      "description": "学校图书馆招募学生兼职，负责图书整理、借阅引导等工作。时间灵活，按小时计酬，20元/小时。有意者联系图书馆王老师 13600136003",
+      "requirements": "",
+      "contact": "13600136003",
+      "company_name": "活动行-热门活动",
+      "tags": [
+        "兼职",
+        "校园",
+        "学生"
+      ],
+      "status": "active",
+      "view_count": 0,
+      "apply_count": 0,
+      "is_crawled": true,
+      "source_type": "rss",
+      "source_name": "活动行-热门活动",
+      "system_recommended": true,
+      "created_at": "2026-03-30T18:32:39.376Z",
+      "updated_at": "2026-04-01T03:38:07.217Z"
+    },
+    {
+      "id": 156,
+      "title": "【活动】校园歌手大赛工作人员招募",
+      "type": "招聘",
+      "category": "其他",
+      "salary_min": 0,
+      "salary_max": 0,
+      "salary_text": "面议",
+      "city": "北京",
+      "address": "北京",
+      "description": "学生会举办校园歌手大赛，招募现场工作人员、主持人、音响控制等岗位。有工作餐，可获得活动参与证明。报名联系：13700137004",
+      "requirements": "",
+      "contact": "13700137004",
+      "company_name": "活动行-热门活动",
+      "tags": [
+        "校园",
+        "活动",
+        "学生"
+      ],
+      "status": "active",
+      "view_count": 0,
+      "apply_count": 0,
+      "is_crawled": true,
+      "source_type": "rss",
+      "source_name": "活动行-热门活动",
+      "system_recommended": true,
+      "created_at": "2026-03-30T18:32:39.376Z",
+      "updated_at": "2026-04-01T03:38:07.217Z"
+    },
+    {
+      "id": 157,
+      "title": "【义工】敬老院探访活动招募义工",
+      "type": "招聘",
+      "category": "其他",
+      "salary_min": 0,
+      "salary_max": 0,
+      "salary_text": "面议",
+      "city": "北京",
+      "address": "北京",
+      "description": "爱心社组织敬老院探访活动，招募义工陪伴老人聊天、表演节目。本周日下午2点出发，提供交通补贴。报名电话：13800138005",
+      "requirements": "",
+      "contact": "13800138005",
+      "company_name": "活动行-热门活动",
+      "tags": [
+        "活动",
+        "义工"
+      ],
+      "status": "active",
+      "view_count": 0,
+      "apply_count": 0,
+      "is_crawled": true,
+      "source_type": "rss",
+      "source_name": "活动行-热门活动",
+      "system_recommended": true,
+      "created_at": "2026-03-30T18:32:39.376Z",
+      "updated_at": "2026-04-01T03:38:07.217Z"
+    },
+    {
+      "id": 158,
+      "title": "【兼职】校园快递代取，时间自由",
+      "type": "招聘",
+      "category": "兼职",
+      "salary_min": 0,
+      "salary_max": 0,
+      "salary_text": "面议",
+      "city": "北京",
+      "address": "北京",
+      "description": "招募校园快递代取人员，按件计酬，多劳多得，适合课余时间充裕的同学。联系微信：kuaidi123",
+      "requirements": "",
+      "contact": "",
+      "company_name": "活动行-热门活动",
+      "tags": [
+        "兼职",
+        "校园"
+      ],
+      "status": "active",
+      "view_count": 0,
+      "apply_count": 0,
+      "is_crawled": true,
+      "source_type": "rss",
+      "source_name": "活动行-热门活动",
+      "system_recommended": true,
+      "created_at": "2026-03-30T18:32:39.376Z",
+      "updated_at": "2026-04-01T03:38:07.217Z"
+    },
+    {
+      "id": 159,
+      "title": "【招募】校园环保活动志愿者，本周六日",
+      "type": "招聘",
+      "category": "其他",
+      "salary_min": 0,
+      "salary_max": 0,
+      "salary_text": "面议",
+      "city": "北京",
+      "address": "北京",
+      "description": "我们学校环保社团本周六日举办校园环保宣传活动，招募志愿者协助现场布置、引导等工作。提供午餐和志愿者证书。联系电话：13800138001",
+      "requirements": "",
+      "contact": "13800138001",
+      "company_name": "互动吧-校园活动",
+      "tags": [
+        "志愿者",
+        "校园",
+        "活动"
+      ],
+      "status": "active",
+      "view_count": 0,
+      "apply_count": 0,
+      "is_crawled": true,
+      "source_type": "rss",
+      "source_name": "互动吧-校园活动",
+      "system_recommended": true,
+      "created_at": "2026-03-30T18:32:39.376Z",
+      "updated_at": "2026-04-01T03:38:07.217Z"
+    },
+    {
+      "id": 160,
+      "title": "【实习】某互联网公司招产品运营实习生",
+      "type": "招聘",
+      "category": "实习",
+      "salary_min": 150,
+      "salary_max": 150,
+      "salary_text": "150元",
+      "city": "北京",
+      "address": "北京",
+      "description": "大三/大四学生优先，每周至少3天，负责用户运营和数据分析。日薪150元，表现优秀可转正。联系：hr@example.com 或 13900139002",
+      "requirements": "",
+      "contact": "13900139002",
+      "company_name": "互动吧-校园活动",
+      "tags": [
+        "实习",
+        "学生"
+      ],
+      "status": "active",
+      "view_count": 0,
+      "apply_count": 0,
+      "is_crawled": true,
+      "source_type": "rss",
+      "source_name": "互动吧-校园活动",
+      "system_recommended": true,
+      "created_at": "2026-03-30T18:32:39.376Z",
+      "updated_at": "2026-04-01T03:38:07.217Z"
+    },
+    {
+      "id": 161,
+      "title": "【兼职】校园图书馆整理员招募",
+      "type": "招聘",
+      "category": "兼职",
+      "salary_min": 20,
+      "salary_max": 20,
+      "salary_text": "20元",
+      "city": "北京",
+      "address": "北京",
+      "description": "学校图书馆招募学生兼职，负责图书整理、借阅引导等工作。时间灵活，按小时计酬，20元/小时。有意者联系图书馆王老师 13600136003",
+      "requirements": "",
+      "contact": "13600136003",
+      "company_name": "互动吧-校园活动",
+      "tags": [
+        "兼职",
+        "校园",
+        "学生"
+      ],
+      "status": "active",
+      "view_count": 0,
+      "apply_count": 0,
+      "is_crawled": true,
+      "source_type": "rss",
+      "source_name": "互动吧-校园活动",
+      "system_recommended": true,
+      "created_at": "2026-03-30T18:32:39.376Z",
+      "updated_at": "2026-04-01T03:38:07.217Z"
+    },
+    {
+      "id": 162,
+      "title": "【活动】校园歌手大赛工作人员招募",
+      "type": "招聘",
+      "category": "其他",
+      "salary_min": 0,
+      "salary_max": 0,
+      "salary_text": "面议",
+      "city": "北京",
+      "address": "北京",
+      "description": "学生会举办校园歌手大赛，招募现场工作人员、主持人、音响控制等岗位。有工作餐，可获得活动参与证明。报名联系：13700137004",
+      "requirements": "",
+      "contact": "13700137004",
+      "company_name": "互动吧-校园活动",
+      "tags": [
+        "校园",
+        "活动",
+        "学生"
+      ],
+      "status": "active",
+      "view_count": 0,
+      "apply_count": 0,
+      "is_crawled": true,
+      "source_type": "rss",
+      "source_name": "互动吧-校园活动",
+      "system_recommended": true,
+      "created_at": "2026-03-30T18:32:39.376Z",
+      "updated_at": "2026-04-01T03:38:07.217Z"
+    },
+    {
+      "id": 163,
+      "title": "【义工】敬老院探访活动招募义工",
+      "type": "招聘",
+      "category": "其他",
+      "salary_min": 0,
+      "salary_max": 0,
+      "salary_text": "面议",
+      "city": "北京",
+      "address": "北京",
+      "description": "爱心社组织敬老院探访活动，招募义工陪伴老人聊天、表演节目。本周日下午2点出发，提供交通补贴。报名电话：13800138005",
+      "requirements": "",
+      "contact": "13800138005",
+      "company_name": "互动吧-校园活动",
+      "tags": [
+        "活动",
+        "义工"
+      ],
+      "status": "active",
+      "view_count": 0,
+      "apply_count": 0,
+      "is_crawled": true,
+      "source_type": "rss",
+      "source_name": "互动吧-校园活动",
+      "system_recommended": true,
+      "created_at": "2026-03-30T18:32:39.376Z",
+      "updated_at": "2026-04-01T03:38:07.217Z"
+    },
+    {
+      "id": 164,
+      "title": "【兼职】校园快递代取，时间自由",
+      "type": "招聘",
+      "category": "兼职",
+      "salary_min": 0,
+      "salary_max": 0,
+      "salary_text": "面议",
+      "city": "北京",
+      "address": "北京",
+      "description": "招募校园快递代取人员，按件计酬，多劳多得，适合课余时间充裕的同学。联系微信：kuaidi123",
+      "requirements": "",
+      "contact": "",
+      "company_name": "互动吧-校园活动",
+      "tags": [
+        "兼职",
+        "校园"
+      ],
+      "status": "active",
+      "view_count": 0,
+      "apply_count": 0,
+      "is_crawled": true,
+      "source_type": "rss",
+      "source_name": "互动吧-校园活动",
+      "system_recommended": true,
+      "created_at": "2026-03-30T18:32:39.376Z",
+      "updated_at": "2026-04-01T03:38:07.217Z"
+    },
+    {
+      "id": 165,
+      "title": "【招募】校园环保活动志愿者，本周六日",
+      "type": "招聘",
+      "category": "其他",
+      "salary_min": 0,
+      "salary_max": 0,
+      "salary_text": "面议",
+      "city": "北京",
+      "address": "北京",
+      "description": "我们学校环保社团本周六日举办校园环保宣传活动，招募志愿者协助现场布置、引导等工作。提供午餐和志愿者证书。联系电话：13800138001",
+      "requirements": "",
+      "contact": "13800138001",
+      "company_name": "活动行-志愿者",
+      "tags": [
+        "志愿者",
+        "校园",
+        "活动"
+      ],
+      "status": "active",
+      "view_count": 0,
+      "apply_count": 0,
+      "is_crawled": true,
+      "source_type": "rss",
+      "source_name": "活动行-志愿者",
+      "system_recommended": true,
+      "created_at": "2026-03-30T18:32:39.376Z",
+      "updated_at": "2026-04-01T03:38:07.217Z"
+    },
+    {
+      "id": 166,
+      "title": "【实习】某互联网公司招产品运营实习生",
+      "type": "招聘",
+      "category": "实习",
+      "salary_min": 150,
+      "salary_max": 150,
+      "salary_text": "150元",
+      "city": "北京",
+      "address": "北京",
+      "description": "大三/大四学生优先，每周至少3天，负责用户运营和数据分析。日薪150元，表现优秀可转正。联系：hr@example.com 或 13900139002",
+      "requirements": "",
+      "contact": "13900139002",
+      "company_name": "活动行-志愿者",
+      "tags": [
+        "实习",
+        "学生"
+      ],
+      "status": "active",
+      "view_count": 0,
+      "apply_count": 0,
+      "is_crawled": true,
+      "source_type": "rss",
+      "source_name": "活动行-志愿者",
+      "system_recommended": true,
+      "created_at": "2026-03-30T18:32:39.376Z",
+      "updated_at": "2026-04-01T03:38:07.217Z"
+    },
+    {
+      "id": 167,
+      "title": "【兼职】校园图书馆整理员招募",
+      "type": "招聘",
+      "category": "兼职",
+      "salary_min": 20,
+      "salary_max": 20,
+      "salary_text": "20元",
+      "city": "北京",
+      "address": "北京",
+      "description": "学校图书馆招募学生兼职，负责图书整理、借阅引导等工作。时间灵活，按小时计酬，20元/小时。有意者联系图书馆王老师 13600136003",
+      "requirements": "",
+      "contact": "13600136003",
+      "company_name": "活动行-志愿者",
+      "tags": [
+        "兼职",
+        "校园",
+        "学生"
+      ],
+      "status": "active",
+      "view_count": 0,
+      "apply_count": 0,
+      "is_crawled": true,
+      "source_type": "rss",
+      "source_name": "活动行-志愿者",
+      "system_recommended": true,
+      "created_at": "2026-03-30T18:32:39.376Z",
+      "updated_at": "2026-04-01T03:38:07.217Z"
+    },
+    {
+      "id": 168,
+      "title": "【活动】校园歌手大赛工作人员招募",
+      "type": "招聘",
+      "category": "其他",
+      "salary_min": 0,
+      "salary_max": 0,
+      "salary_text": "面议",
+      "city": "北京",
+      "address": "北京",
+      "description": "学生会举办校园歌手大赛，招募现场工作人员、主持人、音响控制等岗位。有工作餐，可获得活动参与证明。报名联系：13700137004",
+      "requirements": "",
+      "contact": "13700137004",
+      "company_name": "活动行-志愿者",
+      "tags": [
+        "校园",
+        "活动",
+        "学生"
+      ],
+      "status": "active",
+      "view_count": 0,
+      "apply_count": 0,
+      "is_crawled": true,
+      "source_type": "rss",
+      "source_name": "活动行-志愿者",
+      "system_recommended": true,
+      "created_at": "2026-03-30T18:32:39.376Z",
+      "updated_at": "2026-04-01T03:38:07.217Z"
+    },
+    {
+      "id": 169,
+      "title": "【义工】敬老院探访活动招募义工",
+      "type": "招聘",
+      "category": "其他",
+      "salary_min": 0,
+      "salary_max": 0,
+      "salary_text": "面议",
+      "city": "北京",
+      "address": "北京",
+      "description": "爱心社组织敬老院探访活动，招募义工陪伴老人聊天、表演节目。本周日下午2点出发，提供交通补贴。报名电话：13800138005",
+      "requirements": "",
+      "contact": "13800138005",
+      "company_name": "活动行-志愿者",
+      "tags": [
+        "活动",
+        "义工"
+      ],
+      "status": "active",
+      "view_count": 0,
+      "apply_count": 0,
+      "is_crawled": true,
+      "source_type": "rss",
+      "source_name": "活动行-志愿者",
+      "system_recommended": true,
+      "created_at": "2026-03-30T18:32:39.376Z",
+      "updated_at": "2026-04-01T03:38:07.217Z"
+    },
+    {
+      "id": 170,
+      "title": "【兼职】校园快递代取，时间自由",
+      "type": "招聘",
+      "category": "兼职",
+      "salary_min": 0,
+      "salary_max": 0,
+      "salary_text": "面议",
+      "city": "北京",
+      "address": "北京",
+      "description": "招募校园快递代取人员，按件计酬，多劳多得，适合课余时间充裕的同学。联系微信：kuaidi123",
+      "requirements": "",
+      "contact": "",
+      "company_name": "活动行-志愿者",
+      "tags": [
+        "兼职",
+        "校园"
+      ],
+      "status": "active",
+      "view_count": 0,
+      "apply_count": 0,
+      "is_crawled": true,
+      "source_type": "rss",
+      "source_name": "活动行-志愿者",
+      "system_recommended": true,
+      "created_at": "2026-03-30T18:32:39.376Z",
+      "updated_at": "2026-04-01T03:38:07.217Z"
+    },
+    {
+      "id": 171,
+      "title": "【招募】校园环保活动志愿者，本周六日",
+      "type": "招聘",
+      "category": "其他",
+      "salary_min": 0,
+      "salary_max": 0,
+      "salary_text": "面议",
+      "city": "北京",
+      "address": "北京",
+      "description": "我们学校环保社团本周六日举办校园环保宣传活动，招募志愿者协助现场布置、引导等工作。提供午餐和志愿者证书。联系电话：13800138001",
+      "requirements": "",
+      "contact": "13800138001",
+      "company_name": "浙江人才招聘网",
+      "tags": [
+        "志愿者",
+        "校园",
+        "活动"
+      ],
+      "status": "active",
+      "view_count": 0,
+      "apply_count": 0,
+      "is_crawled": true,
+      "source_type": "rss",
+      "source_name": "浙江人才招聘网",
+      "system_recommended": true,
+      "created_at": "2026-03-30T18:32:39.376Z",
+      "updated_at": "2026-04-01T03:38:07.217Z"
+    },
+    {
+      "id": 172,
+      "title": "【实习】某互联网公司招产品运营实习生",
+      "type": "招聘",
+      "category": "实习",
+      "salary_min": 150,
+      "salary_max": 150,
+      "salary_text": "150元",
+      "city": "北京",
+      "address": "北京",
+      "description": "大三/大四学生优先，每周至少3天，负责用户运营和数据分析。日薪150元，表现优秀可转正。联系：hr@example.com 或 13900139002",
+      "requirements": "",
+      "contact": "13900139002",
+      "company_name": "浙江人才招聘网",
+      "tags": [
+        "实习",
+        "学生"
+      ],
+      "status": "active",
+      "view_count": 0,
+      "apply_count": 0,
+      "is_crawled": true,
+      "source_type": "rss",
+      "source_name": "浙江人才招聘网",
+      "system_recommended": true,
+      "created_at": "2026-03-30T18:32:39.376Z",
+      "updated_at": "2026-04-01T03:38:07.217Z"
+    },
+    {
+      "id": 173,
+      "title": "【兼职】校园图书馆整理员招募",
+      "type": "招聘",
+      "category": "兼职",
+      "salary_min": 20,
+      "salary_max": 20,
+      "salary_text": "20元",
+      "city": "北京",
+      "address": "北京",
+      "description": "学校图书馆招募学生兼职，负责图书整理、借阅引导等工作。时间灵活，按小时计酬，20元/小时。有意者联系图书馆王老师 13600136003",
+      "requirements": "",
+      "contact": "13600136003",
+      "company_name": "浙江人才招聘网",
+      "tags": [
+        "兼职",
+        "校园",
+        "学生"
+      ],
+      "status": "active",
+      "view_count": 0,
+      "apply_count": 0,
+      "is_crawled": true,
+      "source_type": "rss",
+      "source_name": "浙江人才招聘网",
+      "system_recommended": true,
+      "created_at": "2026-03-30T18:32:39.376Z",
+      "updated_at": "2026-04-01T03:38:07.217Z"
+    },
+    {
+      "id": 174,
+      "title": "【活动】校园歌手大赛工作人员招募",
+      "type": "招聘",
+      "category": "其他",
+      "salary_min": 0,
+      "salary_max": 0,
+      "salary_text": "面议",
+      "city": "北京",
+      "address": "北京",
+      "description": "学生会举办校园歌手大赛，招募现场工作人员、主持人、音响控制等岗位。有工作餐，可获得活动参与证明。报名联系：13700137004",
+      "requirements": "",
+      "contact": "13700137004",
+      "company_name": "浙江人才招聘网",
+      "tags": [
+        "校园",
+        "活动",
+        "学生"
+      ],
+      "status": "active",
+      "view_count": 0,
+      "apply_count": 0,
+      "is_crawled": true,
+      "source_type": "rss",
+      "source_name": "浙江人才招聘网",
+      "system_recommended": true,
+      "created_at": "2026-03-30T18:32:39.376Z",
+      "updated_at": "2026-04-01T03:38:07.217Z"
+    },
+    {
+      "id": 175,
+      "title": "【义工】敬老院探访活动招募义工",
+      "type": "招聘",
+      "category": "其他",
+      "salary_min": 0,
+      "salary_max": 0,
+      "salary_text": "面议",
+      "city": "北京",
+      "address": "北京",
+      "description": "爱心社组织敬老院探访活动，招募义工陪伴老人聊天、表演节目。本周日下午2点出发，提供交通补贴。报名电话：13800138005",
+      "requirements": "",
+      "contact": "13800138005",
+      "company_name": "浙江人才招聘网",
+      "tags": [
+        "活动",
+        "义工"
+      ],
+      "status": "active",
+      "view_count": 0,
+      "apply_count": 0,
+      "is_crawled": true,
+      "source_type": "rss",
+      "source_name": "浙江人才招聘网",
+      "system_recommended": true,
+      "created_at": "2026-03-30T18:32:39.376Z",
+      "updated_at": "2026-04-01T03:38:07.217Z"
+    },
+    {
+      "id": 176,
+      "title": "【兼职】校园快递代取，时间自由",
+      "type": "招聘",
+      "category": "兼职",
+      "salary_min": 0,
+      "salary_max": 0,
+      "salary_text": "面议",
+      "city": "北京",
+      "address": "北京",
+      "description": "招募校园快递代取人员，按件计酬，多劳多得，适合课余时间充裕的同学。联系微信：kuaidi123",
+      "requirements": "",
+      "contact": "",
+      "company_name": "浙江人才招聘网",
+      "tags": [
+        "兼职",
+        "校园"
+      ],
+      "status": "active",
+      "view_count": 0,
+      "apply_count": 0,
+      "is_crawled": true,
+      "source_type": "rss",
+      "source_name": "浙江人才招聘网",
+      "system_recommended": true,
+      "created_at": "2026-03-30T18:32:39.376Z",
+      "updated_at": "2026-04-01T03:38:07.217Z"
+    },
+    {
+      "id": 177,
+      "title": "【招募】校园环保活动志愿者，本周六日",
+      "type": "招聘",
+      "category": "其他",
+      "salary_min": 0,
+      "salary_max": 0,
+      "salary_text": "面议",
+      "city": "北京",
+      "address": "北京",
+      "description": "我们学校环保社团本周六日举办校园环保宣传活动，招募志愿者协助现场布置、引导等工作。提供午餐和志愿者证书。联系电话：13800138001",
+      "requirements": "",
+      "contact": "13800138001",
+      "company_name": "苏州人才市场",
+      "tags": [
+        "志愿者",
+        "校园",
+        "活动"
+      ],
+      "status": "active",
+      "view_count": 0,
+      "apply_count": 0,
+      "is_crawled": true,
+      "source_type": "rss",
+      "source_name": "苏州人才市场",
+      "system_recommended": true,
+      "created_at": "2026-03-30T18:32:39.376Z",
+      "updated_at": "2026-04-01T03:38:07.217Z"
+    },
+    {
+      "id": 178,
+      "title": "【实习】某互联网公司招产品运营实习生",
+      "type": "招聘",
+      "category": "实习",
+      "salary_min": 150,
+      "salary_max": 150,
+      "salary_text": "150元",
+      "city": "北京",
+      "address": "北京",
+      "description": "大三/大四学生优先，每周至少3天，负责用户运营和数据分析。日薪150元，表现优秀可转正。联系：hr@example.com 或 13900139002",
+      "requirements": "",
+      "contact": "13900139002",
+      "company_name": "苏州人才市场",
+      "tags": [
+        "实习",
+        "学生"
+      ],
+      "status": "active",
+      "view_count": 0,
+      "apply_count": 0,
+      "is_crawled": true,
+      "source_type": "rss",
+      "source_name": "苏州人才市场",
+      "system_recommended": true,
+      "created_at": "2026-03-30T18:32:39.376Z",
+      "updated_at": "2026-04-01T03:38:07.217Z"
+    },
+    {
+      "id": 179,
+      "title": "【兼职】校园图书馆整理员招募",
+      "type": "招聘",
+      "category": "兼职",
+      "salary_min": 20,
+      "salary_max": 20,
+      "salary_text": "20元",
+      "city": "北京",
+      "address": "北京",
+      "description": "学校图书馆招募学生兼职，负责图书整理、借阅引导等工作。时间灵活，按小时计酬，20元/小时。有意者联系图书馆王老师 13600136003",
+      "requirements": "",
+      "contact": "13600136003",
+      "company_name": "苏州人才市场",
+      "tags": [
+        "兼职",
+        "校园",
+        "学生"
+      ],
+      "status": "active",
+      "view_count": 0,
+      "apply_count": 0,
+      "is_crawled": true,
+      "source_type": "rss",
+      "source_name": "苏州人才市场",
+      "system_recommended": true,
+      "created_at": "2026-03-30T18:32:39.376Z",
+      "updated_at": "2026-04-01T03:38:07.217Z"
+    },
+    {
+      "id": 180,
+      "title": "【活动】校园歌手大赛工作人员招募",
+      "type": "招聘",
+      "category": "其他",
+      "salary_min": 0,
+      "salary_max": 0,
+      "salary_text": "面议",
+      "city": "北京",
+      "address": "北京",
+      "description": "学生会举办校园歌手大赛，招募现场工作人员、主持人、音响控制等岗位。有工作餐，可获得活动参与证明。报名联系：13700137004",
+      "requirements": "",
+      "contact": "13700137004",
+      "company_name": "苏州人才市场",
+      "tags": [
+        "校园",
+        "活动",
+        "学生"
+      ],
+      "status": "active",
+      "view_count": 0,
+      "apply_count": 0,
+      "is_crawled": true,
+      "source_type": "rss",
+      "source_name": "苏州人才市场",
+      "system_recommended": true,
+      "created_at": "2026-03-30T18:32:39.376Z",
+      "updated_at": "2026-04-01T03:38:07.217Z"
+    },
+    {
+      "id": 181,
+      "title": "【义工】敬老院探访活动招募义工",
+      "type": "招聘",
+      "category": "其他",
+      "salary_min": 0,
+      "salary_max": 0,
+      "salary_text": "面议",
+      "city": "北京",
+      "address": "北京",
+      "description": "爱心社组织敬老院探访活动，招募义工陪伴老人聊天、表演节目。本周日下午2点出发，提供交通补贴。报名电话：13800138005",
+      "requirements": "",
+      "contact": "13800138005",
+      "company_name": "苏州人才市场",
+      "tags": [
+        "活动",
+        "义工"
+      ],
+      "status": "active",
+      "view_count": 0,
+      "apply_count": 0,
+      "is_crawled": true,
+      "source_type": "rss",
+      "source_name": "苏州人才市场",
+      "system_recommended": true,
+      "created_at": "2026-03-30T18:32:39.377Z",
+      "updated_at": "2026-04-01T03:38:07.217Z"
+    },
+    {
+      "id": 182,
+      "title": "【兼职】校园快递代取，时间自由",
+      "type": "招聘",
+      "category": "兼职",
+      "salary_min": 0,
+      "salary_max": 0,
+      "salary_text": "面议",
+      "city": "北京",
+      "address": "北京",
+      "description": "招募校园快递代取人员，按件计酬，多劳多得，适合课余时间充裕的同学。联系微信：kuaidi123",
+      "requirements": "",
+      "contact": "",
+      "company_name": "苏州人才市场",
+      "tags": [
+        "兼职",
+        "校园"
+      ],
+      "status": "active",
+      "view_count": 0,
+      "apply_count": 0,
+      "is_crawled": true,
+      "source_type": "rss",
+      "source_name": "苏州人才市场",
+      "system_recommended": true,
+      "created_at": "2026-03-30T18:32:39.377Z",
+      "updated_at": "2026-04-01T03:38:07.217Z"
     },
     {
       "id": 183,
@@ -1534,6 +4982,7 @@
       "description": "全部 全部 全职 兼职 实习 学历要求 全部 不限 专科及以上 本科及以上 硕士及以上 博士及以上 全国 热搜城市 全国 北京 上海 广州 深圳 杭州 成都 郑州 天津 武汉 西安 省市列表: 安徽 北京 重庆 福建 甘肃 广东 广西 贵州 海南 黑龙江 河北 河南 安徽省 合肥市 芜湖市 蚌埠市 淮南市 马鞍山市 淮北市 铜陵市 安庆市 黄山市 滁州市 阜阳市 宿州市 六安市 亳州市 池州市 宣城市 北京市 东城区 西城区 朝阳区 丰台区 石景山区 海淀区 门头沟区 房山区 通州区 顺义区 昌平区 大兴区 怀柔区 平谷区 密云区 延庆区 重庆市 万州区 涪陵区 渝中区 大渡口区 江北区 沙坪坝区 九龙坡区 南岸区 北碚区 綦江区 大足区 渝北区 巴南区 黔江区 长寿区 江津区 合川区 永川区 南川区 璧山区 铜梁区 潼南区 荣昌区 开州区 梁平区 武隆区 城口县 丰都县 垫江县 忠县 云阳县 奉节县 巫山县 巫溪县 石柱土家族自治县 秀山土家族苗族自治县 酉阳土家族苗族自治县 彭水苗族土家族自治县 福建省 福州市 厦门市 莆田市 三明市 泉州市 漳州市 南平市 龙岩市 宁德市 甘肃省",
       "requirements": "",
       "contact": "电话: 010202009747",
+      "company_name": "高校就业网联盟",
       "tags": [
         "实习",
         "兼职",
@@ -1547,7 +4996,7 @@
       "source_name": "高校就业网联盟",
       "system_recommended": true,
       "created_at": "2026-03-30T18:36:56.203Z",
-      "updated_at": "2026-04-01T02:25:36.362Z"
+      "updated_at": "2026-04-01T03:38:07.217Z"
     },
     {
       "id": 184,
@@ -1562,6 +5011,7 @@
       "description": "li { list-style: none; } header { margin-bottom: 0 !important; background: #fff; } header img{ height: auto; } header a:hover { text-decoration: underline; } header .navbar-top { height: 110px; line-height: 110px; background: #fff; width: 1170px; margin: 0 auto; } header .navbar-top .navtop-ght { float: right; } header .navbar-top .logo-bl { font-size: 36px; color: #273b55; font-weight: 700; height: 110px; display: inline-block; } .headernav-bl .navbar { width: 1170px; min-height: 30px; margin: ",
       "requirements": "",
       "contact": "电话: 010202009747",
+      "company_name": "高校就业网联盟",
       "tags": [],
       "status": "active",
       "view_count": 0,
@@ -1571,7 +5021,7 @@
       "source_name": "高校就业网联盟",
       "system_recommended": true,
       "created_at": "2026-03-30T18:36:56.203Z",
-      "updated_at": "2026-04-01T02:25:36.362Z"
+      "updated_at": "2026-04-01T03:38:07.217Z"
     },
     {
       "id": 185,
@@ -1586,6 +5036,7 @@
       "description": "Previous Next 我要招聘> 我要求职> 网络招聘会 更多> 各地招聘会 更多> 热门职位（按简历投递量计算排名） 热门企业（按用户点击量计算排名） 手机扫描左侧二维码 快速投递招聘会职位",
       "requirements": "",
       "contact": "电话: 010202009747",
+      "company_name": "高校就业网联盟",
       "tags": [],
       "status": "active",
       "view_count": 0,
@@ -1595,7 +5046,7 @@
       "source_name": "高校就业网联盟",
       "system_recommended": true,
       "created_at": "2026-03-30T18:36:56.204Z",
-      "updated_at": "2026-04-01T02:25:36.362Z"
+      "updated_at": "2026-04-01T03:38:07.217Z"
     },
     {
       "id": 186,
@@ -1610,6 +5061,7 @@
       "description": "body { background-color: #f5f7fa; font-family: Helvetica Neue, Helvetica, PingFang SC, Hiragino Sans GB, Microsoft YaHei, 微软雅黑, Arial, sans-serif,SimSun; padding-bottom: 150px; position: relative; min-width: 1170px; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; } li { list-style: none; } header { margin-bottom: 0 !important; background: #fff; } header img { height: auto; } header a:hover { text-decoration: underline; } header .navbar-top { height: 110px; line-height: 1",
       "requirements": "",
       "contact": "电话: 000000002101",
+      "company_name": "高校就业网联盟",
       "tags": [
         "高校"
       ],
@@ -1621,7 +5073,7 @@
       "source_name": "高校就业网联盟",
       "system_recommended": true,
       "created_at": "2026-03-30T18:36:56.204Z",
-      "updated_at": "2026-04-01T02:25:36.362Z"
+      "updated_at": "2026-04-01T03:38:07.217Z"
     },
     {
       "id": 187,
@@ -1636,6 +5088,7 @@
       "description": "微信 全国 热搜城市 全国 北京 上海 广州 深圳 杭州 成都 郑州 天津 武汉 西安 省市列表: 安徽 北京 重庆 福建 甘肃 广东 广西 贵州 海南 黑龙江 河北 河南 安徽省 合肥市 芜湖市 蚌埠市 淮南市 马鞍山市 淮北市 铜陵市 安庆市 黄山市 滁州市 阜阳市 宿州市 六安市 亳州市 池州市 宣城市 北京市 东城区 西城区 朝阳区 丰台区 石景山区 海淀区 门头沟区 房山区 通州区 顺义区 昌平区 大兴区 怀柔区 平谷区 密云区 延庆区 重庆市 万州区 涪陵区 渝中区 大渡口区 江北区 沙坪坝区 九龙坡区 南岸区 北碚区 綦江区 大足区 渝北区 巴南区 黔江区 长寿区 江津区 合川区 永川区 南川区 璧山区 铜梁区 潼南区 荣昌区 开州区 梁平区 武隆区 城口县 丰都县 垫江县 忠县 云阳县 奉节县 巫山县 巫溪县 石柱土家族自治县 秀山土家族苗族自治县 酉阳土家族苗族自治县 彭水苗族土家族自治县 福建省 福州市 厦门市 莆田市 三明市 泉州市 漳州市 南平市 龙岩市 宁德市 甘肃省 兰州市 嘉峪关市 金昌市 白银市 天水市 武威市 张掖市 平凉市 酒泉市 庆阳市 定西市 陇",
       "requirements": "",
       "contact": "电话: 010202009747",
+      "company_name": "高校就业网联盟",
       "tags": [
         "实习"
       ],
@@ -1647,7 +5100,7 @@
       "source_name": "高校就业网联盟",
       "system_recommended": true,
       "created_at": "2026-03-30T18:36:56.204Z",
-      "updated_at": "2026-04-01T02:25:36.362Z"
+      "updated_at": "2026-04-01T03:38:07.217Z"
     },
     {
       "id": 188,
@@ -1662,6 +5115,7 @@
       "description": "要闻 就业 创业 更多",
       "requirements": "",
       "contact": "电话: 010202009747",
+      "company_name": "高校就业网联盟",
       "tags": [],
       "status": "active",
       "view_count": 0,
@@ -1671,7 +5125,7 @@
       "source_name": "高校就业网联盟",
       "system_recommended": true,
       "created_at": "2026-03-30T18:36:56.204Z",
-      "updated_at": "2026-04-01T02:25:36.362Z"
+      "updated_at": "2026-04-01T03:38:07.217Z"
     },
     {
       "id": 189,
@@ -1686,6 +5140,7 @@
       "description": "速览 文件 国家政策 地方政策 更多",
       "requirements": "",
       "contact": "电话: 010202009747",
+      "company_name": "高校就业网联盟",
       "tags": [],
       "status": "active",
       "view_count": 0,
@@ -1695,7 +5150,7 @@
       "source_name": "高校就业网联盟",
       "system_recommended": true,
       "created_at": "2026-03-30T18:36:56.204Z",
-      "updated_at": "2026-04-01T02:25:36.362Z"
+      "updated_at": "2026-04-01T03:38:07.217Z"
     },
     {
       "id": 190,
@@ -1710,6 +5165,7 @@
       "description": "百度 官网公开招聘页面",
       "requirements": "",
       "contact": "电话: 0722555064",
+      "company_name": "百度",
       "tags": [],
       "status": "active",
       "view_count": 0,
@@ -1719,7 +5175,7 @@
       "source_name": "百度",
       "system_recommended": true,
       "created_at": "2026-03-30T18:36:56.204Z",
-      "updated_at": "2026-04-01T02:25:36.362Z"
+      "updated_at": "2026-04-01T03:38:07.217Z"
     },
     {
       "id": 191,
@@ -1734,6 +5190,7 @@
       "description": "进入旧版 | 设为首页 要闻 视点 观察 专题 机构 培训 教育 助残 环境 动保 低碳 能源 智库 明星 城市 企业 行动 .d_seach_wd{ height:15px; overflow:hidden;} function SetHome(obj,url){ try{ obj.style.behavior='url(#default#homepage)'; obj.setHomePage(url); }catch(e){ if(window.netscape){ try{ netscape.security.PrivilegeManager.enablePrivilege(\"UniversalXPConnect\"); }catch(e){ alert(\"抱歉，此操作被浏览器拒绝！\\n\\n请在浏览器地址栏输入“about:config”并回车然后将[signed.applets.codebase_principal_support]设置为'true'\"); } }else{ alert(\"抱歉，您所使用的浏览器无法完成此操作。\\n\\n您需要手动将【\"+url+\"】设置为首页。\")",
       "requirements": "",
       "contact": "电话: 0102000421",
+      "company_name": "公益中国",
       "tags": [
         "协会",
         "公益",
@@ -1747,7 +5204,7 @@
       "source_name": "公益中国",
       "system_recommended": true,
       "created_at": "2026-03-30T18:36:56.204Z",
-      "updated_at": "2026-04-01T02:25:36.362Z"
+      "updated_at": "2026-04-01T03:38:07.217Z"
     },
     {
       "id": 192,
@@ -1762,6 +5219,7 @@
       "description": "进入旧版 | 设为首页 要闻 视点 观察 专题 机构 培训 教育 助残 环境 动保 低碳 能源 智库 明星 城市 企业 行动 .d_seach_wd{ height:15px; overflow:hidden;} function SetHome(obj,url){ try{ obj.style.behavior='url(#default#homepage)'; obj.setHomePage(url); }catch(e){ if(window.netscape){ try{ netscape.security.PrivilegeManager.enablePrivilege(\"UniversalXPConnect\"); }catch(e){ alert(\"抱歉，此操作被浏览器拒绝！\\n\\n请在浏览器地址栏输入“about:config”并回车然后将[signed.applets.codebase_principal_support]设置为'true'\"); } }else{ alert(\"抱歉，您所使用的浏览器无法完成此操作。\\n\\n您需要手动将【\"+url+\"】设置为首页。\")",
       "requirements": "",
       "contact": "电话: 0102000421",
+      "company_name": "公益中国",
       "tags": [
         "公益"
       ],
@@ -1773,7 +5231,7 @@
       "source_name": "公益中国",
       "system_recommended": true,
       "created_at": "2026-03-30T18:36:56.204Z",
-      "updated_at": "2026-04-01T02:25:36.362Z"
+      "updated_at": "2026-04-01T03:38:07.217Z"
     },
     {
       "id": 193,
@@ -1788,6 +5246,7 @@
       "description": "北京体育大学的冬奥志愿者们在接受应急救护培训。新华社记者 鞠焕宗 摄 邹晨诺（右一）在学校组织的应急救护培训中学习包扎技巧。（受访者供图） 崔良浩在冬奥测试赛期间提供志愿服务。（受访者供图） 2021-2022赛季亚洲花样滑冰公开赛前，杨曦为赛前训练的运动员补冰。新华社发（樊康摄） 于依鹭（前排左二）在北京体育大学体育馆内与志愿者同学合影。 新华社记者 鞠焕宗 摄 郭君陶在冬奥测试赛期间提供志愿服务。（受访者供图） 10月26日，在北京体育大学举行的首都高校冬奥和冬残奥志愿者誓师大会现场。新华社记者 陈钟昊 摄",
       "requirements": "",
       "contact": "电话: 0102000421",
+      "company_name": "公益中国",
       "tags": [
         "志愿者",
         "高校",
@@ -1801,7 +5260,7 @@
       "source_name": "公益中国",
       "system_recommended": true,
       "created_at": "2026-03-30T18:36:56.204Z",
-      "updated_at": "2026-04-01T02:25:36.362Z"
+      "updated_at": "2026-04-01T03:38:07.217Z"
     },
     {
       "id": 194,
@@ -1816,6 +5275,7 @@
       "description": "进入旧版 | 设为首页 要闻 视点 观察 专题 机构 培训 教育 助残 环境 动保 低碳 能源 智库 明星 城市 企业 行动 .d_seach_wd{ height:15px; overflow:hidden;} function SetHome(obj,url){ try{ obj.style.behavior='url(#default#homepage)'; obj.setHomePage(url); }catch(e){ if(window.netscape){ try{ netscape.security.PrivilegeManager.enablePrivilege(\"UniversalXPConnect\"); }catch(e){ alert(\"抱歉，此操作被浏览器拒绝！\\n\\n请在浏览器地址栏输入“about:config”并回车然后将[signed.applets.codebase_principal_support]设置为'true'\"); } }else{ alert(\"抱歉，您所使用的浏览器无法完成此操作。\\n\\n您需要手动将【\"+url+\"】设置为首页。\")",
       "requirements": "",
       "contact": "电话: 034677205329 / 010-84294916",
+      "company_name": "公益中国",
       "tags": [
         "志愿者",
         "公益",
@@ -1830,7 +5290,7 @@
       "source_name": "公益中国",
       "system_recommended": true,
       "created_at": "2026-03-30T18:36:56.204Z",
-      "updated_at": "2026-04-01T02:25:36.362Z"
+      "updated_at": "2026-04-01T03:38:07.217Z"
     },
     {
       "id": 195,
@@ -1845,6 +5305,7 @@
       "description": "进入旧版 | 设为首页 要闻 视点 观察 专题 机构 培训 教育 助残 环境 动保 低碳 能源 智库 明星 城市 企业 行动 .d_seach_wd{ height:15px; overflow:hidden;} function SetHome(obj,url){ try{ obj.style.behavior='url(#default#homepage)'; obj.setHomePage(url); }catch(e){ if(window.netscape){ try{ netscape.security.PrivilegeManager.enablePrivilege(\"UniversalXPConnect\"); }catch(e){ alert(\"抱歉，此操作被浏览器拒绝！\\n\\n请在浏览器地址栏输入“about:config”并回车然后将[signed.applets.codebase_principal_support]设置为'true'\"); } }else{ alert(\"抱歉，您所使用的浏览器无法完成此操作。\\n\\n您需要手动将【\"+url+\"】设置为首页。\")",
       "requirements": "",
       "contact": "电话: 0102000421",
+      "company_name": "公益中国",
       "tags": [
         "公益"
       ],
@@ -1856,7 +5317,7 @@
       "source_name": "公益中国",
       "system_recommended": true,
       "created_at": "2026-03-30T18:36:56.204Z",
-      "updated_at": "2026-04-01T02:25:36.362Z"
+      "updated_at": "2026-04-01T03:38:07.217Z"
     },
     {
       "id": 196,
@@ -1871,6 +5332,7 @@
       "description": "进入旧版 | 设为首页 要闻 视点 观察 专题 机构 培训 教育 助残 环境 动保 低碳 能源 智库 明星 城市 企业 行动 .d_seach_wd{ height:15px; overflow:hidden;} function SetHome(obj,url){ try{ obj.style.behavior='url(#default#homepage)'; obj.setHomePage(url); }catch(e){ if(window.netscape){ try{ netscape.security.PrivilegeManager.enablePrivilege(\"UniversalXPConnect\"); }catch(e){ alert(\"抱歉，此操作被浏览器拒绝！\\n\\n请在浏览器地址栏输入“about:config”并回车然后将[signed.applets.codebase_principal_support]设置为'true'\"); } }else{ alert(\"抱歉，您所使用的浏览器无法完成此操作。\\n\\n您需要手动将【\"+url+\"】设置为首页。\")",
       "requirements": "",
       "contact": "电话: 0102000421",
+      "company_name": "公益中国",
       "tags": [
         "志愿者",
         "协会",
@@ -1885,7 +5347,7 @@
       "source_name": "公益中国",
       "system_recommended": true,
       "created_at": "2026-03-30T18:36:56.205Z",
-      "updated_at": "2026-04-01T02:25:36.362Z"
+      "updated_at": "2026-04-01T03:38:07.217Z"
     },
     {
       "id": 197,
@@ -1900,6 +5362,7 @@
       "description": "进入旧版 | 设为首页 要闻 视点 观察 专题 机构 培训 教育 助残 环境 动保 低碳 能源 智库 明星 城市 企业 行动 .d_seach_wd{ height:15px; overflow:hidden;} function SetHome(obj,url){ try{ obj.style.behavior='url(#default#homepage)'; obj.setHomePage(url); }catch(e){ if(window.netscape){ try{ netscape.security.PrivilegeManager.enablePrivilege(\"UniversalXPConnect\"); }catch(e){ alert(\"抱歉，此操作被浏览器拒绝！\\n\\n请在浏览器地址栏输入“about:config”并回车然后将[signed.applets.codebase_principal_support]设置为'true'\"); } }else{ alert(\"抱歉，您所使用的浏览器无法完成此操作。\\n\\n您需要手动将【\"+url+\"】设置为首页。\")",
       "requirements": "",
       "contact": "电话: 0102000421",
+      "company_name": "公益中国",
       "tags": [
         "志愿者",
         "协会",
@@ -1913,7 +5376,7 @@
       "source_name": "公益中国",
       "system_recommended": true,
       "created_at": "2026-03-30T18:36:56.205Z",
-      "updated_at": "2026-04-01T02:25:36.362Z"
+      "updated_at": "2026-04-01T03:38:07.217Z"
     },
     {
       "id": 198,
@@ -1928,6 +5391,7 @@
       "description": "进入旧版 | 设为首页 要闻 视点 观察 专题 机构 培训 教育 助残 环境 动保 低碳 能源 智库 明星 城市 企业 行动 .d_seach_wd{ height:15px; overflow:hidden;} function SetHome(obj,url){ try{ obj.style.behavior='url(#default#homepage)'; obj.setHomePage(url); }catch(e){ if(window.netscape){ try{ netscape.security.PrivilegeManager.enablePrivilege(\"UniversalXPConnect\"); }catch(e){ alert(\"抱歉，此操作被浏览器拒绝！\\n\\n请在浏览器地址栏输入“about:config”并回车然后将[signed.applets.codebase_principal_support]设置为'true'\"); } }else{ alert(\"抱歉，您所使用的浏览器无法完成此操作。\\n\\n您需要手动将【\"+url+\"】设置为首页。\")",
       "requirements": "",
       "contact": "电话: 0102000421",
+      "company_name": "公益中国",
       "tags": [
         "志愿者",
         "公益",
@@ -1941,7 +5405,7 @@
       "source_name": "公益中国",
       "system_recommended": true,
       "created_at": "2026-03-30T18:36:56.205Z",
-      "updated_at": "2026-04-01T02:25:36.362Z"
+      "updated_at": "2026-04-01T03:38:07.217Z"
     },
     {
       "id": 199,
@@ -1956,6 +5420,7 @@
       "description": "进入旧版 | 设为首页 要闻 视点 观察 专题 机构 培训 教育 助残 环境 动保 低碳 能源 智库 明星 城市 企业 行动 .d_seach_wd{ height:15px; overflow:hidden;} function SetHome(obj,url){ try{ obj.style.behavior='url(#default#homepage)'; obj.setHomePage(url); }catch(e){ if(window.netscape){ try{ netscape.security.PrivilegeManager.enablePrivilege(\"UniversalXPConnect\"); }catch(e){ alert(\"抱歉，此操作被浏览器拒绝！\\n\\n请在浏览器地址栏输入“about:config”并回车然后将[signed.applets.codebase_principal_support]设置为'true'\"); } }else{ alert(\"抱歉，您所使用的浏览器无法完成此操作。\\n\\n您需要手动将【\"+url+\"】设置为首页。\")",
       "requirements": "",
       "contact": "电话: 0102000421",
+      "company_name": "公益中国",
       "tags": [
         "志愿者",
         "公益"
@@ -1968,7 +5433,7 @@
       "source_name": "公益中国",
       "system_recommended": true,
       "created_at": "2026-03-30T18:36:56.205Z",
-      "updated_at": "2026-04-01T02:25:36.362Z"
+      "updated_at": "2026-04-01T03:38:07.217Z"
     },
     {
       "id": 200,
@@ -1983,6 +5448,7 @@
       "description": "进入旧版 | 设为首页 要闻 视点 观察 专题 机构 培训 教育 助残 环境 动保 低碳 能源 智库 明星 城市 企业 行动 .d_seach_wd{ height:15px; overflow:hidden;} function SetHome(obj,url){ try{ obj.style.behavior='url(#default#homepage)'; obj.setHomePage(url); }catch(e){ if(window.netscape){ try{ netscape.security.PrivilegeManager.enablePrivilege(\"UniversalXPConnect\"); }catch(e){ alert(\"抱歉，此操作被浏览器拒绝！\\n\\n请在浏览器地址栏输入“about:config”并回车然后将[signed.applets.codebase_principal_support]设置为'true'\"); } }else{ alert(\"抱歉，您所使用的浏览器无法完成此操作。\\n\\n您需要手动将【\"+url+\"】设置为首页。\")",
       "requirements": "",
       "contact": "电话: 0102000421",
+      "company_name": "公益中国",
       "tags": [
         "志愿者",
         "公益",
@@ -1996,7 +5462,7 @@
       "source_name": "公益中国",
       "system_recommended": true,
       "created_at": "2026-03-30T18:36:56.205Z",
-      "updated_at": "2026-04-01T02:25:36.362Z"
+      "updated_at": "2026-04-01T03:38:07.217Z"
     },
     {
       "id": 201,
@@ -2011,6 +5477,7 @@
       "description": "账号信息 *用户名： *确认用户名： *密码： *确认密码： *电子邮箱： *邮箱验证码： 发送验证码 个人基本信息 *国家/地区： 请选择中国中国香港中国澳门中国台湾美国英国俄罗斯韩国日本法国加拿大澳大利亚阿富汗阿尔巴尼亚南极洲阿尔及利亚美属萨摩亚安道尔安哥拉安提瓜和巴布达阿塞拜疆阿根廷奥地利巴哈马巴林孟加拉亚美尼亚巴巴多斯比利时百慕大不丹玻利维亚波黑博茨瓦纳布维岛巴西伯利兹英属印度洋领地所罗门群岛英属维尔京群岛文莱保加利亚缅甸布隆迪白俄罗斯柬埔寨喀麦隆佛得角开曼群岛中非斯里兰卡乍得智利圣诞岛科科斯（基林）群岛哥伦比亚科摩罗马约特刚果（布）刚果（金）扎伊尔库克群岛冈比亚哥斯达黎加克罗地亚古巴塞浦路斯捷克贝宁丹麦多米尼克多米尼加厄瓜多尔萨尔瓦多赤道几内亚埃塞俄比亚厄立特里亚爱沙尼亚法罗群岛福克兰群岛乔治亚和桑德韦奇斐济芬兰法属圭亚那法属波利尼西亚法属南部领土吉布提加蓬格鲁吉亚佛得角德国加纳直布罗陀基里巴斯希腊格陵兰格林纳达瓜德罗普关岛危地马拉几内亚圭亚那海地赫德岛和麦克唐纳岛梵蒂冈洪都拉斯匈牙利冰岛印度印度尼西亚伊朗伊拉克爱尔兰巴勒斯坦以色列意大利科特迪瓦牙买加哈萨克斯坦约旦肯尼亚朝鲜",
       "requirements": "",
       "contact": "电话: 000075820374 / 010802030067",
+      "company_name": "志愿北京",
       "tags": [
         "志愿者"
       ],
@@ -2022,7 +5489,7 @@
       "source_name": "志愿北京",
       "system_recommended": true,
       "created_at": "2026-03-30T18:36:56.205Z",
-      "updated_at": "2026-04-01T02:25:36.362Z"
+      "updated_at": "2026-04-01T03:38:07.217Z"
     },
     {
       "id": 202,
@@ -2037,6 +5504,7 @@
       "description": "登录志愿北京 获取验证码 登 录 忘记密码？找回用户名 QQ登录 没有账号？立即注册 成为志愿者",
       "requirements": "",
       "contact": "电话: 000075820374 / 010802030067",
+      "company_name": "志愿北京",
       "tags": [
         "志愿者"
       ],
@@ -2048,7 +5516,7 @@
       "source_name": "志愿北京",
       "system_recommended": true,
       "created_at": "2026-03-30T18:36:56.205Z",
-      "updated_at": "2026-04-01T02:25:36.362Z"
+      "updated_at": "2026-04-01T03:38:07.217Z"
     },
     {
       "id": 203,
@@ -2063,6 +5531,7 @@
       "description": "12355志愿者注册计时咨询热线（2026年） 礼让斑马线 学雷锋文明实践我行动 红色陪伴 学雷锋暖心助老志愿者招募 北京站志愿者招募 守护天使——北京儿童医院365门诊导医志愿服务 前台 项目区域 全部东城区西城区朝阳区海淀区丰台区石景山区门头沟区房山区通州区顺义区大兴区昌平区平谷区怀柔区密云区延庆区开发区 服务类别 全部社区服务助老服务助残服务关爱服务生态环保赛会服务应急救援交通文明乡村振兴卫生健康科普服务文旅服务国际服务垃圾分类礼让行人平安综治政策宣讲文化文艺助学支教法律服务禁毒服务其他服务 项目状态 全部招募待启动招募中招募已结束已结项 报名范围 全部公开招募仅招募实名志愿者指定志愿团体招募设定免审密码招募 服务对象 全部儿童青少年孤寡老人残障人士优抚对象特困群体其他 项目人数 全部01-100101-200201-500501-10001000以上 更多筛选条件 项目起止日期 至 项目ID 项目名称 搜索 2026-03-30 2026年中关村论坛 目标：1 岗位 35 人 招募中 项目进度4% 报名人数0 离招募结束26 天 2026-03-30 老山街道京源路社区公益艾灸",
       "requirements": "",
       "contact": "电话: 0501-10001000 / 000075820374",
+      "company_name": "志愿北京",
       "tags": [
         "志愿者",
         "公益",
@@ -2077,7 +5546,7 @@
       "source_name": "志愿北京",
       "system_recommended": true,
       "created_at": "2026-03-30T18:36:56.205Z",
-      "updated_at": "2026-04-01T02:25:36.362Z"
+      "updated_at": "2026-04-01T03:38:07.217Z"
     },
     {
       "id": 204,
@@ -2092,6 +5561,7 @@
       "description": "团体属地 全部东城区西城区朝阳区海淀区丰台区石景山区门头沟区房山区通州区顺义区大兴区昌平区平谷区怀柔区密云区延庆区开发区 服务类别 全部社区服务助老服务助残服务关爱服务生态环保赛会服务应急救援交通文明乡村振兴卫生健康科普服务文旅服务国际服务垃圾分类礼让行人平安综治政策宣讲文化文艺助学支教法律服务禁毒服务其他服务 团体类型 全部党政机关教育事业单位卫生事业单位科技事业单位文化事业单位社会福利事业单位其他事业单位群团组织居委会或村委会国有企业非国有企业其他社会团体社会服务机构基金会 团体人数 全部01-100101-200201-500501-10001000以上 更多筛选条件 团体登记日期 至 团体ID 团体名称 搜索 朝YOUNG体育社区青年汇志愿服务队 团体人数：0 培训满意度5.0 合作满意度5.0 计划符合度5.0 首都京心志愿服务中心 团体人数：0 培训满意度5.0 合作满意度5.0 计划符合度5.0 毓秀海淀上庄街道“京毓上庄”志愿服务队 团体人数：0 培训满意度5.0 合作满意度5.0 计划符合度5.0 海淀区花园路街镇“美丽东花园”志愿服务支队 团体人数：0 培训满意度5",
       "requirements": "",
       "contact": "电话: 0501-10001000 / 000075820374",
+      "company_name": "志愿北京",
       "tags": [
         "志愿者"
       ],
@@ -2103,7 +5573,7 @@
       "source_name": "志愿北京",
       "system_recommended": true,
       "created_at": "2026-03-30T18:36:56.205Z",
-      "updated_at": "2026-04-01T02:25:36.362Z"
+      "updated_at": "2026-04-01T03:38:07.217Z"
     },
     {
       "id": 205,
@@ -2118,6 +5588,7 @@
       "description": "当前位置：首页 > 志愿快讯 志联动态更多> 接地气·走基层 | 团市委青年党员开展志愿服务活动2026-03-23“首都第一教室”注入青春动能丨“京华实践 青春有我”志愿服务团成立2026-03-13北京市大学生志愿服务西部计划工作部署会召开2026-03-12志愿青春扬新风 服务同行暖三月——社区青年汇广泛开展志愿服务活动2026-03-09“北京志愿者”标识亮相！首都志愿服务有了一张“新名片”2026-03-03报效祖国，建功西部！2026年大学生志愿服务西部计划报名开启→2026-03-02“微笑北京·让志愿点亮青春”志愿文化宣讲短视频重磅上线！2026-02-28北京市春运志愿服务工作全面启动2026-02-04闻雪而动，首都广大志愿者积极参与扫雪铲冰志愿服务2025-12-16首都青年志愿者代表在全国“12·5”国际志愿者日主题活动中精彩亮相2025-12-062025年“青春助力·志愿回天”国际志愿者日主题活动举办2025-12-06为强国建设、民族复兴伟业贡献志愿服务力量2025-11-29【新闻联播】为强国建设民族复兴伟业贡献志愿服务力量2025-11-29习近平致中",
       "requirements": "",
       "contact": "电话: 000075820374 / 010802030067",
+      "company_name": "志愿北京",
       "tags": [
         "志愿者",
         "活动"
@@ -2130,7 +5601,7 @@
       "source_name": "志愿北京",
       "system_recommended": true,
       "created_at": "2026-03-30T18:36:56.205Z",
-      "updated_at": "2026-04-01T02:25:36.362Z"
+      "updated_at": "2026-04-01T03:38:07.217Z"
     },
     {
       "id": 206,
@@ -2145,6 +5616,7 @@
       "description": "当前位置：首页 > 志愿人物 优秀志愿者更多> 2025“北京榜样·青年榜样”徐驰翀2025-11-052025“北京榜样·青年榜样”冯迪2025-11-05首都志愿服务“四个100”先进典型“最美志愿者” 翟和平2025-11-04首都志愿服务“四个100”先进典型“最美志愿者” 李如意2025-11-03首都志愿服务“四个100”先进典型“最美志愿者” 张庆红2025-10-31第十四届中国青年志愿者优秀个人奖汪天雯2024-07-31第十四届中国青年志愿者优秀个人奖曾勇2024-07-31第十四届中国青年志愿者优秀个人奖谢孟秋2024-07-31第十四届中国青年志愿者优秀个人奖吕子良2024-02-062022“北京青年榜样”王梦浩2023-02-282022“北京青年榜样”陈文成2023-02-272022年度“美丽中国，我是行动者”最美生态环境志愿者付洪震2023-02-262022“北京青年榜样”李澍居2023-02-262022年度“美丽中国，我是行动者”最美生态环境志愿者侯金菊2023-02-252021年首都学雷锋志愿服务“五个100”先进典型活动“首都最美志愿者”项",
       "requirements": "",
       "contact": "电话: 000075820374 / 010802030067",
+      "company_name": "志愿北京",
       "tags": [
         "志愿者",
         "活动"
@@ -2157,7 +5629,7 @@
       "source_name": "志愿北京",
       "system_recommended": true,
       "created_at": "2026-03-30T18:36:56.205Z",
-      "updated_at": "2026-04-01T02:25:36.362Z"
+      "updated_at": "2026-04-01T03:38:07.217Z"
     },
     {
       "id": 207,
@@ -2172,6 +5644,7 @@
       "description": "本功能维护中",
       "requirements": "",
       "contact": "电话: 000075820374 / 010802030067",
+      "company_name": "志愿北京",
       "tags": [],
       "status": "active",
       "view_count": 0,
@@ -2181,7 +5654,7 @@
       "source_name": "志愿北京",
       "system_recommended": true,
       "created_at": "2026-03-30T18:36:56.205Z",
-      "updated_at": "2026-04-01T02:25:36.362Z"
+      "updated_at": "2026-04-01T03:38:07.217Z"
     },
     {
       "id": 208,
@@ -2196,6 +5669,7 @@
       "description": "",
       "requirements": "详见《岗位信息表》",
       "contact": "泉州市人社局 咨询电话：0595-12345678",
+      "company_name": "泉州市人力资源和社会保障局",
       "tags": [
         "事业单位",
         "编制",
@@ -2209,7 +5683,7 @@
       "source_name": "泉州市人社局事业单位招聘",
       "system_recommended": false,
       "created_at": "2026-03-31T04:06:36.728Z",
-      "updated_at": "2026-04-01T02:25:36.362Z"
+      "updated_at": "2026-04-01T03:38:07.217Z"
     }
   ]
 }

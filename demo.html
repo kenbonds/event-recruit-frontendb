@@ -4771,7 +4771,14 @@ async function fetchPlatformStats() {
   if (elUsers) animateNumber(elUsers, calcDailyActiveUsers());
 
   const alive = await checkBackend();
-  if (!alive) return; // 后端不通则保留上面的日期计算值
+  if (!alive) {
+    // 后端不通：用爬虫数据文件的数量更新岗位数
+    const crawledData = await _loadCrawledJobs();
+    if (elJobs && crawledData && crawledData.length > 0) {
+      animateNumber(elJobs, crawledData.length);
+    }
+    return;
+  }
 
   const r = await apiCall('/analytics/overview');
   if (r.code !== 0 || !r.data) return;

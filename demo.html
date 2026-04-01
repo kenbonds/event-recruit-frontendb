@@ -32,9 +32,29 @@ h1,h2,h3 { line-height: 1.3; }
 .header { background: linear-gradient(135deg, var(--primary) 0%, var(--primary2) 100%); padding: 44px 20px 20px; color: white; }
 .header h1 { font-size: 22px; margin-bottom: 4px; }
 .header p { font-size: 13px; opacity: 0.85; }
-.search-bar { display: flex; margin-top: 14px; }
-.search-bar input { flex: 1; padding: 10px 16px; border-radius: 20px 0 0 20px; border: none; font-size: 14px; outline: none; background: rgba(255,255,255,0.95); }
-.search-bar button { padding: 10px 18px; border-radius: 0 20px 20px 0; border: none; background: rgba(255,255,255,0.25); color: white; font-size: 14px; cursor: pointer; backdrop-filter: blur(4px); }
+/* BOSS直聘风格搜索框 */
+.boss-search-box { display: flex; align-items: center; background: white; border-radius: 22px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.08); border: 2px solid transparent; transition: border-color 0.2s; }
+.boss-search-box:focus-within { border-color: #4f8ff7; }
+.boss-search-inner { display: flex; align-items: center; flex: 1; padding: 10px 16px; }
+.boss-search-btn { background: linear-gradient(135deg, #4f8ff7, #3573e0); color: white; border: none; padding: 10px 20px; font-size: 14px; font-weight: 600; cursor: pointer; white-space: nowrap; transition: opacity 0.2s; }
+.boss-search-btn:hover { opacity: 0.9; }
+
+/* BOSS直聘风格筛选栏 */
+.boss-filter-bar { user-select: none; }
+.boss-filter-row { display: flex; gap: 4px; }
+.boss-filter-tabs { position: relative; }
+.bf-tab { display: inline-flex; align-items: center; gap: 3px; padding: 5px 12px; border-radius: 16px; font-size: 13px; color: #fff; cursor: pointer; transition: all 0.2s; border: 1.5px solid rgba(255,255,255,0.25); white-space: nowrap; background: rgba(255,255,255,0.08); }
+.bf-tab:hover { background: rgba(255,255,255,0.15); }
+.bf-tab.active { background: rgba(79,143,247,0.2); border-color: #4f8ff7; color: #93bbff; font-weight: 600; }
+.boss-filter-panel { position: absolute; top: 100%; left: 0; min-width: 160px; background: white; border-radius: 12px; box-shadow: 0 8px 24px rgba(0,0,0,0.15); z-index: 100; padding: 8px; margin-top: 4px; display: none; }
+.boss-filter-panel.show { display: block; }
+.boss-filter-option { padding: 8px 14px; border-radius: 8px; font-size: 13px; color: #334155; cursor: pointer; transition: all 0.15s; }
+.boss-filter-option:hover { background: #f1f5f9; }
+.boss-filter-option.active { background: #eff6ff; color: #4f8ff7; font-weight: 600; }
+
+/* 搜索结果页Tab */
+.boss-search-tab { padding: 6px 16px; border-radius: 18px; font-size: 13px; color: #64748b; cursor: pointer; border: 1.5px solid #e2e8f0; background: white; transition: all 0.2s; white-space: nowrap; }
+.boss-search-tab.active { background: #eff6ff; color: #4f8ff7; border-color: #4f8ff7; font-weight: 600; }
 
 /* ===== STATS BANNER ===== */
 .stats { display: flex; background: white; margin: 14px 12px; border-radius: 14px; padding: 14px; box-shadow: 0 4px 16px rgba(102,126,234,0.1); }
@@ -80,7 +100,7 @@ h1,h2,h3 { line-height: 1.3; }
 /* 头部：岗位名 + 薪资 */
 .jc-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
 .jc-title { font-size: 15px; font-weight: 700; color: #1a1a2e; flex: 1; margin-right: 10px; line-height: 1.35; display: -webkit-box; -webkit-line-clamp: 1; -webkit-box-orient: vertical; overflow: hidden; }
-.jc-salary { font-size: 15px; font-weight: 700; color: #f97316; white-space: nowrap; }
+.jc-salary { font-size: 17px; font-weight: 800; color: #f56c6c; white-space: nowrap; letter-spacing: 0.5px; }
 /* 标签行 */
 .jc-tags { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 10px; }
 .jc-tag { font-size: 11px; color: #8896a7; background: #f5f7fa; padding: 2px 8px; border-radius: 4px; line-height: 1.5; }
@@ -190,6 +210,12 @@ h1,h2,h3 { line-height: 1.3; }
 .badge-blue { background: #ede9ff; color: var(--primary); font-size: 11px; padding: 1px 7px; border-radius: 10px; margin-right: 8px; }
 
 /* ===== SUBPAGE (全屏覆盖) ===== */
+/* ===== SEARCH RESULT ===== */
+#searchResultPage { background: var(--bg); min-height: 100vh; }
+#searchResultPage .result-section-title { font-size: 13px; color: var(--sub); font-weight: 700; margin-bottom: 8px; display: flex; align-items: center; gap: 6px; }
+#searchResultPage .result-section + .result-section { margin-top: 16px; padding-top: 16px; border-top: 1px solid var(--border); }
+
+/* ===== SUBPAGE ===== */
 .subpage { position: fixed; top: 0; left: 50%; transform: translateX(-50%); width: 100%; max-width: 480px; height: 100vh; background: var(--bg); z-index: 150; overflow-y: auto; display: none; }
 .subpage.active { display: block; animation: fadeIn 0.2s ease; }
 @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
@@ -481,6 +507,13 @@ h1,h2,h3 { line-height: 1.3; }
 .recruit-count { text-align: right; flex-shrink: 0; }
 .recruit-count .n { font-size: 20px; font-weight: 800; color: var(--primary); }
 .recruit-count .l { font-size: 10px; color: var(--sub); }
+
+.event-list-card { display: flex; gap: 12px; background: white; border-radius: 12px; padding: 12px; margin-bottom: 10px; box-shadow: 0 1px 4px rgba(0,0,0,0.04); cursor: pointer; transition: transform 0.15s; }
+.event-list-card:hover { transform: translateY(-1px); box-shadow: 0 4px 14px rgba(0,0,0,0.08); }
+.cover-sm-ph { width: 64px; height: 64px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 28px; flex-shrink: 0; }
+.event-list-card .info { flex: 1; min-width: 0; }
+.event-list-card .info h3 { font-size: 14px; font-weight: 700; margin-bottom: 5px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.event-list-card .info .meta { font-size: 12px; color: var(--sub); }
 
 /* ===== CHAT STYLES ===== */
 /* 聊天列表 */
@@ -899,9 +932,15 @@ h1,h2,h3 { line-height: 1.3; }
           <div class="role-opt" id="roleCallerOpt" onclick="switchRole('caller')">📣 召集</div>
         </div>
       </div>
-      <div class="search-bar">
-        <input type="text" id="searchInput" placeholder="搜索活动或岗位..." oninput="handleSearch(this.value)">
-        <button onclick="doSearch()">搜索</button>
+      <div class="boss-search-box">
+        <div class="boss-search-inner">
+          <span style="color:#94a3b8;margin-right:6px">🔍</span>
+          <input type="text" id="searchInput" placeholder="搜索岗位名称、公司、地点..." 
+                 oninput="handleSearch(this.value)" 
+                 onkeydown="if(event.key==='Enter'){doSearch();event.preventDefault()}"
+                 style="flex:1;border:none;outline:none;font-size:14px;background:transparent">
+        </div>
+        <button class="boss-search-btn" onclick="doSearch()">搜索</button>
       </div>
     </div>
 
@@ -1009,9 +1048,41 @@ h1,h2,h3 { line-height: 1.3; }
   <div class="page" id="jobsPage">
     <div class="header" style="padding-bottom:12px">
       <h1>岗位招募</h1>
-      <p style="opacity:.8;font-size:13px;margin-top:4px">🔍 聚合搜索，一站找全</p>
-      <p style="opacity:.65;font-size:12px;margin-top:3px">整合兼职猫、活动行、政府就业平台等多渠道数据，真实信息，免费查看</p>
-      <div class="tags" id="jobFilterTags" style="margin-top:10px"></div>
+      <!-- BOSS直聘风格搜索栏 -->
+      <div class="boss-search-box" style="margin-top:10px">
+        <div class="boss-search-inner">
+          <span style="color:#94a3b8;margin-right:6px">🔍</span>
+          <input type="text" id="bossJobSearchInput" placeholder="搜索岗位名称、公司、地点..." 
+                 onkeydown="if(event.key==='Enter'){bossJobSearch();event.preventDefault()}"
+                 style="flex:1;border:none;outline:none;font-size:14px;background:transparent">
+        </div>
+        <button class="boss-search-btn" onclick="bossJobSearch()">搜索</button>
+      </div>
+      <!-- BOSS直聘风格筛选栏 -->
+      <div class="boss-filter-bar" id="bossFilterBar" style="margin-top:10px">
+        <div class="boss-filter-row">
+          <div class="boss-filter-tabs" id="bossCityFilter">
+            <span class="bf-tab" data-val="" onclick="bossFilterSelect(this,'city')">地区</span>
+          </div>
+          <div class="boss-filter-tabs" id="bossSalaryFilter">
+            <span class="bf-tab" data-val="" onclick="bossFilterSelect(this,'salary')">薪资</span>
+          </div>
+          <div class="boss-filter-tabs" id="bossEduFilter">
+            <span class="bf-tab" data-val="" onclick="bossFilterSelect(this,'education')">学历</span>
+          </div>
+          <div class="boss-filter-tabs" id="bossExpFilter">
+            <span class="bf-tab" data-val="" onclick="bossFilterSelect(this,'experience')">经验</span>
+          </div>
+          <div class="boss-filter-tabs" id="bossSourceFilter">
+            <span class="bf-tab" data-val="" onclick="bossFilterSelect(this,'source')">来源</span>
+          </div>
+        </div>
+      </div>
+      <div style="margin-top:8px;font-size:12px;color:rgba(255,255,255,0.5)">
+        共 <b id="bossJobCount">0</b> 个岗位
+        <span id="bossActiveFilters" style="margin-left:8px"></span>
+      </div>
+      <div class="tags" id="jobFilterTags" style="margin-top:6px"></div>
     </div>
     <div style="padding:12px 12px 0" id="jobsList"></div>
   </div>
@@ -1319,6 +1390,31 @@ h1,h2,h3 { line-height: 1.3; }
     </div>
     <button class="apply-btn" onclick="saveResume()">保存简历</button>
   </div>
+</div>
+
+<!-- Search Result Page -->
+<div class="page" id="searchResultPage">
+  <div style="background:white;padding:14px 16px;border-bottom:1px solid var(--border);position:sticky;top:0;z-index:50">
+    <div style="display:flex;align-items:center;gap:10px">
+      <button style="background:none;border:none;font-size:20px;cursor:pointer;color:var(--text);padding:0 4px" onclick="switchPage('homePage')">‹</button>
+      <!-- BOSS直聘风格搜索框 -->
+      <div class="boss-search-box" style="flex:1;border-color:#e2e8f0">
+        <div class="boss-search-inner" style="padding:8px 12px">
+          <span style="color:#94a3b8;margin-right:4px">🔍</span>
+          <input type="text" id="searchResultInput" placeholder="搜索岗位、活动、公司..." 
+                 style="flex:1;border:none;outline:none;font-size:14px;background:transparent"
+                 onkeydown="if(event.key==='Enter'){doSearch(this.value);event.preventDefault()}">
+        </div>
+      </div>
+    </div>
+    <!-- Tab切换：白色背景上的筛选标签 -->
+    <div style="display:flex;gap:6px;margin-top:10px;padding:0;overflow-x:auto;scrollbar-width:none">
+      <div class="boss-search-tab active" id="searchTabAll" onclick="switchSearchTab(this,'all')">全部 <span id="searchCountAll" style="font-size:11px;opacity:.7"></span></div>
+      <div class="boss-search-tab" id="searchTabEvents" onclick="switchSearchTab(this,'events')">🎯 活动 <span id="searchCountEvents" style="font-size:11px;opacity:.7"></span></div>
+      <div class="boss-search-tab" id="searchTabJobs" onclick="switchSearchTab(this,'jobs')">💼 岗位 <span id="searchCountJobs" style="font-size:11px;opacity:.7"></span></div>
+    </div>
+  </div>
+  <div id="searchResultContent" style="padding:12px"></div>
 </div>
 
 <!-- My Events Page -->
@@ -1776,7 +1872,9 @@ h1,h2,h3 { line-height: 1.3; }
 
 <script>
 // =================== CONFIG ===================
-const API_BASE = '/api/v1';
+const API_BASE = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
+  ? '/api/v1'
+  : 'http://124.222.78.95/api/v1';
 
 // =================== 双端角色状态 ===================
 let currentRole = 'follow'; // 'follow'(追随端) | 'caller'(召集端)
@@ -1930,36 +2028,39 @@ async function renderCallerRecruits() {
   if (!container) return;
   container.innerHTML = '<div style="padding:16px;text-align:center;color:var(--sub);font-size:13px">加载中…</div>';
   const alive = await checkBackend();
-  let applicants;
+  let applicants = [];
   if (alive && _authToken) {
-    // 拉取我发布岗位的投递记录
-    const r = await apiCall('/jobs?my=1&pageSize=5');
-    if (r.code === 0 && Array.isArray(r.data?.list)) {
-      applicants = r.data.list.map(j => ({
-        id: j.id,
-        name: j.contact_name || '应聘者',
-        school: j.title || '未知岗位',
-        major: j.type_label || '',
-        tags: (j.tags || []).slice(0, 3),
-        score: (j.apply_count > 0 ? 0.75 : 0.5),
-        status: 'pending',
+    // 调用新增的投递查询API
+    const r = await apiCall('/jobs/my/applications?pageSize=10');
+    if (r.code === 0 && r.data?.list?.length) {
+      applicants = r.data.list.map(a => ({
+        id: a.applicant?.id || a.application_id,
+        name: a.applicant?.name || '求职者',
+        school: a.applicant?.school || '',
+        major: a.applicant?.major || '',
+        tags: (a.applicant?.tags || []).slice(0, 3),
+        score: a.match_score || 0.7,
+        status: a.status === 1 ? 'pending' : (a.status === 2 ? 'viewed' : 'pending'),
+        phone: a.applicant?.phone || '',
+        jobTitle: a.job?.title || '',
       }));
     }
   }
   // 兜底用本地演示数据
-  if (!applicants || !applicants.length) applicants = APPLICANTS.slice(0, 4);
+  if (!applicants.length) applicants = APPLICANTS.slice(0, 4);
   container.innerHTML = applicants.slice(0, 4).map(a => `
-    <div class="recruit-card" onclick="openChatWithUser(${a.id}, '${a.name}', '求职者')">
+    <div class="recruit-card" onclick="${a.phone ? `showToast('📞 联系${a.name}：${a.phone}')` : ''}">
       <div class="role-icon" style="background:#ede9ff">👤</div>
       <div class="detail">
         <h4>${a.name}</h4>
-        <p>${a.school} · ${a.major||''}</p>
+        <p>${a.school}${a.major ? ' · '+a.major : ''}</p>
+        ${a.jobTitle ? `<p style="font-size:11px;color:var(--primary);margin-top:2px">投递：${a.jobTitle}</p>` : ''}
         <div style="display:flex;gap:4px;margin-top:4px;flex-wrap:wrap">
           ${(a.tags||[]).slice(0,3).map(t=>`<span class="mini-tag">${t}</span>`).join('')}
         </div>
       </div>
       <div class="recruit-count">
-        <div style="font-size:22px;font-weight:800;color:var(--primary)">${Math.round((a.score||0.5)*100)}%</div>
+        <div style="font-size:22px;font-weight:800;color:var(--primary)">${Math.round((a.score||0.7)*100)}%</div>
         <div style="font-size:10px;color:var(--sub)">匹配度</div>
         <div style="margin-top:4px;font-size:11px;background:#edfbf5;color:#11998e;padding:2px 6px;border-radius:6px;cursor:pointer">💬 沟通</div>
       </div>
@@ -2867,8 +2968,144 @@ async function renderJobList() {
   if (!list || !list.length) {
     list = currentJobFilter === '全部' ? JOBS : JOBS.filter(j => j.type === currentJobFilter);
   }
+  // 缓存全部岗位用于BOSS筛选
+  _bossAllJobs = list;
+  const countEl = document.getElementById('bossJobCount');
+  if (countEl) countEl.textContent = list.length;
+  // 初始化筛选系统（首次）
+  if (!window._bossFiltersInited) {
+    initBossFilters();
+    window._bossFiltersInited = true;
+  }
   container.innerHTML = list.map(j => renderJobCardHTML(j)).join('')
     || '<div style="padding:40px;text-align:center"><div style="font-size:40px;margin-bottom:12px">💼</div><p style="color:var(--sub)">暂无岗位</p></div>';
+}
+
+// =================== BOSS直聘风格筛选系统 ===================
+const BOSS_FILTERS = {
+  city: '',
+  salary: '',
+  education: '',
+  experience: '',
+  source: ''
+};
+const BOSS_FILTER_OPTIONS = {
+  city: ['全部','惠州','深圳','广州','东莞','佛山','珠海','汕头','厦门','福州','北京','上海','杭州','南京','成都','武汉','长沙','西安','重庆'],
+  salary: ['全部','3k以下','3k-5k','5k-8k','8k-12k','12k-20k','20k-50k','50k以上'],
+  education: ['全部','不限','初中及以下','中专/中技','高中','大专','本科','硕士','博士'],
+  experience: ['全部','不限','在校生','应届生','1年以内','1-3年','3-5年','5-10年','10年以上'],
+  source: ['全部','召集方发布','采集来源','官方来源']
+};
+// 缓存完整岗位列表用于前端筛选
+let _bossAllJobs = [];
+
+function initBossFilters() {
+  // 从后端或缓存获取数据并填充筛选面板
+  Object.keys(BOSS_FILTER_OPTIONS).forEach(key => {
+    const container = document.getElementById('boss' + key.charAt(0).toUpperCase() + key.slice(1) + 'Filter');
+    if (!container) return;
+    const panel = document.createElement('div');
+    panel.className = 'boss-filter-panel';
+    panel.id = 'bossPanel_' + key;
+    BOSS_FILTER_OPTIONS[key].forEach(opt => {
+      const div = document.createElement('div');
+      div.className = 'boss-filter-option';
+      div.textContent = opt;
+      div.onclick = (e) => { e.stopPropagation(); applyBossFilter(key, opt); };
+      panel.appendChild(div);
+    });
+    container.appendChild(panel);
+    // 点击tab切换面板
+    container.querySelector('.bf-tab').onclick = (e) => {
+      e.stopPropagation();
+      document.querySelectorAll('.boss-filter-panel.show').forEach(p => { if(p.id !== 'bossPanel_'+key) p.classList.remove('show'); });
+      panel.classList.toggle('show');
+    };
+  });
+  // 点击页面其他地方关闭面板
+  document.addEventListener('click', () => {
+    document.querySelectorAll('.boss-filter-panel.show').forEach(p => p.classList.remove('show'));
+  });
+}
+
+function applyBossFilter(key, value) {
+  BOSS_FILTERS[key] = value === '全部' ? '' : value;
+  // 更新tab显示
+  const tab = document.querySelector('#boss' + key.charAt(0).toUpperCase() + key.slice(1) + 'Filter .bf-tab');
+  if (tab) {
+    tab.textContent = value === '全部' ? key === 'city' ? '地区' : key === 'salary' ? '薪资' : key === 'education' ? '学历' : key === 'experience' ? '经验' : '来源' : value;
+    tab.classList.toggle('active', value !== '全部');
+  }
+  // 关闭面板
+  document.querySelectorAll('.boss-filter-panel.show').forEach(p => p.classList.remove('show'));
+  // 执行筛选
+  filterBossJobs();
+  // 更新激活筛选标签显示
+  updateBossActiveFilters();
+}
+
+function updateBossActiveFilters() {
+  const el = document.getElementById('bossActiveFilters');
+  if (!el) return;
+  const labels = { city: '地区', salary: '薪资', education: '学历', experience: '经验', source: '来源' };
+  const html = Object.entries(BOSS_FILTERS).filter(([,v]) => v).map(([k,v]) => 
+    `<span style="background:rgba(79,143,247,0.2);color:#93bbff;padding:2px 8px;border-radius:8px;font-size:11px;margin-right:4px;cursor:pointer" onclick="applyBossFilter('${k}','全部')">${labels[k]}: ${v} ✕</span>`
+  ).join('');
+  el.innerHTML = html;
+}
+
+function filterBossJobs() {
+  let list = [..._bossAllJobs];
+  const f = BOSS_FILTERS;
+  if (f.city) list = list.filter(j => (j.city||'').includes(f.city));
+  if (f.salary) {
+    const sMap = {'3k以下':[0,3000],'3k-5k':[3000,5000],'5k-8k':[5000,8000],'8k-12k':[8000,12000],'12k-20k':[12000,20000],'20k-50k':[20000,50000],'50k以上':[50000,999999]};
+    const range = sMap[f.salary];
+    if (range) list = list.filter(j => {
+      const min = j.salary_min || parseInt((j.salary||'0').replace(/[^\d]/g,'')) || 0;
+      return min >= range[0] && min <= range[1];
+    });
+  }
+  if (f.education && f.education !== '不限') list = list.filter(j => !j.education || j.education.includes(f.education) || f.education === '不限');
+  if (f.source) {
+    if (f.source === '召集方发布') list = list.filter(j => !j.is_crawled);
+    else if (f.source === '采集来源') list = list.filter(j => j.is_crawled && j.source_type !== 'official');
+    else if (f.source === '官方来源') list = list.filter(j => j.source_type === 'official');
+  }
+  const container = document.getElementById('jobsList');
+  const countEl = document.getElementById('bossJobCount');
+  if (countEl) countEl.textContent = list.length;
+  if (container) {
+    container.innerHTML = list.map(j => renderJobCardHTML(j)).join('')
+      || '<div style="padding:40px;text-align:center"><div style="font-size:40px;margin-bottom:12px">🔍</div><p style="color:var(--sub)">未找到匹配的岗位，试试调整筛选条件</p></div>';
+  }
+}
+
+function bossJobSearch() {
+  const kw = document.getElementById('bossJobSearchInput')?.value?.trim();
+  if (!kw) { filterBossJobs(); return; }
+  let list = [..._bossAllJobs];
+  const kwLower = kw.toLowerCase();
+  list = list.filter(j => 
+    (j.title||'').toLowerCase().includes(kwLower) ||
+    (j.company||j.company_name||'').toLowerCase().includes(kwLower) ||
+    (j.city||'').toLowerCase().includes(kwLower) ||
+    (j.address||'').toLowerCase().includes(kwLower) ||
+    (j.description||'').toLowerCase().includes(kwLower) ||
+    (j.tags||[]).some(t => t.toLowerCase().includes(kwLower))
+  );
+  const container = document.getElementById('jobsList');
+  const countEl = document.getElementById('bossJobCount');
+  if (countEl) countEl.textContent = list.length;
+  if (container) {
+    container.innerHTML = list.map(j => renderJobCardHTML(j)).join('')
+      || `<div style="padding:40px;text-align:center"><div style="font-size:40px;margin-bottom:12px">🔍</div><p style="color:var(--sub)">未找到与"${kw}"相关的岗位</p></div>`;
+  }
+}
+
+function bossFilterSelect(el, key) {
+  // 点击已激活的tab时重置
+  // (面板切换逻辑在 initBossFilters 中处理)
 }
 
 // =================== MATCH PAGE ===================
@@ -3099,20 +3336,48 @@ async function renderMyApply() {
   // 尝试从后端加载已投递职位
   const alive = await checkBackend();
   if (alive && _authToken) {
-    const r = await apiCall('/jobs?my=1&limit=50');
+    const r = await apiCall('/jobs/my/applied');
     if (r.code === 0 && r.data?.list?.length) {
-      const statusLabels = { pending:'待查看', viewed:'已查看', passed:'通过', reject:'不合适' };
-      container.innerHTML = r.data.list.map(j => {
-        const st = j.apply_status || 'pending';
-        return `<div class="apply-record">
-          <div class="logo-box">${j.emoji || '🏢'}</div>
+      const statusLabels = { 1:'待查看', 2:'已查看', 3:'通过', 0:'不合适' };
+      container.innerHTML = r.data.list.map(app => {
+        const st = app.status || 1;
+        const job = app.job;
+        const icon = job.is_crawled ? '🔍' : '🏢';
+        const source = job.is_crawled && job.source_name ? `<span style="font-size:10px;color:var(--sub);margin-left:auto;margin-right:0">${job.source_name}</span>` : '';
+        return `<div class="apply-record" onclick="showJobDetail(${job.id})" style="cursor:pointer">
+          <div class="logo-box">${icon}</div>
           <div class="detail">
-            <h4>${j.title}</h4>
-            <p>${j.company_name || j.company || ''} · ${j.city || ''}</p>
-            ${j.match_score ? `<p style="margin-top:3px;color:var(--primary);font-size:12px">匹配度 ${j.match_score}%</p>` : ''}
+            <h4>${job.title}</h4>
+            <p>${job.company_name || '招聘方'}${job.city ? ' · '+job.city : ''}</p>
+            <p style="margin-top:3px;color:var(--primary);font-size:12px">💰 ${job.salary_text}</p>
+            ${app.match_score ? `<p style="margin-top:3px;color:#f97316;font-size:11px">匹配度 ${Math.round(app.match_score*100)}%</p>` : ''}
           </div>
-          <div class="status-badge ${st}">${statusLabels[st] || st}</div>
+          <div class="status-badge ${st}">${statusLabels[st] || '待处理'}${source}</div>
         </div>`;
+      }).join('');
+      return;
+    }
+  }
+
+  // 本地演示兜底
+  const list = [...appliedJobs].map(id => JOBS.find(j => j.id === id)).filter(Boolean);
+  if (list.length === 0) {
+    container.innerHTML = `<div class="empty"><div class="icon">📝</div><p>还没有投递任何职位<br>快去发现心仪职位吧</p></div>`;
+    return;
+  }
+  const statuses = ['pending','viewed','passed','reject'];
+  const statusLabels = { pending:'待查看', viewed:'已查看', passed:'通过', reject:'不合适' };
+  container.innerHTML = list.map((j, i) => {
+    const st = statuses[i % 3];
+    return `<div class="apply-record">
+      <div class="logo-box">${j.emoji || '🏢'}</div>
+      <div class="detail">
+        <h4>${j.title}</h4>
+        <p>${j.company} · ${j.city}</p>
+        <p style="margin-top:3px;color:var(--primary);font-size:12px">匹配度 ${Math.round((j.match_score||0)*100)}%</p>
+      </div>
+      <div class="status-badge ${st}">${statusLabels[st]}</div>
+    </div>`;
       }).join('');
       return;
     }
@@ -4387,62 +4652,108 @@ function handleSearch(val) {
 async function doSearch() {
   const kw = document.getElementById('searchInput').value.trim();
   if (!kw) return showToast('请输入搜索词');
-  const kwLower = kw.toLowerCase();
+  switchPage('searchResultPage');
+
+  // 先显示加载中
+  document.getElementById('searchResultContent').innerHTML = '<div style="padding:40px;text-align:center;color:var(--sub)">搜索中…</div>';
+
+  // 优先使用后端统一搜索API
   const alive = await checkBackend();
-
   if (alive) {
-    const [jobR, evR] = await Promise.all([
-      apiCall(`/jobs?keyword=${encodeURIComponent(kw)}&pageSize=20`),
-      apiCall(`/events?keyword=${encodeURIComponent(kw)}&pageSize=20`),
-    ]);
-    const matchJobs = (jobR.code === 0 && jobR.data?.list) ? jobR.data.list : [];
-    const matchEvents = (evR.code === 0 && evR.data?.list) ? evR.data.list : [];
+    const r = await apiCall(`/search?q=${encodeURIComponent(kw)}&tab=all&pageSize=20`);
+    if (r.code === 0 && r.data && (r.data.events?.length || r.data.jobs?.length)) {
+      renderSearchResults(r.data, kw);
+      return;
+    }
+  }
 
-    if (matchJobs.length > 0) {
-      switchPage('jobsPage');
-      document.getElementById('jobsList').innerHTML = matchJobs.map(j => renderJobCardHTML({
+  // 本地兜底搜索
+  const kwLower = kw.toLowerCase();
+  const localJobs = JOBS.filter(j =>
+    j.title.toLowerCase().includes(kwLower) ||
+    j.tags.some(t => t.toLowerCase().includes(kwLower)) ||
+    (j.company || '').toLowerCase().includes(kwLower)
+  );
+  const localEvents = EVENTS.filter(e =>
+    e.title.toLowerCase().includes(kwLower) ||
+    e.tags.some(t => t.toLowerCase().includes(kwLower)) ||
+    (e.category || '').toLowerCase().includes(kwLower)
+  );
+  renderSearchResults({ events: localEvents, eventsTotal: localEvents.length, jobs: localJobs, jobsTotal: localJobs.length, total: localEvents.length + localJobs.length }, kw);
+}
+
+// 搜索结果页状态
+let _searchData = null;
+let _searchTab = 'all';
+
+function renderSearchResults(data, kw) {
+  if (!data) return;
+  _searchData = data;
+  _searchTab = 'all';
+  document.getElementById('searchResultKw').textContent = kw;
+  document.querySelectorAll('#searchResultTabs .tag').forEach((t, i) => t.classList.toggle('active', i === 0));
+  // 更新搜索计数
+  const eCount = data.eventsTotal || (data.events || []).length;
+  const jCount = data.jobsTotal || (data.jobs || []).length;
+  document.getElementById('searchCountAll').textContent = `(${eCount + jCount})`;
+  document.getElementById('searchCountEvents').textContent = `(${eCount})`;
+  document.getElementById('searchCountJobs').textContent = `(${jCount})`;
+  _renderSearchContent();
+}
+
+function switchSearchTab(el, tab) {
+  el.parentElement.querySelectorAll('.boss-search-tab').forEach(t => t.classList.remove('active'));
+  el.classList.add('active');
+  _searchTab = tab;
+  _renderSearchContent();
+}
+
+function _renderSearchContent() {
+  if (!_searchData) return;
+  const container = document.getElementById('searchResultContent');
+  let html = '';
+
+  if (_searchTab === 'all' || _searchTab === 'events') {
+    const events = _searchData.events || [];
+    if (events.length) {
+      html += `<div class="result-section"><div class="result-section-title">🎯 活动 (${events.length})</div>`;
+      html += events.map(e => {
+        const gradient = e.cover_gradient || e.gradient || 'linear-gradient(135deg,#667eea,#764ba2)';
+        const emoji = e.cover_emoji || e.emoji || '🎉';
+        const current = e.current_participants ?? e.current ?? 0;
+        const max = e.max_participants ?? e.max ?? 100;
+        return `<div class="event-list-card" onclick="showEventDetail(${e.id})">
+          <div class="cover-sm-ph" style="background:${gradient}">${emoji}</div>
+          <div class="info">
+            <h3>${e.title}</h3>
+            <div class="meta">📅 ${(e.start_time||'').slice(0,16).replace('T',' ')} · ${(e.location||'').slice(0,15)}</div>
+            <div style="font-size:11px;color:var(--sub);margin-top:3px">👥 ${current}/${max}人报名</div>
+          </div>
+        </div>`;
+      }).join('');
+      html += '</div>';
+    }
+  }
+
+  if (_searchTab === 'all' || _searchTab === 'jobs') {
+    const jobs = _searchData.jobs || [];
+    if (jobs.length) {
+      html += `<div class="result-section"><div class="result-section-title">💼 岗位 (${jobs.length})</div>`;
+      html += jobs.map(j => renderJobCardHTML({
         ...j,
         company: j.company_name || j.company || '招聘方',
         emoji: j.cover_emoji || j.emoji || '🏢',
         salary: j.salary_min && j.salary_max ? `${j.salary_min}-${j.salary_max}` : (j.salary || '面议'),
         tags: j.tags || [],
         match_score: j.match_score || 0.7,
+        company_verified: j.certify_status === 1,
       })).join('');
-      showToast(`找到 ${matchJobs.length} 个相关岗位`);
-    } else if (matchEvents.length > 0) {
-      switchPage('eventsPage');
-      document.getElementById('eventsList').innerHTML = matchEvents.map(e => `
-        <div class="event-list-card" onclick="showEventDetail(${e.id})">
-          <div class="cover-sm-ph" style="background:${e.cover_gradient||e.gradient||'linear-gradient(135deg,#667eea,#764ba2)'}">${e.cover_emoji||e.emoji||'🎉'}</div>
-          <div class="info"><h3>${e.title}</h3><div class="meta">📅 ${(e.start_time||'').slice(0,10)}</div></div>
-        </div>
-      `).join('');
-      showToast(`找到 ${matchEvents.length} 个相关活动`);
-    } else {
-      showToast('没有找到相关内容，换个关键词试试');
+      html += '</div>';
     }
-    return;
   }
 
-  // 后端不通时本地兜底
-  const matchJobs = JOBS.filter(j => j.title.toLowerCase().includes(kwLower) || j.tags.some(t=>t.toLowerCase().includes(kwLower)) || j.company.toLowerCase().includes(kwLower));
-  const matchEvents = EVENTS.filter(e => e.title.toLowerCase().includes(kwLower) || e.tags.some(t=>t.toLowerCase().includes(kwLower)));
-  if (matchJobs.length > 0) {
-    switchPage('jobsPage');
-    document.getElementById('jobsList').innerHTML = matchJobs.map(j => renderJobCardHTML(j)).join('');
-    showToast(`找到 ${matchJobs.length} 个相关岗位`);
-  } else if (matchEvents.length > 0) {
-    switchPage('eventsPage');
-    document.getElementById('eventsList').innerHTML = matchEvents.map(e => `
-      <div class="event-list-card" onclick="showEventDetail(${e.id})">
-        <div class="cover-sm-ph" style="background:${e.gradient}">${e.emoji}</div>
-        <div class="info"><h3>${e.title}</h3><div class="meta">📅 ${e.start_time}</div></div>
-      </div>
-    `).join('');
-    showToast(`找到 ${matchEvents.length} 个相关活动`);
-  } else {
-    showToast('没有找到相关结果');
-  }
+  if (!html) html = '<div style="padding:60px 20px;text-align:center"><div style="font-size:48px;margin-bottom:16px">🔍</div><p style="color:var(--sub);font-size:14px">没有找到相关结果</p><p style="color:var(--sub);font-size:12px;margin-top:6px">换个关键词试试？</p></div>';
+  container.innerHTML = html;
 }
 
 // =================== CHAT DATA ===================
@@ -5031,16 +5342,18 @@ async function fetchCallerStats() {
     if (viewEl) viewEl.textContent = totalViews;
   }
 
-  // 我发布的岗位 & 收到的投递
+  // 我发布的岗位
   const jobR = await apiCall('/jobs?my=1&pageSize=50');
   if (jobR.code === 0 && jobR.data) {
     const jobList = jobR.data.list || [];
     const el = document.getElementById('cStatJobs');
     if (el) el.textContent = jobR.data.total || jobList.length;
-    // 收到投递 = 各岗位 apply_count 之和
-    const totalApply = jobList.reduce((s, j) => s + (j.apply_count || 0), 0);
+  }
+  // 收到的投递（从applications表查询，不再依赖apply_count字段）
+  const appR = await apiCall('/jobs/my/applications');
+  if (appR.code === 0 && appR.data) {
     const applyEl = document.getElementById('cStatApply');
-    if (applyEl) applyEl.textContent = totalApply;
+    if (applyEl) applyEl.textContent = appR.data.total || 0;
   }
 }
 

@@ -23,7 +23,7 @@
     },
     {
       "source": "/api/:path*",
-      "destination": "https://zhaojiba1-0gqnm5h075fc5ccf-1300229407.ap-shanghai.app.tcloudbase.com/api/:path*"
+      "destination": "http://124.222.78.95/api/:path*"
     },
     {
       "source": "/(.*)",

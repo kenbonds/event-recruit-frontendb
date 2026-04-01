@@ -2077,6 +2077,10 @@ let mySelectedSkills = new Set(['Java','Python','前端','Vue','算法']);
 let currentEventId = null;
 let currentJobId = null;
 let currentMatchJobId = null;
+// 全局岗位索引：ID → 岗位对象（包含硬编码 + API加载 + 爬虫数据）
+const ALL_JOBS_MAP = new Map();
+// 初始化硬编码岗位到索引
+JOBS.forEach(j => ALL_JOBS_MAP.set(Number(j.id), j));
 let companyJobs = [...JOBS.slice(0,3)];
 let uploadedDiploma = null; // 存储上传的毕业证照片
 
@@ -2627,6 +2631,7 @@ async function renderRecommendJobs() {
         match_score: j.match_score || 0.7,
         company_verified: j.certify_status === 1,
       }));
+      jobs.forEach(j => ALL_JOBS_MAP.set(Number(j.id), j));
     }
   }
   if (!jobs || !jobs.length) {
@@ -2644,6 +2649,7 @@ async function renderRecommendJobs() {
           match_score: j.match_score || 0.7,
           company_verified: j.certify_status === 1,
         }));
+        jobs.forEach(j => ALL_JOBS_MAP.set(Number(j.id), j));
       }
     }
   }
@@ -2660,6 +2666,7 @@ async function renderRecommendJobs() {
         match_score: 0.7,
         company_verified: false,
       }));
+      jobs.forEach(j => ALL_JOBS_MAP.set(Number(j.id), j));
     }
   }
   if (!jobs || !jobs.length) {
@@ -2756,6 +2763,7 @@ async function renderJobList() {
         match_score: j.match_score || 0.7,
         company_verified: j.certify_status === 1,
       }));
+      list.forEach(j => ALL_JOBS_MAP.set(Number(j.id), j));
     }
   }
   if (!list || !list.length) {
@@ -2771,6 +2779,7 @@ async function renderJobList() {
         match_score: 0.7,
         company_verified: false,
       }));
+      list.forEach(j => ALL_JOBS_MAP.set(Number(j.id), j));
     }
   }
   if (!list || !list.length) {
@@ -3400,7 +3409,7 @@ function fmtTimeAgo(iso) {
 // =================== JOB DETAIL ===================
 function showJobDetail(id) {
   currentJobId = id;
-  const j = JOBS.find(x => x.id === id);
+  const j = ALL_JOBS_MAP.get(Number(id)) || JOBS.find(x => x.id === id);
   if (!j) return;
   const applied = appliedJobs.has(id);
   const pct = Math.round(j.match_score * 100);
@@ -3550,7 +3559,7 @@ function callJobContact() {
 // =================== MATCH DETAIL ===================
 function showMatchDetail(id) {
   currentMatchJobId = id;
-  const j = JOBS.find(x => x.id === id);
+  const j = ALL_JOBS_MAP.get(Number(id)) || JOBS.find(x => x.id === id);
   if (!j) return;
   const userTags = [...mySelectedSkills];
   const hitTags = j.tags.filter(t => userTags.includes(t));
@@ -3672,7 +3681,7 @@ async function cancelRegistration() {
 async function applyJob() {
   if (!currentUser) return showToast('请先登录');
   if (appliedJobs.has(currentJobId)) return;
-  const j = JOBS.find(x => x.id === currentJobId);
+  const j = ALL_JOBS_MAP.get(Number(currentJobId)) || JOBS.find(x => x.id === currentJobId);
   const btn = document.getElementById('jobApplyBtn');
   btn.disabled = true; btn.textContent = '投递中…';
 
@@ -4686,7 +4695,7 @@ function initiateChatFromEvent() {
 /** 从职位详情页发起沟通 */
 function initiateChatFromJob() {
   if (!currentUser) { showToast('请先登录后再发起沟通'); return; }
-  const j = JOBS.find(x => x.id === currentJobId);
+  const j = ALL_JOBS_MAP.get(Number(currentJobId)) || JOBS.find(x => x.id === currentJobId);
   if (!j) return;
   closeModal('jobModal');
 

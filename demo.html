@@ -4906,5 +4906,49 @@ function requireLogin(action) {
 }
 
 </script>
+
+<!-- 管理员入口（点击三次右下角触发） -->
+<div id="adminEntry" style="position:fixed;bottom:60px;right:20px;z-index:9999;display:none;flex-direction:column;gap:6px;background:rgba(255,255,255,0.95);backdrop-filter:blur(10px);border-radius:16px;padding:12px;box-shadow:0 8px 32px rgba(0,0,0,0.15);border:1px solid rgba(102,126,234,0.2);">
+  <a href="/crawler-admin.html" target="_blank" style="display:flex;align-items:center;gap:8px;padding:8px 12px;background:linear-gradient(135deg,#667eea,#764ba2);color:white;border-radius:12px;text-decoration:none;font-size:13px;font-weight:600;">
+    <span>🕷️</span> 爬虫管理后台
+  </a>
+  <a href="/admin-crawler.html" target="_blank" style="display:flex;align-items:center;gap:8px;padding:8px 12px;background:#f8f9fa;color:#2c3e50;border-radius:12px;text-decoration:none;font-size:13px;font-weight:600;border:1px solid #e9ecef;">
+    <span>📊</span> 后台数据监控
+  </a>
+  <a href="https://github.com/kenbonds/event-recruit-frontendb" target="_blank" style="display:flex;align-items:center;gap:8px;padding:8px 12px;background:#f8f9fa;color:#2c3e50;border-radius:12px;text-decoration:none;font-size:13px;font-weight:600;border:1px solid #e9ecef;">
+    <span>📦</span> GitHub仓库
+  </a>
+</div>
+
+<script>
+// 右下角三次点击显示管理员入口
+let tapCount = 0;
+let lastTapTime = 0;
+const tapArea = document.createElement('div');
+tapArea.style.position = 'fixed';
+tapArea.style.bottom = '0';
+tapArea.style.right = '0';
+tapArea.style.width = '60px';
+tapArea.style.height = '60px';
+tapArea.style.opacity = '0';
+tapArea.style.zIndex = '9998';
+document.body.appendChild(tapArea);
+
+tapArea.addEventListener('click', (e) => {
+  const now = Date.now();
+  if (now - lastTapTime > 1000) tapCount = 0;
+  tapCount++;
+  lastTapTime = now;
+  
+  if (tapCount >= 3) {
+    document.getElementById('adminEntry').style.display = 'flex';
+    setTimeout(() => {
+      document.getElementById('adminEntry').style.display = 'none';
+      tapCount = 0;
+    }, 8000);
+  }
+});
+</script>
+
 </body>
 </html>
